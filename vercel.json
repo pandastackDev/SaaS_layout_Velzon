@@ -1,0 +1,11 @@
+{
+  "build": {
+    "env": {
+      "NODE_OPTIONS": "--max_old_space_size=4096",
+      "GENERATE_SOURCEMAP": "false"
+    }
+  },
+  "github": {
+    "silent": true
+  }
+}
