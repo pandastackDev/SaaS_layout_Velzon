@@ -42,8 +42,8 @@ const Login = (props : any) => {
 
     useEffect(() => {
         if (user && user) {
-            const updatedUserData = process.env.REACT_APP_DEFAULTAUTH === "firebase" ? user.multiFactor.user.email : user.email;
-            const updatedUserPassword = process.env.REACT_APP_DEFAULTAUTH === "firebase" ? "" : user.confirm_password;
+            const updatedUserData = import.meta.env.VITE_APP_DEFAULTAUTH === "firebase" ? user.multiFactor.user.email : user.email;
+            const updatedUserPassword = import.meta.env.VITE_APP_DEFAULTAUTH === "firebase" ? "" : user.confirm_password;
             setUserLogin({
                 email: updatedUserData,
                 password: updatedUserPassword

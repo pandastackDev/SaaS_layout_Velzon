@@ -1,62 +1,51 @@
+// 1. Layout: Vertical only
 enum LAYOUT_TYPES {
-  HORIZONTAL= "horizontal",
   VERTICAL= "vertical",
-  TWOCOLUMN= "twocolumn",
-  SEMIBOX="semibox"
 };
 
+// 2. Color Scheme: Light only
 enum LAYOUT_MODE_TYPES {
   LIGHTMODE= "light",
-  DARKMODE= "dark",
 };
 
+// 8. Sidebar Color: Light only
 enum LAYOUT_SIDEBAR_TYPES {
   LIGHT= "light",
-  DARK= "dark",
-  GRADIENT= "gradient",
-  GRADIENT_2= "gradient-2",
-  GRADIENT_3= "gradient-3",
-  GRADIENT_4= "gradient-4",
 };
 
+// 3. Layout Width: Fluid only
 enum LAYOUT_WIDTH_TYPES {
   FLUID= "lg",
-  BOXED= "boxed",
 };
 
+// 4. Layout Position: Fixed only
 enum LAYOUT_POSITION_TYPES {
   FIXED= "fixed",
-  SCROLLABLE= "scrollable",
 };
 
+// 5. Topbar Color: Light only
 enum LAYOUT_TOPBAR_THEME_TYPES {
   LIGHT= "light",
-  DARK= "dark",
 };
 
+// 6. Sidebar Size: Default only
 enum LEFT_SIDEBAR_SIZE_TYPES {
   DEFAULT= "lg",
-  COMPACT= "md",
-  SMALLICON= "sm",
-  SMALLHOVER= "sm-hover"
 };
 
+// 7. Sidebar View: Default only
 enum LEFT_SIDEBAR_VIEW_TYPES {
   DEFAULT= "default",
-  DETACHED = "detached"
 };
 
+// 9. Sidebar Images: None only
 enum LEFT_SIDEBAR_IMAGE_TYPES {
   NONE= "none",
-  IMG1= "img-1",
-  IMG2= "img-2",
-  IMG3= "img-3",
-  IMG4= "img-4",  
 };
 
+// 10. Preloader: Enabled only
 enum PERLOADER_TYPES {
   ENABLE= "enable",
-  DISABLE= "disable"
 }
 
 enum SIDEBAR_VISIBILITY_TYPES {

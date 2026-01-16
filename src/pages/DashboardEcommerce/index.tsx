@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Col, Container, Row } from "reactstrap";
 import Widget from "./Widgets";
 import BestSellingProducts from "./BestSellingProducts";
-import RecentActivity from "./RecentActivity";
 import RecentOrders from "./RecentOrders";
 import Revenue from "./Revenue";
 import SalesByLocations from "./SalesByLocations";
@@ -13,11 +12,6 @@ import TopSellers from "./TopSellers";
 const DashboardEcommerce = () => {
   document.title = "Dashboard | Velzon - React Admin & Dashboard Template";
 
-  const [rightColumn, setRightColumn] = useState(true);
-  const toggleRightColumn = () => {
-    setRightColumn(!rightColumn);
-  };
-
   return (
     <React.Fragment>
       <div className="page-content">
@@ -25,7 +19,7 @@ const DashboardEcommerce = () => {
           <Row>
             <Col>
               <div className="h-100">
-                <Section rightClickBtn={toggleRightColumn} />
+                <Section />
                 <Row>
                   <Widget />
                 </Row>
@@ -45,7 +39,6 @@ const DashboardEcommerce = () => {
                 </Row>
               </div>
             </Col>
-            <RecentActivity rightColumn={rightColumn} hideRightColumn={toggleRightColumn} />
           </Row>
         </Container>
       </div>

@@ -43,11 +43,10 @@ const Layout = (props : any) => {
             leftsidbarSizeType: layout.leftsidbarSizeType,
             leftSidebarViewType: layout.leftSidebarViewType,
             leftSidebarImageType: layout.leftSidebarImageType,
-            preloader: layout.preloader,
             sidebarVisibilitytype: layout.sidebarVisibilitytype,
         })
     );
-    // Inside your component
+
     const {
         layoutType,
         leftSidebarType,
@@ -62,56 +61,29 @@ const Layout = (props : any) => {
     } = useSelector(selectLayoutProperties);
 
     /*
-    layout settings
+    layout settings - Fixed values applied on mount
     */
     useEffect(() => {
-        if (
-            layoutType ||
-            leftSidebarType ||
-            layoutModeType ||
-            layoutWidthType ||
-            layoutPositionType ||
-            topbarThemeType ||
-            leftsidbarSizeType ||
-            leftSidebarViewType ||
-            leftSidebarImageType ||
-            sidebarVisibilitytype
-        ) {
-            window.dispatchEvent(new Event('resize'));
-            dispatch(changeLeftsidebarViewType(leftSidebarViewType));
-            dispatch(changeLeftsidebarSizeType(leftsidbarSizeType));
-            dispatch(changeSidebarTheme(leftSidebarType));
-            dispatch(changeLayoutMode(layoutModeType));
-            dispatch(changeLayoutWidth(layoutWidthType));
-            dispatch(changeLayoutPosition(layoutPositionType));
-            dispatch(changeTopbarTheme(topbarThemeType));
-            dispatch(changeLayout(layoutType));
-            dispatch(changeSidebarImageType(leftSidebarImageType));
-            dispatch(changeSidebarVisibility(sidebarVisibilitytype));
-        }
-    }, [layoutType,
-        leftSidebarType,
-        layoutModeType,
-        layoutWidthType,
-        layoutPositionType,
-        topbarThemeType,
-        leftsidbarSizeType,
-        leftSidebarViewType,
-        leftSidebarImageType,
-        sidebarVisibilitytype,
-        dispatch]);
-    /*
-    call dark/light mode
-    */
-    const onChangeLayoutMode = (value : any) => {
-        if (changeLayoutMode) {
-            dispatch(changeLayoutMode(value));
-        }
-    };
+        // Apply fixed layout settings
+        dispatch(changeLayout(layoutType));
+        dispatch(changeLayoutMode(layoutModeType));
+        dispatch(changeLayoutWidth(layoutWidthType));
+        dispatch(changeLayoutPosition(layoutPositionType));
+        dispatch(changeTopbarTheme(topbarThemeType));
+        dispatch(changeLeftsidebarSizeType(leftsidbarSizeType));
+        dispatch(changeLeftsidebarViewType(leftSidebarViewType));
+        dispatch(changeSidebarTheme(leftSidebarType));
+        dispatch(changeSidebarImageType(leftSidebarImageType));
+        dispatch(changeSidebarVisibility(sidebarVisibilitytype));
+        window.dispatchEvent(new Event('resize'));
+    }, [dispatch, layoutType, leftSidebarType, layoutModeType, layoutWidthType, 
+        layoutPositionType, topbarThemeType, leftsidbarSizeType, leftSidebarViewType, 
+        leftSidebarImageType, sidebarVisibilitytype]);
 
     // class add remove in header 
     useEffect(() => {
         window.addEventListener("scroll", scrollNavigation, true);
+        return () => window.removeEventListener("scroll", scrollNavigation, true);
     });
 
     function scrollNavigation() {
@@ -125,23 +97,18 @@ const Layout = (props : any) => {
 
     useEffect(() => {
         const humberIcon = document.querySelector(".hamburger-icon") as HTMLElement;
-        if (sidebarVisibilitytype === 'show' || layoutType === "vertical" || layoutType === "twocolumn") {
-            humberIcon.classList.remove('open');
+        if (sidebarVisibilitytype === 'show' || layoutType === "vertical") {
+            humberIcon?.classList.remove('open');
         } else {
-            humberIcon && humberIcon.classList.add('open');
+            humberIcon?.classList.add('open');
         }
     }, [sidebarVisibilitytype, layoutType]);
 
     return (
         <React.Fragment>
             <div id="layout-wrapper">
-                <Header
-                    headerClass={headerClass}
-                    layoutModeType={layoutModeType}
-                    onChangeLayoutMode={onChangeLayoutMode} />
-                <Sidebar
-                    layoutType={layoutType}
-                />
+                <Header headerClass={headerClass} />
+                <Sidebar layoutType={layoutType} />
                 <div className="main-content">
                     {props.children}
                     <Footer />
@@ -149,7 +116,6 @@ const Layout = (props : any) => {
             </div>
             <RightSidebar />
         </React.Fragment>
-
     );
 };
 

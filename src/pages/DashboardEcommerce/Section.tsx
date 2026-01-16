@@ -2,7 +2,7 @@ import React from 'react';
 import { Col, Row } from 'reactstrap';
 import Flatpickr from "react-flatpickr";
 
-const Section = (props:any) => {
+const Section = () => {
     return (
         <React.Fragment>
             <Row className="mb-3 pb-1">
@@ -30,9 +30,6 @@ const Section = (props:any) => {
                                     </div>
                                     <div className="col-auto">
                                         <button type="button" className="btn btn-soft-success"><i className="ri-add-circle-line align-middle me-1"></i> Add Product</button>
-                                    </div>
-                                    <div className="col-auto">
-                                        <button type="button" className="btn btn-soft-info btn-icon waves-effect waves-light layout-rightside-btn" onClick={props.rightClickBtn} ><i className="ri-pulse-line"></i></button>
                                     </div>
                                 </Row>
                             </form>
