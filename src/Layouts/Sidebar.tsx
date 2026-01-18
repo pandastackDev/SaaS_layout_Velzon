@@ -2,9 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import SimpleBar from "simplebar-react";
 //import logo
-import logoSm from "../assets/images/logo-sm.png";
-import logoDark from "../assets/images/logo-dark.png";
-import logoLight from "../assets/images/logo-light.png";
+import mainLogo from "../assets/images/main-logo/logo.png";
 
 //Import Components
 import VerticalLayout from "./VerticalLayouts";
@@ -38,19 +36,19 @@ const Sidebar = ({ layoutType } : any) => {
         <div className="navbar-brand-box">
           <Link to="/" className="logo logo-dark">
             <span className="logo-sm">
-              <img src={logoSm} alt="" height="22" />
+              <img src={mainLogo} alt="" height="22" style={{ transform: "scale(1.8)", transformOrigin: "center center" }} />
             </span>
             <span className="logo-lg">
-              <img src={logoDark} alt="" height="17" />
+              <img src={mainLogo} alt="" height="17" style={{ transform: "scale(2.5)", transformOrigin: "center center" }} />
             </span>
           </Link>
 
           <Link to="/" className="logo logo-light">
             <span className="logo-sm">
-              <img src={logoSm} alt="" height="22" />
+              <img src={mainLogo} alt="" height="22" style={{ transform: "scale(1.8)", transformOrigin: "center center" }} />
             </span>
             <span className="logo-lg">
-              <img src={logoLight} alt="" height="17" />
+              <img src={mainLogo} alt="" height="17" style={{ transform: "scale(2.5)", transformOrigin: "center center" }} />
             </span>
           </Link>
           <button

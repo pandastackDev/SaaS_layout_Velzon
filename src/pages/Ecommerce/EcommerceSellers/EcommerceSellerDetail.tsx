@@ -28,8 +28,6 @@ import {
   Price,
 } from "../EcommerceProducts/EcommerceProductCol";
 
-import Revenue from "../../DashboardEcommerce/Revenue";
-
 //redux
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -449,8 +447,6 @@ const EcommerceSellerDetail = () => {
             </div>
 
             <div className="col-xxl-9">
-              <Revenue />
-
               <Row className="g-4 mb-1">
                 <div className="col-sm-auto">
                   <div>

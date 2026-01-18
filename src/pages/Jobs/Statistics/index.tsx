@@ -1,7 +1,6 @@
 import React from "react";
 import { Container, Row } from "reactstrap";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import UsersByDevice from "../../DashboardAnalytics/UsersByDevice";
 import JobSummary from "./JobSummary";
 import NatworkSummary from "./NatworkSummary";
 import VisitorGraph from "./VisitorGraph";
@@ -24,7 +23,6 @@ const Statistics = () => {
 
           <Row className="row">
             <VisitorGraph dataColors='["--vz-primary", "--vz-secondary", "--vz-success", "--vz-info","--vz-warning", "--vz-danger"]' />
-            <UsersByDevice />
           </Row>
 
           <Row className="row">

@@ -9,6 +9,9 @@ import VerticalLayout from "../Layouts/index";
 import { authProtectedRoutes, publicRoutes } from "./allRoutes";
 import AuthProtected  from './AuthProtected';
 
+// Routes that should use VerticalLayout even without auth
+const layoutRoutes = ['/dashboard', '/index', '/'];
+
 const Index = () => {
     return (
         <React.Fragment>
@@ -18,9 +21,11 @@ const Index = () => {
                         <Route
                             path={route.path}
                             element={
-                                <NonAuthLayout>
-                                    {route.component}
-                                </NonAuthLayout>
+                                layoutRoutes.includes(route.path) ? (
+                                    <VerticalLayout>{route.component}</VerticalLayout>
+                                ) : (
+                                    <NonAuthLayout>{route.component}</NonAuthLayout>
+                                )
                             }
                             key={idx}
                         />

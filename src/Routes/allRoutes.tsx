@@ -2,14 +2,8 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 
 //Dashboard
-import DashboardAnalytics from "../pages/DashboardAnalytics";
-import DashboardCrm from "../pages/DashboardCrm";
-import DashboardEcommerce from "../pages/DashboardEcommerce";
-
+import DashboardPitchInvest from "../pages/DashboardPitchInvest";
 import DashboardCrypto from "../pages/DashboardCrypto";
-import DashboardProject from "../pages/DashboardProject";
-import DashboardNFT from "../pages/DashboardNFT";
-import DashboardJob from "../pages/DashboardJob/";
 
 // //Calendar
 import Calendar from "../pages/Calendar";
@@ -244,19 +238,26 @@ import BlogListView from "pages/Pages/Blogs/ListView";
 import BlogGridView from "pages/Pages/Blogs/GridView";
 import PageBlogOverview from "pages/Pages/Blogs/Overview";
 import SlopeCharts from "pages/Charts/ApexCharts/SlopeCharts";
-import DashboardBlog from "pages/DashboardBlog";
+
+// Custom Pages
+import GalleryPage from "../pages/Gallery";
+import InvestorsPage from "../pages/Investors";
+import BlogPage from "../pages/Blog";
+import ContactPage from "../pages/Contact";
+import AboutUsPage from "../pages/AboutUs";
 
 
 const authProtectedRoutes = [
-  { path: "/dashboard-analytics", component: <DashboardAnalytics /> },
-  { path: "/dashboard-crm", component: <DashboardCrm /> },
-  { path: "/dashboard", component: <DashboardEcommerce /> },
-  { path: "/index", component: <DashboardEcommerce /> },
+  // Custom Routes
+  { path: "/gallery", component: <GalleryPage /> },
+  { path: "/investors", component: <InvestorsPage /> },
+  { path: "/blog", component: <BlogPage /> },
+  { path: "/contact", component: <ContactPage /> },
+  { path: "/about-us", component: <AboutUsPage /> },
+
+  { path: "/dashboard", component: <DashboardPitchInvest /> },
+  { path: "/index", component: <DashboardPitchInvest /> },
   { path: "/dashboard-crypto", component: <DashboardCrypto /> },
-  { path: "/dashboard-projects", component: <DashboardProject /> },
-  { path: "/dashboard-nft", component: <DashboardNFT /> },
-  { path: "/dashboard-job", component: <DashboardJob /> },
-  { path: "/dashboard-blog", component: <DashboardBlog /> },
 
   { path: "/apps-calendar", component: <Calendar /> },
   { path: "/apps-calendar-month-grid", component: <MonthGrid /> },
@@ -467,6 +468,11 @@ const authProtectedRoutes = [
 ];
 
 const publicRoutes = [
+  // Dashboard (Public Access)
+  { path: "/dashboard", component: <DashboardPitchInvest /> },
+  { path: "/index", component: <DashboardPitchInvest /> },
+  { path: "/", component: <DashboardPitchInvest /> },
+  
   // Authentication Page
   { path: "/logout", component: <Logout /> },
   { path: "/login", component: <Login /> },

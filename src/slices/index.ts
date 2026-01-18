@@ -36,23 +36,8 @@ import InvoiceReducer from "./invoice/reducer";
 //Mailbox
 import MailboxReducer from "./mailbox/reducer";
 
-// Dashboard Analytics
-import DashboardAnalyticsReducer from "./dashboardAnalytics/reducer";
-
-// Dashboard CRM
-import DashboardCRMReducer from "./dashboardCRM/reducer";
-
-// Dashboard Ecommerce
-import DashboardEcommerceReducer from "./dashboardEcommerce/reducer";
-
-// Dashboard Cryto
+// Dashboard Crypto
 import DashboardCryptoReducer from "./dashboardCrypto/reducer";
-
-// Dashboard Cryto
-import DashboardProjectReducer from "./dashboardProject/reducer";
-
-// Dashboard NFT
-import DashboardNFTReducer from "./dashboardNFT/reducer";
 
 // Pages > Team
 import TeamDataReducer from "./team/reducer";
@@ -85,12 +70,7 @@ const rootReducer = combineReducers({
     Crm: CrmReducer,
     Invoice: InvoiceReducer,
     Mailbox: MailboxReducer,
-    DashboardAnalytics: DashboardAnalyticsReducer,
-    DashboardCRM: DashboardCRMReducer,
-    DashboardEcommerce: DashboardEcommerceReducer,
     DashboardCrypto: DashboardCryptoReducer,
-    DashboardProject: DashboardProjectReducer,
-    DashboardNFT: DashboardNFTReducer,
     Team: TeamDataReducer,
     FileManager: FileManagerReducer,
     Todos: TodosReducer,
