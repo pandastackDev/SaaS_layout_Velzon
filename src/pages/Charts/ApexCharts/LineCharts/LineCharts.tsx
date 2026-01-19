@@ -1,9 +1,7 @@
-import React from "react";
 import ReactApexChart from "react-apexcharts";
-import { seriesData } from "../series";
 import logoSm from "../../../../assets/images/logo-sm.png";
-
 import getChartColorsArray from "../../../../Components/Common/ChartsDynamicColor";
+import { seriesData } from "../series";
 
 const BasicLineCharts = ({ dataColors }: any) => {
 	var linechartBasicColors = getChartColorsArray(dataColors);
@@ -57,16 +55,14 @@ const BasicLineCharts = ({ dataColors }: any) => {
 		},
 	};
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="line"
-				height="350"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="line"
+			height="350"
+			className="apex-charts"
+		/>
 	);
 };
 
@@ -625,9 +621,7 @@ const ZoomableTimeseries = ({ dataColors }: any) => {
 			showAlways: true,
 			labels: {
 				show: true,
-				formatter: function (val: any) {
-					return (val / 1000000).toFixed(0);
-				},
+				formatter: (val: any) => (val / 1000000).toFixed(0),
 			},
 			title: {
 				text: "Price",
@@ -642,23 +636,19 @@ const ZoomableTimeseries = ({ dataColors }: any) => {
 		tooltip: {
 			shared: false,
 			y: {
-				formatter: function (val: any) {
-					return (val / 1000000).toFixed(0);
-				},
+				formatter: (val: any) => (val / 1000000).toFixed(0),
 			},
 		},
 	};
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="area"
-				height="350"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="area"
+			height="350"
+			className="apex-charts"
+		/>
 	);
 };
 
@@ -748,16 +738,14 @@ const LinewithDataLabels = ({ dataColors }: any) => {
 		],
 	};
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="line"
-				height="380"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="line"
+			height="380"
+			className="apex-charts"
+		/>
 	);
 };
 
@@ -831,23 +819,17 @@ const DashedLine = ({ dataColors }: any) => {
 			y: [
 				{
 					title: {
-						formatter: function (val: any) {
-							return val + " (mins)";
-						},
+						formatter: (val: any) => `${val} (mins)`,
 					},
 				},
 				{
 					title: {
-						formatter: function (val: any) {
-							return val + " per session";
-						},
+						formatter: (val: any) => `${val} per session`,
 					},
 				},
 				{
 					title: {
-						formatter: function (val: any) {
-							return val;
-						},
+						formatter: (val: any) => val,
 					},
 				},
 			],
@@ -857,16 +839,14 @@ const DashedLine = ({ dataColors }: any) => {
 		},
 	};
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="line"
-				height="380"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="line"
+			height="380"
+			className="apex-charts"
+		/>
 	);
 };
 
@@ -1010,16 +990,14 @@ const LinewithAnnotations = ({ dataColors }: any) => {
 		},
 	};
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="line"
-				height="350"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="line"
+			height="350"
+			className="apex-charts"
+		/>
 	);
 };
 
@@ -1078,16 +1056,14 @@ const BrushChart = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="line"
-				height={220}
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="line"
+			height={220}
+			className="apex-charts"
+		/>
 	);
 };
 
@@ -1153,16 +1129,14 @@ const BrushChart1 = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="area"
-				height={130}
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="area"
+			height={130}
+			className="apex-charts"
+		/>
 	);
 };
 
@@ -1196,16 +1170,14 @@ const SteplineChart = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="line"
-				height={350}
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="line"
+			height={350}
+			className="apex-charts"
+		/>
 	);
 };
 
@@ -1291,16 +1263,14 @@ const GradientCharts = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="line"
-				height={350}
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="line"
+			height={350}
+			className="apex-charts"
+		/>
 	);
 };
 
@@ -1381,16 +1351,14 @@ const MissingData = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="line"
-				height={350}
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="line"
+			height={350}
+			className="apex-charts"
+		/>
 	);
 };
 
@@ -1457,9 +1425,7 @@ const ChartSyncingLine = ({ dataColors }: any) => {
 			},
 			y: {
 				title: {
-					formatter: function () {
-						return "";
-					},
+					formatter: () => "",
 				},
 			},
 		},
@@ -1474,16 +1440,14 @@ const ChartSyncingLine = ({ dataColors }: any) => {
 		},
 	};
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="line"
-				height="160"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="line"
+			height="160"
+			className="apex-charts"
+		/>
 	);
 };
 
@@ -1535,9 +1499,7 @@ const ChartSyncingLine2 = ({ dataColors }: any) => {
 			},
 			y: {
 				title: {
-					formatter: function () {
-						return "";
-					},
+					formatter: () => "",
 				},
 			},
 		},
@@ -1552,16 +1514,14 @@ const ChartSyncingLine2 = ({ dataColors }: any) => {
 		},
 	};
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="line"
-				height="160"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="line"
+			height="160"
+			className="apex-charts"
+		/>
 	);
 };
 
@@ -1618,9 +1578,7 @@ const ChartSyncingArea = ({ dataColors }: any) => {
 			},
 			y: {
 				title: {
-					formatter: function () {
-						return "";
-					},
+					formatter: () => "",
 				},
 			},
 		},
@@ -1635,16 +1593,14 @@ const ChartSyncingArea = ({ dataColors }: any) => {
 		},
 	};
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="area"
-				height="160"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="area"
+			height="160"
+			className="apex-charts"
+		/>
 	);
 };
 

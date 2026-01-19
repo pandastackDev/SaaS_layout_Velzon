@@ -1,4 +1,9 @@
-import React, { useEffect, useState, useCallback } from "react";
+import { useFormik } from "formik";
+import React, { useCallback, useEffect, useState } from "react";
+//redux
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import {
 	Card,
 	CardBody,
@@ -15,30 +20,24 @@ import {
 	Row,
 	UncontrolledDropdown,
 } from "reactstrap";
+import { createSelector } from "reselect";
 import SimpleBar from "simplebar-react";
-import { ToastContainer } from "react-toastify";
-import SimpleDonutCharts from "./FileManagerCharts";
-import DeleteModal from "../../Components/Common/DeleteModal";
-//redux
-import { useSelector, useDispatch } from "react-redux";
-
-//import action
-import {
-	getFolders as onGetFolders,
-	updateFolder as onupdateFolder,
-	deleteFolder as onDeleteFolder,
-	addNewFolder as onAddNewFolder,
-	getFiles as onGetFiles,
-	updateFile as onupdateFile,
-	deleteFile as onDeleteFile,
-	addNewFile as onAddNewFile,
-} from "../../slices/thunks";
 
 // Formik
 import * as Yup from "yup";
-import { useFormik } from "formik";
-import { Link } from "react-router-dom";
-import { createSelector } from "reselect";
+import DeleteModal from "../../Components/Common/DeleteModal";
+//import action
+import {
+	addNewFile as onAddNewFile,
+	addNewFolder as onAddNewFolder,
+	deleteFile as onDeleteFile,
+	deleteFolder as onDeleteFolder,
+	getFiles as onGetFiles,
+	getFolders as onGetFolders,
+	updateFile as onupdateFile,
+	updateFolder as onupdateFolder,
+} from "../../slices/thunks";
+import SimpleDonutCharts from "./FileManagerCharts";
 
 const FileManager = () => {
 	document.title = "File Manager | Velzon - React Admin & Dashboard Template";
@@ -208,7 +207,7 @@ const FileManager = () => {
 
 	useEffect(() => {
 		sidebarOpen("file-detail-show");
-	}, []);
+	}, [sidebarOpen]);
 
 	const favouriteBtn = (ele: any) => {
 		if (ele.closest("button").classList.contains("active")) {
@@ -233,9 +232,9 @@ const FileManager = () => {
 		enableReinitialize: true,
 
 		initialValues: {
-			folderName: (folder && folder.folderName) || "",
-			folderFile: (folder && folder.folderFile) || "",
-			size: (folder && folder.size) || "",
+			folderName: folder?.folderName || "",
+			folderFile: folder?.folderFile || "",
+			size: folder?.size || "",
 		},
 		validationSchema: Yup.object({
 			folderName: Yup.string().required("Please Enter Folder Name"),
@@ -256,9 +255,9 @@ const FileManager = () => {
 			} else {
 				const newFolder = {
 					id: (Math.floor(Math.random() * (30 - 20)) + 20).toString(),
-					folderName: values["folderName"],
-					folderFile: values["folderFile"],
-					size: values["size"],
+					folderName: values.folderName,
+					folderFile: values.folderFile,
+					size: values.size,
 				};
 				// save new Folder
 				dispatch(onAddNewFolder(newFolder));
@@ -269,7 +268,7 @@ const FileManager = () => {
 	});
 
 	const dateFormat = () => {
-		let d = new Date(),
+		const d = new Date(),
 			months = [
 				"Jan",
 				"Feb",
@@ -299,9 +298,9 @@ const FileManager = () => {
 		enableReinitialize: true,
 
 		initialValues: {
-			fileName: (file && file.fileName) || "",
-			fileItem: (file && file.fileItem) || "",
-			size: (file && file.size) || "",
+			fileName: file?.fileName || "",
+			fileItem: file?.fileItem || "",
+			size: file?.size || "",
 		},
 		validationSchema: Yup.object({
 			fileName: Yup.string().required("Please Enter File Name"),
@@ -320,7 +319,7 @@ const FileManager = () => {
 			} else {
 				const newFile = {
 					id: (Math.floor(Math.random() * (30 - 20)) + 20).toString(),
-					fileName: values.fileName + ".txt",
+					fileName: `${values.fileName}.txt`,
 					fileItem: "0",
 					icon: "ri-file-text-fill",
 					iconClass: "secondary",
@@ -525,7 +524,7 @@ const FileManager = () => {
 											<Col xxl={3} className="col-6 folder-card" key={key}>
 												<Card
 													className="bg-light shadow-none"
-													id={"folder-" + item.id}
+													id={`folder-${item.id}`}
 												>
 													<CardBody>
 														<div className="d-flex mb-1">
@@ -534,11 +533,11 @@ const FileManager = () => {
 																	className="form-check-input"
 																	type="checkbox"
 																	value=""
-																	id={"folderlistCheckbox_" + item.id}
+																	id={`folderlistCheckbox_${item.id}`}
 																/>
 																<label
 																	className="form-check-label"
-																	htmlFor={"folderlistCheckbox_" + item.id}
+																	htmlFor={`folderlistCheckbox_${item.id}`}
 																></label>
 															</div>
 
@@ -1048,10 +1047,10 @@ const FileManager = () => {
 								onBlur={folderValidation.handleBlur}
 								value={folderValidation.values.folderName || ""}
 								invalid={
-									folderValidation.touched.folderName &&
-									folderValidation.errors.folderName
-										? true
-										: false
+									!!(
+										folderValidation.touched.folderName &&
+										folderValidation.errors.folderName
+									)
 								}
 							/>
 							{folderValidation.touched.folderName &&
@@ -1081,10 +1080,10 @@ const FileManager = () => {
 											onBlur={folderValidation.handleBlur}
 											value={folderValidation.values.folderFile || ""}
 											invalid={
-												folderValidation.touched.folderFile &&
-												folderValidation.errors.folderFile
-													? true
-													: false
+												!!(
+													folderValidation.touched.folderFile &&
+													folderValidation.errors.folderFile
+												)
 											}
 										/>
 										{folderValidation.touched.folderFile &&
@@ -1111,10 +1110,10 @@ const FileManager = () => {
 											onBlur={folderValidation.handleBlur}
 											value={folderValidation.values.size || ""}
 											invalid={
-												folderValidation.touched.size &&
-												folderValidation.errors.size
-													? true
-													: false
+												!!(
+													folderValidation.touched.size &&
+													folderValidation.errors.size
+												)
 											}
 										/>
 										{folderValidation.touched.size &&
@@ -1157,7 +1156,7 @@ const FileManager = () => {
 				tabIndex={-1}
 			>
 				<ModalHeader toggle={fileToggle} className="p-3 bg-success-subtle">
-					{!!isEdit ? "File Rename" : "Create File"}
+					{isEdit ? "File Rename" : "Create File"}
 				</ModalHeader>
 				<ModalBody>
 					<form
@@ -1186,10 +1185,10 @@ const FileManager = () => {
 								onBlur={fileValidation.handleBlur}
 								value={fileValidation.values.fileName || ""}
 								invalid={
-									fileValidation.touched.fileName &&
-									fileValidation.errors.fileName
-										? true
-										: false
+									!!(
+										fileValidation.touched.fileName &&
+										fileValidation.errors.fileName
+									)
 								}
 							/>
 							{fileValidation.touched.fileName &&
@@ -1208,7 +1207,7 @@ const FileManager = () => {
 								<i className="ri-close-line align-bottom"></i> Close
 							</button>
 							<button type="submit" className="btn btn-primary" id="addNewFile">
-								{!!isEdit ? "Save" : "Create"}
+								{isEdit ? "Save" : "Create"}
 							</button>
 						</div>
 					</form>

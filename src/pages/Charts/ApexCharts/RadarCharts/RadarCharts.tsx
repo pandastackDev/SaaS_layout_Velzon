@@ -1,4 +1,3 @@
-import React from "react";
 import ReactApexChart from "react-apexcharts";
 
 import getChartColorsArray from "../../../../Components/Common/ChartsDynamicColor";
@@ -131,9 +130,7 @@ const PolygonRadar = ({ dataColors }: any) => {
 		},
 		tooltip: {
 			y: {
-				formatter: function (val: any) {
-					return val;
-				},
+				formatter: (val: any) => val,
 			},
 		},
 		xaxis: {
@@ -150,7 +147,7 @@ const PolygonRadar = ({ dataColors }: any) => {
 		yaxis: {
 			tickAmount: 7,
 			labels: {
-				formatter: function (val: any, i: any) {
+				formatter: (val: any, i: any) => {
 					if (i % 2 === 0) {
 						return val;
 					} else {

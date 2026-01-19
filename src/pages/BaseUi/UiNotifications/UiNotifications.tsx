@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import {
 	Button,
 	Card,
@@ -11,24 +13,21 @@ import {
 	ToastBody,
 	ToastHeader,
 } from "reactstrap";
-import { Link } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-// Import Content
-import UiContent from "../../../Components/Common/UiContent";
-//import Components
-import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
 
 // Import Images
 import logosm from "../../../assets/images/logo-sm.png";
+//import Components
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
+// Import Content
+import UiContent from "../../../Components/Common/UiContent";
 
 import {
 	BootstrapToastsExample,
-	ToastPlacementExample,
 	BorderIconExample,
 	ToastifyExample,
+	ToastPlacementExample,
 } from "./UiNotificationsCode";
 
 const UiNotifications = () => {
@@ -394,9 +393,7 @@ const UiNotifications = () => {
 											style={{ minHeight: "300px" }}
 										>
 											<div
-												className={
-													"toast-container position-absolute p-3 " + position
-												}
+												className={`toast-container position-absolute p-3 ${position}`}
 												id="toastPlacement"
 											>
 												<Toast isOpen={toast11}>

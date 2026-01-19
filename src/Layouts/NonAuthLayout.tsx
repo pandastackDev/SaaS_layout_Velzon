@@ -1,11 +1,14 @@
-import React, { useEffect } from "react";
-import withRouter from "../Components/Common/withRouter";
-
+import { useEffect } from "react";
 //redux
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
+import withRouter from "../Components/Common/withRouter";
 
-const NonAuthLayout = ({ children }: any) => {
+interface NonAuthLayoutProps {
+	children: React.ReactNode;
+}
+
+const NonAuthLayout = ({ children }: NonAuthLayoutProps) => {
 	const nonauthData = createSelector(
 		(state) => state.Layout,
 		(layoutModeType) => layoutModeType.layoutModeType,

@@ -8,28 +8,27 @@ import {
 	Progress,
 	Row,
 } from "reactstrap";
-
-// Import Content
-import UiContent from "../../../Components/Common/UiContent";
 //import Components
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
+// Import Content
+import UiContent from "../../../Components/Common/UiContent";
 
 import {
-	DefaultProgressExample,
-	BackgroundColorExample,
-	LabelExample,
-	MultipleBarsExample,
-	HeightExample,
-	StripedExample,
-	AnimatedStripedExample,
-	GradientExample,
 	AnimatedExample,
+	AnimatedStripedExample,
+	BackgroundColorExample,
+	ContentExample,
 	CustomExample,
 	CustomProgressExample,
-	ContentExample,
+	DefaultProgressExample,
+	GradientExample,
+	HeightExample,
+	LabelExample,
+	MultipleBarsExample,
 	ProgressWithStepExample,
 	StepProgressArrowExample,
+	StripedExample,
 } from "./UiProgressCode";
 
 const UiProgress = () => {

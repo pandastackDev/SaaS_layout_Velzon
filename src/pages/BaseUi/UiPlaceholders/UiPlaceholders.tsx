@@ -1,22 +1,20 @@
 import React from "react";
-import { Card, CardBody, Col, Container, Row } from "reactstrap";
 import { Link } from "react-router-dom";
-
-// Import Content
-import UiContent from "../../../Components/Common/UiContent";
-//import Components
-import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
-
+import { Card, CardBody, Col, Container, Row } from "reactstrap";
 // Import Images
 import img1 from "../../../assets/images/small/img-1.jpg";
 import img2 from "../../../assets/images/small/img-2.jpg";
+//import Components
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
+// Import Content
+import UiContent from "../../../Components/Common/UiContent";
 
 import {
-	DefaultPlaceholderExample,
-	WidthExample,
-	SizingExample,
 	ColorExample,
+	DefaultPlaceholderExample,
+	SizingExample,
+	WidthExample,
 } from "./UiPlaceholdersCode";
 
 const UiPlaceholders = () => {
@@ -82,7 +80,7 @@ const UiPlaceholders = () => {
 																</p>
 																<Link
 																	to="#"
-																	tabIndex={1}
+																	tabIndex="0"
 																	className="btn btn-primary disabled placeholder col-6"
 																></Link>
 															</CardBody>

@@ -1,9 +1,9 @@
 import React from "react";
-import UiContent from "../../../Components/Common/UiContent";
+import { Link } from "react-router-dom";
 import { Card, CardBody, Col, Container, Row } from "reactstrap";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import { Link } from "react-router-dom";
 import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
+import UiContent from "../../../Components/Common/UiContent";
 import {
 	ColorExample,
 	DefaultLinkExample,

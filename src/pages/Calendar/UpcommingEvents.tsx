@@ -6,7 +6,7 @@ function UpcommingEvents(props: any) {
 		if (params.getHours() != null) {
 			const hour = params.getHours();
 			const minute = params.getMinutes() ? params.getMinutes() : "00";
-			return hour + ":" + minute;
+			return `${hour}:${minute}`;
 		}
 	};
 	const tConvert = (time: any) => {
@@ -18,7 +18,7 @@ function UpcommingEvents(props: any) {
 		hours = hours % 12;
 		hours = hours ? hours : 12;
 		// minutes = minutes < 10 ? "0" + minutes : minutes;
-		return hours + ":" + minutes + " " + newformat;
+		return `${hours}:${minutes} ${newformat}`;
 	};
 
 	const str_dt = function formatDate(date: any) {
@@ -37,12 +37,12 @@ function UpcommingEvents(props: any) {
 			"December",
 		];
 		var d = new Date(date),
-			month = "" + monthNames[d.getMonth()],
-			day = "" + d.getDate(),
+			month = `${monthNames[d.getMonth()]}`,
+			day = `${d.getDate()}`,
 			year = d.getFullYear();
-		if (month.length < 2) month = "0" + month;
-		if (day.length < 2) day = "0" + day;
-		return [day + " " + month, year].join(",");
+		if (month.length < 2) month = `0${month}`;
+		if (day.length < 2) day = `0${day}`;
+		return [`${day} ${month}`, year].join(",");
 	};
 
 	const category = props.event.className.split("-");
@@ -95,7 +95,7 @@ function UpcommingEvents(props: any) {
 			.join(" ");
 	}
 
-	var end_dt = e_dt ? " to " + e_dt : "";
+	var end_dt = e_dt ? ` to ${e_dt}` : "";
 	var e_time_s = tConvert(getTime(props.event.start));
 	var e_time_e = tConvert(getTime(updatedDay));
 
@@ -103,7 +103,7 @@ function UpcommingEvents(props: any) {
 		e_time_s = "Full day event";
 		e_time_e = "";
 	}
-	e_time_e = e_time_e ? " to " + e_time_e : "";
+	e_time_e = e_time_e ? ` to ${e_time_e}` : "";
 
 	return (
 		<Card className="mb-3">
@@ -111,9 +111,7 @@ function UpcommingEvents(props: any) {
 				<div className="d-flex mb-3">
 					<div className="flex-grow-1">
 						<i
-							className={
-								"mdi mdi-checkbox-blank-circle me-2 text-" + category[1]
-							}
+							className={`mdi mdi-checkbox-blank-circle me-2 text-${category[1]}`}
 						></i>
 						<span className="fw-medium">
 							{startDate} {end_dt}

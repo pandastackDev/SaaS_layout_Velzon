@@ -4,10 +4,10 @@ import "react-toastify/dist/ReactToastify.css";
 
 //Include Both Helper File with needed methods
 import {
-	getTeamData as getTeamDataApi,
 	addTeamData as addTeamDataApi,
-	updateTeamData as updateTeamDataApi,
 	deleteTeamData as deleteTeamDataApi,
+	getTeamData as getTeamDataApi,
+	updateTeamData as updateTeamDataApi,
 } from "../../helpers/fakebackend_helper";
 
 export const getTeamData = createAsyncThunk("team/getTeamData", async () => {
@@ -21,7 +21,7 @@ export const getTeamData = createAsyncThunk("team/getTeamData", async () => {
 
 export const addTeamData = createAsyncThunk(
 	"team/addTeamData",
-	async (team: any) => {
+	async (team: Record<string, unknown>) => {
 		try {
 			const response = addTeamDataApi(team);
 			toast.success("Team Data Added Successfully", { autoClose: 3000 });
@@ -35,7 +35,7 @@ export const addTeamData = createAsyncThunk(
 
 export const updateTeamData = createAsyncThunk(
 	"team/updateTeamData",
-	async (project: any) => {
+	async (project: Record<string, unknown>) => {
 		try {
 			const response = updateTeamDataApi(project);
 			toast.success("Team Data Updated Successfully", { autoClose: 3000 });
@@ -49,7 +49,7 @@ export const updateTeamData = createAsyncThunk(
 
 export const deleteTeamData = createAsyncThunk(
 	"team/deleteTeamData",
-	async (team: any) => {
+	async (team: string | number | Record<string, unknown>) => {
 		try {
 			const response = deleteTeamDataApi(team);
 			toast.success("Team Data Delete Successfully", { autoClose: 3000 });

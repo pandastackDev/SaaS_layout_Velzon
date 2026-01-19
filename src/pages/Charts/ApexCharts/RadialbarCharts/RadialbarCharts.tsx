@@ -1,4 +1,3 @@
-import React from "react";
 import ReactApexChart from "react-apexcharts";
 
 // Import Images
@@ -57,9 +56,7 @@ const MultipleRadialbar = ({ dataColors }: any) => {
 					total: {
 						show: true,
 						label: "Total",
-						formatter: function (w: any) {
-							return 249;
-						},
+						formatter: (_w: any) => 249,
 					},
 				},
 			},
@@ -123,9 +120,8 @@ const CircleRadialbar = ({ dataColors }: any) => {
 			markers: {
 				size: 0,
 			},
-			formatter: function (seriesName: any, opts: any) {
-				return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex];
-			},
+			formatter: (seriesName: any, opts: any) =>
+				`${seriesName}:  ${opts.w.globals.series[opts.seriesIndex]}`,
 			itemMargin: {
 				vertical: 3,
 			},
@@ -190,9 +186,7 @@ const GradientCircleRadialbar = ({ dataColors }: any) => {
 						fontSize: "17px",
 					},
 					value: {
-						formatter: function (val: any) {
-							return parseInt(val);
-						},
+						formatter: (val: any) => parseInt(val, 10),
 						color: "#111",
 						fontSize: "36px",
 						show: true,
@@ -307,9 +301,7 @@ const StrokedCircleRadial = ({ dataColors }: any) => {
 						offsetY: 76,
 						fontSize: "22px",
 						color: undefined,
-						formatter: function (val: any) {
-							return val + "%";
-						},
+						formatter: (val: any) => `${val}%`,
 					},
 				},
 			},

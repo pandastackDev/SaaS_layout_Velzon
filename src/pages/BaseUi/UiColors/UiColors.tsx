@@ -8,11 +8,10 @@ import {
 	Row,
 	Table,
 } from "reactstrap";
-
-// Import Content
-import UiContent from "../../../Components/Common/UiContent";
 //import Components
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
+// Import Content
+import UiContent from "../../../Components/Common/UiContent";
 
 const UiColors = () => {
 	document.title = "Colors | Velzon - React Admin & Dashboard Template";

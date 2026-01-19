@@ -1,70 +1,62 @@
-import React, { useEffect, useState, useCallback } from "react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
 
+import classnames from "classnames";
+import FeatherIcon from "feather-icons-react";
+import React, { useCallback, useEffect, useState } from "react";
+//Import Scrollbar
+import PerfectScrollbar from "react-perfect-scrollbar";
 import {
+	Alert,
+	Button,
+	ButtonGroup,
+	Card,
+	CardBody,
+	CardHeader,
 	Col,
 	DropdownItem,
 	DropdownMenu,
 	DropdownToggle,
-	Nav,
-	NavItem,
-	NavLink,
-	Row,
-	UncontrolledDropdown,
-	UncontrolledTooltip,
-	UncontrolledCollapse,
-	ButtonGroup,
-	Button,
-	UncontrolledButtonDropdown,
+	Input,
 	Modal,
 	ModalBody,
 	ModalHeader,
-	Input,
+	Nav,
+	NavItem,
+	NavLink,
 	Progress,
-	Card,
-	CardHeader,
-	CardBody,
-	Alert,
+	Row,
+	UncontrolledButtonDropdown,
+	UncontrolledCollapse,
+	UncontrolledDropdown,
+	UncontrolledTooltip,
 } from "reactstrap";
-
-import classnames from "classnames";
-
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import FeatherIcon from "feather-icons-react";
-import DeleteModal from "../../Components/Common/DeleteModal";
 //SimpleBar
 import SimpleBar from "simplebar-react";
-
-//Import Scrollbar
-import PerfectScrollbar from "react-perfect-scrollbar";
+import DeleteModal from "../../Components/Common/DeleteModal";
 import "react-perfect-scrollbar/dist/css/styles.css";
 
-// Import Images
-import avatar1 from "../../assets/images/users/avatar-1.jpg";
-
+//redux
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import { createSelector } from "reselect";
 import img2 from "../../assets/images/small/img-2.jpg";
 import img6 from "../../assets/images/small/img-6.jpg";
-
+// Import Images
+import avatar1 from "../../assets/images/users/avatar-1.jpg";
 import image2 from "../../assets/images/users/avatar-2.jpg";
-import image4 from "../../assets/images/users/avatar-4.jpg";
 import image3 from "../../assets/images/users/avatar-3.jpg";
+import image4 from "../../assets/images/users/avatar-4.jpg";
 import image5 from "../../assets/images/users/avatar-5.jpg";
-
-import { Link } from "react-router-dom";
-import { createSelector } from "reselect";
-
-//redux
-import { useSelector, useDispatch } from "react-redux";
 import {
-	getMailDetails,
-	unreadMail,
-	staredMail,
-	labelMail,
-	trashMail,
 	deleteMail,
+	getMailDetails,
+	labelMail,
+	staredMail,
+	trashMail,
+	unreadMail,
 } from "../../slices/thunks";
-
-import { ToastContainer, toast } from "react-toastify";
 
 const EmailToolbar = () => {
 	const dispatch: any = useDispatch();
@@ -318,7 +310,7 @@ const EmailToolbar = () => {
 		if (ele === "unread") {
 			document
 				.querySelectorAll(".message-list li.active:not(.unread)")
-				.forEach(function (element: any) {
+				.forEach((element: any) => {
 					const ele = element.querySelector(".form-check-input").value;
 					dispatch(unreadMail(ele));
 				});
@@ -328,17 +320,17 @@ const EmailToolbar = () => {
 			) as HTMLElement;
 			if (document.querySelectorAll(".message-list li.unread").length === 0) {
 				unreadConversations.style.display = "block";
-				setTimeout(function () {
+				setTimeout(() => {
 					unreadConversations.style.display = "none";
 				}, 1000);
 			}
 
-			document.querySelectorAll(".message-list li.unread").forEach(function (
-				element: any,
-			) {
-				const ele = element.querySelector(".form-check-input").value;
-				dispatch(unreadMail(ele));
-			});
+			document
+				.querySelectorAll(".message-list li.unread")
+				.forEach((element: any) => {
+					const ele = element.querySelector(".form-check-input").value;
+					dispatch(unreadMail(ele));
+				});
 		}
 
 		const element: any = document.querySelectorAll(".message-list li");
@@ -357,7 +349,7 @@ const EmailToolbar = () => {
 		if (!item) {
 			document
 				.querySelectorAll(".message-list li.active:not(:has(button.active))")
-				.forEach(function (element: any) {
+				.forEach((element: any) => {
 					const ele = element.querySelector(".form-check-input").value;
 					dispatch(staredMail(ele));
 				});
@@ -498,7 +490,7 @@ const EmailToolbar = () => {
 		const time = `${formattedHour}:${formattedMinute} ${ampm}`;
 
 		const senderObj = {
-			id: lastItem["id"] + 1,
+			id: lastItem.id + 1,
 			message: text,
 			time: time,
 			isSender: false,
@@ -1688,10 +1680,10 @@ const EmailToolbar = () => {
 						<div className="ck-editor-reverse">
 							<CKEditor
 								editor={ClassicEditor as any}
-								onReady={(editor) => {
+								onReady={(_editor) => {
 									// You can store the "editor" and use when it is needed.
 								}}
-								onChange={(event, editor) => {
+								onChange={(_event, editor) => {
 									editor.getData();
 								}}
 							/>

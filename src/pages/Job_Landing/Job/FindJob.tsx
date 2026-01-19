@@ -8,12 +8,12 @@ import {
 	Row,
 	UncontrolledTooltip,
 } from "reactstrap";
-import { findJob } from "../../../common/data/jobLanding";
 import img1 from "../../../assets/images/companies/img-1.png";
-import img5 from "../../../assets/images/companies/img-5.png";
 import img2 from "../../../assets/images/companies/img-2.png";
+import img5 from "../../../assets/images/companies/img-5.png";
 import img7 from "../../../assets/images/companies/img-7.png";
 import img8 from "../../../assets/images/companies/img-8.png";
+import { findJob } from "../../../common/data/jobLanding";
 
 const FindJob = () => {
 	return (

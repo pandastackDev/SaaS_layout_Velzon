@@ -2,11 +2,11 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 //Include Both Helper File with needed methods
 import {
-	getDirectContact as getDirectContactApi,
-	getMessages as getMessagesApi,
-	getChannels as getChannelsApi,
 	addMessage as addMessageApi,
 	deleteMessage as deleteMessageApi,
+	getChannels as getChannelsApi,
+	getDirectContact as getDirectContactApi,
+	getMessages as getMessagesApi,
 } from "../../helpers/fakebackend_helper";
 
 export const getDirectContact = createAsyncThunk(
@@ -32,7 +32,7 @@ export const getChannels = createAsyncThunk("chat/getChannels", async () => {
 
 export const getMessages = createAsyncThunk(
 	"chat/getMessages",
-	async (roomId: any) => {
+	async (roomId: string | number) => {
 		try {
 			const response = getMessagesApi(roomId);
 			const data = await response;
@@ -45,7 +45,7 @@ export const getMessages = createAsyncThunk(
 
 export const addMessage = createAsyncThunk(
 	"chat/addMessage",
-	async (message: any) => {
+	async (message: Record<string, unknown>) => {
 		try {
 			const response = addMessageApi(message);
 			const data = await response;
@@ -58,7 +58,7 @@ export const addMessage = createAsyncThunk(
 
 export const deleteMessage = createAsyncThunk(
 	"chat/deleteMessage",
-	async (message: any) => {
+	async (message: string | number | Record<string, unknown>) => {
 		try {
 			const response = deleteMessageApi(message);
 			const data = await response;

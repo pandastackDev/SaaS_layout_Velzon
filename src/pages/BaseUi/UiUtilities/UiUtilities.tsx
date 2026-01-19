@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
 	Button,
 	Card,
@@ -9,29 +10,25 @@ import {
 	Input,
 	Row,
 } from "reactstrap";
-import { Link } from "react-router-dom";
-
-// Import Content
-import UiContent from "../../../Components/Common/UiContent";
-//import Components
-import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
-
+import img2 from "../../../assets/images/small/img-2.jpg";
 // Import Images
 import avatar1 from "../../../assets/images/users/avatar-1.jpg";
 import avatar2 from "../../../assets/images/users/avatar-2.jpg";
-
-import img2 from "../../../assets/images/small/img-2.jpg";
+//import Components
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
+// Import Content
+import UiContent from "../../../Components/Common/UiContent";
 import {
-	StacksVerticalExample,
-	StacksHorizontalExample,
-	TextSelectionExample,
-	PointerEventsExample,
+	HeightExample,
 	OverflowExample,
+	PointerEventsExample,
 	PositionExample,
 	ShadowsExample,
+	StacksHorizontalExample,
+	StacksVerticalExample,
+	TextSelectionExample,
 	WidthExample,
-	HeightExample,
 } from "./UiUtilitiesCode";
 
 const UiUtilities = () => {
@@ -1039,7 +1036,7 @@ const UiUtilities = () => {
 												<Link
 													to="#"
 													className="text-success pe-none"
-													tabIndex={1}
+													tabIndex="0"
 												>
 													This link
 												</Link>{" "}
@@ -1052,7 +1049,7 @@ const UiUtilities = () => {
 												can be clicked (this is default behavior).
 											</p>
 											<p className="pe-none mb-0">
-												<Link to="#" className="text-success" tabIndex={1}>
+												<Link to="#" className="text-success" tabIndex="0">
 													This link
 												</Link>{" "}
 												can not be clicked because the{" "}

@@ -1,4 +1,12 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useFormik } from "formik";
+import moment from "moment";
+import React, { useCallback, useEffect, useState } from "react";
+import Dragula from "react-dragula";
+import Flatpickr from "react-flatpickr";
+//redux
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import {
 	Col,
 	Container,
@@ -12,21 +20,12 @@ import {
 	Row,
 	UncontrolledCollapse,
 } from "reactstrap";
+import { createSelector } from "reselect";
 import SimpleBar from "simplebar-react";
-import Flatpickr from "react-flatpickr";
-import moment from "moment";
-import Dragula from "react-dragula";
-import { ToastContainer } from "react-toastify";
-import { Link } from "react-router-dom";
-import taskImg from "../../assets/images/task.png";
-import DeleteModal from "../../Components/Common/DeleteModal";
-
-//redux
-import { useSelector, useDispatch } from "react-redux";
 
 // Formik
 import * as Yup from "yup";
-import { useFormik } from "formik";
+import taskImg from "../../assets/images/task.png";
 
 // Import Images
 import avatar1 from "../../assets/images/users/avatar-1.jpg";
@@ -39,19 +38,22 @@ import avatar7 from "../../assets/images/users/avatar-7.jpg";
 import avatar8 from "../../assets/images/users/avatar-8.jpg";
 import avatar9 from "../../assets/images/users/avatar-9.jpg";
 import avatar10 from "../../assets/images/users/avatar-10.jpg";
-
+import DeleteModal from "../../Components/Common/DeleteModal";
 //import action
 import {
+	addNewProject as onAddNewProject,
+	addNewTodo as onAddNewTodo,
+	deleteTodo as onDeleteTodo,
+	getProjects as onGetProjects,
 	getTodos as onGetTodos,
 	updateTodo as onupdateTodo,
-	deleteTodo as onDeleteTodo,
-	addNewTodo as onAddNewTodo,
-	getProjects as onGetProjects,
-	addNewProject as onAddNewProject,
 } from "../../slices/thunks";
-import { createSelector } from "reselect";
 
-const Status = ({ status }: any) => {
+interface StatusProps {
+	status: string;
+}
+
+const Status = ({ status }: StatusProps) => {
 	switch (status) {
 		case "New":
 			return (
@@ -86,7 +88,11 @@ const Status = ({ status }: any) => {
 	}
 };
 
-const Priority = ({ priority }: any) => {
+interface PriorityProps {
+	priority: string;
+}
+
+const Priority = ({ priority }: PriorityProps) => {
 	switch (priority) {
 		case "High":
 			return <span className="badge bg-danger text-uppercase">{priority}</span>;
@@ -114,9 +120,10 @@ interface ImgData {
 const ToDoList = () => {
 	document.title = "To Do Lists | Velzon - React Admin & Dashboard Template";
 
-	const dispatch: any = useDispatch();
+	const dispatch = useDispatch();
 
-	const selectLayoutState = (state: any) => state.Todos;
+	const selectLayoutState = (state: { Todos: Record<string, unknown> }) =>
+		state.Todos;
 	const selectLayoutProperties = createSelector(selectLayoutState, (state) => ({
 		todos: state.todos,
 		projects: state.projects,
@@ -126,7 +133,15 @@ const ToDoList = () => {
 
 	const [deleteModal, setDeleteModal] = useState<boolean>(false);
 
-	const [taskList, setTaskList] = useState<any>([]);
+	interface TodoItem {
+		id: number;
+		task: string;
+		dueDate: string;
+		status: string;
+		priority: string;
+	}
+
+	const [taskList, setTaskList] = useState<TodoItem[]>([]);
 
 	// Projects
 	const [modalProject, setModalProject] = useState<boolean>(false);
@@ -137,7 +152,7 @@ const ToDoList = () => {
 
 	// To do Task List
 	// To dos
-	const [todo, setTodo] = useState<any>(null);
+	const [todo, setTodo] = useState<TodoItem | null>(null);
 	const [modalTodo, setModalTodo] = useState<boolean>(false);
 	const [isEdit, setIsEdit] = useState<boolean>(false);
 
@@ -170,7 +185,7 @@ const ToDoList = () => {
 
 	// Update To do
 	const handleTodoClick = useCallback(
-		(arg: any) => {
+		(arg: TodoItem) => {
 			const todo = arg;
 
 			setTodo({
@@ -196,7 +211,7 @@ const ToDoList = () => {
 	};
 
 	// Delete To do
-	const onClickTodoDelete = (todo: any) => {
+	const onClickTodoDelete = (todo: TodoItem) => {
 		setTodo(todo);
 		setDeleteModal(true);
 	};
@@ -230,45 +245,43 @@ const ToDoList = () => {
 		},
 	];
 
-	const taskStatus = (e: any) => {
+	const taskStatus = (e: string | null) => {
 		if (e) {
-			setTaskList(todos.filter((item: any) => item.status === e));
+			setTaskList(todos.filter((item) => item.status === e));
 		} else {
-			setTaskList(todos.filter((item: any) => item.status !== e));
+			setTaskList(todos.filter((item) => item.status !== e));
 		}
 	};
 
-	const searchList = (e: any) => {
-		let inputVal = e.toLowerCase();
+	const searchList = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const inputVal = e.target.value.toLowerCase();
 
-		function filterItems(arr: any, query: any) {
-			return arr.filter(function (el: any) {
-				return el.task.toLowerCase().indexOf(query.toLowerCase()) !== -1;
-			});
+		function filterItems(arr: TodoItem[], query: string) {
+			return arr.filter(
+				(el) => el.task.toLowerCase().indexOf(query.toLowerCase()) !== -1,
+			);
 		}
 
-		let filterData = filterItems(todos, inputVal);
+		const filterData = filterItems(todos, inputVal);
 		setTaskList(filterData);
+		const noresult = document.getElementById("noresult") as HTMLElement;
+		const todoTask = document.getElementById("todo-task") as HTMLElement;
 		if (filterData.length === 0) {
-			var noresult = document.getElementById("noresult") as HTMLElement;
-			noresult.style.display = "block";
-			var todoTask = document.getElementById("todo-task") as HTMLElement;
-			todoTask.style.display = "none";
+			if (noresult) noresult.style.display = "block";
+			if (todoTask) todoTask.style.display = "none";
 		} else {
-			var noResult = document.getElementById("noresult") as HTMLElement;
-			noResult.style.display = "none";
-			var TodoTask = document.getElementById("todo-task") as HTMLElement;
-			TodoTask.style.display = "block";
+			if (noresult) noresult.style.display = "none";
+			if (todoTask) todoTask.style.display = "block";
 		}
 	};
 
-	const taskSort = (e: any) => {
+	const taskSort = (e: string | null) => {
 		if (e) {
 			setTaskList([...todos].sort((a, b) => a.id - b.id));
 			setTaskList(
 				[...todos].sort((a, b) => {
-					let x = a.task.toLowerCase();
-					let y = b.task.toLowerCase();
+					const x = a.task.toLowerCase();
+					const y = b.task.toLowerCase();
 					if (x < y) {
 						return -1;
 					} else if (x > y) {
@@ -281,20 +294,20 @@ const ToDoList = () => {
 		}
 	};
 
-	const changeTaskStatus = (e: any) => {
-		const activeTask = e.target.value;
-		let activeTaskList;
+	const changeTaskStatus = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const activeTask = Number(e.target.value);
+		let activeTaskList: TodoItem[];
 		if (e.target.checked) {
-			activeTaskList = taskList.map((item: any) => {
-				const tasks = Object.assign({}, item);
+			activeTaskList = taskList.map((item) => {
+				const tasks = { ...item };
 				if (tasks.id === activeTask) {
 					tasks.status = "Completed";
 				}
 				return tasks;
 			});
 		} else {
-			activeTaskList = taskList.map((item: any) => {
-				const tasks = Object.assign({}, item);
+			activeTaskList = taskList.map((item) => {
+				const tasks = { ...item };
 				if (tasks.id === activeTask) {
 					tasks.status = "Inprogress";
 				}
@@ -306,7 +319,7 @@ const ToDoList = () => {
 
 	// Project validation
 	// validation
-	const projectValidation: any = useFormik({
+	const projectValidation = useFormik({
 		// enableReinitialize : use this flag when initial values needs to be changed
 		enableReinitialize: true,
 
@@ -330,16 +343,16 @@ const ToDoList = () => {
 	});
 
 	// To do Task List validation
-	const validation: any = useFormik({
+	const validation = useFormik({
 		// enableReinitialize : use this flag when initial values needs to be changed
 		enableReinitialize: true,
 
 		initialValues: {
-			task: (todo && todo.task) || "",
-			dueDate: (todo && todo.dueDate) || "",
-			status: (todo && todo.status) || "",
-			priority: (todo && todo.priority) || "",
-			subItem: (todo && todo.subItem) || "",
+			task: todo?.task || "",
+			dueDate: todo?.dueDate || "",
+			status: todo?.status || "",
+			priority: todo?.priority || "",
+			subItem: todo?.subItem || "",
 		},
 		validationSchema: Yup.object({
 			task: Yup.string().required("Please Enter Task"),
@@ -392,14 +405,14 @@ const ToDoList = () => {
 
 	const [droplist, setDroplist] = useState(false);
 
-	const dragulaDecorator = (componentBackingInstance: any) => {
+	const dragulaDecorator = (componentBackingInstance: HTMLElement | null) => {
 		if (componentBackingInstance) {
-			let options = {};
+			const options = {};
 			Dragula([componentBackingInstance], options);
 		}
 	};
 
-	const [imgStore, setImgStore] = useState<any>();
+	const [imgStore, setImgStore] = useState<ImgData[]>([]);
 
 	const handleClick = (item: ImgData) => {
 		const newData = [...imgStore, item];
@@ -407,7 +420,7 @@ const ToDoList = () => {
 		validation.setFieldValue("subItem", newData);
 	};
 	useEffect(() => {
-		setImgStore((todo && todo.subItem) || []);
+		setImgStore(todo?.subItem || []);
 	}, [todo]);
 
 	return (
@@ -425,6 +438,7 @@ const ToDoList = () => {
 							<div className="p-4 d-flex flex-column h-100">
 								<div className="mb-3">
 									<button
+										type="button"
 										className="btn btn-info w-100"
 										onClick={() => setModalProject(true)}
 									>
@@ -440,30 +454,36 @@ const ToDoList = () => {
 										className="to-do-menu list-unstyled"
 										id="projectlist-data"
 									>
-										{(projects || []).map((item: any, key: any) => (
-											<li key={key}>
+										{(projects || []).map((item, projectIndex) => (
+											<li
+												key={`project-${projectIndex}-${item.title || projectIndex}`}
+											>
 												<Link
 													to="#"
 													className="nav-link fs-14"
-													id={"todos" + key}
+													id={`todos${projectIndex}`}
 												>
 													{item.title}
 												</Link>
-												<UncontrolledCollapse toggler={"#todos" + key}>
+												<UncontrolledCollapse toggler={`#todos${projectIndex}`}>
 													<ul className="mb-0 sub-menu list-unstyled ps-3 vstack gap-2 mb-2">
-														{(item.subItem || []).map((item: any, key: any) => (
-															<li key={key}>
-																<Link to="#">
-																	<i
-																		className={
-																			"ri-stop-mini-fill align-middle fs-15 text-" +
-																			item.iconClass
-																		}
-																	></i>{" "}
-																	{item.version}
-																</Link>
-															</li>
-														))}
+														{(item.subItem || []).map(
+															(subItem, subItemIndex) => (
+																<li
+																	key={`subitem-${projectIndex}-${subItemIndex}-${subItem.version || subItemIndex}`}
+																>
+																	<Link to="#">
+																		<i
+																			className={
+																				"ri-stop-mini-fill align-middle fs-15 text-" +
+																				subItem.iconClass
+																			}
+																		></i>{" "}
+																		{subItem.version}
+																	</Link>
+																</li>
+															),
+														)}
 													</ul>
 												</UncontrolledCollapse>
 											</li>
@@ -502,10 +522,16 @@ const ToDoList = () => {
 											role="group"
 											aria-label="Basic example"
 										>
-											<button className="btn btn-icon fw-semibold btn-soft-danger">
+											<button
+												type="button"
+												className="btn btn-icon fw-semibold btn-soft-danger"
+											>
 												<i className="ri-arrow-go-back-line"></i>
 											</button>
-											<button className="btn btn-icon fw-semibold btn-soft-success">
+											<button
+												type="button"
+												className="btn btn-icon fw-semibold btn-soft-success"
+											>
 												<i className="ri-arrow-go-forward-line"></i>
 											</button>
 										</div>
@@ -547,7 +573,9 @@ const ToDoList = () => {
 												id="searchTaskList"
 												className="form-control search"
 												placeholder="Search task name"
-												onKeyUp={(e: any) => searchList(e.target.value)}
+												onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) =>
+													searchList(e.currentTarget.value)
+												}
 											/>
 											<i className="ri-search-line search-icon"></i>
 										</div>
@@ -573,6 +601,7 @@ const ToDoList = () => {
 										<div
 											className="spinner-border text-primary avatar-sm"
 											role="status"
+											aria-label="Loading"
 										>
 											<span className="visually-hidden">Loading...</span>
 										</div>
@@ -594,8 +623,8 @@ const ToDoList = () => {
 											</thead>
 
 											<tbody id="task-list" ref={dragulaDecorator}>
-												{(taskList || []).map((item: any, key: any) => (
-													<tr key={key}>
+												{(taskList || []).map((item, taskIndex) => (
+													<tr key={`task-${taskIndex}-${item.id || taskIndex}`}>
 														<td>
 															<div className="d-flex align-items-start">
 																<div className="flex-shrink-0 me-3">
@@ -610,7 +639,7 @@ const ToDoList = () => {
 																				className="form-check-input me-1"
 																				type="checkbox"
 																				value={item.id}
-																				id={"todo" + item.id}
+																				id={`todo${item.id}`}
 																				onChange={(e) => changeTaskStatus(e)}
 																				defaultChecked
 																			/>
@@ -619,13 +648,13 @@ const ToDoList = () => {
 																				className="form-check-input me-1"
 																				type="checkbox"
 																				value={item.id}
-																				id={"todo" + item.id}
+																				id={`todo${item.id}`}
 																				onChange={(e) => changeTaskStatus(e)}
 																			/>
 																		)}
 																		<label
 																			className="form-check-label"
-																			htmlFor={"todo" + item.id}
+																			htmlFor={`todo${item.id}`}
 																		>
 																			{item.task}{" "}
 																		</label>
@@ -636,14 +665,14 @@ const ToDoList = () => {
 														<td>
 															<div className="avatar-group">
 																{(item.subItem || []).map(
-																	(item: any, key: any) => (
+																	(subItem, subItemIndex) => (
 																		<Link
 																			to="#"
 																			className="avatar-group-item"
-																			key={key}
+																			key={`avatar-${taskIndex}-${subItemIndex}-${subItem.img || subItemIndex}`}
 																		>
 																			<img
-																				src={item.img}
+																				src={subItem.img}
 																				alt=""
 																				className="rounded-circle avatar-xxs"
 																			/>
@@ -662,6 +691,7 @@ const ToDoList = () => {
 														<td>
 															<div className="hstack gap-2">
 																<button
+																	type="button"
 																	className="btn btn-sm btn-soft-danger remove-list"
 																	onClick={() => onClickTodoDelete(item)}
 																>
@@ -705,7 +735,7 @@ const ToDoList = () => {
 			>
 				<ModalHeader toggle={toggle} className="p-3 bg-success-subtle">
 					{" "}
-					{!!isEdit ? "Edit Task" : "Create Task"}{" "}
+					{isEdit ? "Edit Task" : "Create Task"}{" "}
 				</ModalHeader>
 				<ModalBody>
 					<div id="task-error-msg" className="alert alert-danger py-2"></div>
@@ -732,11 +762,7 @@ const ToDoList = () => {
 								onChange={validation.handleChange}
 								onBlur={validation.handleBlur}
 								value={validation.values.task || ""}
-								invalid={
-									validation.touched.task && validation.errors.task
-										? true
-										: false
-								}
+								invalid={!!(validation.touched.task && validation.errors.task)}
 							/>
 							{validation.touched.task && validation.errors.task ? (
 								<FormFeedback type="invalid">
@@ -753,20 +779,19 @@ const ToDoList = () => {
 								className="avatar-group d-flex justify-content-center"
 								id="assignee-member"
 							>
-								{imgStore &&
-									imgStore.map((imageUrl: ImgData, index: number) => (
-										<div key={index}>
-											<Link to="#">
-												<img
-													src={imageUrl?.img}
-													width={36}
-													height={36}
-													alt=""
-													className="rounded-circle avatar-xs"
-												/>
-											</Link>
-										</div>
-									))}
+								{imgStore?.map((imageUrl: ImgData, index: number) => (
+									<div key={index}>
+										<Link to="#">
+											<img
+												src={imageUrl?.img}
+												width={36}
+												height={36}
+												alt=""
+												className="rounded-circle avatar-xs"
+											/>
+										</Link>
+									</div>
+								))}
 							</div>
 							<div className="select-element">
 								<button
@@ -789,8 +814,10 @@ const ToDoList = () => {
 									>
 										<SimpleBar style={{ maxHeight: "141px" }}>
 											<ul className="list-unstyled mb-0">
-												{(assignee || []).map((item: any, key: any) => (
-													<li key={key}>
+												{(assignee || []).map((item, assigneeIndex) => (
+													<li
+														key={`assignee-${assigneeIndex}-${item.name || assigneeIndex}`}
+													>
 														<Link
 															className="dropdown-item d-flex align-items-center"
 															to="#"
@@ -827,9 +854,7 @@ const ToDoList = () => {
 									onBlur={validation.handleBlur}
 									value={validation.values.status || ""}
 									invalid={
-										validation.touched.status && validation.errors.status
-											? true
-											: false
+										!!(validation.touched.status && validation.errors.status)
 									}
 								>
 									{sortbystatus.map((item, key) => (
@@ -861,9 +886,9 @@ const ToDoList = () => {
 									onBlur={validation.handleBlur}
 									value={validation.values.priority || ""}
 									invalid={
-										validation.touched.priority && validation.errors.priority
-											? true
-											: false
+										!!(
+											validation.touched.priority && validation.errors.priority
+										)
 									}
 								>
 									{sortbypriority.map((item, key) => (
@@ -897,7 +922,7 @@ const ToDoList = () => {
 									altFormat: "d M, Y",
 									dateFormat: "d M, Y",
 								}}
-								onChange={(dueDate: any) =>
+								onChange={(dueDate: Date[]) =>
 									validation.setFieldValue(
 										"dueDate",
 										moment(dueDate[0]).format("DD MMMM ,YYYY"),
@@ -921,7 +946,7 @@ const ToDoList = () => {
 								<i className="ri-close-fill align-bottom"></i> Close
 							</button>
 							<button type="submit" className="btn btn-primary" id="addNewTodo">
-								{!!isEdit ? "Save" : "Add Task"}
+								{isEdit ? "Save" : "Add Task"}
 							</button>
 						</div>
 					</Form>
@@ -970,10 +995,10 @@ const ToDoList = () => {
 								onBlur={projectValidation.handleBlur}
 								value={projectValidation.values.title || ""}
 								invalid={
-									projectValidation.touched.title &&
-									projectValidation.errors.title
-										? true
-										: false
+									!!(
+										projectValidation.touched.title &&
+										projectValidation.errors.title
+									)
 								}
 							/>
 							{projectValidation.touched.title &&

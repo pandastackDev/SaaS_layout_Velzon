@@ -1,4 +1,3 @@
-import React from "react";
 import ReactApexChart from "react-apexcharts";
 
 import getChartColorsArray from "../../../../Components/Common/ChartsDynamicColor";
@@ -70,9 +69,7 @@ const BasicColumn = ({ dataColors }: any) => {
 		},
 		tooltip: {
 			y: {
-				formatter: function (val: any) {
-					return "$ " + val + " thousands";
-				},
+				formatter: (val: any) => `$ ${val} thousands`,
 			},
 		},
 	};
@@ -113,9 +110,7 @@ const ColumnWithLable = ({ dataColors }: any) => {
 		},
 		dataLabels: {
 			enabled: !0,
-			formatter: function (val: any) {
-				return val + "%";
-			},
+			formatter: (val: any) => `${val}%`,
 			offsetY: -20,
 			style: {
 				fontSize: "12px",
@@ -189,9 +184,7 @@ const ColumnWithLable = ({ dataColors }: any) => {
 			},
 			labels: {
 				show: !1,
-				formatter: function (val: any) {
-					return val + "%";
-				},
+				formatter: (val: any) => `${val}%`,
 			},
 		},
 		title: {
@@ -408,7 +401,7 @@ const GroupStacked = ({ dataColors }: any) => {
 		},
 		dataLabels: {
 			formatter: (val: any) => {
-				return val / 1000 + "K";
+				return `${val / 1000}K`;
 			},
 		},
 		plotOptions: {
@@ -433,7 +426,7 @@ const GroupStacked = ({ dataColors }: any) => {
 		yaxis: {
 			labels: {
 				formatter: (val: any) => {
-					return val / 1000 + "K";
+					return `${val / 1000}K`;
 				},
 			},
 		},
@@ -840,9 +833,7 @@ const NagetiveLable = ({ dataColors }: any) => {
 				text: "Growth",
 			},
 			labels: {
-				formatter: function (y: any) {
-					return y.toFixed(0) + "%";
-				},
+				formatter: (y: any) => `${y.toFixed(0)}%`,
 			},
 		},
 		xaxis: {
@@ -1211,7 +1202,7 @@ const DynamicColumn = ({ dataColors }: any) => {
 			height: 330,
 			width: "100%",
 			events: {
-				dataPointSelection: function (e: any, chart: any, opts: any) {
+				dataPointSelection: (_e: any, chart: any, opts: any) => {
 					const quarterChartEl = document.querySelector("#chart-quarter");
 					const yearChartEl = document.querySelector("#chart-year");
 
@@ -1240,7 +1231,7 @@ const DynamicColumn = ({ dataColors }: any) => {
 						}
 					}
 				},
-				updated: function (chart: any) {
+				updated: (chart: any) => {
 					updateQuarterChart(chart, "barQuarter");
 				},
 			},
@@ -1261,9 +1252,8 @@ const DynamicColumn = ({ dataColors }: any) => {
 			style: {
 				colors: ["#fff"],
 			},
-			formatter: function (val: any, opt: any) {
-				return opt.w.globals.labels[opt.dataPointIndex];
-			},
+			formatter: (_val: any, opt: any) =>
+				opt.w.globals.labels[opt.dataPointIndex],
 			offsetX: 0,
 			dropShadow: {
 				enabled: !1,
@@ -1292,9 +1282,8 @@ const DynamicColumn = ({ dataColors }: any) => {
 			},
 			y: {
 				title: {
-					formatter: function (val: any, opts: any) {
-						return opts.w.globals.labels[opts.dataPointIndex];
-					},
+					formatter: (_val: any, opts: any) =>
+						opts.w.globals.labels[opts.dataPointIndex],
 				},
 			},
 		},
@@ -1378,15 +1367,13 @@ const Quarter = () => {
 		},
 		tooltip: {
 			x: {
-				formatter: function (val: any, opts: any) {
-					return opts.w.globals.seriesNames[opts.seriesIndex];
-				},
+				formatter: (_val: any, opts: any) =>
+					opts.w.globals.seriesNames[opts.seriesIndex],
 			},
 			y: {
 				title: {
-					formatter: function (val: any, opts: any) {
-						return opts.w.globals.labels[opts.dataPointIndex];
-					},
+					formatter: (_val: any, opts: any) =>
+						opts.w.globals.labels[opts.dataPointIndex],
 				},
 			},
 		},
@@ -1416,7 +1403,7 @@ const DistributedColumn = ({ dataColors }: any) => {
 			height: 350,
 			type: "bar",
 			events: {
-				click: function (chart: any, w: any, e: any) {},
+				click: (_chart: any, _w: any, _e: any) => {},
 			},
 		},
 		colors: chartColumnDistributedColors,

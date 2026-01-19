@@ -1,34 +1,32 @@
 import React, { useState } from "react";
+import Flatpickr from "react-flatpickr";
+import { Link } from "react-router-dom";
+import Select from "react-select";
 import {
-	Col,
-	Row,
 	Button,
-	UncontrolledDropdown,
-	DropdownToggle,
+	Col,
 	DropdownItem,
 	DropdownMenu,
+	DropdownToggle,
+	Row,
+	UncontrolledDropdown,
 } from "reactstrap";
-import { Link } from "react-router-dom";
-import Flatpickr from "react-flatpickr";
-import Select from "react-select";
 
 const ProductsGlobalFilter = () => {
 	return (
-		<React.Fragment>
-			<div className="col-sm-auto ms-auto">
-				<div>
-					<Link to="/apps-ecommerce-add-product" className="btn btn-success">
-						<i className="ri-add-line align-bottom me-1"></i> Add Product
-					</Link>
-				</div>
+		<div className="col-sm-auto ms-auto">
+			<div>
+				<Link to="/apps-ecommerce-add-product" className="btn btn-success">
+					<i className="ri-add-line align-bottom me-1"></i> Add Product
+				</Link>
 			</div>
-		</React.Fragment>
+		</div>
 	);
 };
 const CustomersGlobalFilter = () => {
 	const [customerStatus, setcustomerStatus] = useState(null);
 
-	function handlecustomerStatus(customerStatus: any) {
+	function handlecustomerStatus(customerStatus: string | null) {
 		setcustomerStatus(customerStatus);
 	}
 
@@ -43,51 +41,49 @@ const CustomersGlobalFilter = () => {
 		},
 	];
 	return (
-		<React.Fragment>
-			<Col xl={7}>
-				<Row className="g-3">
-					<Col sm={4}>
-						<div className="">
-							<Flatpickr
-								className="form-control"
-								id="datepicker-publish-input"
-								placeholder="Select a date"
-								options={{
-									altInput: true,
-									altFormat: "F j, Y",
-									mode: "multiple",
-									dateFormat: "d.m.y",
-								}}
-							/>
-						</div>
-					</Col>
+		<Col xl={7}>
+			<Row className="g-3">
+				<Col sm={4}>
+					<div className="">
+						<Flatpickr
+							className="form-control"
+							id="datepicker-publish-input"
+							placeholder="Select a date"
+							options={{
+								altInput: true,
+								altFormat: "F j, Y",
+								mode: "multiple",
+								dateFormat: "d.m.y",
+							}}
+						/>
+					</div>
+				</Col>
 
-					<Col sm={4}>
-						<div>
-							<Select
-								value={customerStatus}
-								onChange={(e: any) => {
-									handlecustomerStatus(e.value);
-								}}
-								options={customerstatus}
-								name="choices-single-default"
-								id="idStatus"
-							></Select>
-						</div>
-					</Col>
+				<Col sm={4}>
+					<div>
+						<Select
+							value={customerStatus}
+							onChange={(e: { value: string } | null) => {
+								handlecustomerStatus(e?.value || null);
+							}}
+							options={customerstatus}
+							name="choices-single-default"
+							id="idStatus"
+						></Select>
+					</div>
+				</Col>
 
-					<Col sm={4}>
-						<div>
-							<button type="button" className="btn btn-primary w-100">
-								{" "}
-								<i className="ri-equalizer-fill me-2 align-bottom"></i>
-								Filters
-							</button>
-						</div>
-					</Col>
-				</Row>
-			</Col>
-		</React.Fragment>
+				<Col sm={4}>
+					<div>
+						<button type="button" className="btn btn-primary w-100">
+							{" "}
+							<i className="ri-equalizer-fill me-2 align-bottom"></i>
+							Filters
+						</button>
+					</div>
+				</Col>
+			</Row>
+		</Col>
 	);
 };
 
@@ -95,15 +91,15 @@ const OrderGlobalFilter = () => {
 	const [orderStatus, setorderStatus] = useState([]);
 	const [orderPayement, setorderPayement] = useState(null);
 
-	function handleorderStatus(orderstatus: any) {
+	function handleorderStatus(orderstatus: string[]) {
 		setorderStatus(orderstatus);
 	}
 
-	function handleorderPayement(orderPayement: any) {
+	function handleorderPayement(orderPayement: string | null) {
 		setorderPayement(orderPayement);
 	}
 
-	const orderstatus: any = [
+	const orderstatus = [
 		{
 			options: [
 				{ label: "Status", value: "Status" },
@@ -152,8 +148,8 @@ const OrderGlobalFilter = () => {
 				<div>
 					<Select
 						value={orderStatus}
-						onChange={(e: any) => {
-							handleorderStatus(e.target.value);
+						onChange={(e: { value: string[] } | null) => {
+							handleorderStatus(e?.value || []);
 						}}
 						options={orderstatus}
 						name="choices-single-default"
@@ -166,8 +162,8 @@ const OrderGlobalFilter = () => {
 				<div>
 					<Select
 						value={orderPayement}
-						onChange={(e: any) => {
-							handleorderPayement(e.target.value);
+						onChange={(e: { value: string } | null) => {
+							handleorderPayement(e?.value || null);
 						}}
 						options={orderpayement}
 						name="choices-payment-default"
@@ -192,7 +188,9 @@ const OrderGlobalFilter = () => {
 const ContactsGlobalFilter = () => {
 	const [sortBy, setSortBy] = useState(null);
 
-	function handleSortBy(selectedOption: any) {
+	function handleSortBy(
+		selectedOption: { value: string; label: string } | null,
+	) {
 		setSortBy(selectedOption);
 	}
 
@@ -207,31 +205,29 @@ const ContactsGlobalFilter = () => {
 	];
 
 	return (
-		<React.Fragment>
-			<div className="col-md-auto ms-auto">
-				<div className="d-flex align-items-center gap-2">
-					<span className="text-muted">Sort by: </span>
-					<Select
-						className="mb-0"
-						value={sortBy}
-						onChange={handleSortBy}
-						options={sortOptions}
-						id="choices-single-default"
-					/>
-				</div>
+		<div className="col-md-auto ms-auto">
+			<div className="d-flex align-items-center gap-2">
+				<span className="text-muted">Sort by: </span>
+				<Select
+					className="mb-0"
+					value={sortBy}
+					onChange={handleSortBy}
+					options={sortOptions}
+					id="choices-single-default"
+				/>
 			</div>
-		</React.Fragment>
+		</div>
 	);
 };
 
 const CompaniesGlobalFilter = () => {
 	const [sortBy, setsortBy] = useState("Owner");
 
-	function handlesortBy(sortBy: any) {
+	function handlesortBy(sortBy: string) {
 		setsortBy(sortBy);
 	}
 
-	const sortbyname: any = [
+	const sortbyname = [
 		{
 			options: [
 				{ label: "Owner", value: "Owner" },
@@ -241,22 +237,20 @@ const CompaniesGlobalFilter = () => {
 		},
 	];
 	return (
-		<React.Fragment>
-			<div className="col-md-auto ms-auto">
-				<div className="d-flex align-items-center gap-2">
-					<span className="text-muted">Sort by: </span>
-					<Select
-						className="mb-0"
-						value={sortBy}
-						onChange={(e: any) => {
-							handlesortBy(e.target.value);
-						}}
-						options={sortbyname}
-						id="choices-single-default"
-					></Select>
-				</div>
+		<div className="col-md-auto ms-auto">
+			<div className="d-flex align-items-center gap-2">
+				<span className="text-muted">Sort by: </span>
+				<Select
+					className="mb-0"
+					value={sortBy}
+					onChange={(e: { value: string } | null) => {
+						handlesortBy(e?.value || "Owner");
+					}}
+					options={sortbyname}
+					id="choices-single-default"
+				></Select>
 			</div>
-		</React.Fragment>
+		</div>
 	);
 };
 
@@ -306,7 +300,9 @@ const CryptoOrdersGlobalFilter = () => {
 				</select>
 			</Col>
 			<Col xl={1} md={4}>
-				<button className="btn btn-success w-100">Filters</button>
+				<button type="button" className="btn btn-success w-100">
+					Filters
+				</button>
 			</Col>
 		</React.Fragment>
 	);
@@ -315,7 +311,7 @@ const CryptoOrdersGlobalFilter = () => {
 const InvoiceListGlobalSearch = () => {
 	const [isStatus, setisStatus] = useState(null);
 
-	function handleisStatus(isStatus: any) {
+	function handleisStatus(isStatus: string | null) {
 		setisStatus(isStatus);
 	}
 
@@ -351,8 +347,8 @@ const InvoiceListGlobalSearch = () => {
 				<div className="input-light">
 					<Select
 						value={isStatus}
-						onChange={(e: any) => {
-							handleisStatus(e.target.value);
+						onChange={(e: { value: string } | null) => {
+							handleisStatus(e?.value || null);
 						}}
 						options={allstatus}
 						name="choices-single-default"
@@ -414,28 +410,26 @@ const TicketsListGlobalFilter = () => {
 
 const NFTRankingGlobalFilter = () => {
 	return (
-		<React.Fragment>
-			<Col xxl={2} sm={4} className="ms-auto">
-				<div>
-					<select
-						className="form-control"
-						data-choices
-						data-choices-search-false
-						name="choices-single-default"
-						id="idStatus"
-					>
-						<option value="All Time" defaultValue="">
-							All Time
-						</option>
-						<option value="1 Day">1 Day</option>
-						<option value="7 Days">7 Days</option>
-						<option value="15 Days">15 Days</option>
-						<option value="1 Month">1 Month</option>
-						<option value="6 Month">6 Month</option>
-					</select>
-				</div>
-			</Col>
-		</React.Fragment>
+		<Col xxl={2} sm={4} className="ms-auto">
+			<div>
+				<select
+					className="form-control"
+					data-choices
+					data-choices-search-false
+					name="choices-single-default"
+					id="idStatus"
+				>
+					<option value="All Time" defaultValue="">
+						All Time
+					</option>
+					<option value="1 Day">1 Day</option>
+					<option value="7 Days">7 Days</option>
+					<option value="15 Days">15 Days</option>
+					<option value="1 Month">1 Month</option>
+					<option value="6 Month">6 Month</option>
+				</select>
+			</div>
+		</Col>
 	);
 };
 
@@ -482,60 +476,66 @@ const TaskListGlobalFilter = () => {
 	);
 };
 
-const LeadsGlobalFilter = ({ onClickDelete }: any) => {
+interface LeadsGlobalFilterProps {
+	onClickDelete?: () => void;
+}
+
+const LeadsGlobalFilter = ({ onClickDelete }: LeadsGlobalFilterProps) => {
 	return (
-		<React.Fragment>
-			<div className="col-sm-auto ms-auto">
-				<div className="hstack gap-2">
-					<button className="btn btn-soft-danger" onClick={onClickDelete}>
-						<i className="ri-delete-bin-2-line"></i>
-					</button>
-					<button
+		<div className="col-sm-auto ms-auto">
+			<div className="hstack gap-2">
+				<button
+					type="button"
+					className="btn btn-soft-danger"
+					onClick={onClickDelete}
+				>
+					<i className="ri-delete-bin-2-line"></i>
+				</button>
+				<button
+					type="button"
+					className="btn btn-info"
+					//  onClick={toggleInfo}
+				>
+					<i className="ri-filter-3-line align-bottom me-1"></i> Fliters
+				</button>
+				<button
+					type="button"
+					className="btn btn-success add-btn"
+					id="create-btn"
+					// onClick={() => { setIsEdit(false); toggle(); }}
+				>
+					<i className="ri-add-line align-bottom me-1"></i> Add Leads
+				</button>
+				<UncontrolledDropdown>
+					<DropdownToggle
+						className="btn btn-soft-info btn-icon fs-14"
 						type="button"
-						className="btn btn-info"
-						//  onClick={toggleInfo}
+						id="dropdownMenuButton1"
+						data-bs-toggle="dropdown"
+						aria-expanded="false"
 					>
-						<i className="ri-filter-3-line align-bottom me-1"></i> Fliters
-					</button>
-					<button
-						type="button"
-						className="btn btn-success add-btn"
-						id="create-btn"
-						// onClick={() => { setIsEdit(false); toggle(); }}
-					>
-						<i className="ri-add-line align-bottom me-1"></i> Add Leads
-					</button>
-					<UncontrolledDropdown>
-						<DropdownToggle
-							className="btn btn-soft-info btn-icon fs-14"
-							type="button"
-							id="dropdownMenuButton1"
-							data-bs-toggle="dropdown"
-							aria-expanded="false"
-						>
-							<i className="ri-settings-4-line"></i>
-						</DropdownToggle>
-						<DropdownMenu>
-							<li>
-								<DropdownItem>Copy</DropdownItem>
-							</li>
-							<li>
-								<DropdownItem>Move to pipline</DropdownItem>
-							</li>
-							<li>
-								<DropdownItem>Add to exceptions</DropdownItem>
-							</li>
-							<li>
-								<DropdownItem>Switch to common form view</DropdownItem>
-							</li>
-							<li>
-								<DropdownItem>Reset form view to default</DropdownItem>
-							</li>
-						</DropdownMenu>
-					</UncontrolledDropdown>
-				</div>
+						<i className="ri-settings-4-line"></i>
+					</DropdownToggle>
+					<DropdownMenu>
+						<li>
+							<DropdownItem>Copy</DropdownItem>
+						</li>
+						<li>
+							<DropdownItem>Move to pipline</DropdownItem>
+						</li>
+						<li>
+							<DropdownItem>Add to exceptions</DropdownItem>
+						</li>
+						<li>
+							<DropdownItem>Switch to common form view</DropdownItem>
+						</li>
+						<li>
+							<DropdownItem>Reset form view to default</DropdownItem>
+						</li>
+					</DropdownMenu>
+				</UncontrolledDropdown>
 			</div>
-		</React.Fragment>
+		</div>
 	);
 };
 

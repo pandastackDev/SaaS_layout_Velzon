@@ -1,4 +1,13 @@
 /** Product 1 */
+
+import company1 from "../../assets/images/companies/img-1.png";
+import company2 from "../../assets/images/companies/img-2.png";
+import company3 from "../../assets/images/companies/img-3.png";
+import company4 from "../../assets/images/companies/img-4.png";
+import company5 from "../../assets/images/companies/img-5.png";
+import company6 from "../../assets/images/companies/img-6.png";
+import company7 from "../../assets/images/companies/img-7.png";
+import company8 from "../../assets/images/companies/img-8.png";
 import product1 from "../../assets/images/products/img-1.png";
 import product2 from "../../assets/images/products/img-2.png";
 import product3 from "../../assets/images/products/img-3.png";
@@ -9,19 +18,9 @@ import product7 from "../../assets/images/products/img-7.png";
 import product8 from "../../assets/images/products/img-8.png";
 import product9 from "../../assets/images/products/img-9.png";
 import product10 from "../../assets/images/products/img-10.png";
-
 import img10 from "../../assets/images/small/img-10.jpg";
 import img11 from "../../assets/images/small/img-11.jpg";
 import img12 from "../../assets/images/small/img-12.jpg";
-
-import company1 from "../../assets/images/companies/img-1.png";
-import company2 from "../../assets/images/companies/img-2.png";
-import company3 from "../../assets/images/companies/img-3.png";
-import company4 from "../../assets/images/companies/img-4.png";
-import company5 from "../../assets/images/companies/img-5.png";
-import company6 from "../../assets/images/companies/img-6.png";
-import company7 from "../../assets/images/companies/img-7.png";
-import company8 from "../../assets/images/companies/img-8.png";
 
 const productsData = [
 	{

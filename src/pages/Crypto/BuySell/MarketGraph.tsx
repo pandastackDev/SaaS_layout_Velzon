@@ -1,11 +1,14 @@
-import React from "react";
-import { Card, CardBody, CardHeader, Col, Row } from "reactstrap";
 import ReactApexChart from "react-apexcharts";
+import { Card, CardBody, CardHeader, Col, Row } from "reactstrap";
 
 import getChartColorsArray from "../../../Components/Common/ChartsDynamicColor";
 
-const MarketGraph = ({ dataColors }: any) => {
-	var MarketchartColors = getChartColorsArray(dataColors);
+interface MarketGraphProps {
+	dataColors: string;
+}
+
+const MarketGraph = ({ dataColors }: MarketGraphProps) => {
+	const MarketchartColors = getChartColorsArray(dataColors);
 	const series = [
 		{
 			data: [
@@ -276,16 +279,14 @@ const MarketGraph = ({ dataColors }: any) => {
 				enabled: true,
 			},
 			labels: {
-				formatter: function (value: any) {
-					return "$" + value;
-				},
+				formatter: (value: any) => `$${value}`,
 			},
 		},
 		tooltip: {
 			shared: true,
 			y: [
 				{
-					formatter: function (y: any) {
+					formatter: (y: any) => {
 						if (typeof y !== "undefined") {
 							return y.toFixed(0);
 						}
@@ -293,17 +294,17 @@ const MarketGraph = ({ dataColors }: any) => {
 					},
 				},
 				{
-					formatter: function (y: any) {
+					formatter: (y: any) => {
 						if (typeof y !== "undefined") {
-							return "$" + y.toFixed(2) + "k";
+							return `$${y.toFixed(2)}k`;
 						}
 						return y;
 					},
 				},
 				{
-					formatter: function (y: any) {
+					formatter: (y: any) => {
 						if (typeof y !== "undefined") {
-							return y.toFixed(0) + " Sales";
+							return `${y.toFixed(0)} Sales`;
 						}
 						return y;
 					},
@@ -312,96 +313,94 @@ const MarketGraph = ({ dataColors }: any) => {
 		},
 	};
 	return (
-		<React.Fragment>
-			<Col xxl={9}>
-				<Card className="card-height-100">
-					<CardHeader className="border-0 align-items-center d-flex">
-						<h4 className="card-title mb-0 flex-grow-1">Market Graph</h4>
-						<div>
-							<button
-								type="button"
-								className="btn btn-soft-secondary btn-sm me-1"
-							>
-								1H
-							</button>
-							<button
-								type="button"
-								className="btn btn-soft-secondary btn-sm me-1"
-							>
-								7D
-							</button>
-							<button
-								type="button"
-								className="btn btn-soft-secondary btn-sm me-1"
-							>
-								1M
-							</button>
-							<button
-								type="button"
-								className="btn btn-soft-secondary btn-sm me-1"
-							>
-								1Y
-							</button>
-							<button type="button" className="btn btn-soft-primary btn-sm">
-								ALL
-							</button>
-						</div>
-					</CardHeader>
-					<CardBody className="p-0">
-						<div className="bg-light-subtle border-top-dashed border border-start-0 border-end-0 border-bottom-dashed py-3 px-4">
-							<Row className="align-items-center">
-								<Col xs={6}>
-									<div className="d-flex flex-wrap gap-4 align-items-center">
+		<Col xxl={9}>
+			<Card className="card-height-100">
+				<CardHeader className="border-0 align-items-center d-flex">
+					<h4 className="card-title mb-0 flex-grow-1">Market Graph</h4>
+					<div>
+						<button
+							type="button"
+							className="btn btn-soft-secondary btn-sm me-1"
+						>
+							1H
+						</button>
+						<button
+							type="button"
+							className="btn btn-soft-secondary btn-sm me-1"
+						>
+							7D
+						</button>
+						<button
+							type="button"
+							className="btn btn-soft-secondary btn-sm me-1"
+						>
+							1M
+						</button>
+						<button
+							type="button"
+							className="btn btn-soft-secondary btn-sm me-1"
+						>
+							1Y
+						</button>
+						<button type="button" className="btn btn-soft-primary btn-sm">
+							ALL
+						</button>
+					</div>
+				</CardHeader>
+				<CardBody className="p-0">
+					<div className="bg-light-subtle border-top-dashed border border-start-0 border-end-0 border-bottom-dashed py-3 px-4">
+						<Row className="align-items-center">
+							<Col xs={6}>
+								<div className="d-flex flex-wrap gap-4 align-items-center">
+									<div>
+										<h3 className="fs-19">
+											$46,959.<small className="fs-14 text-muted">00</small>
+										</h3>
+										<p className="text-muted text-uppercase fw-medium mb-0">
+											Bitcoin (BTC){" "}
+											<small className="badge bg-success-subtle text-success">
+												<i className="ri-arrow-right-up-line align-bottom"></i>{" "}
+												2.15%
+											</small>
+										</p>
+									</div>
+								</div>
+							</Col>
+							<Col xs={6}>
+								<div className="d-flex">
+									<div className="d-flex justify-content-end text-end flex-wrap gap-4 ms-auto">
+										<div className="pe-3">
+											<h6 className="mb-2 text-muted">High</h6>
+											<h5 className="text-success mb-0">$28,722.76</h5>
+										</div>
+										<div className="pe-3">
+											<h6 className="mb-2 text-muted">Low</h6>
+											<h5 className="text-danger mb-0">$68,789.63</h5>
+										</div>
 										<div>
-											<h3 className="fs-19">
-												$46,959.<small className="fs-14 text-muted">00</small>
-											</h3>
-											<p className="text-muted text-uppercase fw-medium mb-0">
-												Bitcoin (BTC){" "}
-												<small className="badge bg-success-subtle text-success">
-													<i className="ri-arrow-right-up-line align-bottom"></i>{" "}
-													2.15%
-												</small>
-											</p>
+											<h6 className="mb-2 text-muted">Market Volume</h6>
+											<h5 className="text-danger mb-0">$888,411,910</h5>
 										</div>
 									</div>
-								</Col>
-								<Col xs={6}>
-									<div className="d-flex">
-										<div className="d-flex justify-content-end text-end flex-wrap gap-4 ms-auto">
-											<div className="pe-3">
-												<h6 className="mb-2 text-muted">High</h6>
-												<h5 className="text-success mb-0">$28,722.76</h5>
-											</div>
-											<div className="pe-3">
-												<h6 className="mb-2 text-muted">Low</h6>
-												<h5 className="text-danger mb-0">$68,789.63</h5>
-											</div>
-											<div>
-												<h6 className="mb-2 text-muted">Market Volume</h6>
-												<h5 className="text-danger mb-0">$888,411,910</h5>
-											</div>
-										</div>
-									</div>
-								</Col>
-							</Row>
-						</div>
-					</CardBody>
-					<CardBody className="p-0 pb-3">
-						<div dir="ltr">
-							<ReactApexChart
-								dir="ltr"
-								options={options}
-								series={series}
-								type="candlestick"
-								height="360"
-								className="apex-charts"
-							/>
-						</div>
-					</CardBody>
-				</Card>
-			</Col>
-		</React.Fragment>
+								</div>
+							</Col>
+						</Row>
+					</div>
+				</CardBody>
+				<CardBody className="p-0 pb-3">
+					<div dir="ltr">
+						<ReactApexChart
+							dir="ltr"
+							options={options}
+							series={series}
+							type="candlestick"
+							height="360"
+							className="apex-charts"
+						/>
+					</div>
+				</CardBody>
+			</Card>
+		</Col>
 	);
 };
 

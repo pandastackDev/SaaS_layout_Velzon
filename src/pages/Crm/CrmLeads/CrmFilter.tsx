@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import {
-	Offcanvas,
-	OffcanvasHeader,
-	OffcanvasBody,
-	Label,
-	Input,
-	Row,
-	Col,
-} from "reactstrap";
+import { useState } from "react";
 import Flatpickr from "react-flatpickr";
 import Select from "react-select";
+import {
+	Col,
+	Input,
+	Label,
+	Offcanvas,
+	OffcanvasBody,
+	OffcanvasHeader,
+	Row,
+} from "reactstrap";
 
 const CrmFilter = ({ show, onCloseClick }: any) => {
 	const [selectCountry, setselectCountry] = useState<any>(null);

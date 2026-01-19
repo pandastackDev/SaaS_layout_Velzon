@@ -1,18 +1,16 @@
-import React from "react";
-import {
-	CardBody,
-	Row,
-	Col,
-	Card,
-	Table,
-	CardHeader,
-	Container,
-} from "reactstrap";
-import BreadCrumb from "../../Components/Common/BreadCrumb";
 import { Link } from "react-router-dom";
-
+import {
+	Card,
+	CardBody,
+	CardHeader,
+	Col,
+	Container,
+	Row,
+	Table,
+} from "reactstrap";
 import logoDark from "../../assets/images/logo-dark.png";
 import logoLight from "../../assets/images/logo-light.png";
+import BreadCrumb from "../../Components/Common/BreadCrumb";
 
 const InvoiceDetails = () => {
 	//Print the Invoice

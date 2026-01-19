@@ -1,5 +1,10 @@
-import React, { useState, useEffect } from "react";
+//Import Icons
+import FeatherIcon from "feather-icons-react";
+import React, { useEffect, useState } from "react";
+//redux
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import {
 	Card,
 	CardBody,
@@ -11,21 +16,13 @@ import {
 	Row,
 	UncontrolledDropdown,
 } from "reactstrap";
+import { createSelector } from "reselect";
 import DeleteModal from "../../../Components/Common/DeleteModal";
-import { ToastContainer } from "react-toastify";
-
-//redux
-import { useSelector, useDispatch } from "react-redux";
-
-//Import Icons
-import FeatherIcon from "feather-icons-react";
-
 //import action
 import {
-	getProjectList as onGetProjectList,
 	deleteProjectList as onDeleteProjectList,
+	getProjectList as onGetProjectList,
 } from "../../../slices/thunks";
-import { createSelector } from "reselect";
 
 const List = () => {
 	const dispatch: any = useDispatch();

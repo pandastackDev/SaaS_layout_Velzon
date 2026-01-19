@@ -1,29 +1,29 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 //Include Both Helper File with needed methods
 import {
-	getBtcPortfolioData as getBtcPortfolioDataApi,
-	getUsdPortfolioData as getUsdPortfolioDataApi,
-	getEuroPortfolioData as getEuroPortfolioDataApi,
 	getAllMarketData as getAllMarketDataApi,
-	getYearMarketData as getYearMarketDataApi,
-	getMonthMarketData as getMonthMarketDataApi,
-	getWeekMarketData as getWeekMarketDataApi,
+	getBtcPortfolioData as getBtcPortfolioDataApi,
+	getEuroPortfolioData as getEuroPortfolioDataApi,
 	getHourMarketData as getHourMarketDataApi,
+	getMonthMarketData as getMonthMarketDataApi,
+	getUsdPortfolioData as getUsdPortfolioDataApi,
+	getWeekMarketData as getWeekMarketDataApi,
+	getYearMarketData as getYearMarketDataApi,
 } from "../../helpers/fakebackend_helper";
 
 export const getPortfolioChartsData = createAsyncThunk(
 	"dashboardCrypto/getPortfolioChartsData",
-	async (data: any) => {
+	async (data: string) => {
 		try {
-			var response;
+			let response: unknown;
 			if (data === "btc") {
 				response = getBtcPortfolioDataApi();
-			}
-			if (data === "usd") {
+			} else if (data === "usd") {
 				response = getUsdPortfolioDataApi();
-			}
-			if (data === "euro") {
+			} else if (data === "euro") {
 				response = getEuroPortfolioDataApi();
+			} else {
+				response = null;
 			}
 			return response;
 		} catch (error) {
@@ -34,24 +34,22 @@ export const getPortfolioChartsData = createAsyncThunk(
 
 export const getMarketChartsData = createAsyncThunk(
 	"dashboardCrypto/getMarketChartsData",
-	async (data: any) => {
+	async (data: string) => {
 		try {
-			var response;
+			let response: unknown;
 
 			if (data === "all") {
 				response = getAllMarketDataApi();
-			}
-			if (data === "year") {
+			} else if (data === "year") {
 				response = getYearMarketDataApi();
-			}
-			if (data === "month") {
+			} else if (data === "month") {
 				response = getMonthMarketDataApi();
-			}
-			if (data === "week") {
+			} else if (data === "week") {
 				response = getWeekMarketDataApi();
-			}
-			if (data === "hour") {
+			} else if (data === "hour") {
 				response = getHourMarketDataApi();
+			} else {
+				response = null;
 			}
 			return response;
 		} catch (error) {

@@ -1,10 +1,9 @@
-import React from "react";
-import { Line, Bar, Pie, Doughnut, Radar, PolarArea } from "react-chartjs-2";
+import { Bar, Doughnut, Line, Pie, PolarArea, Radar } from "react-chartjs-2";
 
 import getChartColorsArray from "../../../Components/Common/ChartsDynamicColor";
 
 import "chart.js/auto";
-import { Chart, CategoryScale } from "chart.js";
+import { CategoryScale, Chart } from "chart.js";
 
 Chart.register(CategoryScale);
 
@@ -94,11 +93,7 @@ const LineChart = ({ dataColors }: any) => {
 			},
 		},
 	};
-	return (
-		<React.Fragment>
-			<Line width={723} height={320} data={data} options={option} />
-		</React.Fragment>
-	);
+	return <Line width={723} height={320} data={data} options={option} />;
 };
 //Bar Chart
 const BarChart = ({ dataColors }: any) => {
@@ -142,11 +137,7 @@ const BarChart = ({ dataColors }: any) => {
 			},
 		},
 	};
-	return (
-		<React.Fragment>
-			<Bar width={723} height={320} data={data} options={option} />
-		</React.Fragment>
-	);
+	return <Bar width={723} height={320} data={data} options={option} />;
 };
 //Pie Chart
 const PieChart = ({ dataColors }: any) => {
@@ -173,11 +164,7 @@ const PieChart = ({ dataColors }: any) => {
 				},
 			},
 		};
-	return (
-		<React.Fragment>
-			<Pie data={data} options={option} className="chartjs-chart" />
-		</React.Fragment>
-	);
+	return <Pie data={data} options={option} className="chartjs-chart" />;
 };
 //Donut Chart
 const DonutChart = ({ dataColors }: any) => {
@@ -204,11 +191,7 @@ const DonutChart = ({ dataColors }: any) => {
 				},
 			},
 		};
-	return (
-		<React.Fragment>
-			<Doughnut data={data} options={option} className="chartjs-chart" />
-		</React.Fragment>
-	);
+	return <Doughnut data={data} options={option} className="chartjs-chart" />;
 };
 //Polar Chart
 const PolarChart = ({ dataColors }: any) => {
@@ -235,11 +218,7 @@ const PolarChart = ({ dataColors }: any) => {
 			},
 		},
 	};
-	return (
-		<React.Fragment>
-			<PolarArea className="chartjs-chart" data={data} options={option} />
-		</React.Fragment>
-	);
+	return <PolarArea className="chartjs-chart" data={data} options={option} />;
 };
 //Radar Chart
 const RadarChart = ({ dataColors }: any) => {
@@ -288,11 +267,7 @@ const RadarChart = ({ dataColors }: any) => {
 				},
 			},
 		};
-	return (
-		<React.Fragment>
-			<Radar className="chartjs-chart" data={data} options={option} />
-		</React.Fragment>
-	);
+	return <Radar className="chartjs-chart" data={data} options={option} />;
 };
 
 export { LineChart, BarChart, PieChart, DonutChart, PolarChart, RadarChart };

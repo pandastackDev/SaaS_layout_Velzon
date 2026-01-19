@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
 	Button,
 	Card,
@@ -16,7 +17,6 @@ import {
 	Row,
 	UncontrolledDropdown,
 } from "reactstrap";
-import { Link } from "react-router-dom";
 
 import SimpleBar from "simplebar-react";
 
@@ -104,8 +104,11 @@ const UpcomingActivity = () => {
 
 						<CardBody className="pt-0">
 							<ListGroup className="border-dashed" flush>
-								{widgetsActivities.map((item, key) => (
-									<ListGroupItem className="ps-0" key={key}>
+								{widgetsActivities.map((item, index) => (
+									<ListGroupItem
+										className="ps-0"
+										key={`activity-${index}-${item.date || index}`}
+									>
 										<Row className="align-items-center g-3">
 											<Col className="col-auto">
 												<div className="avatar-sm p-1 py-2 h-auto bg-light rounded-3">
@@ -125,17 +128,19 @@ const UpcomingActivity = () => {
 											</Col>
 											<Col className="col-sm-auto">
 												<div className="avatar-group">
-													{item.subItem.map((item, key) => (
-														<React.Fragment key={key}>
-															{item.img ? (
+													{item.subItem.map((subItem, subIndex) => (
+														<React.Fragment
+															key={`subitem-${index}-${subIndex}-${subItem.img || subIndex}`}
+														>
+															{subItem.img ? (
 																<div className="avatar-group-item">
 																	<Link
 																		to="#"
 																		className="d-inline-block"
-																		// id={item.targetId}
+																		// id={subItem.targetId}
 																	>
 																		<img
-																			src={item.img}
+																			src={subItem.img}
 																			alt=""
 																			className="rounded-circle avatar-xxs"
 																		/>
@@ -148,10 +153,10 @@ const UpcomingActivity = () => {
 																			<span
 																				className={
 																					"avatar-title rounded-circle text-white " +
-																					item.bgcolor
+																					subItem.bgcolor
 																				}
 																			>
-																				{item.imgNumber}
+																				{subItem.imgNumber}
 																			</span>
 																		</div>
 																	</Link>

@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import Chart from "react-apexcharts";
-import { createSelector } from "reselect";
-import { useSelector } from "react-redux";
 import getChartColorsArray from "Components/Common/ChartsDynamicColor";
+import { useEffect } from "react";
+import Chart from "react-apexcharts";
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
 
 const BasicSlop = ({ dataColors }: any) => {
 	var basicSlopeColors = getChartColorsArray(dataColors);
@@ -12,11 +12,11 @@ const BasicSlop = ({ dataColors }: any) => {
 		(state: any) => state.Layout,
 		(layoutThemeType) => layoutThemeType.layoutThemeType,
 	);
-	const layoutThemeType = useSelector(selectLayoutThemeType);
+	const _layoutThemeType = useSelector(selectLayoutThemeType);
 
 	useEffect(() => {
 		document.getElementsByClassName("apex-charts");
-	}, [layoutThemeType]);
+	}, []);
 
 	const series = [
 		{
@@ -74,18 +74,16 @@ const BasicSlop = ({ dataColors }: any) => {
 		colors: basicSlopeColors,
 	};
 	return (
-		<React.Fragment>
-			<Chart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="line"
-				id="basic_charts"
-				height={350}
-				width={400}
-			/>
-		</React.Fragment>
+		<Chart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="line"
+			id="basic_charts"
+			height={350}
+			width={400}
+		/>
 	);
 };
 
@@ -95,11 +93,11 @@ const MultiGroup = ({ dataColors }: any) => {
 		(state: any) => state.Layout,
 		(layoutThemeType) => layoutThemeType.layoutThemeType,
 	);
-	const layoutThemeType = useSelector(selectLayoutThemeType);
+	const _layoutThemeType = useSelector(selectLayoutThemeType);
 
 	useEffect(() => {
 		document.getElementsByClassName("apex-charts");
-	}, [layoutThemeType]);
+	}, []);
 
 	var chartMultiColors = getChartColorsArray(dataColors);
 
@@ -228,18 +226,16 @@ const MultiGroup = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<Chart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="line"
-				id="multi_charts"
-				height={350}
-				width={600}
-			/>
-		</React.Fragment>
+		<Chart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="line"
+			id="multi_charts"
+			height={350}
+			width={600}
+		/>
 	);
 };
 

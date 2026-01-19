@@ -1,4 +1,3 @@
-import React from "react";
 import ReactApexChart from "react-apexcharts";
 import getChartColorsArray from "../../../../Components/Common/ChartsDynamicColor";
 
@@ -22,16 +21,14 @@ const AppSummaryChart = ({ dataColors }: any) => {
 		colors: chartDonutBasicColors,
 	};
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				series={series}
-				options={options}
-				type="donut"
-				height={300}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			series={series}
+			options={options}
+			type="donut"
+			height={300}
+		/>
 	);
 };
 

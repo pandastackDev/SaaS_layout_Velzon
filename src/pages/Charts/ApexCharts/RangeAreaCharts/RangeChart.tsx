@@ -1,4 +1,3 @@
-import React from "react";
 import ReactApexChart from "react-apexcharts";
 
 import getChartColorsArray from "../../../../Components/Common/ChartsDynamicColor";
@@ -84,7 +83,7 @@ const RangeAreaChartCode = ({ dataColors }: any) => {
 		yaxis: {
 			labels: {
 				formatter: (val: any) => {
-					return val + "°C";
+					return `${val}°C`;
 				},
 			},
 		},

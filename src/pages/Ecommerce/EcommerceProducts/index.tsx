@@ -1,46 +1,41 @@
-import React, { useEffect, useState, useMemo } from "react";
-
+import classnames from "classnames";
+// RangeSlider
+import Nouislider from "nouislider-react";
+import { useEffect, useMemo, useState } from "react";
 import {
-	Container,
-	UncontrolledDropdown,
-	DropdownToggle,
-	DropdownItem,
-	DropdownMenu,
-	Nav,
-	NavItem,
-	NavLink,
-	UncontrolledCollapse,
-	Row,
 	Card,
 	CardHeader,
 	Col,
+	Container,
+	DropdownItem,
+	DropdownMenu,
+	DropdownToggle,
+	Nav,
+	NavItem,
+	NavLink,
+	Row,
+	UncontrolledCollapse,
+	UncontrolledDropdown,
 } from "reactstrap";
-import classnames from "classnames";
-
-// RangeSlider
-import Nouislider from "nouislider-react";
 import "nouislider/distribute/nouislider.css";
-import DeleteModal from "../../../Components/Common/DeleteModal";
-
+import { isEmpty } from "lodash";
+//redux
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import Select from "react-select";
+import { ToastContainer, toast } from "react-toastify";
+import { createSelector } from "reselect";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import DeleteModal from "../../../Components/Common/DeleteModal";
 import TableContainer from "../../../Components/Common/TableContainer";
-import { Rating, Published, Price } from "./EcommerceProductCol";
 //Import data
 import { productsData } from "../../../common/data";
-
 //Import actions
 import {
-	getProducts as onGetProducts,
 	deleteProducts,
+	getProducts as onGetProducts,
 } from "../../../slices/thunks";
-import { isEmpty } from "lodash";
-import Select from "react-select";
-
-//redux
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
-import { createSelector } from "reselect";
+import { Price, Published, Rating } from "./EcommerceProductCol";
 
 const SingleOptions = [
 	{ value: "Watches", label: "Watches" },
@@ -50,7 +45,7 @@ const SingleOptions = [
 	{ value: "4 star", label: "4 star" },
 ];
 
-const EcommerceProducts = (props: any) => {
+const EcommerceProducts = (_props: any) => {
 	const dispatch: any = useDispatch();
 
 	const selectecomproductData = createSelector(
@@ -119,7 +114,7 @@ const EcommerceProducts = (props: any) => {
 
 	useEffect(() => {
 		onUpDate([mincost, maxcost]);
-	}, [mincost, maxcost]);
+	}, [mincost, maxcost, onUpDate]);
 
 	const onUpDate = (value: any) => {
 		setProductList(
@@ -150,7 +145,7 @@ const EcommerceProducts = (props: any) => {
     find min values
     */
 		var filteredProducts = productsData;
-		if (modifiedData && modifiedData.length && value !== 1) {
+		if (modifiedData?.length && value !== 1) {
 			var minValue = Math.min(...modifiedData);
 			if (minValue && minValue !== Infinity) {
 				filteredProducts = productsData.filter(
@@ -337,7 +332,7 @@ const EcommerceProducts = (props: any) => {
 				},
 			},
 		],
-		[],
+		[displayDelete, onClickDelete],
 	);
 	document.title = "Products | Velzon - React Admin & Dashboard Template";
 

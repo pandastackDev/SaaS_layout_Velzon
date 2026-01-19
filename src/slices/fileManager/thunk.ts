@@ -4,14 +4,14 @@ import "react-toastify/dist/ReactToastify.css";
 
 //Include Both Helper File with needed methods
 import {
-	getFolders as getFoldersApi,
+	addNewFile as addNewFileApi,
 	addNewFolder as addNewFolderApi,
-	updateFolder as updateFolderApi,
+	deleteFile as deleteFileApi,
 	deleteFolder as deleteFolderApi,
 	getFiles as getFilesApi,
-	addNewFile as addNewFileApi,
+	getFolders as getFoldersApi,
 	updateFile as updateFileApi,
-	deleteFile as deleteFileApi,
+	updateFolder as updateFolderApi,
 } from "../../helpers/fakebackend_helper";
 
 export const getFolders = createAsyncThunk(
@@ -28,7 +28,7 @@ export const getFolders = createAsyncThunk(
 
 export const addNewFolder = createAsyncThunk(
 	"fileManager/addNewFolder",
-	async (folder: any) => {
+	async (folder: Record<string, unknown>) => {
 		try {
 			const response = addNewFolderApi(folder);
 			toast.success("Folder Added Successfully", { autoClose: 3000 });
@@ -42,7 +42,7 @@ export const addNewFolder = createAsyncThunk(
 
 export const updateFolder = createAsyncThunk(
 	"fileManager/updateFolder",
-	async (folder: any) => {
+	async (folder: Record<string, unknown>) => {
 		try {
 			const response = updateFolderApi(folder);
 			toast.success("Folder Updated Successfully", { autoClose: 3000 });
@@ -56,7 +56,7 @@ export const updateFolder = createAsyncThunk(
 
 export const deleteFolder = createAsyncThunk(
 	"fileManager/deleteFolder",
-	async (folder: any) => {
+	async (folder: string | number | Record<string, unknown>) => {
 		try {
 			const response = deleteFolderApi(folder);
 			toast.success("Order Deleted Successfully", { autoClose: 3000 });
@@ -79,7 +79,7 @@ export const getFiles = createAsyncThunk("fileManager/getFiles", async () => {
 
 export const addNewFile = createAsyncThunk(
 	"fileManager/addNewFile",
-	async (file: any) => {
+	async (file: Record<string, unknown>) => {
 		try {
 			const response = addNewFileApi(file);
 			toast.success("File Added Successfully", { autoClose: 3000 });
@@ -93,7 +93,7 @@ export const addNewFile = createAsyncThunk(
 
 export const updateFile = createAsyncThunk(
 	"fileManager/updateFile",
-	async (file: any) => {
+	async (file: Record<string, unknown>) => {
 		try {
 			const response = updateFileApi(file);
 			toast.success("File Updated Successfully", { autoClose: 3000 });
@@ -107,7 +107,7 @@ export const updateFile = createAsyncThunk(
 
 export const deleteFile = createAsyncThunk(
 	"fileManager/deleteFile",
-	async (file: any) => {
+	async (file: string | number | Record<string, unknown>) => {
 		try {
 			const response = deleteFileApi(file);
 			toast.success("File Delete Successfully", { autoClose: 3000 });

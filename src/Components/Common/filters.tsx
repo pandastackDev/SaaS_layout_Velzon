@@ -1,6 +1,13 @@
 import React from "react";
 
-export const Filter = ({ column }: any) => {
+interface FilterProps {
+	column: {
+		Filter?: unknown;
+		render: (filter: string) => React.ReactNode;
+	};
+}
+
+export const Filter = ({ column }: FilterProps) => {
 	return (
 		<>
 			{column.Filter && (
@@ -11,10 +18,11 @@ export const Filter = ({ column }: any) => {
 };
 
 interface DefaultColumnProps {
-	column?: any;
-	filterValue?: any;
-	setFilter?: any;
-	preFilteredRows?: any;
+	column: {
+		filterValue?: string;
+		setFilter?: (value: string | undefined) => void;
+		preFilteredRows: { length: number };
+	};
 }
 
 export const DefaultColumnFilter = ({
@@ -27,8 +35,8 @@ export const DefaultColumnFilter = ({
 	return (
 		<input
 			value={filterValue || ""}
-			onChange={(e: any) => {
-				setFilter(e.target.value || undefined);
+			onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+				setFilter?.(e.target.value || undefined);
 			}}
 			placeholder={`search (${length}) ...`}
 		/>
@@ -36,22 +44,23 @@ export const DefaultColumnFilter = ({
 };
 
 interface SelectColumnFilterProps {
-	column?: any;
-	filterValue?: any;
-	setFilter?: any;
-	preFilteredRows?: any;
-	id?: any;
+	column: {
+		filterValue?: string;
+		setFilter?: (value: string | undefined) => void;
+		preFilteredRows: Array<{ values: Record<string, unknown> }>;
+		id: string;
+	};
 }
 
 export const SelectColumnFilter = ({
 	column: { filterValue, setFilter, preFilteredRows, id },
 }: SelectColumnFilterProps) => {
 	const options = React.useMemo(() => {
-		const options: any = new Set();
-		preFilteredRows.forEach((row: any) => {
-			options.add(row.values[id]);
+		const optionSet = new Set<unknown>();
+		preFilteredRows.forEach((row) => {
+			optionSet.add(row.values[id]);
 		});
-		return [...options.values()];
+		return [...optionSet.values()];
 	}, [id, preFilteredRows]);
 
 	return (
@@ -60,13 +69,13 @@ export const SelectColumnFilter = ({
 			className="form-select"
 			value={filterValue}
 			onChange={(e) => {
-				setFilter(e.target.value || undefined);
+				setFilter?.(e.target.value || undefined);
 			}}
 		>
 			<option value="">All</option>
-			{options.map((option: any) => (
-				<option key={option} value={option}>
-					{option}
+			{options.map((option) => (
+				<option key={String(option)} value={String(option)}>
+					{String(option)}
 				</option>
 			))}
 		</select>

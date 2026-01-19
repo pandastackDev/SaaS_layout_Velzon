@@ -1,30 +1,29 @@
+import { useFormik } from "formik";
 import React from "react";
+import {
+	Button,
+	Card,
+	CardBody,
+	Col,
+	Container,
+	Form,
+	FormFeedback,
+	FormGroup,
+	Input,
+	InputGroup,
+	Label,
+	Row,
+} from "reactstrap";
+// Formik validation
+import * as Yup from "yup";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import UiContent from "../../../Components/Common/UiContent";
 import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
+import UiContent from "../../../Components/Common/UiContent";
 import {
 	BrowserDefaults,
 	CustomStyles,
 	SupportedElements,
 } from "./FormValidationCode";
-
-import {
-	Row,
-	Col,
-	Card,
-	CardBody,
-	FormGroup,
-	Button,
-	Label,
-	Input,
-	Container,
-	FormFeedback,
-	Form,
-	InputGroup,
-} from "reactstrap";
-// Formik validation
-import * as Yup from "yup";
-import { useFormik } from "formik";
 import ReactValidation from "./ReactValidation";
 
 const FormValidations = () => {
@@ -243,10 +242,10 @@ const FormValidations = () => {
 															onBlur={validation.handleBlur}
 															value={validation.values.firstname || ""}
 															invalid={
-																validation.touched.firstname &&
-																validation.errors.firstname
-																	? true
-																	: false
+																!!(
+																	validation.touched.firstname &&
+																	validation.errors.firstname
+																)
 															}
 														/>
 														{validation.touched.firstname &&
@@ -272,10 +271,10 @@ const FormValidations = () => {
 															onBlur={validation.handleBlur}
 															value={validation.values.lastname || ""}
 															invalid={
-																validation.touched.lastname &&
-																validation.errors.lastname
-																	? true
-																	: false
+																!!(
+																	validation.touched.lastname &&
+																	validation.errors.lastname
+																)
 															}
 														/>
 														{validation.touched.lastname &&
@@ -307,10 +306,10 @@ const FormValidations = () => {
 																onBlur={validation.handleBlur}
 																value={validation.values.username || ""}
 																invalid={
-																	validation.touched.username &&
-																	validation.errors.username
-																		? true
-																		: false
+																	!!(
+																		validation.touched.username &&
+																		validation.errors.username
+																	)
 																}
 															/>
 															{validation.touched.username &&
@@ -337,10 +336,10 @@ const FormValidations = () => {
 															onBlur={validation.handleBlur}
 															value={validation.values.city || ""}
 															invalid={
-																validation.touched.city &&
-																validation.errors.city
-																	? true
-																	: false
+																!!(
+																	validation.touched.city &&
+																	validation.errors.city
+																)
 															}
 														/>
 														{validation.touched.city &&
@@ -364,10 +363,10 @@ const FormValidations = () => {
 															onBlur={validation.handleBlur}
 															value={validation.values.state || ""}
 															invalid={
-																validation.touched.state &&
-																validation.errors.state
-																	? true
-																	: false
+																!!(
+																	validation.touched.state &&
+																	validation.errors.state
+																)
 															}
 														/>
 														{validation.touched.state &&
@@ -391,9 +390,10 @@ const FormValidations = () => {
 															onBlur={validation.handleBlur}
 															value={validation.values.zip || ""}
 															invalid={
-																validation.touched.zip && validation.errors.zip
-																	? true
-																	: false
+																!!(
+																	validation.touched.zip &&
+																	validation.errors.zip
+																)
 															}
 														/>
 														{validation.touched.zip && validation.errors.zip ? (

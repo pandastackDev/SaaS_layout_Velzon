@@ -1,27 +1,24 @@
 import React from "react";
 import { Badge, Button, Card, CardBody, Col, Container, Row } from "reactstrap";
-
+//import Components
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
-
 // Import Content
 import UiContent from "../../../Components/Common/UiContent";
 
-//import Components
-import BreadCrumb from "../../../Components/Common/BreadCrumb";
-
 import {
-	DefaultBadgesExample,
-	RoundedPillBadgesExample,
-	LabelBadgesExample,
-	HTMLBadgesExample,
-	SoftBadgesExample,
-	OutlineBadgesExample,
-	RoundSoftBadgesExample,
-	SoftBorderBadgesExample,
-	OutlinePillBadgesExample,
-	ButtonPositionBadgesExample,
 	ButtonBadgesExample,
+	ButtonPositionBadgesExample,
+	DefaultBadgesExample,
 	GradientBadgesExample,
+	HTMLBadgesExample,
+	LabelBadgesExample,
+	OutlineBadgesExample,
+	OutlinePillBadgesExample,
+	RoundedPillBadgesExample,
+	RoundSoftBadgesExample,
+	SoftBadgesExample,
+	SoftBorderBadgesExample,
 } from "./UiBadgesCode";
 
 const UiBadges = () => {

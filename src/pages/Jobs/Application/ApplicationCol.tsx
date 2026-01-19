@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 const AppId = (cell: any) => {
 	return (
 		<NavLink to="#" className="fw-semibold link-primary">
-			#VZ0{cell.value ? (cell.value < 10 ? "0" + cell.value : cell.value) : ""}
+			#VZ0{cell.value ? (cell.value < 10 ? `0${cell.value}` : cell.value) : ""}
 		</NavLink>
 	);
 };

@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {
+	Button,
 	Card,
 	CardBody,
-	UncontrolledCollapse,
 	CardFooter,
-	Button,
+	UncontrolledCollapse,
 } from "reactstrap";
 
 const leadDiscover = (props: any) => {
@@ -14,8 +14,8 @@ const leadDiscover = (props: any) => {
 			<Card>
 				<Link
 					to="#"
-					className={"card-header bg-" + props.deal.bgColor + "-subtle"}
-					id={"leadDiscovered" + props.index}
+					className={`card-header bg-${props.deal.bgColor}-subtle`}
+					id={`leadDiscovered${props.index}`}
 				>
 					<h5 className="card-title text-uppercase mb-1 fs-14">
 						{props.deal.title}
@@ -27,7 +27,7 @@ const leadDiscover = (props: any) => {
 				</Link>
 			</Card>
 			<UncontrolledCollapse
-				toggler={"#leadDiscovered" + props.index}
+				toggler={`#leadDiscovered${props.index}`}
 				defaultOpen={true}
 			>
 				{props.deal.subItems.map((subitem: any, subitemkey: any) => (
@@ -48,7 +48,7 @@ const leadDiscover = (props: any) => {
 								<Link
 									to="#"
 									className="d-flex align-items-center"
-									id={"leadInnerDiscovered" + props.index + subitemkey}
+									id={`leadInnerDiscovered${props.index}${subitemkey}`}
 								>
 									<div className="flex-shrink-0">
 										<img
@@ -67,8 +67,8 @@ const leadDiscover = (props: any) => {
 							</CardBody>
 							<UncontrolledCollapse
 								className="border-top border-top-dashed"
-								toggler={"#leadInnerDiscovered" + props.index + subitemkey}
-								defaultOpen={subitem.isOpen === true ? true : false}
+								toggler={`#leadInnerDiscovered${props.index}${subitemkey}`}
+								defaultOpen={subitem.isOpen === true}
 							>
 								<CardBody>
 									<h6 className="fs-14 mb-1">

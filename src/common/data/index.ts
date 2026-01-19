@@ -1,186 +1,134 @@
 import {
-	topPages,
-	allData,
-	monthData,
-	halfyearData,
 	allaudiencesMetricsData,
-	monthaudiencesMetricsData,
-	halfyearaudiencesMetricsData,
-	yaeraudiencesMetricsData,
-	todayDeviceData,
-	lastWeekDeviceData,
-	lastMonthDeviceData,
+	allData,
 	currentYearDeviceData,
-	todayaudiencesCountryData,
-	lastWeekaudiencesCountryData,
-	lastMonthaudiencesCountryData,
 	currentyearaudiencesCountryData,
+	halfyearaudiencesMetricsData,
+	halfyearData,
+	lastMonthaudiencesCountryData,
+	lastMonthDeviceData,
+	lastWeekaudiencesCountryData,
+	lastWeekDeviceData,
+	monthaudiencesMetricsData,
+	monthData,
+	todayaudiencesCountryData,
+	todayDeviceData,
+	topPages,
+	yaeraudiencesMetricsData,
 } from "./analytics";
+import { apiKey } from "./apiKey";
+import { jobApplication, jobCandidates, jobCategories } from "./appsJobs";
+import { calenderDefaultCategories, defaultevent, events } from "./calender";
+import { chatContactData, chatMessage, messages } from "./chat";
+import country from "./country";
+import { companies, crmcontacts, deals, leads } from "./crm";
 import {
-	crmWidgets,
-	dealsStatus,
-	tasks,
+	btcPortfolioData,
+	cryptoSlider,
+	currencies,
+	cyptoWidgets,
+	euroPortfolioData,
+	MarketGraphAll,
+	MarketGraphHour,
+	MarketGraphMonth,
+	MarketGraphWeek,
+	MarketGraphYear,
+	newsFeed,
+	recentActivity,
+	topPerformers,
+	usdPortfolioData,
+} from "./crypto";
+import {
+	buysellWidgets,
+	CryptoicoWidgets,
+	CryptoOrders,
+	icoWidgetsList,
+	market,
+	marketStatus,
+	transactions,
+	watchlist,
+} from "./cryptoPage";
+import {
+	blogwidget,
+	comments,
+	recentTable,
+	socialShares,
+} from "./dashboardblog";
+import {
 	activities,
 	closingDeals,
-	todayBalanceData,
-	lastWeekBalanceData,
-	lastMonthBalanceData,
+	crmWidgets,
 	currentYearBalanceData,
-	todayDealData,
-	weeklyDealData,
-	monthlyDealData,
-	yealyDealData,
-	octData,
-	novData,
+	dealsStatus,
 	decData,
 	janData,
+	lastMonthBalanceData,
+	lastWeekBalanceData,
+	monthlyDealData,
+	novData,
+	octData,
+	tasks,
+	todayBalanceData,
+	todayDealData,
+	weeklyDealData,
+	yealyDealData,
 } from "./dashboardcrm";
 import {
-	ecomWidgets,
+	allRevenueData,
 	bestSellingProducts,
-	topSellers,
+	ecomWidgets,
+	halfYearRevenueData,
+	monthRevenueData,
 	recentOrders,
 	topCategories,
-	allRevenueData,
-	monthRevenueData,
-	halfYearRevenueData,
+	topSellers,
 	yearRevenueData,
 } from "./dashboardEcommerce";
 import {
-	cyptoWidgets,
-	currencies,
-	recentActivity,
-	topPerformers,
-	newsFeed,
-	cryptoSlider,
-	btcPortfolioData,
-	usdPortfolioData,
-	euroPortfolioData,
-	MarketGraphAll,
-	MarketGraphYear,
-	MarketGraphMonth,
-	MarketGraphWeek,
-	MarketGraphHour,
-} from "./crypto";
-import { apiKey } from "./apiKey";
-import {
-	projectsWidgets,
-	activeProjects,
-	projectTasks,
-	teamMembers,
-	overviewCounter,
-	allProjectData,
-	monthProjectData,
-	halfyearProjectData,
-	yearProjectData,
-	allTimeData,
-	lastWeekData,
-	lastMonthData,
-	lastquarterData,
-	dashboardChat,
-} from "./dashboardProjects";
-import {
-	topartWork,
+	allMarketplaceData,
 	featuredNFTData,
+	halfyearMarketplaceData,
+	monthMarketplaceData,
+	popularCreatorsData,
 	popularityData,
 	recentNFTsData,
+	topartWork,
 	topCollectionData,
-	popularCreatorsData,
-	allMarketplaceData,
-	monthMarketplaceData,
-	halfyearMarketplaceData,
 	yearMarketplaceData,
 } from "./dashboardNFT";
 import {
-	tileBoxs1,
-	tileBoxs2,
-	tileBoxs3,
-	tileBoxes4,
-	tileBoxes5,
-	widgetsActivities,
-	widgetsAudiences,
-	widgetsPortfolio,
-	widgetsTasks,
-	otherWidgets2,
-} from "./widgets";
-import { taskWidgets, allTask, kanbanBoardData } from "./taskList";
-import { invoiceWidgets, invoiceTable } from "./invoiceList";
-import { projectList } from "./projectList";
-
-import { calenderDefaultCategories, events, defaultevent } from "./calender";
-import { chatMessage, messages, chatContactData } from "./chat";
-import { mailbox } from "./mailbox";
-import {
-	transactions,
-	buysellWidgets,
-	market,
-	CryptoOrders,
-	watchlist,
-	marketStatus,
-	CryptoicoWidgets,
-	icoWidgetsList,
-} from "./cryptoPage";
-import { ticketsWidgets, ticketsTable } from "./supportTickets";
-
-// Pages
-import {
-	gallery,
-	pricing1,
-	pricing2,
-	pricing3,
-	projects,
-	documents,
-	SearchGallery,
-	news,
-	video,
-	swiper,
-	team,
-} from "./pagesData";
-
-import { jobApplication, jobCandidates, jobCategories } from "./appsJobs";
-
-import country from "./country";
-
+	activeProjects,
+	allProjectData,
+	allTimeData,
+	dashboardChat,
+	halfyearProjectData,
+	lastMonthData,
+	lastquarterData,
+	lastWeekData,
+	monthProjectData,
+	overviewCounter,
+	projectsWidgets,
+	projectTasks,
+	teamMembers,
+	yearProjectData,
+} from "./dashboardProjects";
 //Ecommerce
 import {
-	productsData,
-	productDetailsWidgets,
-	reviews,
+	customerList,
+	orderSummary,
 	orders,
 	productDetails,
-	customerList,
-	shoppingCart,
-	orderSummary,
-	sellersList,
-	revenueWidgets,
+	productDetailsWidgets,
+	productsData,
 	productsReview,
+	revenueWidgets,
+	reviews,
+	sellersList,
+	shoppingCart,
 } from "./ecommerce";
-
-import { crmcontacts, companies, leads, deals } from "./crm";
-
-import {
-	blogwidget,
-	socialShares,
-	comments,
-	recentTable,
-} from "./dashboardblog";
-
-import {
-	expolreNow,
-	aution,
-	NFTRanking,
-	creatorsData,
-	creatorsListData,
-	walletConnectData,
-	topDrop,
-	topCreator,
-	topCollection,
-	tradingArtworkData,
-	nftArtworkData,
-	popularCreatorsNFT,
-	marketPlacewidget,
-} from "./NFTMarketplace";
-
+import { folderList, recentFile } from "./fileManager";
+import { invoiceTable, invoiceWidgets } from "./invoiceList";
+import { AddTeamMember, headData, tasklist } from "./kanban";
 import {
 	connectData,
 	discoverItemsData,
@@ -188,14 +136,54 @@ import {
 	productData,
 	topCreatorData,
 } from "./LandingNFT";
+import { mailbox } from "./mailbox";
+import {
+	aution,
+	creatorsData,
+	creatorsListData,
+	expolreNow,
+	marketPlacewidget,
+	NFTRanking,
+	nftArtworkData,
+	popularCreatorsNFT,
+	topCollection,
+	topCreator,
+	topDrop,
+	tradingArtworkData,
+	walletConnectData,
+} from "./NFTMarketplace";
+import { gridData, listData } from "./pageblog";
+// Pages
+import {
+	documents,
+	gallery,
+	news,
+	pricing1,
+	pricing2,
+	pricing3,
+	projects,
+	SearchGallery,
+	swiper,
+	team,
+	video,
+} from "./pagesData";
+import { projectList } from "./projectList";
+import { ticketsTable, ticketsWidgets } from "./supportTickets";
+import { allTask, kanbanBoardData, taskWidgets } from "./taskList";
 
-import { recentFile, folderList } from "./fileManager";
-
-import { listData, gridData } from "./pageblog";
-
-import { todoTaskList, todoCollapse } from "./todoData";
-
-import { headData, tasklist, AddTeamMember } from "./kanban";
+import { todoCollapse, todoTaskList } from "./todoData";
+import {
+	otherWidgets2,
+	tileBoxes4,
+	tileBoxes5,
+	tileBoxs1,
+	tileBoxs2,
+	tileBoxs3,
+	widgetsActivities,
+	widgetsAudiences,
+	widgetsPortfolio,
+	widgetsTasks,
+} from "./widgets";
 
 export {
 	topPages,

@@ -1,13 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-
+import BootstrapTheme from "@fullcalendar/bootstrap";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin, { Draggable } from "@fullcalendar/interaction";
+import listPlugin from "@fullcalendar/list";
+import multiMonthPlugin from "@fullcalendar/multimonth";
+import FullCalendar from "@fullcalendar/react";
 //Import Icons
 import FeatherIcon from "feather-icons-react";
-
+import { useFormik } from "formik";
+import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
+import Flatpickr from "react-flatpickr";
+//redux
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
 	Card,
 	CardBody,
+	Col,
 	Container,
 	Form,
 	FormFeedback,
@@ -17,39 +26,23 @@ import {
 	ModalBody,
 	ModalHeader,
 	Row,
-	Col,
 } from "reactstrap";
-
+import { createSelector } from "reselect";
+//Simple bar
+import SimpleBar from "simplebar-react";
 import * as Yup from "yup";
-import { useFormik } from "formik";
-
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import interactionPlugin, { Draggable } from "@fullcalendar/interaction";
-import BootstrapTheme from "@fullcalendar/bootstrap";
-import multiMonthPlugin from "@fullcalendar/multimonth";
-import Flatpickr from "react-flatpickr";
-
-//redux
-import { useSelector, useDispatch } from "react-redux";
-
 import BreadCrumb from "../../Components/Common/BreadCrumb";
 import DeleteModal from "../../Components/Common/DeleteModal";
 
-//Simple bar
-import SimpleBar from "simplebar-react";
-import UpcommingEvents from "./UpcommingEvents";
-import listPlugin from "@fullcalendar/list";
-
 import {
-	getEvents as onGetEvents,
-	getCategories as onGetCategories,
 	addNewEvent as onAddNewEvent,
 	deleteEvent as onDeleteEvent,
-	updateEvent as onUpdateEvent,
+	getCategories as onGetCategories,
+	getEvents as onGetEvents,
 	getUpCommingEvent as onGetUpCommingEvent,
+	updateEvent as onUpdateEvent,
 } from "../../slices/thunks";
-import { createSelector } from "reselect";
+import UpcommingEvents from "./UpcommingEvents";
 
 const MonthGridCalender = () => {
 	const dispatch: any = useDispatch();
@@ -90,7 +83,7 @@ const MonthGridCalender = () => {
 			setIsEdit(false);
 			setEvent({});
 		}
-	}, [dispatch, isEventUpdated]);
+	}, [isEventUpdated]);
 
 	/**
 	 * Handling the modal state
@@ -110,7 +103,7 @@ const MonthGridCalender = () => {
 	 */
 
 	const handleDateClick = (arg: any) => {
-		const date = arg["date"];
+		const date = arg.date;
 		setSelectedNewDay(date);
 		toggle();
 	};
@@ -131,12 +124,12 @@ const MonthGridCalender = () => {
 			"December",
 		];
 		var d = new Date(date),
-			month = "" + monthNames[d.getMonth()],
-			day = "" + d.getDate(),
+			month = `${monthNames[d.getMonth()]}`,
+			day = `${d.getDate()}`,
 			year = d.getFullYear();
-		if (month.length < 2) month = "0" + month;
-		if (day.length < 2) day = "0" + day;
-		return [day + " " + month, year].join(",");
+		if (month.length < 2) month = `0${month}`;
+		if (day.length < 2) day = `0${day}`;
+		return [`${day} ${month}`, year].join(",");
 	};
 
 	/**
@@ -151,7 +144,7 @@ const MonthGridCalender = () => {
 		const r_date =
 			ed_date == null
 				? str_dt(st_date)
-				: str_dt(st_date) + " to " + str_dt(ed_date);
+				: `${str_dt(st_date)} to ${str_dt(ed_date)}`;
 		const er_date = ed_date === null ? [st_date] : [st_date, ed_date];
 
 		setEvent({
@@ -188,15 +181,15 @@ const MonthGridCalender = () => {
 		enableReinitialize: true,
 
 		initialValues: {
-			id: (event && event.id) || "",
-			title: (event && event.title) || "",
-			category: (event && event.category) || "",
-			location: (event && event.location) || "",
-			description: (event && event.description) || "",
-			defaultDate: (event && event.defaultDate) || [],
-			datetag: (event && event.datetag) || "",
-			start: (event && event.start) || "",
-			end: (event && event.end) || "",
+			id: event?.id || "",
+			title: event?.title || "",
+			category: event?.category || "",
+			location: event?.location || "",
+			description: event?.description || "",
+			defaultDate: event?.defaultDate || [],
+			datetag: event?.datetag || "",
+			start: event?.start || "",
+			end: event?.end || "",
 		},
 
 		validationSchema: Yup.object({
@@ -234,12 +227,12 @@ const MonthGridCalender = () => {
 			} else {
 				const newEvent = {
 					id: Math.floor(Math.random() * 100),
-					title: values["title"],
+					title: values.title,
 					start: selectedNewDay[0],
 					end: updatedDay,
-					className: values["category"],
-					location: values["location"],
-					description: values["description"],
+					className: values.category,
+					location: values.location,
+					description: values.description,
 				};
 				// save new event
 				dispatch(onAddNewEvent(newEvent));
@@ -297,7 +290,7 @@ const MonthGridCalender = () => {
 	 * On calendar drop event
 	 */
 	const onDrop = (event: any) => {
-		const date = event["date"];
+		const date = event.date;
 		const day = date.getDate();
 		const month = date.getMonth();
 		const year = date.getFullYear();
@@ -364,20 +357,19 @@ const MonthGridCalender = () => {
 												<p className="text-muted">
 													Drag and drop your event or click in the calendar
 												</p>
-												{categories &&
-													categories.map((category: any) => (
-														<div
-															className={`bg-${category.type}-subtle external-event fc-event text-${category.type}`}
-															key={"cat-" + category.id}
-															draggable
-															onDrag={(event: any) => {
-																onDrag(event);
-															}}
-														>
-															<i className="mdi mdi-checkbox-blank-circle font-size-11 me-2" />
-															{category.title}
-														</div>
-													))}
+												{categories?.map((category: any) => (
+													<div
+														className={`bg-${category.type}-subtle external-event fc-event text-${category.type}`}
+														key={`cat-${category.id}`}
+														draggable
+														onDrag={(event: any) => {
+															onDrag(event);
+														}}
+													>
+														<i className="mdi mdi-checkbox-blank-circle font-size-11 me-2" />
+														{category.title}
+													</div>
+												))}
 											</div>
 										</CardBody>
 									</Card>
@@ -463,12 +455,12 @@ const MonthGridCalender = () => {
 									tag="h5"
 									className="p-3 bg-info-subtle modal-title"
 								>
-									{!!isEdit ? eventName : "Add Event"}
+									{isEdit ? eventName : "Add Event"}
 								</ModalHeader>
 								<ModalBody>
 									<Form
 										className={
-											!!isEdit
+											isEdit
 												? "needs-validation view-event"
 												: "needs-validation"
 										}
@@ -480,7 +472,7 @@ const MonthGridCalender = () => {
 											return false;
 										}}
 									>
-										{!!isEdit ? (
+										{isEdit ? (
 											<div className="text-end">
 												<Link
 													to="#"
@@ -559,7 +551,7 @@ const MonthGridCalender = () => {
 													<Label className="form-label">Type</Label>
 													<Input
 														className={
-															!!isEdit
+															isEdit
 																? "form-select d-none"
 																: "form-select d-block"
 														}
@@ -589,7 +581,7 @@ const MonthGridCalender = () => {
 												<div className="mb-3">
 													<Label className="form-label">Event Name</Label>
 													<Input
-														className={!!isEdit ? "d-none" : "d-block"}
+														className={isEdit ? "d-none" : "d-block"}
 														placeholder="Enter event name"
 														type="text"
 														name="title"
@@ -611,7 +603,7 @@ const MonthGridCalender = () => {
 													<Label>Event Date</Label>
 													<div
 														className={
-															!!isEdit ? "input-group d-none" : "input-group"
+															isEdit ? "input-group d-none" : "input-group"
 														}
 													>
 														<Flatpickr
@@ -707,7 +699,7 @@ const MonthGridCalender = () => {
 													<div>
 														<Input
 															type="text"
-															className={!!isEdit ? "d-none" : "d-block"}
+															className={isEdit ? "d-none" : "d-block"}
 															name="location"
 															id="event-location"
 															placeholder="Event location"
@@ -729,7 +721,7 @@ const MonthGridCalender = () => {
 													<Label className="form-label">Description</Label>
 													<textarea
 														className={
-															!!isEdit
+															isEdit
 																? "form-control d-none"
 																: "form-control d-block"
 														}
@@ -770,7 +762,7 @@ const MonthGridCalender = () => {
 													className="btn btn-success"
 													id="btn-save-event"
 												>
-													{!!isEdit ? "Edit Event" : "Add Event"}
+													{isEdit ? "Edit Event" : "Add Event"}
 												</button>
 											)}
 										</div>

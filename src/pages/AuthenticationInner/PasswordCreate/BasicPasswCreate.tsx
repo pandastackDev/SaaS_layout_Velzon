@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+//formik
+import { useFormik } from "formik";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
 	Button,
@@ -6,18 +8,15 @@ import {
 	CardBody,
 	Col,
 	Container,
-	Row,
 	Form,
+	FormFeedback,
 	Input,
 	Label,
-	FormFeedback,
+	Row,
 } from "reactstrap";
-import ParticlesAuth from "../ParticlesAuth";
-import logoLight from "../../../assets/images/logo-light.png";
-
-//formik
-import { useFormik } from "formik";
 import * as Yup from "yup";
+import logoLight from "../../../assets/images/logo-light.png";
+import ParticlesAuth from "../ParticlesAuth";
 
 const BasicPasswCreate = () => {
 	document.title =
@@ -36,15 +35,15 @@ const BasicPasswCreate = () => {
 		validationSchema: Yup.object({
 			password: Yup.string()
 				.min(8, "Password must be at least 8 characters")
-				.matches(RegExp("(.*[a-z].*)"), "At least lowercase letter")
-				.matches(RegExp("(.*[A-Z].*)"), "At least uppercase letter")
-				.matches(RegExp("(.*[0-9].*)"), "At least one number")
+				.matches(/(.*[a-z].*)/, "At least lowercase letter")
+				.matches(/(.*[A-Z].*)/, "At least uppercase letter")
+				.matches(/(.*[0-9].*)/, "At least one number")
 				.required("This field is required"),
 			confirm_password: Yup.string()
 				.oneOf([Yup.ref("password"), ""])
 				.required("Confirm Password is required"),
 		}),
-		onSubmit: (values) => {
+		onSubmit: (_values) => {
 			// console.log(values);
 		},
 	});
@@ -98,10 +97,10 @@ const BasicPasswCreate = () => {
 														onBlur={validation.handleBlur}
 														onChange={validation.handleChange}
 														invalid={
-															validation.errors.password &&
-															validation.touched.password
-																? true
-																: false
+															!!(
+																validation.errors.password &&
+																validation.touched.password
+															)
 														}
 													/>
 													{validation.errors.password &&
@@ -143,10 +142,10 @@ const BasicPasswCreate = () => {
 														onBlur={validation.handleBlur}
 														onChange={validation.handleChange}
 														invalid={
-															validation.errors.confirm_password &&
-															validation.touched.confirm_password
-																? true
-																: false
+															!!(
+																validation.errors.confirm_password &&
+																validation.touched.confirm_password
+															)
 														}
 													/>
 													{validation.errors.confirm_password &&

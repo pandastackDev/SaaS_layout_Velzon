@@ -1,13 +1,25 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import {
-	getProjectList,
 	addProjectList,
-	updateProjectList,
 	deleteProjectList,
+	getProjectList,
+	updateProjectList,
 } from "./thunk";
-export const initialState: any = {
+
+interface Project {
+	id?: string | number;
+	_id?: string | number;
+	[key: string]: unknown;
+}
+
+interface ProjectsState {
+	projectLists: Project[];
+	error: Record<string, unknown> | null;
+}
+
+export const initialState: ProjectsState = {
 	projectLists: [],
-	error: {},
+	error: null,
 };
 
 const ProjectsSlice = createSlice({
@@ -15,36 +27,51 @@ const ProjectsSlice = createSlice({
 	initialState,
 	reducers: {},
 	extraReducers: (builder) => {
-		builder.addCase(getProjectList.fulfilled, (state: any, action: any) => {
-			state.projectLists = action.payload;
+		builder.addCase(
+			getProjectList.fulfilled,
+			(state, action: PayloadAction<Project[]>) => {
+				state.projectLists = action.payload;
+			},
+		);
+		builder.addCase(getProjectList.rejected, (state, action) => {
+			state.error = (action.payload as { error?: unknown })?.error || null;
 		});
-		builder.addCase(getProjectList.rejected, (state: any, action: any) => {
-			state.error = action.payload.error || null;
+		builder.addCase(
+			addProjectList.fulfilled,
+			(state, action: PayloadAction<Project>) => {
+				state.projectLists.push(action.payload);
+			},
+		);
+		builder.addCase(addProjectList.rejected, (state, action) => {
+			state.error = (action.payload as { error?: unknown })?.error || null;
 		});
-		builder.addCase(addProjectList.fulfilled, (state: any, action: any) => {
-			state.projectLists.push(action.payload);
+		builder.addCase(
+			updateProjectList.fulfilled,
+			(state, action: PayloadAction<{ data: Project }>) => {
+				state.projectLists = state.projectLists.map((project) => {
+					const projectId = project._id || project.id;
+					const payloadId = action.payload.data._id || action.payload.data.id;
+					return projectId?.toString() === payloadId?.toString()
+						? { ...project, ...action.payload.data }
+						: project;
+				});
+			},
+		);
+		builder.addCase(updateProjectList.rejected, (state, action) => {
+			state.error = (action.payload as { error?: unknown })?.error || null;
 		});
-		builder.addCase(addProjectList.rejected, (state: any, action: any) => {
-			state.error = action.payload.error || null;
-		});
-		builder.addCase(updateProjectList.fulfilled, (state: any, action: any) => {
-			state.projectLists = state.projectLists.map((project: any) =>
-				project._id.toString() === action.payload.data._id.toString()
-					? { ...project, ...action.payload.data }
-					: project,
-			);
-		});
-		builder.addCase(updateProjectList.rejected, (state: any, action: any) => {
-			state.error = action.payload.error || null;
-		});
-		builder.addCase(deleteProjectList.fulfilled, (state: any, action: any) => {
-			state.projectLists = state.projectLists.filter(
-				(project: any) =>
-					project.id.toString() !== action.payload.id.toString(),
-			);
-		});
-		builder.addCase(deleteProjectList.rejected, (state: any, action: any) => {
-			state.error = action.payload.error || null;
+		builder.addCase(
+			deleteProjectList.fulfilled,
+			(state, action: PayloadAction<{ id: string | number }>) => {
+				state.projectLists = state.projectLists.filter(
+					(project) =>
+						(project.id || project._id)?.toString() !==
+						action.payload.id.toString(),
+				);
+			},
+		);
+		builder.addCase(deleteProjectList.rejected, (state, action) => {
+			state.error = (action.payload as { error?: unknown })?.error || null;
 		});
 	},
 });

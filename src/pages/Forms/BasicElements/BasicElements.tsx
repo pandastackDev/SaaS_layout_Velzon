@@ -1,20 +1,5 @@
 import React from "react";
 import {
-	InputExample,
-	InputSizing,
-	FileInput,
-	InputGroup,
-	InputGroupSizing,
-	MultipleInputs,
-	ButtonsCheckboxesRadiosGroup,
-	ButtonsWithDropdowns,
-	CustomForms,
-} from "./BasicElementCode";
-import UiContent from "../../../Components/Common/UiContent";
-
-//import Components
-import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import {
 	Card,
 	CardBody,
 	Col,
@@ -28,7 +13,21 @@ import {
 	Row,
 	UncontrolledDropdown,
 } from "reactstrap";
+//import Components
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
+import UiContent from "../../../Components/Common/UiContent";
+import {
+	ButtonsCheckboxesRadiosGroup,
+	ButtonsWithDropdowns,
+	CustomForms,
+	FileInput,
+	InputExample,
+	InputGroup,
+	InputGroupSizing,
+	InputSizing,
+	MultipleInputs,
+} from "./BasicElementCode";
 
 const BasicElements = () => {
 	document.title = "Basic Elements | Velzon - React Admin & Dashboard Template";

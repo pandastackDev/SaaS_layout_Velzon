@@ -1,6 +1,6 @@
+import moment from "moment";
 import React from "react";
 import { Link } from "react-router-dom";
-import moment from "moment";
 
 const handleValidDate = (date: any) => {
 	const date1 = moment(new Date(date)).format("DD MMM Y");
@@ -9,54 +9,48 @@ const handleValidDate = (date: any) => {
 
 const OrdersId = (cell: any) => {
 	return (
-		<React.Fragment>
-			<Link to="/apps-tasks-details" className="fw-medium link-primary">
-				{cell.getValue()}
-			</Link>
-		</React.Fragment>
+		<Link to="/apps-tasks-details" className="fw-medium link-primary">
+			{cell.getValue()}
+		</Link>
 	);
 };
 
 const Project = (cell: any) => {
 	return (
-		<React.Fragment>
-			<Link to="/apps-projects-overview" className="fw-medium link-primary">
-				{cell.getValue()}
-			</Link>
-		</React.Fragment>
+		<Link to="/apps-projects-overview" className="fw-medium link-primary">
+			{cell.getValue()}
+		</Link>
 	);
 };
 
 const Tasks = (cell: any, onEditIconClick: any, onDeleteIconClick: any) => {
 	return (
-		<React.Fragment>
-			<div className="d-flex">
-				<div className="flex-grow-1 tasks_name">{cell.getValue()}</div>
-				<div className="flex-shrink-0 ms-4">
-					<ul className="list-inline tasks-list-menu mb-0">
-						<li className="list-inline-item">
-							<Link to="/apps-tasks-details">
-								<i className="ri-eye-fill align-bottom me-2 text-muted"></i>
-							</Link>
-						</li>
-						<li className="list-inline-item">
-							<Link to="#" onClick={onEditIconClick}>
-								<i className="ri-pencil-fill align-bottom me-2 text-muted"></i>
-							</Link>
-						</li>
-						<li className="list-inline-item">
-							<Link
-								to="#"
-								className="remove-item-btn"
-								onClick={onDeleteIconClick}
-							>
-								<i className="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-							</Link>
-						</li>
-					</ul>
-				</div>
+		<div className="d-flex">
+			<div className="flex-grow-1 tasks_name">{cell.getValue()}</div>
+			<div className="flex-shrink-0 ms-4">
+				<ul className="list-inline tasks-list-menu mb-0">
+					<li className="list-inline-item">
+						<Link to="/apps-tasks-details">
+							<i className="ri-eye-fill align-bottom me-2 text-muted"></i>
+						</Link>
+					</li>
+					<li className="list-inline-item">
+						<Link to="#" onClick={onEditIconClick}>
+							<i className="ri-pencil-fill align-bottom me-2 text-muted"></i>
+						</Link>
+					</li>
+					<li className="list-inline-item">
+						<Link
+							to="#"
+							className="remove-item-btn"
+							onClick={onDeleteIconClick}
+						>
+							<i className="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
+						</Link>
+					</li>
+				</ul>
 			</div>
-		</React.Fragment>
+		</div>
 	);
 };
 
@@ -66,15 +60,13 @@ const CreateBy = (cell: any) => {
 
 const AssignedTo = (cell: any) => {
 	return (
-		<React.Fragment>
-			<div className="avatar-group">
-				{(cell.getValue() || []).map((item: any, index: any) => (
-					<Link key={index} to="#" className="avatar-group-item">
-						<img src={item.img} alt="" className="rounded-circle avatar-xxs" />
-					</Link>
-				))}
-			</div>
-		</React.Fragment>
+		<div className="avatar-group">
+			{(cell.getValue() || []).map((item: any, index: any) => (
+				<Link key={index} to="#" className="avatar-group-item">
+					<img src={item.img} alt="" className="rounded-circle avatar-xxs" />
+				</Link>
+			))}
+		</div>
 	);
 };
 

@@ -1,33 +1,31 @@
+import classnames from "classnames";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-//Import Breadcrumb
-import BreadCrumb from "../../Components/Common/BreadCrumb";
-
+import Select from "react-select";
 import {
-	Container,
-	Form,
-	Row,
-	Col,
 	Card,
 	CardBody,
 	CardHeader,
+	Col,
+	Container,
+	Form,
+	Input,
+	Label,
+	Modal,
+	ModalBody,
+	ModalFooter,
+	ModalHeader,
 	Nav,
 	NavItem,
 	NavLink,
+	Row,
 	TabContent,
 	TabPane,
-	Modal,
-	ModalFooter,
-	ModalHeader,
-	ModalBody,
-	Label,
-	Input,
 } from "reactstrap";
-
-import Select from "react-select";
-import classnames from "classnames";
+//Import Breadcrumb
+import BreadCrumb from "../../Components/Common/BreadCrumb";
 import { orderSummary } from "../../common/data/ecommerce";
-import { Link } from "react-router-dom";
 
 const EcommerceCheckout = () => {
 	const [selectedCountry, setselectedCountry] = useState<any>(null);
@@ -49,7 +47,7 @@ const EcommerceCheckout = () => {
 		setselectedCountry(selectedCountry);
 	}
 
-	function handleSelectState(selectedStateany: any) {
+	function handleSelectState(_selectedStateany: any) {
 		setselectedState(selectedState);
 	}
 

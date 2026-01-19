@@ -1,4 +1,8 @@
+//Import Icons
+import FeatherIcon from "feather-icons-react";
 import React from "react";
+import CountUp from "react-countup";
+import { Link } from "react-router-dom";
 import {
 	Card,
 	CardBody,
@@ -9,19 +13,13 @@ import {
 	Row,
 	UncontrolledDropdown,
 } from "reactstrap";
-import { Link } from "react-router-dom";
-
-import CountUp from "react-countup";
-
-//Import Icons
-import FeatherIcon from "feather-icons-react";
 
 import {
+	tileBoxes4,
+	tileBoxes5,
 	tileBoxs1,
 	tileBoxs2,
 	tileBoxs3,
-	tileBoxes4,
-	tileBoxes5,
 } from "../../common/data/index";
 
 const TileBoxs = () => {
@@ -34,24 +32,22 @@ const TileBoxs = () => {
 			</Row>
 
 			<Row>
-				{(tileBoxs1 || []).map((item: any, key: any) => (
+				{(tileBoxs1 || []).map((item, key) => (
 					<Col xl={3} md={6} key={key}>
-						<Card className={"card-animate " + item.bgColor}>
+						<Card className={`card-animate ${item.bgColor}`}>
 							<CardBody>
 								<div className="d-flex align-items-center">
 									<div className="flex-grow-1">
 										<p
-											className={
-												"text-uppercase fw-medium mb-0 text-" + item.labelClass
-											}
+											className={`text-uppercase fw-medium mb-0 text-${item.labelClass}`}
 										>
 											{item.label}
 										</p>
 									</div>
 									<div className="flex-shrink-0">
-										<h5 className={"fs-14 mb-0 text-" + item.percentageClass}>
+										<h5 className={`fs-14 mb-0 text-${item.percentageClass}`}>
 											<i
-												className={"fs-13 align-middle " + item.percentageIcon}
+												className={`fs-13 align-middle ${item.percentageIcon}`}
 											></i>{" "}
 											{item.percentage}
 										</h5>
@@ -79,20 +75,16 @@ const TileBoxs = () => {
 										</h4>
 										<Link
 											to="#"
-											className={
-												"text-decoration-underline " + item.captionClass
-											}
+											className={`text-decoration-underline ${item.captionClass}`}
 										>
 											{item.caption}
 										</Link>
 									</div>
 									<div className="avatar-sm flex-shrink-0">
 										<span
-											className={
-												"avatar-title rounded fs-3 bg-" + item.iconClass
-											}
+											className={`avatar-title rounded fs-3 bg-${item.iconClass}`}
 										>
-											<i className={item.icon + " text-" + item.color}></i>
+											<i className={`${item.icon} text-${item.color}`}></i>
 										</span>
 									</div>
 								</div>
@@ -116,15 +108,13 @@ const TileBoxs = () => {
 											<h5 className="text-muted text-uppercase fs-13">
 												{item.label}{" "}
 												<i
-													className={
-														"fs-18 float-end align-middle " + item.badge
-													}
+													className={`fs-18 float-end align-middle ${item.badge}`}
 												></i>
 											</h5>
 											<div className="d-flex align-items-center">
 												<div className="flex-shrink-0">
 													<i
-														className={"display-6 text-muted " + item.icon}
+														className={`display-6 text-muted ${item.icon}`}
 													></i>
 												</div>
 												<div className="flex-grow-1 ms-3">
@@ -155,17 +145,15 @@ const TileBoxs = () => {
 			<Row>
 				{(tileBoxs3 || []).map((item, key) => (
 					<Col xl={3} md={6} key={key}>
-						<Card className={"card-animate " + item.bgColor}>
+						<Card className={`card-animate ${item.bgColor}`}>
 							<CardBody>
 								<div className="d-flex justify-content-between">
 									<div>
-										<p className={"fw-medium mb-0 text-" + item.labelClass}>
+										<p className={`fw-medium mb-0 text-${item.labelClass}`}>
 											{item.label}
 										</p>
 										<h2
-											className={
-												"mt-4 ff-secondary fw-semibold " + item.counterClass
-											}
+											className={`mt-4 ff-secondary fw-semibold ${item.counterClass}`}
 										>
 											{item.subCounter.map((item, key) => (
 												<span className="counter-value" key={key}>
@@ -181,9 +169,9 @@ const TileBoxs = () => {
 												</span>
 											))}
 										</h2>
-										<p className={"mb-0 text-" + item.labelClass}>
-											<span className={"mb-0 badge " + item.badgeClass}>
-												<i className={"align-middle " + item.badge}></i>{" "}
+										<p className={`mb-0 text-${item.labelClass}`}>
+											<span className={`mb-0 badge ${item.badgeClass}`}>
+												<i className={`align-middle ${item.badge}`}></i>{" "}
 												{item.percentage}
 											</span>{" "}
 											vs. previous month
@@ -199,7 +187,7 @@ const TileBoxs = () => {
 											>
 												<FeatherIcon
 													icon={item.feaIcon}
-													className={"text-" + item.color}
+													className={`text-${item.color}`}
 												/>
 											</span>
 										</div>
@@ -214,7 +202,7 @@ const TileBoxs = () => {
 			<Row>
 				{(tileBoxes4 || []).map((item, key) => (
 					<Col xl={3} md={6} key={key}>
-						<Card className={"card-height-100 " + item.bgColor}>
+						<Card className={`card-height-100 ${item.bgColor}`}>
 							<CardBody>
 								<div className="d-flex align-items-center">
 									<div className="avatar-sm flex-shrink-0">
@@ -231,13 +219,11 @@ const TileBoxs = () => {
 									</div>
 									<div className="flex-grow-1 ms-3">
 										<p
-											className={
-												"text-uppercase fw-medium mb-3 text-" + item.labelClass
-											}
+											className={`text-uppercase fw-medium mb-3 text-${item.labelClass}`}
 										>
 											{item.label}
 										</p>
-										<h4 className={"fs-4 mb-3 " + item.counterClass}>
+										<h4 className={`fs-4 mb-3 ${item.counterClass}`}>
 											<span className="counter-value">
 												<CountUp
 													start={0}
@@ -250,7 +236,7 @@ const TileBoxs = () => {
 												/>
 											</span>
 										</h4>
-										<p className={"mb-0 text-" + item.captionClass}>
+										<p className={`mb-0 text-${item.captionClass}`}>
 											{item.caption}
 										</p>
 									</div>
@@ -264,7 +250,7 @@ const TileBoxs = () => {
 											}
 										>
 											<i
-												className={"fs-13 align-middle me-1 " + item.badge}
+												className={`fs-13 align-middle me-1 ${item.badge}`}
 											></i>
 											{item.percentage}
 											<span></span>
@@ -280,7 +266,7 @@ const TileBoxs = () => {
 			<Row>
 				{(tileBoxes5 || []).map((item, key) => (
 					<Col xl={3} ms={6} key={key}>
-						<Card className={"card-height-100 " + item.class}>
+						<Card className={`card-height-100 ${item.class}`}>
 							<CardBody>
 								<UncontrolledDropdown className="float-end">
 									<DropdownToggle

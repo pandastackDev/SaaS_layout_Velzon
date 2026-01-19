@@ -35,7 +35,7 @@ const Widgets = () => {
 												" mb-0"
 											}
 										>
-											<i className={item.arrowIcon + " align-middle"}></i>{" "}
+											<i className={`${item.arrowIcon} align-middle`}></i>{" "}
 											{item.percentage}
 										</span>{" "}
 										vs. previous month

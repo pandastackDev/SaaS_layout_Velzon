@@ -1,10 +1,21 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-import { getPortfolioChartsData, getMarketChartsData } from "./thunk";
-export const initialState: any = {
+import { getMarketChartsData, getPortfolioChartsData } from "./thunk";
+
+interface ChartData {
+	[key: string]: unknown;
+}
+
+interface DashboardCryptoState {
+	portfolioData: ChartData[];
+	marketData: ChartData[];
+	error: Record<string, unknown> | null;
+}
+
+export const initialState: DashboardCryptoState = {
 	portfolioData: [],
 	marketData: [],
-	error: {},
+	error: null,
 };
 
 const DashboardCryptoSlice = createSlice({
@@ -14,25 +25,22 @@ const DashboardCryptoSlice = createSlice({
 	extraReducers: (builder) => {
 		builder.addCase(
 			getPortfolioChartsData.fulfilled,
-			(state: any, action: any) => {
+			(state, action: PayloadAction<ChartData[]>) => {
 				state.portfolioData = action.payload;
 			},
 		);
-		builder.addCase(
-			getPortfolioChartsData.rejected,
-			(state: any, action: any) => {
-				state.error = action.payload.error || null;
-			},
-		);
+		builder.addCase(getPortfolioChartsData.rejected, (state, action) => {
+			state.error = (action.payload as { error?: unknown })?.error || null;
+		});
 
 		builder.addCase(
 			getMarketChartsData.fulfilled,
-			(state: any, action: any) => {
+			(state, action: PayloadAction<ChartData[]>) => {
 				state.marketData = action.payload;
 			},
 		);
-		builder.addCase(getMarketChartsData.rejected, (state: any, action: any) => {
-			state.error = action.payload.error || null;
+		builder.addCase(getMarketChartsData.rejected, (state, action) => {
+			state.error = (action.payload as { error?: unknown })?.error || null;
 		});
 	},
 });

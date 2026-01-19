@@ -1,6 +1,6 @@
 import React from "react";
-import { Card, CardBody, Col } from "reactstrap";
 import CountUp from "react-countup";
+import { Card, CardBody, Col } from "reactstrap";
 import { taskWidgets } from "../../../common/data";
 
 const Widgets = () => {
@@ -26,9 +26,9 @@ const Widgets = () => {
 									</h2>
 									<p className="mb-0 text-muted">
 										<span
-											className={"badge bg-light mb-0 text-" + item.badgeClass}
+											className={`badge bg-light mb-0 text-${item.badgeClass}`}
 										>
-											<i className={"align-middle " + item.badge}></i>{" "}
+											<i className={`align-middle ${item.badge}`}></i>{" "}
 											{item.percentage}
 										</span>{" "}
 										vs. previous month

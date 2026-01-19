@@ -1,6 +1,6 @@
-import React from "react";
-import { Modal, ModalBody, Button } from "reactstrap";
-import { Startup } from "./types";
+import type React from "react";
+import { Button, Modal, ModalBody } from "reactstrap";
+import type { Startup } from "./types";
 
 interface VideoLightboxProps {
 	isOpen: boolean;

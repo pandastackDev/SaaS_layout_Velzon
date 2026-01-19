@@ -1,6 +1,5 @@
-import React from "react";
-import { Card, CardBody, Row, Col, Badge, Button } from "reactstrap";
 import { Link } from "react-router-dom";
+import { Badge, Button, Card, CardBody, Col, Row } from "reactstrap";
 
 interface GalleryCardProps {
 	id: string | number;
@@ -29,7 +28,6 @@ const GalleryCard: React.FC<GalleryCardProps> = ({
 	id,
 	title,
 	artist,
-	subtitle,
 	imageUrl,
 	category,
 	views,
@@ -87,9 +85,9 @@ const GalleryCard: React.FC<GalleryCardProps> = ({
 								{/* Badges overlay */}
 								{badges && badges.length > 0 && (
 									<div className="position-absolute top-0 start-0 p-2 d-flex gap-1 flex-wrap">
-										{badges.slice(0, 2).map((badge, idx) => (
+										{badges.slice(0, 2).map((badge) => (
 											<Badge
-												key={idx}
+												key={badge}
 												color="success"
 												className="badge-soft-success"
 												style={{ fontSize: "0.7rem" }}
@@ -121,7 +119,10 @@ const GalleryCard: React.FC<GalleryCardProps> = ({
 									}}
 								/>
 								<div className="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center card-play-btn">
-									<i className="ri-eye-line card-play-icon" style={{ fontSize: "1.5rem" }}></i>
+									<i
+										className="ri-eye-line card-play-icon"
+										style={{ fontSize: "1.5rem" }}
+									></i>
 								</div>
 								<div className="position-absolute bottom-0 start-0 end-0 p-2 text-center card-video-overlay-bottom">
 									<small className="text-white card-video-label">
@@ -150,14 +151,20 @@ const GalleryCard: React.FC<GalleryCardProps> = ({
 					{/* Title */}
 					<h6 className="mb-1 fw-semibold">{title}</h6>
 					{artist && (
-						<p className="text-muted mb-2 card-description" style={{ fontSize: "0.85rem" }}>
+						<p
+							className="text-muted mb-2 card-description"
+							style={{ fontSize: "0.85rem" }}
+						>
 							by {artist}
 						</p>
 					)}
 
 					{/* Description */}
 					{description && (
-						<p className="text-muted mb-3 card-description" style={{ fontSize: "0.8rem" }}>
+						<p
+							className="text-muted mb-3 card-description"
+							style={{ fontSize: "0.8rem" }}
+						>
 							{description.length > 80
 								? `${description.substring(0, 80)}...`
 								: description}
@@ -196,7 +203,8 @@ const GalleryCard: React.FC<GalleryCardProps> = ({
 									alt={author.name}
 									className="avatar-xs rounded-circle"
 									onError={(e) => {
-										(e.target as HTMLImageElement).src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'%3E%3C/circle cx='12' cy='7' r='4'%3E%3C/svg%3E";
+										(e.target as HTMLImageElement).src =
+											"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'%3E%3C/circle cx='12' cy='7' r='4'%3E%3C/svg%3E";
 									}}
 								/>
 							) : (

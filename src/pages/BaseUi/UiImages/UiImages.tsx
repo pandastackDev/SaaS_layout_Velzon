@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
 	Card,
 	CardBody,
@@ -7,13 +8,10 @@ import {
 	Row,
 	UncontrolledTooltip,
 } from "reactstrap";
-import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
-
-// Import Content
-import UiContent from "../../../Components/Common/UiContent";
-//import Components
-import BreadCrumb from "../../../Components/Common/BreadCrumb";
-
+import img2 from "../../../assets/images/small/img-2.jpg";
+import img3 from "../../../assets/images/small/img-3.jpg";
+import img4 from "../../../assets/images/small/img-4.jpg";
+import img5 from "../../../assets/images/small/img-5.jpg";
 // Import Images
 import avatar2 from "../../../assets/images/users/avatar-2.jpg";
 import avatar3 from "../../../assets/images/users/avatar-3.jpg";
@@ -21,20 +19,19 @@ import avatar4 from "../../../assets/images/users/avatar-4.jpg";
 import avatar5 from "../../../assets/images/users/avatar-5.jpg";
 import avatar8 from "../../../assets/images/users/avatar-8.jpg";
 import avatar10 from "../../../assets/images/users/avatar-10.jpg";
-
-import img2 from "../../../assets/images/small/img-2.jpg";
-import img3 from "../../../assets/images/small/img-3.jpg";
-import img4 from "../../../assets/images/small/img-4.jpg";
-import img5 from "../../../assets/images/small/img-5.jpg";
-import { Link } from "react-router-dom";
+//import Components
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
+// Import Content
+import UiContent from "../../../Components/Common/UiContent";
 
 import {
-	ImgRoundedCircleExample,
-	ImgThumbnailsExample,
-	ImgSizesExample,
 	AvatarExample,
 	AvatarGroupExample,
 	FiguresExample,
+	ImgRoundedCircleExample,
+	ImgSizesExample,
+	ImgThumbnailsExample,
 	ResponsiveExample,
 } from "./UiImagesCode";
 

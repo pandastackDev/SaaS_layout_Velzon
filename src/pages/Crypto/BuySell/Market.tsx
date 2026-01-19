@@ -1,9 +1,9 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardBody, CardHeader, Col, Row } from "reactstrap";
-import { market } from "../../../common/data";
 import TableContainer from "../../../Components/Common/TableContainer";
-import { Price, Pairs, HighPrice, LowPrice, MarketVolume } from "./MarketCol";
+import { market } from "../../../common/data";
+import { HighPrice, LowPrice, MarketVolume, Pairs, Price } from "./MarketCol";
 
 const Market = () => {
 	const columns = useMemo(
@@ -12,7 +12,10 @@ const Market = () => {
 				header: "Currency",
 				accessorKey: "coinName",
 				enableColumnFilter: false,
-				cell: (cell: any) => (
+				cell: (cell: {
+					row: { original: { img: string; iconClass: string; icon: string } };
+					getValue: () => string;
+				}) => (
 					<>
 						<div className="d-flex align-items-center fw-medium">
 							<img
@@ -31,7 +34,10 @@ const Market = () => {
 				header: "Price",
 				accessorKey: "price",
 				enableColumnFilter: false,
-				cell: (cell: any) => {
+				cell: (cell: {
+					row: { original: Record<string, unknown> };
+					getValue: () => string;
+				}) => {
 					return <Price {...cell} />;
 				},
 			},
@@ -39,7 +45,10 @@ const Market = () => {
 				header: "Pairs",
 				accessorKey: "pairs",
 				enableColumnFilter: false,
-				cell: (cell: any) => {
+				cell: (cell: {
+					row: { original: Record<string, unknown> };
+					getValue: () => string;
+				}) => {
 					return <Pairs {...cell} />;
 				},
 			},
@@ -47,7 +56,10 @@ const Market = () => {
 				header: "24 High",
 				accessorKey: "high",
 				enableColumnFilter: false,
-				cell: (cell: any) => {
+				cell: (cell: {
+					row: { original: Record<string, unknown> };
+					getValue: () => string;
+				}) => {
 					return <HighPrice {...cell} />;
 				},
 			},
@@ -55,7 +67,10 @@ const Market = () => {
 				header: "24 Low",
 				accessorKey: "low",
 				enableColumnFilter: false,
-				cell: (cell: any) => {
+				cell: (cell: {
+					row: { original: Record<string, unknown> };
+					getValue: () => string;
+				}) => {
 					return <LowPrice {...cell} />;
 				},
 			},
@@ -63,7 +78,10 @@ const Market = () => {
 				header: "Market Volume",
 				accessorKey: "marketVolume",
 				enableColumnFilter: false,
-				cell: (cell: any) => {
+				cell: (cell: {
+					row: { original: Record<string, unknown> };
+					getValue: () => string;
+				}) => {
 					return <MarketVolume {...cell} />;
 				},
 			},
@@ -71,12 +89,13 @@ const Market = () => {
 				header: "Volume %",
 				accessorKey: "percentage",
 				enableColumnFilter: false,
-				cell: (cell: any) => (
+				cell: (cell: {
+					row: { original: { img: string; iconClass: string; icon: string } };
+					getValue: () => string;
+				}) => (
 					<>
-						<h6
-							className={"text-" + cell.row.original.iconClass + " fs-13 mb-0"}
-						>
-							<i className={cell.row.original.icon + " align-middle me-1"}></i>
+						<h6 className={`text-${cell.row.original.iconClass} fs-13 mb-0`}>
+							<i className={`${cell.row.original.icon} align-middle me-1`}></i>
 							{cell.getValue()}
 						</h6>
 					</>
@@ -94,45 +113,42 @@ const Market = () => {
 		[],
 	);
 	return (
-		<React.Fragment>
-			<Card>
-				<CardHeader className="border-bottom-dashed">
-					<Row className="align-items-center">
-						<Col xs={3}>
-							<h5 className="card-title mb-0">Markets</h5>
-						</Col>
-						<div className="col-auto ms-auto">
-							<div className="d-flex gap-2">
-								<button className="btn btn-success">
-									<i className="ri-equalizer-line align-bottom me-1"></i>{" "}
-									Filters
-								</button>
-							</div>
+		<Card>
+			<CardHeader className="border-bottom-dashed">
+				<Row className="align-items-center">
+					<Col xs={3}>
+						<h5 className="card-title mb-0">Markets</h5>
+					</Col>
+					<div className="col-auto ms-auto">
+						<div className="d-flex gap-2">
+							<button className="btn btn-success">
+								<i className="ri-equalizer-line align-bottom me-1"></i> Filters
+							</button>
 						</div>
-					</Row>
-				</CardHeader>
-				<CardBody className="p-0 border-bottom border-bottom-dashed">
-					<div className="search-box">
-						<input
-							type="text"
-							className="form-control search border-0 py-3"
-							placeholder="Search to currency..."
-						/>
-						<i className="ri-search-line search-icon"></i>
 					</div>
-				</CardBody>
-				<CardBody>
-					<TableContainer
-						columns={columns}
-						data={market || []}
-						customPageSize={8}
-						divClass="table-responsive table-card"
-						tableClass="align-middle table-nowrap"
-						theadClass="table-light text-muted"
+				</Row>
+			</CardHeader>
+			<CardBody className="p-0 border-bottom border-bottom-dashed">
+				<div className="search-box">
+					<input
+						type="text"
+						className="form-control search border-0 py-3"
+						placeholder="Search to currency..."
 					/>
-				</CardBody>
-			</Card>
-		</React.Fragment>
+					<i className="ri-search-line search-icon"></i>
+				</div>
+			</CardBody>
+			<CardBody>
+				<TableContainer
+					columns={columns}
+					data={market || []}
+					customPageSize={8}
+					divClass="table-responsive table-card"
+					tableClass="align-middle table-nowrap"
+					theadClass="table-light text-muted"
+				/>
+			</CardBody>
+		</Card>
 	);
 };
 

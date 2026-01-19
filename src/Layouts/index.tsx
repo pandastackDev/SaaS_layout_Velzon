@@ -1,36 +1,39 @@
-import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import withRouter from "../Components/Common/withRouter";
-
-//import Components
-import Header from "./Header";
-import Sidebar from "./Sidebar";
-import Footer from "./Footer";
+import React, { useEffect, useState } from "react";
+//redux
+import { useDispatch, useSelector } from "react-redux";
+import { createSelector } from "reselect";
 import RightSidebar from "../Components/Common/RightSidebar";
-
+import withRouter from "../Components/Common/withRouter";
 //import actions
 import {
 	changeLayout,
-	changeSidebarTheme,
 	changeLayoutMode,
-	changeLayoutWidth,
 	changeLayoutPosition,
-	changeTopbarTheme,
+	changeLayoutWidth,
 	changeLeftsidebarSizeType,
 	changeLeftsidebarViewType,
 	changeSidebarImageType,
+	changeSidebarTheme,
 	changeSidebarVisibility,
+	changeTopbarTheme,
 } from "../slices/thunks";
+import Footer from "./Footer";
+//import Components
+import Header from "./Header";
+import Sidebar from "./Sidebar";
 
-//redux
-import { useSelector, useDispatch } from "react-redux";
-import { createSelector } from "reselect";
+interface LayoutProps {
+	children: React.ReactNode;
+	[key: string]: unknown;
+}
 
-const Layout = (props: any) => {
+const Layout = (props: LayoutProps) => {
 	const [headerClass, setHeaderClass] = useState("");
-	const dispatch: any = useDispatch();
+	const dispatch = useDispatch();
 
-	const selectLayoutState = (state: any) => state.Layout;
+	const selectLayoutState = (state: { Layout: Record<string, unknown> }) =>
+		state.Layout;
 	const selectLayoutProperties = createSelector(
 		selectLayoutState,
 		(layout) => ({
@@ -97,7 +100,7 @@ const Layout = (props: any) => {
 	});
 
 	function scrollNavigation() {
-		var scrollup = document.documentElement.scrollTop;
+		const scrollup = document.documentElement.scrollTop;
 		if (scrollup > 50) {
 			setHeaderClass("topbar-shadow");
 		} else {

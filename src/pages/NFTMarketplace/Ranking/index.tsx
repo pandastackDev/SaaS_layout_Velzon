@@ -1,8 +1,8 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
+import { Link } from "react-router-dom";
 import { Container } from "reactstrap";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import TableContainer from "../../../Components/Common/TableContainer";
-import { Link } from "react-router-dom";
 
 import { NFTRanking } from "../../../common/data";
 
@@ -101,55 +101,53 @@ const Ranking = () => {
 	);
 
 	return (
-		<React.Fragment>
-			<div className="page-content">
-				<Container fluid>
-					<BreadCrumb title="Ranking" pageTitle="NFT Marketplace" />
-					<div className="row">
-						<div className="col-lg-12">
-							<div className="card" id="contactList">
-								<div className="card-header border-0">
-									<div className="d-flex align-items center">
-										<h5 className="card-title mb-0 flex-grow-1">
-											The top NFTs ranking on Velzon
-										</h5>
-										<p className="text-muted mb-0">
-											Updated: 28 April, 2022 08:05:00
-										</p>
-									</div>
+		<div className="page-content">
+			<Container fluid>
+				<BreadCrumb title="Ranking" pageTitle="NFT Marketplace" />
+				<div className="row">
+					<div className="col-lg-12">
+						<div className="card" id="contactList">
+							<div className="card-header border-0">
+								<div className="d-flex align-items center">
+									<h5 className="card-title mb-0 flex-grow-1">
+										The top NFTs ranking on Velzon
+									</h5>
+									<p className="text-muted mb-0">
+										Updated: 28 April, 2022 08:05:00
+									</p>
 								</div>
-								<div className="card-body">
-									{NFTRanking && NFTRanking.length > 0 ? (
-										<TableContainer
-											columns={columns}
-											data={NFTRanking || []}
-											isGlobalFilter={true}
-											customPageSize={10}
-											divClass="table-responsive table-card mb-1"
-											tableClass="align-middle table-nowrap"
-											theadClass="table-light text-muted"
-											isNFTRankingFilter={true}
-											SearchPlaceholder="Search for..."
-										/>
-									) : (
-										<div className="noresult">
-											<div className="text-center">
-												<i className="ri-search-line display-5 text-success"></i>
-												<h5 className="mt-2">Sorry! No Result Found</h5>
-												<p className="text-muted mb-0">
-													We've searched more than 150+ ranking We did not find
-													aanyranking for you search.
-												</p>
-											</div>
+							</div>
+							<div className="card-body">
+								{NFTRanking && NFTRanking.length > 0 ? (
+									<TableContainer
+										columns={columns}
+										data={NFTRanking || []}
+										isGlobalFilter={true}
+										customPageSize={10}
+										divClass="table-responsive table-card mb-1"
+										tableClass="align-middle table-nowrap"
+										theadClass="table-light text-muted"
+										isNFTRankingFilter={true}
+										SearchPlaceholder="Search for..."
+									/>
+								) : (
+									<div className="noresult">
+										<div className="text-center">
+											<i className="ri-search-line display-5 text-success"></i>
+											<h5 className="mt-2">Sorry! No Result Found</h5>
+											<p className="text-muted mb-0">
+												We've searched more than 150+ ranking We did not find
+												aanyranking for you search.
+											</p>
 										</div>
-									)}
-								</div>
+									</div>
+								)}
 							</div>
 						</div>
 					</div>
-				</Container>
-			</div>
-		</React.Fragment>
+				</div>
+			</Container>
+		</div>
 	);
 };
 

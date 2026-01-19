@@ -1,37 +1,35 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
+	Breadcrumb,
+	BreadcrumbItem,
 	Button,
 	Card,
 	CardBody,
 	Col,
 	Container,
-	Row,
-	UncontrolledPopover,
-	PopoverHeader,
-	PopoverBody,
-	UncontrolledTooltip,
-	Spinner,
 	Pagination,
 	PaginationItem,
 	PaginationLink,
-	Breadcrumb,
-	BreadcrumbItem,
+	PopoverBody,
+	PopoverHeader,
+	Row,
+	Spinner,
+	UncontrolledPopover,
+	UncontrolledTooltip,
 } from "reactstrap";
-
-// Import Content
-import UiContent from "../../../Components/Common/UiContent";
 //import Components
 import BreadCrumbpage from "../../../Components/Common/BreadCrumb";
 import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
-
+// Import Content
+import UiContent from "../../../Components/Common/UiContent";
 import {
-	PopoversExample,
-	TooltipsExample,
 	BreadcrumbExample,
 	PaginationExample,
+	PopoversExample,
 	SpinnersExample,
+	TooltipsExample,
 } from "./UiGeneralCode";
-import { Link } from "react-router-dom";
 
 const UiGeneral = () => {
 	document.title = "General | Velzon - React Admin & Dashboard Template";

@@ -1,6 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
 	Button,
+	ButtonGroup,
+	ButtonToolbar,
 	Card,
 	CardBody,
 	Col,
@@ -8,47 +11,43 @@ import {
 	DropdownItem,
 	DropdownMenu,
 	DropdownToggle,
-	Row,
-	UncontrolledButtonDropdown,
-	ButtonGroup,
-	ButtonToolbar,
 	Input,
+	Row,
 	Spinner,
+	UncontrolledButtonDropdown,
 } from "reactstrap";
-import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
-
-// Import Content
-import UiContent from "../../../Components/Common/UiContent";
 //import Components
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import { Link } from "react-router-dom";
+import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
+// Import Content
+import UiContent from "../../../Components/Common/UiContent";
 
 import {
-	DefaultButtonsExample,
-	OutlineButtonsExample,
-	RoundedButtonsExample,
-	SoftButtonsExample,
-	GradientButtonsExample,
 	AnimationButtonsExample,
-	LabelButtonsExample,
-	SizeButtonsExample,
-	WidthButtonsExample,
-	TagButtonsExample,
-	GridButtonsExample,
-	CheckButtonsExample,
-	GroupButtonsExample,
-	IconButtonsExample,
-	ToolbarButtonsExample,
-	GroupsizingButtonsExample,
-	VerticalButtonsExample,
-	GhostButtonsExample,
-	LoadingbuttonsExample,
-	BorderButtonsExample,
-	CustomToggleButtonsExample,
 	BaseClassExample,
+	BorderButtonsExample,
+	CheckButtonsExample,
 	CustomSizeExample,
+	CustomToggleButtonsExample,
+	DefaultButtonsExample,
 	FocusRingExample,
 	FocusRingUtilityExample,
+	GhostButtonsExample,
+	GradientButtonsExample,
+	GridButtonsExample,
+	GroupButtonsExample,
+	GroupsizingButtonsExample,
+	IconButtonsExample,
+	LabelButtonsExample,
+	LoadingbuttonsExample,
+	OutlineButtonsExample,
+	RoundedButtonsExample,
+	SizeButtonsExample,
+	SoftButtonsExample,
+	TagButtonsExample,
+	ToolbarButtonsExample,
+	VerticalButtonsExample,
+	WidthButtonsExample,
 } from "./UiButtonCode";
 
 const UiButtons = () => {

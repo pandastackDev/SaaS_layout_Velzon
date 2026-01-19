@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DualListBox from "react-dual-listbox";
 import "react-dual-listbox/lib/react-dual-listbox.css";
 import { Col, Row } from "reactstrap";
+
 const options = [
 	{ value: "apple", label: "Apple" },
 	{ value: "banana", label: "Banana" },

@@ -69,16 +69,18 @@ const TicketsSlice = createSlice({
 			state.isTicketUpdate = false;
 			state.isTicketUpdateFail = true;
 		});
-		builder.addCase(deleteTicket.fulfilled, (state: any, action: any) => {
-			state.ticketsList = state.ticketsList.filter(
-				(ticket: any) =>
-					ticket.id.toString() !== action.payload.ticket.toString(),
-			);
+		builder.addCase(deleteTicket.fulfilled, (state, action) => {
+			const ticketId = (action.payload as { ticket: string | number })?.ticket;
+			if (ticketId) {
+				state.ticketsList = state.ticketsList.filter(
+					(ticket) => ticket.id.toString() !== ticketId.toString(),
+				);
+			}
 			state.isTicketDelete = true;
 			state.isTicketDeleteFail = false;
 		});
-		builder.addCase(deleteTicket.rejected, (state: any, action: any) => {
-			state.error = action.payload.error || null;
+		builder.addCase(deleteTicket.rejected, (state, action) => {
+			state.error = (action.payload as { error?: unknown })?.error || null;
 			state.isTicketDelete = false;
 			state.isTicketDeleteFail = true;
 		});

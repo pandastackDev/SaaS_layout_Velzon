@@ -1,4 +1,6 @@
+import classnames from "classnames";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
 	Card,
 	CardBody,
@@ -12,14 +14,12 @@ import {
 	TabPane,
 	UncontrolledTooltip,
 } from "reactstrap";
-import { Link } from "react-router-dom";
-import classnames from "classnames";
-
-// Import Content
-import UiContent from "../../../Components/Common/UiContent";
-//import Components
-import BreadCrumb from "../../../Components/Common/BreadCrumb";
-
+import img3 from "../../../assets/images/small/img-3.jpg";
+import img4 from "../../../assets/images/small/img-4.jpg";
+import img5 from "../../../assets/images/small/img-5.jpg";
+import img6 from "../../../assets/images/small/img-6.jpg";
+import img7 from "../../../assets/images/small/img-7.jpg";
+import img8 from "../../../assets/images/small/img-8.jpg";
 // Import Images
 import avatar1 from "../../../assets/images/users/avatar-1.jpg";
 import avatar2 from "../../../assets/images/users/avatar-2.jpg";
@@ -29,13 +29,10 @@ import avatar5 from "../../../assets/images/users/avatar-5.jpg";
 import avatar6 from "../../../assets/images/users/avatar-6.jpg";
 import avatar7 from "../../../assets/images/users/avatar-7.jpg";
 import avatar8 from "../../../assets/images/users/avatar-8.jpg";
-
-import img3 from "../../../assets/images/small/img-3.jpg";
-import img4 from "../../../assets/images/small/img-4.jpg";
-import img5 from "../../../assets/images/small/img-5.jpg";
-import img6 from "../../../assets/images/small/img-6.jpg";
-import img7 from "../../../assets/images/small/img-7.jpg";
-import img8 from "../../../assets/images/small/img-8.jpg";
+//import Components
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
+// Import Content
+import UiContent from "../../../Components/Common/UiContent";
 
 const UiTabs = () => {
 	// Default Tabs

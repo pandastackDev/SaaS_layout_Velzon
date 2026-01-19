@@ -1,8 +1,8 @@
-import {
-	Startup,
+import type {
 	Announcement,
-	FeaturedStartupProfile,
 	FeaturedInvestor,
+	FeaturedStartupProfile,
+	Startup,
 } from "./types";
 
 // ============================================

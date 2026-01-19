@@ -1,23 +1,21 @@
-import React, { useState } from "react";
+import classnames from "classnames";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
 	Card,
 	CardBody,
+	CardHeader,
 	Col,
+	Collapse,
 	Container,
 	Row,
-	CardHeader,
-	Collapse,
 } from "reactstrap";
-
-import classnames from "classnames";
-import { Link } from "react-router-dom";
-
+import avatar3 from "../../../assets/images/users/avatar-3.jpg";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import { productDetails } from "../../../common/data/ecommerce";
 import EcommerceOrderProduct from "./EcommerceOrderProduct";
-import avatar3 from "../../../assets/images/users/avatar-3.jpg";
 
-const EcommerceOrderDetail = (props: any) => {
+const EcommerceOrderDetail = (_props: any) => {
 	const [col1, setcol1] = useState(true);
 	const [col2, setcol2] = useState(true);
 	const [col3, setcol3] = useState(true);

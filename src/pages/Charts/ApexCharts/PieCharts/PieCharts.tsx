@@ -1,4 +1,3 @@
-import React from "react";
 import ReactApexChart from "react-apexcharts";
 
 //Import images
@@ -136,9 +135,9 @@ const MonochromePie = () => {
 			},
 		},
 		dataLabels: {
-			formatter: function (val: any, opts: any) {
+			formatter: (val: any, opts: any) => {
 				var name = opts.w.globals.labels[opts.seriesIndex];
-				return [name, val.toFixed(1) + "%"];
+				return [name, `${val.toFixed(1)}%`];
 			},
 			dropShadow: {
 				enabled: false,
@@ -182,9 +181,8 @@ const GradientDonut = ({ dataColors }: any) => {
 		},
 		legend: {
 			position: "bottom",
-			formatter: function (val: any, opts: any) {
-				return val + " - " + opts.w.globals.series[opts.seriesIndex];
-			},
+			formatter: (val: any, opts: any) =>
+				`${val} - ${opts.w.globals.series[opts.seriesIndex]}`,
 		},
 		title: {
 			text: "Gradient Donut with custom Start-angle",

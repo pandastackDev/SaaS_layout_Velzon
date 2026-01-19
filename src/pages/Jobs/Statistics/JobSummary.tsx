@@ -1,4 +1,4 @@
-import React from "react";
+import ReactApexChart from "react-apexcharts";
 import {
 	Card,
 	CardBody,
@@ -9,7 +9,6 @@ import {
 	DropdownToggle,
 	UncontrolledDropdown,
 } from "reactstrap";
-import ReactApexChart from "react-apexcharts";
 import getChartColorsArray from "../../../Components/Common/ChartsDynamicColor";
 
 const JobSummary = ({ dataColors }: any) => {
@@ -69,49 +68,47 @@ const JobSummary = ({ dataColors }: any) => {
 		},
 	};
 	return (
-		<React.Fragment>
-			<Col xxl={8} md={6}>
-				<Card className="card-height-100">
-					<CardHeader className="align-items-center d-flex">
-						<h4 className="card-title mb-0 flex-grow-1">Jobs Summary</h4>
-						<div className="flex-shrink-0">
-							<UncontrolledDropdown className="card-header-dropdown">
-								<DropdownToggle
-									className="text-reset dropdown-btn"
-									tag="a"
-									type="a"
-									href="#"
-								>
-									<span className="fw-semibold text-uppercase fs-12">
-										Sort by:{" "}
-									</span>
-									<span className="text-muted">
-										Current Year
-										<i className="mdi mdi-chevron-down ms-1"></i>
-									</span>
-								</DropdownToggle>
-								<DropdownMenu className="dropdown-menu-end">
-									<DropdownItem href="#">Today</DropdownItem>
-									<DropdownItem href="#">Last Week</DropdownItem>
-									<DropdownItem href="#">Last Month</DropdownItem>
-									<DropdownItem href="#">Current Year</DropdownItem>
-								</DropdownMenu>
-							</UncontrolledDropdown>
-						</div>
-					</CardHeader>
-					<CardBody className="card-body px-0">
-						<ReactApexChart
-							dir="ltr"
-							className="apex-charts"
-							series={series}
-							options={options}
-							type="area"
-							height={320}
-						/>
-					</CardBody>
-				</Card>
-			</Col>
-		</React.Fragment>
+		<Col xxl={8} md={6}>
+			<Card className="card-height-100">
+				<CardHeader className="align-items-center d-flex">
+					<h4 className="card-title mb-0 flex-grow-1">Jobs Summary</h4>
+					<div className="flex-shrink-0">
+						<UncontrolledDropdown className="card-header-dropdown">
+							<DropdownToggle
+								className="text-reset dropdown-btn"
+								tag="a"
+								type="a"
+								href="#"
+							>
+								<span className="fw-semibold text-uppercase fs-12">
+									Sort by:{" "}
+								</span>
+								<span className="text-muted">
+									Current Year
+									<i className="mdi mdi-chevron-down ms-1"></i>
+								</span>
+							</DropdownToggle>
+							<DropdownMenu className="dropdown-menu-end">
+								<DropdownItem href="#">Today</DropdownItem>
+								<DropdownItem href="#">Last Week</DropdownItem>
+								<DropdownItem href="#">Last Month</DropdownItem>
+								<DropdownItem href="#">Current Year</DropdownItem>
+							</DropdownMenu>
+						</UncontrolledDropdown>
+					</div>
+				</CardHeader>
+				<CardBody className="card-body px-0">
+					<ReactApexChart
+						dir="ltr"
+						className="apex-charts"
+						series={series}
+						options={options}
+						type="area"
+						height={320}
+					/>
+				</CardBody>
+			</Card>
+		</Col>
 	);
 };
 

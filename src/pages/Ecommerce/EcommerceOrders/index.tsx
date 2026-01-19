@@ -1,53 +1,48 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react";
+import classnames from "classnames";
+import { useFormik } from "formik";
+import { isEmpty } from "lodash";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import Flatpickr from "react-flatpickr";
+//redux
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import {
 	Card,
 	CardBody,
+	CardHeader,
 	Col,
 	Container,
-	CardHeader,
+	Form,
+	FormFeedback,
+	Input,
+	Label,
+	Modal,
+	ModalBody,
+	ModalHeader,
 	Nav,
 	NavItem,
 	NavLink,
 	Row,
-	Modal,
-	ModalHeader,
-	Form,
-	ModalBody,
-	Label,
-	Input,
-	FormFeedback,
 } from "reactstrap";
-import { Link } from "react-router-dom";
-import classnames from "classnames";
-import Flatpickr from "react-flatpickr";
-import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import TableContainer from "../../../Components/Common/TableContainer";
-import DeleteModal from "../../../Components/Common/DeleteModal";
-import { isEmpty } from "lodash";
-
-// Export Modal
-import ExportCSVModal from "../../../Components/Common/ExportCSVModal";
-
 // Formik
 import * as Yup from "yup";
-import { useFormik } from "formik";
-
-//redux
-import { useSelector, useDispatch } from "react-redux";
-
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import DeleteModal from "../../../Components/Common/DeleteModal";
+// Export Modal
+import ExportCSVModal from "../../../Components/Common/ExportCSVModal";
+import Loader from "../../../Components/Common/Loader";
+import TableContainer from "../../../Components/Common/TableContainer";
 //Import actions
 import {
-	getOrders as onGetOrders,
 	addNewOrder as onAddNewOrder,
-	updateOrder as onUpdateOrder,
 	deleteOrder as onDeleteOrder,
+	getOrders as onGetOrders,
+	updateOrder as onUpdateOrder,
 } from "../../../slices/thunks";
-
-import Loader from "../../../Components/Common/Loader";
-import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { createSelector } from "reselect";
 import moment from "moment";
+import { createSelector } from "reselect";
 
 const EcommerceOrders = () => {
 	const [modal, setModal] = useState<boolean>(false);
@@ -173,13 +168,13 @@ const EcommerceOrders = () => {
 		enableReinitialize: true,
 
 		initialValues: {
-			orderId: (order && order.orderId) || "",
-			customer: (order && order.customer) || "",
-			product: (order && order.product) || "",
-			orderDate: (order && order.orderDate) || "",
-			amount: (order && order.amount) || "",
-			payment: (order && order.payment) || "",
-			status: (order && order.status) || "",
+			orderId: order?.orderId || "",
+			customer: order?.customer || "",
+			product: order?.product || "",
+			orderDate: order?.orderDate || "",
+			amount: order?.amount || "",
+			payment: order?.payment || "",
+			status: order?.status || "",
 		},
 		validationSchema: Yup.object({
 			orderId: Yup.string().required("Please Enter order Id"),
@@ -208,13 +203,13 @@ const EcommerceOrders = () => {
 			} else {
 				const newOrder = {
 					id: (Math.floor(Math.random() * (30 - 20)) + 20).toString(),
-					orderId: values["orderId"],
-					customer: values["customer"],
-					product: values["product"],
-					orderDate: values["orderDate"],
-					amount: values["amount"],
-					payment: values["payment"],
-					status: values["status"],
+					orderId: values.orderId,
+					customer: values.customer,
+					product: values.product,
+					orderDate: values.orderDate,
+					amount: values.amount,
+					payment: values.payment,
+					status: values.status,
 				};
 				// save new order
 				dispatch(onAddNewOrder(newOrder));
@@ -285,7 +280,7 @@ const EcommerceOrders = () => {
 			});
 		}
 		deleteCheckbox();
-	}, []);
+	}, [deleteCheckbox]);
 
 	// Delete Multiple
 	const [selectedCheckBoxDelete, setSelectedCheckBoxDelete] = useState<any>([]);
@@ -489,7 +484,14 @@ const EcommerceOrders = () => {
 				},
 			},
 		],
-		[handleOrderClick, checkedAll],
+		[
+			handleOrderClick,
+			checkedAll,
+			deleteCheckbox,
+			handleValidDate,
+			handleValidTime,
+			onClickDelete,
+		],
 	);
 
 	const handleValidDate = (date: any) => {
@@ -508,8 +510,7 @@ const EcommerceOrders = () => {
 		} else {
 			meridiem = "AM";
 		}
-		const updateTime =
-			moment(getTime, "hh:mm").format("hh:mm") + " " + meridiem;
+		const updateTime = `${moment(getTime, "hh:mm").format("hh:mm")} ${meridiem}`;
 		return updateTime;
 	};
 
@@ -671,7 +672,7 @@ const EcommerceOrders = () => {
 								</div>
 								<Modal id="showModal" isOpen={modal} toggle={toggle} centered>
 									<ModalHeader className="bg-light p-3" toggle={toggle}>
-										{!!isEdit ? "Edit Order" : "Add Order"}
+										{isEdit ? "Edit Order" : "Add Order"}
 									</ModalHeader>
 									<Form
 										className="tablelist-form"
@@ -701,10 +702,10 @@ const EcommerceOrders = () => {
 													onBlur={validation.handleBlur}
 													value={validation.values.orderId || ""}
 													invalid={
-														validation.touched.orderId &&
-														validation.errors.orderId
-															? true
-															: false
+														!!(
+															validation.touched.orderId &&
+															validation.errors.orderId
+														)
 													}
 												/>
 												{validation.touched.orderId &&
@@ -735,10 +736,10 @@ const EcommerceOrders = () => {
 													onBlur={validation.handleBlur}
 													value={validation.values.customer || ""}
 													invalid={
-														validation.touched.customer &&
-														validation.errors.customer
-															? true
-															: false
+														!!(
+															validation.touched.customer &&
+															validation.errors.customer
+														)
 													}
 												/>
 												{validation.touched.customer &&
@@ -765,10 +766,10 @@ const EcommerceOrders = () => {
 													onBlur={validation.handleBlur}
 													value={validation.values.product || ""}
 													invalid={
-														validation.touched.product &&
-														validation.errors.product
-															? true
-															: false
+														!!(
+															validation.touched.product &&
+															validation.errors.product
+														)
 													}
 												>
 													{productname.map((item, key) => (
@@ -837,10 +838,10 @@ const EcommerceOrders = () => {
 															onBlur={validation.handleBlur}
 															value={validation.values.amount || ""}
 															invalid={
-																validation.touched.amount &&
-																validation.errors.amount
-																	? true
-																	: false
+																!!(
+																	validation.touched.amount &&
+																	validation.errors.amount
+																)
 															}
 														/>
 														{validation.touched.amount &&
@@ -868,10 +869,10 @@ const EcommerceOrders = () => {
 															onBlur={validation.handleBlur}
 															value={validation.values.payment || ""}
 															invalid={
-																validation.touched.payment &&
-																validation.errors.payment
-																	? true
-																	: false
+																!!(
+																	validation.touched.payment &&
+																	validation.errors.payment
+																)
 															}
 														>
 															{orderpayement.map((item, key) => (
@@ -910,10 +911,10 @@ const EcommerceOrders = () => {
 													onBlur={validation.handleBlur}
 													value={validation.values.status || ""}
 													invalid={
-														validation.touched.status &&
-														validation.errors.status
-															? true
-															: false
+														!!(
+															validation.touched.status &&
+															validation.errors.status
+														)
 													}
 												>
 													{orderstatus.map((item, key) => (
@@ -947,7 +948,7 @@ const EcommerceOrders = () => {
 												</button>
 
 												<button type="submit" className="btn btn-success">
-													{!!isEdit ? "Update" : "Add Customer"}
+													{isEdit ? "Update" : "Add Customer"}
 												</button>
 											</div>
 										</div>

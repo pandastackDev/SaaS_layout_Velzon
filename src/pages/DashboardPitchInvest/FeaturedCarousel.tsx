@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Row, Col, Card, CardBody, Button, Badge } from "reactstrap";
-import { Startup } from "./types";
-import { featuredStartupProfile, featuredInvestor } from "./data";
+import { Badge, Button, Card, CardBody, Col, Row } from "reactstrap";
+import { featuredInvestor, featuredStartupProfile } from "./data";
+import type { Startup } from "./types";
 
 interface FeaturedCarouselProps {
 	startups: Startup[];

@@ -1,9 +1,7 @@
-import React from "react";
-
 //import Scss
 import "./assets/scss/themes.scss";
 
-//imoprt Route
+//import Route
 import Route from "./Routes";
 
 // Import Firebase Configuration file
@@ -30,9 +28,7 @@ fakeBackend();
 // initFirebaseBackend(firebaseConfig);
 
 function App() {
-	return (
-		       <Route />
-	);
+	return <Route />;
 }
 
 export default App;

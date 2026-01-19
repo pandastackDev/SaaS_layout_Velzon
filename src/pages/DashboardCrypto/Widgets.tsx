@@ -13,7 +13,7 @@ const Widgets = () => {
 							<div className="d-flex align-items-center">
 								<div className="avatar-sm flex-shrink-0">
 									<span className="avatar-title bg-light text-primary rounded-circle fs-3">
-										<i className={"align-middle " + item.icon}></i>
+										<i className={`align-middle ${item.icon}`}></i>
 									</span>
 								</div>
 								<div className="flex-grow-1 ms-3">
@@ -42,7 +42,7 @@ const Widgets = () => {
 											""
 										}
 									>
-										<i className={"align-middle me-1 " + item.badge}></i>
+										<i className={`align-middle me-1 ${item.badge}`}></i>
 										{item.percentage} %<span></span>
 									</span>
 								</div>

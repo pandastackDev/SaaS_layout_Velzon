@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
 	Button,
+	Dropdown,
+	DropdownItem,
+	DropdownMenu,
+	DropdownToggle,
 	Offcanvas,
 	OffcanvasBody,
-	Dropdown,
-	DropdownToggle,
-	DropdownMenu,
-	DropdownItem,
 	UncontrolledDropdown,
 } from "reactstrap";
 import Img9 from "../../assets/images/small/img-9.jpg";

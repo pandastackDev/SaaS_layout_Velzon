@@ -1,4 +1,4 @@
-import axios, { AxiosResponse, AxiosRequestConfig } from "axios";
+import axios, { type AxiosRequestConfig, type AxiosResponse } from "axios";
 import config from "../config";
 
 const { api } = config;
@@ -9,16 +9,17 @@ axios.defaults.baseURL = api.API_URL;
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 // content type
-const authUser: any = sessionStorage.getItem("authUser");
-const token = JSON.parse(authUser) ? JSON.parse(authUser).token : null;
-if (token) axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+const authUser = sessionStorage.getItem("authUser");
+const parsedAuth = authUser
+	? (JSON.parse(authUser) as { token?: string })
+	: null;
+const token = parsedAuth?.token || null;
+if (token) axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 
 // intercepting to capture errors
 axios.interceptors.response.use(
-	function (response) {
-		return response.data ? response.data : response;
-	},
-	function (error) {
+	(response) => (response.data ? response.data : response),
+	(error) => {
 		// Any status codes that falls outside the range of 2xx cause this function to trigger
 		let message;
 		switch (error.status) {
@@ -42,26 +43,28 @@ axios.interceptors.response.use(
  * @param {*} token
  */
 const setAuthorization = (token: string) => {
-	axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+	axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 class APIClient {
 	/**
 	 * Fetches data from the given URL
 	 */
-	get = (url: string, params?: any): Promise<AxiosResponse> => {
+	get = (
+		url: string,
+		params?: Record<string, unknown>,
+	): Promise<AxiosResponse> => {
 		let response: Promise<AxiosResponse>;
 
-		let paramKeys: string[] = [];
+		const paramKeys: string[] = [];
 
 		if (params) {
 			Object.keys(params).map((key) => {
-				paramKeys.push(key + "=" + params[key]);
+				paramKeys.push(`${key}=${params[key]}`);
 				return paramKeys;
 			});
 
-			const queryString =
-				paramKeys && paramKeys.length ? paramKeys.join("&") : "";
+			const queryString = paramKeys?.length ? paramKeys.join("&") : "";
 			response = axios.get(`${url}?${queryString}`, params);
 		} else {
 			response = axios.get(`${url}`, params);
@@ -73,18 +76,18 @@ class APIClient {
 	/**
 	 * Posts the given data to the URL
 	 */
-	create = (url: string, data: any): Promise<AxiosResponse> => {
+	create = (url: string, data: unknown): Promise<AxiosResponse> => {
 		return axios.post(url, data);
 	};
 
 	/**
 	 * Updates data
 	 */
-	update = (url: string, data: any): Promise<AxiosResponse> => {
+	update = (url: string, data: unknown): Promise<AxiosResponse> => {
 		return axios.patch(url, data);
 	};
 
-	put = (url: string, data: any): Promise<AxiosResponse> => {
+	put = (url: string, data: unknown): Promise<AxiosResponse> => {
 		return axios.put(url, data);
 	};
 

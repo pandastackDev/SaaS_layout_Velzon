@@ -1,4 +1,3 @@
-import React from "react";
 import PrismCode from "../../../Components/Common/Prism";
 
 //Checkbox
@@ -83,11 +82,7 @@ const Checkbox = () => {
 </Col>
 `;
 
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //Custom Checkbox
@@ -194,11 +189,7 @@ const CustomCheckbox = () => {
 </Col> 
 `;
 
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //Radio
@@ -264,11 +255,7 @@ const Radio = () => {
 </Col>
 `;
 
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //Custom Radio
@@ -384,11 +371,7 @@ const CustomRadio = () => {
     </div>
 </Col>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 //Switches
 const Switches = () => {
@@ -470,11 +453,7 @@ const Switches = () => {
     </div>
 </Col>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //Switch Color
@@ -522,11 +501,7 @@ const SwitchColor = () => {
     </div>
 </Col>
     `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //Custom Switches
@@ -574,11 +549,7 @@ const CustomSwitches = () => {
     </div>
 </Col>
         `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //Inline Checkbox & Radio
@@ -634,11 +605,7 @@ const InlineCheckboxRadio = () => {
     </div>
 </Col>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //Without Labels
@@ -687,11 +654,7 @@ const WithoutLabels = () => {
     </div>
 </Col>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //Radio Toggle Buttons
@@ -710,11 +673,7 @@ const RadioToggleButtons = () => {
 <Label className="btn btn-secondary" for="option4">Radio</Label>
 </div>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //Outlined Styles
@@ -733,11 +692,7 @@ const OutlinedStyles = () => {
 <Label className="btn btn-secondary" for="option4">Radio</Label>
 </div>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 export {

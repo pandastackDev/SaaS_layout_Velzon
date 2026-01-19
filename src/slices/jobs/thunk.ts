@@ -1,20 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 //Include Both Helper File with needed methods
 import {
-	getJobApplicationList as getApplicationListApi,
-	addNewJobApplicationList as addNewJobApplicationListApi,
-	updateJobApplicationList as updateJobApplicationListApi,
-	deleteJobApplicationList as deleteJobApplicationListApi,
-	getJobCandidateList as getCandidateListApi,
 	addJobCandidate as addCandidateApi,
-	updateJobCandidate as updateCandidateApi,
-	deleteJobCandidate as deleteCandidateApi,
-	getCandidateGrid as getCandidateGridApi,
 	addCandidateGrid as addCandidateGridApi,
-	getcategoryList as getcategoryListApi,
 	addcategoryList as addcategoryListApi,
+	addNewJobApplicationList as addNewJobApplicationListApi,
+	deleteJobCandidate as deleteCandidateApi,
+	deleteJobApplicationList as deleteJobApplicationListApi,
+	getJobApplicationList as getApplicationListApi,
+	getCandidateGrid as getCandidateGridApi,
+	getJobCandidateList as getCandidateListApi,
+	getcategoryList as getcategoryListApi,
+	updateJobCandidate as updateCandidateApi,
+	updateJobApplicationList as updateJobApplicationListApi,
 } from "../../helpers/fakebackend_helper";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export const getApplicationList = createAsyncThunk(
@@ -31,7 +31,7 @@ export const getApplicationList = createAsyncThunk(
 
 export const addNewJobApplicationList = createAsyncThunk(
 	"jobs/addNewJobApplicationList",
-	async (job: any) => {
+	async (job: Record<string, unknown>) => {
 		try {
 			const response = addNewJobApplicationListApi(job);
 			const data = await response;
@@ -46,7 +46,7 @@ export const addNewJobApplicationList = createAsyncThunk(
 
 export const updateJobApplicationList = createAsyncThunk(
 	"jobs/updateJobApplicationList",
-	async (job: any) => {
+	async (job: Record<string, unknown>) => {
 		try {
 			const response = updateJobApplicationListApi(job);
 			const data = await response;
@@ -63,7 +63,7 @@ export const updateJobApplicationList = createAsyncThunk(
 
 export const deleteJobApplicationList = createAsyncThunk(
 	"jobs/deleteJobApplicationList",
-	async (job: any) => {
+	async (job: string | number | Record<string, unknown>) => {
 		try {
 			const response = deleteJobApplicationListApi(job);
 			const data = await response;
@@ -93,7 +93,7 @@ export const getCandidateList = createAsyncThunk(
 
 export const addCandidate = createAsyncThunk(
 	"jobs/addJobCandidate",
-	async (candidate: any) => {
+	async (candidate: Record<string, unknown>) => {
 		try {
 			const response = addCandidateApi(candidate);
 			const data = await response;
@@ -108,7 +108,7 @@ export const addCandidate = createAsyncThunk(
 
 export const updateCandidate = createAsyncThunk(
 	"jobs/updateJobCandidate",
-	async (candidate: any) => {
+	async (candidate: Record<string, unknown>) => {
 		try {
 			const response = updateCandidateApi(candidate);
 			const data = await response;
@@ -123,7 +123,7 @@ export const updateCandidate = createAsyncThunk(
 
 export const deleteCandidate = createAsyncThunk(
 	"jobs/deleteJobCandidate",
-	async (id: any) => {
+	async (id: string | number) => {
 		try {
 			const response = deleteCandidateApi(id);
 			toast.success("Candidate Deleted Successfully", { autoClose: 2000 });
@@ -150,7 +150,7 @@ export const getCandidateGrid = createAsyncThunk(
 
 export const addCandidateGrid = createAsyncThunk(
 	"jobs/addJobCandidateGrid",
-	async (candidate: any) => {
+	async (candidate: Record<string, unknown>) => {
 		try {
 			const response = addCandidateGridApi(candidate);
 			const data = await response;
@@ -178,7 +178,7 @@ export const getCategoryList = createAsyncThunk(
 
 export const addcategoryList = createAsyncThunk(
 	"jobs/addcategoryList",
-	async (category: any) => {
+	async (category: Record<string, unknown>) => {
 		try {
 			const response = addcategoryListApi(category);
 			const data = await response;

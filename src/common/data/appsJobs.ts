@@ -1,8 +1,8 @@
-import img2 from "../../assets/images/small/img-2.jpg";
-import img4 from "../../assets/images/small/img-4.jpg";
-import img7 from "../../assets/images/small/img-7.jpg";
-import img3 from "../../assets/images/small/img-3.jpg";
-import img8 from "../../assets/images/small/img-8.jpg";
+import bitBucket from "../../assets/images/brands/bitbucket.png";
+import dribble from "../../assets/images/brands/dribbble.png";
+import dropbox from "../../assets/images/brands/dropbox.png";
+import mail_chimp from "../../assets/images/brands/mail_chimp.png";
+import slack from "../../assets/images/brands/slack.png";
 
 import cimg1 from "../../assets/images/companies/img-1.png";
 import cimg2 from "../../assets/images/companies/img-2.png";
@@ -13,7 +13,11 @@ import cimg6 from "../../assets/images/companies/img-6.png";
 import cimg7 from "../../assets/images/companies/img-7.png";
 import cimg8 from "../../assets/images/companies/img-8.png";
 import cimg9 from "../../assets/images/companies/img-9.png";
-
+import img2 from "../../assets/images/small/img-2.jpg";
+import img3 from "../../assets/images/small/img-3.jpg";
+import img4 from "../../assets/images/small/img-4.jpg";
+import img7 from "../../assets/images/small/img-7.jpg";
+import img8 from "../../assets/images/small/img-8.jpg";
 import Avatar1 from "../../assets/images/users/avatar-1.jpg";
 import Avatar2 from "../../assets/images/users/avatar-2.jpg";
 import Avatar4 from "../../assets/images/users/avatar-4.jpg";
@@ -23,12 +27,6 @@ import Avatar7 from "../../assets/images/users/avatar-7.jpg";
 import Avatar8 from "../../assets/images/users/avatar-8.jpg";
 import Avatar9 from "../../assets/images/users/avatar-9.jpg";
 import Avatar10 from "../../assets/images/users/avatar-10.jpg";
-
-import slack from "../../assets/images/brands/slack.png";
-import mail_chimp from "../../assets/images/brands/mail_chimp.png";
-import dropbox from "../../assets/images/brands/dropbox.png";
-import bitBucket from "../../assets/images/brands/bitbucket.png";
-import dribble from "../../assets/images/brands/dribbble.png";
 
 const jobWidgets = [
 	{

@@ -1,28 +1,27 @@
 import React from "react";
 import { Card, CardBody, Col, Container, Row } from "reactstrap";
-
-// Import Content
-import UiContent from "../../../Components/Common/UiContent";
 //import Components
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
+// Import Content
+import UiContent from "../../../Components/Common/UiContent";
+import CrossfadeAnimation from "./CarouselTypes/crossfadeAnimation";
+import DisableTouch from "./CarouselTypes/disableTouch";
+import IndividualInterval from "./CarouselTypes/individualInterval";
 import Slide from "./CarouselTypes/slide";
+import SlideDark from "./CarouselTypes/slideDark";
+import Slidewithcaption from "./CarouselTypes/slidewithcaption";
 import Slidewithcontrol from "./CarouselTypes/slidewithcontrol";
 import Slidewithindicator from "./CarouselTypes/slidewithindicator";
-import Slidewithcaption from "./CarouselTypes/slidewithcaption";
-import CrossfadeAnimation from "./CarouselTypes/crossfadeAnimation";
-import IndividualInterval from "./CarouselTypes/individualInterval";
-import DisableTouch from "./CarouselTypes/disableTouch";
-import SlideDark from "./CarouselTypes/slideDark";
 import {
+	CrossFadeExample,
+	DarkVariantExample,
+	DisableTouchExample,
+	InduvidualIntervalExample,
 	SlideOnlyExample,
+	WithCaptionExample,
 	WithControlExample,
 	WithIndicatorExample,
-	WithCaptionExample,
-	CrossFadeExample,
-	InduvidualIntervalExample,
-	DisableTouchExample,
-	DarkVariantExample,
 } from "./UiCarouselCode";
 
 const UiCarousel = () => {

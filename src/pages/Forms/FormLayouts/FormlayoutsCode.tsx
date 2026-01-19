@@ -1,4 +1,3 @@
-import React from "react";
 import PrismCode from "../../../Components/Common/Prism";
 
 //FormGrid code
@@ -61,11 +60,7 @@ const FormGrid = () => {
 </Col>
 `;
 
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //Gutters
@@ -121,11 +116,7 @@ const Gutters = () => {
 </Col>
 `;
 
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //Vertical Form
@@ -166,11 +157,7 @@ const VerticalForm = () => {
 </div>
 `;
 
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //Horizontal Form
@@ -247,11 +234,7 @@ const HorizontalForm = () => {
 <button type="submit" className="btn btn-primary">Add Leave</button>
 </div>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //Horizontal Form Label Sizing
@@ -281,11 +264,7 @@ const HorizontalFormLabelSizing = () => {
 </Row>
 </Col>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //Column Sizing
@@ -315,11 +294,7 @@ const ColumnSizing = () => {
     <Input type="text" className="form-control" placeholder="Zip" aria-label="Zip"/>
 </Col>
     `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //Auto Sizing
@@ -396,11 +371,7 @@ const AutoSizing = () => {
 </Row>
 </Form>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //Inline Forms
@@ -435,11 +406,7 @@ const InlineForms = () => {
 </Col>
 </Row>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //Inline Forms
@@ -508,11 +475,7 @@ const FloatingLabels = () => {
 </Row>
 </Form>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 export {
 	FormGrid,

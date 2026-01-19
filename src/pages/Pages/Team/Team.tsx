@@ -1,5 +1,9 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useFormik } from "formik";
+import React, { useCallback, useEffect, useState } from "react";
+//redux
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import {
 	Button,
 	Card,
@@ -11,6 +15,7 @@ import {
 	DropdownMenu,
 	DropdownToggle,
 	Form,
+	FormFeedback,
 	Input,
 	Label,
 	Modal,
@@ -19,33 +24,25 @@ import {
 	OffcanvasBody,
 	Row,
 	UncontrolledDropdown,
-	FormFeedback,
 } from "reactstrap";
-import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import DeleteModal from "../../../Components/Common/DeleteModal";
-import { ToastContainer } from "react-toastify";
-
-//User Images
-import avatar2 from "../../../assets/images/users/avatar-2.jpg";
-import userdummyimg from "../../../assets/images/users/user-dummy-img.jpg";
+import { createSelector } from "reselect";
+// Formik
+import * as Yup from "yup";
 
 //Small Images
 import smallImage9 from "../../../assets/images/small/img-9.jpg";
-//redux
-import { useSelector, useDispatch } from "react-redux";
-
+//User Images
+import avatar2 from "../../../assets/images/users/avatar-2.jpg";
+import userdummyimg from "../../../assets/images/users/user-dummy-img.jpg";
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import DeleteModal from "../../../Components/Common/DeleteModal";
 //import action
 import {
-	getTeamData as onGetTeamData,
-	deleteTeamData as onDeleteTeamData,
 	addTeamData as onAddTeamData,
+	deleteTeamData as onDeleteTeamData,
+	getTeamData as onGetTeamData,
 	updateTeamData as onUpdateTeamData,
 } from "../../../slices/thunks";
-
-// Formik
-import * as Yup from "yup";
-import { useFormik } from "formik";
-import { createSelector } from "reselect";
 
 const Team = () => {
 	document.title = "Team | Velzon - React Admin & Dashboard Template";
@@ -172,7 +169,7 @@ const Team = () => {
 	};
 
 	const searchList = (e: any) => {
-		let inputVal = e.toLowerCase();
+		const inputVal = e.toLowerCase();
 
 		const filterItems = (arr: any, query: any) => {
 			return arr.filter((el: any) => {
@@ -180,7 +177,7 @@ const Team = () => {
 			});
 		};
 
-		let filterData = filterItems(teamData, inputVal);
+		const filterData = filterItems(teamData, inputVal);
 		setTeamlist(filterData);
 		const noResultElement = document.getElementById("noresult");
 		const teamListElement = document.getElementById("teamlist");
@@ -219,12 +216,12 @@ const Team = () => {
 		enableReinitialize: true,
 
 		initialValues: {
-			id: (teamMem && teamMem.id) || "",
-			name: (teamMem && teamMem.name) || "",
-			userImage: (teamMem && teamMem.userImage) || "",
-			designation: (teamMem && teamMem.designation) || "",
-			projectCount: (teamMem && teamMem.projectCount) || "",
-			taskCount: (teamMem && teamMem.taskCount) || "",
+			id: teamMem?.id || "",
+			name: teamMem?.name || "",
+			userImage: teamMem?.userImage || "",
+			designation: teamMem?.designation || "",
+			projectCount: teamMem?.projectCount || "",
+			taskCount: teamMem?.taskCount || "",
 		},
 		validationSchema: Yup.object({
 			name: Yup.string().required("Please Enter team Name"),
@@ -274,7 +271,7 @@ const Team = () => {
 	};
 
 	useEffect(() => {
-		setImgStore((teamMem && teamMem.userImage) || []);
+		setImgStore(teamMem?.userImage || []);
 	}, [teamMem]);
 
 	const handleImageChange = (event: any) => {
@@ -507,12 +504,7 @@ const Team = () => {
 									</Col>
 								</Row>
 
-								<div
-									className="modal fade"
-									id="addmembers"
-									tabIndex={1}
-									aria-hidden="true"
-								>
+								<div className="modal fade" id="addmembers">
 									<div className="modal-dialog modal-dialog-centered">
 										<Modal isOpen={modal} toggle={toggle} centered>
 											<ModalBody>
@@ -612,10 +604,10 @@ const Team = () => {
 																			accept="image/png, image/gif, image/jpeg"
 																			onChange={handleImageChange}
 																			invalid={
-																				validation.touched.userImage &&
-																				validation.errors.userImage
-																					? true
-																					: false
+																				!!(
+																					validation.touched.userImage &&
+																					validation.errors.userImage
+																				)
 																			}
 																		/>
 																	</div>
@@ -669,10 +661,10 @@ const Team = () => {
 																	onBlur={validation.handleBlur}
 																	value={validation.values.name || ""}
 																	invalid={
-																		validation.touched.name &&
-																		validation.errors.name
-																			? true
-																			: false
+																		!!(
+																			validation.touched.name &&
+																			validation.errors.name
+																		)
 																	}
 																/>
 																{validation.touched.name &&
@@ -704,10 +696,10 @@ const Team = () => {
 																	onBlur={validation.handleBlur}
 																	value={validation.values.designation || ""}
 																	invalid={
-																		validation.touched.designation &&
-																		validation.errors.designation
-																			? true
-																			: false
+																		!!(
+																			validation.touched.designation &&
+																			validation.errors.designation
+																		)
 																	}
 																/>
 																{validation.touched.designation &&
@@ -739,10 +731,10 @@ const Team = () => {
 																	onBlur={validation.handleBlur}
 																	value={validation.values.projectCount || ""}
 																	invalid={
-																		validation.touched.projectCount &&
-																		validation.errors.projectCount
-																			? true
-																			: false
+																		!!(
+																			validation.touched.projectCount &&
+																			validation.errors.projectCount
+																		)
 																	}
 																/>
 																{validation.touched.projectCount &&
@@ -771,10 +763,10 @@ const Team = () => {
 																	onBlur={validation.handleBlur}
 																	value={validation.values.taskCount || ""}
 																	invalid={
-																		validation.touched.taskCount &&
-																		validation.errors.taskCount
-																			? true
-																			: false
+																		!!(
+																			validation.touched.taskCount &&
+																			validation.errors.taskCount
+																		)
 																	}
 																/>
 																{validation.touched.taskCount &&
@@ -815,7 +807,7 @@ const Team = () => {
 									direction="end"
 									toggle={() => setIsOpen(!isOpen)}
 									className="offcanvas-end border-0"
-									tabIndex={1}
+									tabIndex="0"
 								>
 									<OffcanvasBody className="profile-offcanvas p-0">
 										<div className="team-cover">

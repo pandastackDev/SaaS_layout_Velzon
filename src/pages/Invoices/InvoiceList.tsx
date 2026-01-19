@@ -1,39 +1,34 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
-import {
-	CardBody,
-	Row,
-	Col,
-	Card,
-	Container,
-	CardHeader,
-	UncontrolledDropdown,
-	DropdownToggle,
-	DropdownMenu,
-	DropdownItem,
-} from "reactstrap";
-import { Link } from "react-router-dom";
-import moment from "moment";
-import CountUp from "react-countup";
-import BreadCrumb from "../../Components/Common/BreadCrumb";
-import TableContainer from "../../Components/Common/TableContainer";
-import DeleteModal from "../../Components/Common/DeleteModal";
-
 //Import Icons
 import FeatherIcon from "feather-icons-react";
+import moment from "moment";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import CountUp from "react-countup";
+//redux
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import {
+	Card,
+	CardBody,
+	CardHeader,
+	Col,
+	Container,
+	DropdownItem,
+	DropdownMenu,
+	DropdownToggle,
+	Row,
+	UncontrolledDropdown,
+} from "reactstrap";
+import BreadCrumb from "../../Components/Common/BreadCrumb";
+import DeleteModal from "../../Components/Common/DeleteModal";
+import Loader from "../../Components/Common/Loader";
+import TableContainer from "../../Components/Common/TableContainer";
 import { invoiceWidgets } from "../../common/data/invoiceList";
-
 //Import actions
 import {
-	getInvoices as onGetInvoices,
 	deleteInvoice as onDeleteInvoice,
+	getInvoices as onGetInvoices,
 } from "../../slices/thunks";
-
-//redux
-import { useSelector, useDispatch } from "react-redux";
-
-import Loader from "../../Components/Common/Loader";
-
-import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { createSelector } from "reselect";
 
@@ -99,8 +94,7 @@ const InvoiceList = () => {
 		} else {
 			meridiem = "AM";
 		}
-		const updateTime =
-			moment(getTime, "hh:mm").format("hh:mm") + " " + meridiem;
+		const updateTime = `${moment(getTime, "hh:mm").format("hh:mm")} ${meridiem}`;
 		return updateTime;
 	};
 
@@ -119,7 +113,7 @@ const InvoiceList = () => {
 			});
 		}
 		deleteCheckbox();
-	}, []);
+	}, [deleteCheckbox]);
 
 	// Delete Multiple
 	const [selectedCheckBoxDelete, setSelectedCheckBoxDelete] = useState([]);
@@ -333,139 +327,141 @@ const InvoiceList = () => {
 				},
 			},
 		],
-		[checkedAll],
+		[
+			checkedAll,
+			deleteCheckbox,
+			handleValidDate,
+			handleValidTime,
+			onClickDelete,
+		],
 	);
 
 	document.title = "Invoice List | Velzon - React Admin & Dashboard Template";
 
 	return (
-		<React.Fragment>
-			<div className="page-content">
-				<DeleteModal
-					show={deleteModal}
-					onDeleteClick={() => handleDeleteInvoice()}
-					onCloseClick={() => setDeleteModal(false)}
-				/>
-				<DeleteModal
-					show={deleteModalMulti}
-					onDeleteClick={() => {
-						deleteMultiple();
-						setDeleteModalMulti(false);
-					}}
-					onCloseClick={() => setDeleteModalMulti(false)}
-				/>
-				<Container fluid>
-					<BreadCrumb title="Invoice List" pageTitle="Invoices" />
-					<Row>
-						{invoiceWidgets.map((invoicewidget, key) => (
-							<React.Fragment key={key}>
-								<Col xl={3} md={6}>
-									<Card className="card-animate">
-										<CardBody>
-											<div className="d-flex align-items-center">
-												<div className="flex-grow-1">
-													<p className="text-uppercase fw-medium text-muted mb-0">
-														{invoicewidget.label}
-													</p>
-												</div>
-												<div className="flex-shrink-0">
-													<h5
-														className={
-															"fs-14 mb-0 text-" + invoicewidget.percentageClass
-														}
-													>
-														<i className="ri-arrow-right-up-line fs-13 align-middle"></i>{" "}
-														{invoicewidget.percentage}
-													</h5>
-												</div>
+		<div className="page-content">
+			<DeleteModal
+				show={deleteModal}
+				onDeleteClick={() => handleDeleteInvoice()}
+				onCloseClick={() => setDeleteModal(false)}
+			/>
+			<DeleteModal
+				show={deleteModalMulti}
+				onDeleteClick={() => {
+					deleteMultiple();
+					setDeleteModalMulti(false);
+				}}
+				onCloseClick={() => setDeleteModalMulti(false)}
+			/>
+			<Container fluid>
+				<BreadCrumb title="Invoice List" pageTitle="Invoices" />
+				<Row>
+					{invoiceWidgets.map((invoicewidget, key) => (
+						<React.Fragment key={key}>
+							<Col xl={3} md={6}>
+								<Card className="card-animate">
+									<CardBody>
+										<div className="d-flex align-items-center">
+											<div className="flex-grow-1">
+												<p className="text-uppercase fw-medium text-muted mb-0">
+													{invoicewidget.label}
+												</p>
 											</div>
-											<div className="d-flex align-items-end justify-content-between mt-4">
-												<div>
-													<h4 className="fs-22 fw-semibold ff-secondary mb-4">
-														<CountUp
-															start={0}
-															prefix={invoicewidget.prefix}
-															suffix={invoicewidget.suffix}
-															end={invoicewidget.counter}
-															duration={4}
-															className="counter-value"
-														/>
-													</h4>
-													<span className="badge bg-warning me-1">
-														{invoicewidget.badge}
-													</span>{" "}
-													<span className="text-muted">
-														{" "}
-														{invoicewidget.caption}
-													</span>
-												</div>
-												<div className="avatar-sm flex-shrink-0">
-													<span className="avatar-title bg-light rounded fs-3">
-														<FeatherIcon
-															icon={invoicewidget.feaIcon}
-															className="text-success icon-dual-success"
-														/>
-													</span>
-												</div>
-											</div>
-										</CardBody>
-									</Card>
-								</Col>
-							</React.Fragment>
-						))}
-					</Row>
-
-					<Row>
-						<Col lg={12}>
-							<Card id="invoiceList">
-								<CardHeader className="border-0">
-									<div className="d-flex align-items-center">
-										<h5 className="card-title mb-0 flex-grow-1">Invoices</h5>
-										<div className="flex-shrink-0">
-											<div className="d-flex gap-2 flex-wrap">
-												{isMultiDeleteButton && (
-													<button
-														className="btn btn-primary me-1"
-														onClick={() => setDeleteModalMulti(true)}
-													>
-														<i className="ri-delete-bin-2-line"></i>
-													</button>
-												)}
-												<Link
-													to="/apps-invoices-create"
-													className="btn btn-danger"
+											<div className="flex-shrink-0">
+												<h5
+													className={`fs-14 mb-0 text-${invoicewidget.percentageClass}`}
 												>
-													<i className="ri-add-line align-bottom me-1"></i>{" "}
-													Create Invoice
-												</Link>
+													<i className="ri-arrow-right-up-line fs-13 align-middle"></i>{" "}
+													{invoicewidget.percentage}
+												</h5>
 											</div>
 										</div>
+										<div className="d-flex align-items-end justify-content-between mt-4">
+											<div>
+												<h4 className="fs-22 fw-semibold ff-secondary mb-4">
+													<CountUp
+														start={0}
+														prefix={invoicewidget.prefix}
+														suffix={invoicewidget.suffix}
+														end={invoicewidget.counter}
+														duration={4}
+														className="counter-value"
+													/>
+												</h4>
+												<span className="badge bg-warning me-1">
+													{invoicewidget.badge}
+												</span>{" "}
+												<span className="text-muted">
+													{" "}
+													{invoicewidget.caption}
+												</span>
+											</div>
+											<div className="avatar-sm flex-shrink-0">
+												<span className="avatar-title bg-light rounded fs-3">
+													<FeatherIcon
+														icon={invoicewidget.feaIcon}
+														className="text-success icon-dual-success"
+													/>
+												</span>
+											</div>
+										</div>
+									</CardBody>
+								</Card>
+							</Col>
+						</React.Fragment>
+					))}
+				</Row>
+
+				<Row>
+					<Col lg={12}>
+						<Card id="invoiceList">
+							<CardHeader className="border-0">
+								<div className="d-flex align-items-center">
+									<h5 className="card-title mb-0 flex-grow-1">Invoices</h5>
+									<div className="flex-shrink-0">
+										<div className="d-flex gap-2 flex-wrap">
+											{isMultiDeleteButton && (
+												<button
+													className="btn btn-primary me-1"
+													onClick={() => setDeleteModalMulti(true)}
+												>
+													<i className="ri-delete-bin-2-line"></i>
+												</button>
+											)}
+											<Link
+												to="/apps-invoices-create"
+												className="btn btn-danger"
+											>
+												<i className="ri-add-line align-bottom me-1"></i> Create
+												Invoice
+											</Link>
+										</div>
 									</div>
-								</CardHeader>
-								<CardBody className="pt-0">
-									<div>
-										{isInvoiceSuccess && invoices.length ? (
-											<TableContainer
-												columns={columns}
-												data={invoices || []}
-												isGlobalFilter={true}
-												customPageSize={10}
-												isInvoiceListFilter={true}
-												theadClass="text-muted text-uppercase"
-												SearchPlaceholder="Search for customer, email, country, status or something..."
-											/>
-										) : (
-											<Loader error={error} />
-										)}
-										<ToastContainer closeButton={false} limit={1} />
-									</div>
-								</CardBody>
-							</Card>
-						</Col>
-					</Row>
-				</Container>
-			</div>
-		</React.Fragment>
+								</div>
+							</CardHeader>
+							<CardBody className="pt-0">
+								<div>
+									{isInvoiceSuccess && invoices.length ? (
+										<TableContainer
+											columns={columns}
+											data={invoices || []}
+											isGlobalFilter={true}
+											customPageSize={10}
+											isInvoiceListFilter={true}
+											theadClass="text-muted text-uppercase"
+											SearchPlaceholder="Search for customer, email, country, status or something..."
+										/>
+									) : (
+										<Loader error={error} />
+									)}
+									<ToastContainer closeButton={false} limit={1} />
+								</div>
+							</CardBody>
+						</Card>
+					</Col>
+				</Row>
+			</Container>
+		</div>
 	);
 };
 

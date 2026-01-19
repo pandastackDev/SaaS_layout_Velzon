@@ -1,30 +1,30 @@
 import React, { useState } from "react";
+//Import Flatepicker
+import Flatpickr from "react-flatpickr";
 import { Link } from "react-router-dom";
 import { Card, CardBody, Col, Row } from "reactstrap";
 import { icoWidgetsList } from "../../../common/data";
-//Import Flatepicker
-import Flatpickr from "react-flatpickr";
 
 const ICO = () => {
-	const [icoList, setIcoList] = useState<any>(icoWidgetsList);
-	const type = (e: any) => {
+	const [icoList, setIcoList] = useState(icoWidgetsList);
+	const type = (e: string) => {
 		setIcoList(icoWidgetsList.filter((item) => item.title === e));
 	};
 
-	const rating = (e: any) => {
-		let output = icoWidgetsList.filter((item) => {
-			let opt = item.subItem.some(({ rating }) => rating > e);
+	const rating = (e: string) => {
+		const output = icoWidgetsList.filter((item) => {
+			const opt = item.subItem.some(({ rating }) => rating > e);
 			return opt;
 		});
 		setIcoList(output);
 	};
 
-	const datefilter = (e: any) => {
+	const datefilter = (e: Date[]) => {
 		const date = e.toString().split(" ");
-		const joinDate = (date[2] + " " + date[1] + ", " + date[3]).toString();
+		const joinDate = `${date[2]} ${date[1]}, ${date[3]}`.toString();
 
-		let output = icoWidgetsList.filter((item) => {
-			let opt = item.subItem.some(({ date }) => date === joinDate);
+		const output = icoWidgetsList.filter((item) => {
+			const opt = item.subItem.some(({ date }) => date === joinDate);
 			return opt;
 		});
 		setIcoList(output);
@@ -97,8 +97,8 @@ const ICO = () => {
 			</Card>
 
 			<Row>
-				{(icoList || []).map((item: any, key: any) => (
-					<React.Fragment key={key}>
+				{(icoList || []).map((item, index) => (
+					<React.Fragment key={`ico-${index}-${item.title || index}`}>
 						{item.title === "Active ICOs" ? (
 							<Col xxl={3} md={6}>
 								<Card className="overflow-hidden">
@@ -106,8 +106,11 @@ const ICO = () => {
 										<h5 className="fs-15 text-center mb-0">{item.title}</h5>
 									</CardBody>
 								</Card>
-								{(item.subItem || []).map((subItem: any, key: any) => (
-									<Card className="mb-2" key={key}>
+								{(item.subItem || []).map((subItem, subIndex) => (
+									<Card
+										className="mb-2"
+										key={`ico-subitem-${index}-${subIndex}-${subItem.label || subIndex}`}
+									>
 										<CardBody>
 											<div className="d-flex mb-3">
 												<div className="flex-shrink-0 avatar-sm">
@@ -149,9 +152,7 @@ const ICO = () => {
 													</h6>
 												</div>
 												<h6
-													className={
-														"flex-shrink-0 text-" + subItem.dateClass + " mb-0"
-													}
+													className={`flex-shrink-0 text-${subItem.dateClass} mb-0`}
 												>
 													<i className="ri-time-line align-bottom"></i>{" "}
 													{subItem.date}
@@ -168,8 +169,11 @@ const ICO = () => {
 										<h5 className="fs-15 text-center mb-0">{item.title}</h5>
 									</CardBody>
 								</Card>
-								{(item.subItem || []).map((subItem: any, key: any) => (
-									<Card className="mb-2" key={key}>
+								{(item.subItem || []).map((subItem, subIndex) => (
+									<Card
+										className="mb-2"
+										key={`ico-subitem-${index}-${subIndex}-${subItem.label || subIndex}`}
+									>
 										<CardBody>
 											<div className="d-flex mb-3">
 												<div className="flex-shrink-0 avatar-sm">
@@ -211,9 +215,7 @@ const ICO = () => {
 													</h6>
 												</div>
 												<h6
-													className={
-														"flex-shrink-0 text-" + subItem.dateClass + " mb-0"
-													}
+													className={`flex-shrink-0 text-${subItem.dateClass} mb-0`}
 												>
 													<i className="ri-time-line align-bottom"></i>{" "}
 													{subItem.date}
@@ -230,8 +232,11 @@ const ICO = () => {
 										<h5 className="fs-15 text-center mb-0">{item.title}</h5>
 									</CardBody>
 								</Card>
-								{(item.subItem || []).map((subItem: any, key: any) => (
-									<Card className="mb-2" key={key}>
+								{(item.subItem || []).map((subItem, subIndex) => (
+									<Card
+										className="mb-2"
+										key={`ico-subitem-${index}-${subIndex}-${subItem.label || subIndex}`}
+									>
 										<CardBody>
 											<div className="d-flex mb-3">
 												<div className="flex-shrink-0 avatar-sm">
@@ -268,9 +273,7 @@ const ICO = () => {
 													</h6>
 												</div>
 												<h6
-													className={
-														"flex-shrink-0 text-" + subItem.dateClass + " mb-0"
-													}
+													className={`flex-shrink-0 text-${subItem.dateClass} mb-0`}
 												>
 													<i className="ri-time-line align-bottom"></i>{" "}
 													{subItem.date}
@@ -287,8 +290,11 @@ const ICO = () => {
 										<h5 className="fs-15 text-center mb-0">{item.title}</h5>
 									</CardBody>
 								</Card>
-								{(item.subItem || []).map((subItem: any, key: any) => (
-									<Card className="mb-2 ribbon-box ribbon-fill right" key={key}>
+								{(item.subItem || []).map((subItem, subIndex) => (
+									<Card
+										className="mb-2 ribbon-box ribbon-fill right"
+										key={`ico-trading-${index}-${subIndex}-${subItem.label || subIndex}`}
+									>
 										<div className="ribbon ribbon-info shadow-none">
 											<i className="ri-flashlight-fill me-1"></i>
 											{subItem.ribbonNumber}
@@ -334,9 +340,7 @@ const ICO = () => {
 													</h6>
 												</div>
 												<h6
-													className={
-														"flex-shrink-0 text-" + subItem.dateClass + " mb-0"
-													}
+													className={`flex-shrink-0 text-${subItem.dateClass} mb-0`}
 												>
 													<i className="ri-time-line align-bottom"></i>{" "}
 													{subItem.date}

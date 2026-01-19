@@ -4,18 +4,18 @@ import "react-toastify/dist/ReactToastify.css";
 
 //Include Both Helper File with needed methods
 import {
-	getProducts as getProductsApi,
-	deleteProducts as deleteProductsApi,
-	getOrders as getOrdersApi,
-	getSellers as getSellersApi,
-	getCustomers as getCustomersApi,
-	updateOrder as updateOrderApi,
-	deleteOrder as deleteOrderApi,
-	addNewOrder as addNewOrderApi,
 	addNewCustomer as addNewCustomerApi,
-	updateCustomer as updateCustomerApi,
-	deleteCustomer as deleteCustomerApi,
+	addNewOrder as addNewOrderApi,
 	addNewProduct as addNewProductApi,
+	deleteCustomer as deleteCustomerApi,
+	deleteOrder as deleteOrderApi,
+	deleteProducts as deleteProductsApi,
+	getCustomers as getCustomersApi,
+	getOrders as getOrdersApi,
+	getProducts as getProductsApi,
+	getSellers as getSellersApi,
+	updateCustomer as updateCustomerApi,
+	updateOrder as updateOrderApi,
 	updateProduct as updateProductApi,
 } from "../../helpers/fakebackend_helper";
 
@@ -63,7 +63,7 @@ export const getCustomers = createAsyncThunk(
 
 export const deleteProducts = createAsyncThunk(
 	"ecommerce/deleteProducts",
-	async (product: any) => {
+	async (product: string | number | Record<string, unknown>) => {
 		try {
 			const response = deleteProductsApi(product);
 			toast.success("Product Delete Successfully", { autoClose: 3000 });
@@ -77,7 +77,7 @@ export const deleteProducts = createAsyncThunk(
 
 export const updateOrder = createAsyncThunk(
 	"ecommerce/updateOrder",
-	async (order: any) => {
+	async (order: Record<string, unknown>) => {
 		try {
 			const response = updateOrderApi(order);
 			const data = await response;
@@ -92,7 +92,7 @@ export const updateOrder = createAsyncThunk(
 
 export const addNewProduct = createAsyncThunk(
 	"ecommerce/addNewProduct",
-	async (product: any) => {
+	async (product: Record<string, unknown>) => {
 		try {
 			const response = addNewProductApi(product);
 			const data = await response;
@@ -107,7 +107,7 @@ export const addNewProduct = createAsyncThunk(
 
 export const updateProduct = createAsyncThunk(
 	"ecommerce/updateProduct",
-	async (product: any) => {
+	async (product: Record<string, unknown>) => {
 		try {
 			const response = updateProductApi(product);
 			const data = await response;
@@ -122,7 +122,7 @@ export const updateProduct = createAsyncThunk(
 
 export const deleteOrder = createAsyncThunk(
 	"ecommerce/deleteOrder",
-	async (order: any) => {
+	async (order: string | number | Record<string, unknown>) => {
 		try {
 			const response = deleteOrderApi(order);
 			toast.success("Order Deleted Successfully", { autoClose: 3000 });
@@ -136,7 +136,7 @@ export const deleteOrder = createAsyncThunk(
 
 export const addNewOrder = createAsyncThunk(
 	"ecommerce/addNewOrder",
-	async (order: any) => {
+	async (order: Record<string, unknown>) => {
 		try {
 			const response = addNewOrderApi(order);
 			const data = await response;
@@ -151,7 +151,7 @@ export const addNewOrder = createAsyncThunk(
 
 export const updateCustomer = createAsyncThunk(
 	"ecommerce/updateCustomer",
-	async (customer: any) => {
+	async (customer: Record<string, unknown>) => {
 		try {
 			const response = updateCustomerApi(customer);
 			const data = await response;
@@ -166,7 +166,7 @@ export const updateCustomer = createAsyncThunk(
 
 export const deleteCustomer = createAsyncThunk(
 	"ecommerce/deleteCustomer",
-	async (customer: any) => {
+	async (customer: string | number | Record<string, unknown>) => {
 		try {
 			const response = deleteCustomerApi(customer);
 			toast.success("Customer Deleted Successfully", { autoClose: 3000 });
@@ -180,7 +180,7 @@ export const deleteCustomer = createAsyncThunk(
 
 export const addNewCustomer = createAsyncThunk(
 	"ecommerce/addNewCustomer",
-	async (customer: any) => {
+	async (customer: Record<string, unknown>) => {
 		try {
 			const response = addNewCustomerApi(customer);
 			const data = await response;

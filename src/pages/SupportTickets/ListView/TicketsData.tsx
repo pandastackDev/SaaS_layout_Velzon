@@ -1,4 +1,12 @@
-import React, { useEffect, useMemo, useState, useCallback } from "react";
+import { useFormik } from "formik";
+import { isEmpty } from "lodash";
+import moment from "moment";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+//Import Flatepicker
+import Flatpickr from "react-flatpickr";
+//redux
+import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
 import {
 	Card,
 	CardBody,
@@ -17,41 +25,29 @@ import {
 	Row,
 	UncontrolledDropdown,
 } from "reactstrap";
-//redux
-import { useSelector, useDispatch } from "react-redux";
-import TableContainer from "../../../Components/Common/TableContainer";
-import {
-	getTicketsList as onGetTicketsList,
-	addNewTicket as onAddNewTicket,
-	updateTicket,
-	deleteTicket,
-} from "../../../slices/thunks";
-
-import {
-	TicketsId,
-	Title,
-	Client,
-	AssignedTo,
-	CreateDate,
-	DueDate,
-	Status,
-	Priority,
-} from "./TicketCol";
-//Import Flatepicker
-import Flatpickr from "react-flatpickr";
-import moment from "moment";
-import { isEmpty } from "lodash";
-
 // Formik
 import * as Yup from "yup";
-import { useFormik } from "formik";
-
 import DeleteModal from "../../../Components/Common/DeleteModal";
-
-import { toast, ToastContainer } from "react-toastify";
+import TableContainer from "../../../Components/Common/TableContainer";
+import {
+	deleteTicket,
+	addNewTicket as onAddNewTicket,
+	getTicketsList as onGetTicketsList,
+	updateTicket,
+} from "../../../slices/thunks";
+import {
+	AssignedTo,
+	Client,
+	CreateDate,
+	DueDate,
+	Priority,
+	Status,
+	TicketsId,
+	Title,
+} from "./TicketCol";
 import "react-toastify/dist/ReactToastify.css";
-import Loader from "../../../Components/Common/Loader";
 import { createSelector } from "reselect";
+import Loader from "../../../Components/Common/Loader";
 
 const TicketsData = () => {
 	const dispatch: any = useDispatch();
@@ -93,15 +89,15 @@ const TicketsData = () => {
 		enableReinitialize: true,
 
 		initialValues: {
-			id: (ticket && ticket.id) || "",
-			ticketId: (ticket && ticket.ticketId) || "",
-			title: (ticket && ticket.title) || "",
-			client: (ticket && ticket.client) || "",
-			assigned: (ticket && ticket.assigned) || "",
-			createDate: (ticket && ticket.createDate) || "",
-			dueDate: (ticket && ticket.dueDate) || "",
-			status: (ticket && ticket.status) || "",
-			priority: (ticket && ticket.priority) || "",
+			id: ticket?.id || "",
+			ticketId: ticket?.ticketId || "",
+			title: ticket?.title || "",
+			client: ticket?.client || "",
+			assigned: ticket?.assigned || "",
+			createDate: ticket?.createDate || "",
+			dueDate: ticket?.dueDate || "",
+			status: ticket?.status || "",
+			priority: ticket?.priority || "",
 		},
 		validationSchema: Yup.object({
 			title: Yup.string().required("Please Enter Title"),
@@ -131,15 +127,14 @@ const TicketsData = () => {
 			} else {
 				const newTicket = {
 					id: (Math.floor(Math.random() * (30 - 20)) + 20).toString(),
-					ticketId:
-						"#VLZ4" + (Math.floor(Math.random() * (30 - 20)) + 20).toString(),
-					title: values["title"],
-					client: values["client"],
-					assigned: values["assigned"],
-					createDate: values["createDate"],
-					dueDate: values["dueDate"],
-					status: values["status"],
-					priority: values["priority"],
+					ticketId: `#VLZ4${(Math.floor(Math.random() * (30 - 20)) + 20).toString()}`,
+					title: values.title,
+					client: values.client,
+					assigned: values.assigned,
+					createDate: values.createDate,
+					dueDate: values.dueDate,
+					status: values.status,
+					priority: values.priority,
 				};
 				// save new ticket
 				dispatch(onAddNewTicket(newTicket));
@@ -216,7 +211,7 @@ const TicketsData = () => {
 			});
 		}
 		deleteCheckbox();
-	}, []);
+	}, [deleteCheckbox]);
 
 	// Delete Multiple
 	const [selectedCheckBoxDelete, setSelectedCheckBoxDelete] = useState<any>([]);
@@ -382,7 +377,7 @@ const TicketsData = () => {
 				},
 			},
 		],
-		[checkedAll],
+		[checkedAll, deleteCheckbox, handleTicketsClick, onClickDelete],
 	);
 
 	return (
@@ -460,7 +455,7 @@ const TicketsData = () => {
 				modalClassName="zoomIn"
 			>
 				<ModalHeader toggle={toggle} className="p-3 bg-info-subtle">
-					{!!isEdit ? "Edit Ticket" : "Add Ticket"}
+					{isEdit ? "Edit Ticket" : "Add Ticket"}
 				</ModalHeader>
 				<Form
 					className="tablelist-form"
@@ -490,9 +485,7 @@ const TicketsData = () => {
 										onBlur={validation.handleBlur}
 										value={validation.values.title || ""}
 										invalid={
-											validation.touched.title && validation.errors.title
-												? true
-												: false
+											!!(validation.touched.title && validation.errors.title)
 										}
 									/>
 									{validation.touched.title && validation.errors.title ? (
@@ -516,9 +509,7 @@ const TicketsData = () => {
 										onBlur={validation.handleBlur}
 										value={validation.values.client || ""}
 										invalid={
-											validation.touched.client && validation.errors.client
-												? true
-												: false
+											!!(validation.touched.client && validation.errors.client)
 										}
 									/>
 									{validation.touched.client && validation.errors.client ? (
@@ -542,9 +533,10 @@ const TicketsData = () => {
 										onBlur={validation.handleBlur}
 										value={validation.values.assigned || ""}
 										invalid={
-											validation.touched.assigned && validation.errors.assigned
-												? true
-												: false
+											!!(
+												validation.touched.assigned &&
+												validation.errors.assigned
+											)
 										}
 									/>
 									{validation.touched.assigned && validation.errors.assigned ? (
@@ -624,9 +616,7 @@ const TicketsData = () => {
 									onBlur={validation.handleBlur}
 									value={validation.values.status || ""}
 									invalid={
-										validation.touched.status && validation.errors.status
-											? true
-											: false
+										!!(validation.touched.status && validation.errors.status)
 									}
 								>
 									<option value="">Status</option>
@@ -654,9 +644,9 @@ const TicketsData = () => {
 									onBlur={validation.handleBlur}
 									value={validation.values.priority || ""}
 									invalid={
-										validation.touched.priority && validation.errors.priority
-											? true
-											: false
+										!!(
+											validation.touched.priority && validation.errors.priority
+										)
 									}
 								>
 									<option value="">Priority</option>
@@ -678,7 +668,7 @@ const TicketsData = () => {
 								Close
 							</button>
 							<button type="submit" className="btn btn-success" id="add-btn">
-								{!!isEdit ? "Update" : "Add Ticket"}
+								{isEdit ? "Update" : "Add Ticket"}
 							</button>
 						</div>
 					</div>

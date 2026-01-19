@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
 import { Card, CardBody, Col, Row } from "reactstrap";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/pagination";

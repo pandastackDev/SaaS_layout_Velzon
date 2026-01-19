@@ -1,4 +1,3 @@
-import React from "react";
 import ReactApexChart from "react-apexcharts";
 
 import getChartColorsArray from "../../../Components/Common/ChartsDynamicColor";
@@ -116,7 +115,7 @@ const RevenueCharts = ({ dataColors }: any) => {
 			shared: true,
 			y: [
 				{
-					formatter: function (y: any) {
+					formatter: (y: any) => {
 						if (typeof y !== "undefined") {
 							return y.toFixed(0);
 						}
@@ -124,17 +123,17 @@ const RevenueCharts = ({ dataColors }: any) => {
 					},
 				},
 				{
-					formatter: function (y: any) {
+					formatter: (y: any) => {
 						if (typeof y !== "undefined") {
-							return "$" + y.toFixed(2) + "k";
+							return `$${y.toFixed(2)}k`;
 						}
 						return y;
 					},
 				},
 				{
-					formatter: function (y: any) {
+					formatter: (y: any) => {
 						if (typeof y !== "undefined") {
-							return y.toFixed(0) + " Sales";
+							return `${y.toFixed(0)} Sales`;
 						}
 						return y;
 					},
@@ -143,16 +142,14 @@ const RevenueCharts = ({ dataColors }: any) => {
 		},
 	};
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="line"
-				height="370"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="line"
+			height="370"
+			className="apex-charts"
+		/>
 	);
 };
 

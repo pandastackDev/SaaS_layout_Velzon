@@ -1,42 +1,40 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { CardBody, Col, Row, Table } from "reactstrap";
-import { Link } from "react-router-dom";
-
+import { rankItem } from "@tanstack/match-sorter-utils";
 import {
-	Column,
-	Table as ReactTable,
-	ColumnFiltersState,
-	FilterFn,
-	useReactTable,
+	type Column,
+	type ColumnFiltersState,
+	type FilterFn,
+	flexRender,
 	getCoreRowModel,
 	getFilteredRowModel,
 	getPaginationRowModel,
 	getSortedRowModel,
-	flexRender,
+	type Table as ReactTable,
+	useReactTable,
 } from "@tanstack/react-table";
-
-import { rankItem } from "@tanstack/match-sorter-utils";
+import React, { Fragment, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { CardBody, Col, Row, Table } from "reactstrap";
 
 import {
-	ProductsGlobalFilter,
-	CustomersGlobalFilter,
-	OrderGlobalFilter,
-	ContactsGlobalFilter,
 	CompaniesGlobalFilter,
-	LeadsGlobalFilter,
+	ContactsGlobalFilter,
 	CryptoOrdersGlobalFilter,
+	CustomersGlobalFilter,
 	InvoiceListGlobalSearch,
-	TicketsListGlobalFilter,
+	LeadsGlobalFilter,
 	NFTRankingGlobalFilter,
+	OrderGlobalFilter,
+	ProductsGlobalFilter,
 	TaskListGlobalFilter,
+	TicketsListGlobalFilter,
 } from "../../Components/Common/GlobalSearchFilter";
 
 // Column Filter
 const Filter = ({
 	column,
 }: {
-	column: Column<any, unknown>;
-	table: ReactTable<any>;
+	column: Column<unknown, unknown>;
+	table: ReactTable<unknown>;
 }) => {
 	const columnFilterValue = column.getFilterValue();
 
@@ -48,7 +46,7 @@ const Filter = ({
 				onChange={(value) => column.setFilterValue(value)}
 				placeholder="Search..."
 				className="w-36 border shadow rounded"
-				list={column.id + "list"}
+				list={`${column.id}list`}
 			/>
 			<div className="h-1" />
 		</>
@@ -92,32 +90,32 @@ const DebouncedInput = ({
 };
 
 interface TableContainerProps {
-	columns?: any;
-	data?: any;
-	isGlobalFilter?: any;
-	isProductsFilter?: any;
-	isCustomerFilter?: any;
-	isOrderFilter?: any;
-	isContactsFilter?: any;
-	isCompaniesFilter?: any;
-	isLeadsFilter?: any;
-	isCryptoOrdersFilter?: any;
-	isInvoiceListFilter?: any;
-	isTicketsListFilter?: any;
-	isNFTRankingFilter?: any;
-	isTaskListFilter?: any;
-	handleTaskClick?: any;
-	customPageSize?: any;
-	tableClass?: any;
-	theadClass?: any;
-	trClass?: any;
-	thClass?: any;
-	divClass?: any;
-	SearchPlaceholder?: any;
-	handleLeadClick?: any;
-	handleCompanyClick?: any;
-	handleContactClick?: any;
-	handleTicketClick?: any;
+	columns?: Column<unknown, unknown>[];
+	data?: unknown[];
+	isGlobalFilter?: boolean;
+	isProductsFilter?: boolean;
+	isCustomerFilter?: boolean;
+	isOrderFilter?: boolean;
+	isContactsFilter?: boolean;
+	isCompaniesFilter?: boolean;
+	isLeadsFilter?: boolean;
+	isCryptoOrdersFilter?: boolean;
+	isInvoiceListFilter?: boolean;
+	isTicketsListFilter?: boolean;
+	isNFTRankingFilter?: boolean;
+	isTaskListFilter?: boolean;
+	handleTaskClick?: (task: unknown) => void;
+	customPageSize?: number;
+	tableClass?: string;
+	theadClass?: string;
+	trClass?: string;
+	thClass?: string;
+	divClass?: string;
+	SearchPlaceholder?: string;
+	handleLeadClick?: (lead: unknown) => void;
+	handleCompanyClick?: (company: unknown) => void;
+	handleContactClick?: (contact: unknown) => void;
+	handleTicketClick?: (ticket: unknown) => void;
 }
 
 const TableContainer = ({
@@ -146,7 +144,7 @@ const TableContainer = ({
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 	const [globalFilter, setGlobalFilter] = useState("");
 
-	const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
+	const fuzzyFilter: FilterFn<unknown> = (row, columnId, value, addMeta) => {
 		const itemRank = rankItem(row.getValue(columnId), value);
 		addMeta({
 			itemRank,
@@ -236,9 +234,9 @@ const TableContainer = ({
 			<div className={divClass}>
 				<Table hover className={tableClass}>
 					<thead className={theadClass}>
-						{getHeaderGroups().map((headerGroup: any) => (
+						{getHeaderGroups().map((headerGroup) => (
 							<tr className={trClass} key={headerGroup.id}>
-								{headerGroup.headers.map((header: any) => (
+								{headerGroup.headers.map((header) => (
 									<th
 										key={header.id}
 										className={thClass}
@@ -270,10 +268,10 @@ const TableContainer = ({
 					</thead>
 
 					<tbody>
-						{getRowModel().rows.map((row: any) => {
+						{getRowModel().rows.map((row) => {
 							return (
 								<tr key={row.id}>
-									{row.getVisibleCells().map((cell: any) => {
+									{row.getVisibleCells().map((cell) => {
 										return (
 											<td key={cell.id}>
 												{flexRender(
@@ -311,8 +309,8 @@ const TableContainer = ({
 								Previous
 							</Link>
 						</li>
-						{getPageOptions().map((item: any, key: number) => (
-							<React.Fragment key={key}>
+						{getPageOptions().map((item) => (
+							<React.Fragment key={item}>
 								<li className="page-item">
 									<Link
 										to="#"

@@ -1,12 +1,11 @@
 import PropTypes from "prop-types";
-import React from "react";
-import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import { CSVLink } from "react-csv";
+import { Modal, ModalBody, ModalHeader } from "reactstrap";
 
 interface ExportCSVModalProps {
 	show: boolean;
 	onCloseClick: () => void;
-	data: any;
+	data: Record<string, unknown>[] | unknown[];
 }
 
 const ExportCSVModal = ({ show, onCloseClick, data }: ExportCSVModalProps) => {

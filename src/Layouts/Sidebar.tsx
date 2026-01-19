@@ -1,18 +1,21 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Container } from "reactstrap";
 import SimpleBar from "simplebar-react";
 //import logo
 import mainLogo from "../assets/images/main-logo/logo.png";
-
 //Import Components
 import VerticalLayout from "./VerticalLayouts";
-import { Container } from "reactstrap";
 
-const Sidebar = ({ layoutType }: any) => {
+interface SidebarProps {
+	layoutType?: string;
+}
+
+const Sidebar = ({ layoutType }: SidebarProps) => {
 	useEffect(() => {
-		var verticalOverlay = document.getElementsByClassName("vertical-overlay");
+		const verticalOverlay = document.getElementsByClassName("vertical-overlay");
 		if (verticalOverlay) {
-			verticalOverlay[0].addEventListener("click", function () {
+			verticalOverlay[0].addEventListener("click", () => {
 				document.body.classList.remove("vertical-sidebar-enable");
 			});
 		}

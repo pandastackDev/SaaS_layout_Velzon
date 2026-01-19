@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
+import { Link } from "react-router-dom";
 import {
 	Accordion,
 	AccordionBody,
@@ -13,28 +13,26 @@ import {
 	Container,
 	Row,
 } from "reactstrap";
-import { Link } from "react-router-dom";
-
-// Import Content
-import UiContent from "../../../Components/Common/UiContent";
-
 //import Components
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
+// Import Content
+import UiContent from "../../../Components/Common/UiContent";
 import {
-	DefaultAccordionExample,
-	FlushAccordionExample,
-	IconAccordionExample,
-	WithIconAccordionExample,
-	PlusIconAccordionExample,
-	LeftIconAccordionExample,
 	BorderedAccordionExample,
-	NestingAccordionExample,
-	FillColoredAccordionExample,
 	CollapseExample,
+	DefaultAccordionExample,
+	FillColoredAccordionExample,
+	FlushAccordionExample,
 	HorizontalCollapseExample,
+	IconAccordionExample,
 	IconCollapseExample,
 	InlineBLockCollapseExample,
+	LeftIconAccordionExample,
 	MultipleTargetCollapseExample,
+	NestingAccordionExample,
+	PlusIconAccordionExample,
+	WithIconAccordionExample,
 } from "./UiAccordion&CollapseCode";
 
 const UiAccordions = () => {

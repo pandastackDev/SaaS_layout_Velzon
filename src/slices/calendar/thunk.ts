@@ -2,12 +2,12 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 //Include Both Helper File with needed methods
 import {
-	getEvents as getEventsApi,
 	addNewEvent as addNewEventApi,
-	updateEvent as updateEventApi,
 	deleteEvent as deleteEventApi,
 	getCategories as getCategoriesApi,
+	getEvents as getEventsApi,
 	getUpCommingEvent as getUpCommingEventApi,
+	updateEvent as updateEventApi,
 } from "../../helpers/fakebackend_helper";
 
 export const getEvents = createAsyncThunk("calendar/getEvents", async () => {
@@ -21,7 +21,7 @@ export const getEvents = createAsyncThunk("calendar/getEvents", async () => {
 
 export const addNewEvent = createAsyncThunk(
 	"calendar/addNewEvent",
-	async (event: any) => {
+	async (event: Record<string, unknown>) => {
 		try {
 			const response = addNewEventApi(event);
 			return response;
@@ -33,7 +33,7 @@ export const addNewEvent = createAsyncThunk(
 
 export const updateEvent = createAsyncThunk(
 	"calendar/updateEvent",
-	async (event: any) => {
+	async (event: Record<string, unknown>) => {
 		try {
 			const response = updateEventApi(event);
 			const modifiedevent = await response;
@@ -46,7 +46,7 @@ export const updateEvent = createAsyncThunk(
 
 export const deleteEvent = createAsyncThunk(
 	"calendar/deleteEvent",
-	async (event: any) => {
+	async (event: string | number | Record<string, unknown>) => {
 		try {
 			const response = deleteEventApi(event);
 			return response;
@@ -82,10 +82,9 @@ export const getUpCommingEvent = createAsyncThunk(
 
 export const resetCalendar = createAsyncThunk(
 	"calendar/resetCalendar",
-	async () => {
+	async (payload?: { flag: string; value: unknown }) => {
 		try {
-			const response = "";
-			return response;
+			return payload || { flag: "", value: "" };
 		} catch (error) {
 			return error;
 		}

@@ -1,16 +1,14 @@
 import PropTypes from "prop-types";
-import React, { useEffect } from "react";
-import { Navigate } from "react-router-dom";
-
-import { logoutUser } from "../../slices/thunks";
-
+import { useEffect } from "react";
 //redux
-import { useSelector, useDispatch } from "react-redux";
-
-import withRouter from "../../Components/Common/withRouter";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 import { createSelector } from "reselect";
 
-const Logout = (props: any) => {
+import withRouter from "../../Components/Common/withRouter";
+import { logoutUser } from "../../slices/thunks";
+
+const Logout = (_props: any) => {
 	const dispatch: any = useDispatch();
 
 	const logoutData = createSelector(

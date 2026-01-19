@@ -1,5 +1,5 @@
-import React from "react";
 import PrismCode from "../../../Components/Common/Prism";
+
 //InputExample code
 const InputExample = () => {
 	const code = `<!-- Basic Input -->
@@ -161,11 +161,7 @@ const InputExample = () => {
     </div>
 </Col>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //InputSizing code
@@ -182,11 +178,7 @@ const InputSizing = () => {
 <Input className="form-control form-control-lg" type="text" placeholder=".form-control-lg" />
 </Col>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //FileInput code
@@ -245,11 +237,7 @@ const FileInput = () => {
 
 </Row>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //Input Group code
@@ -311,11 +299,7 @@ const InputGroup = () => {
 </div>
 </div>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //Input Group Sizing
@@ -342,11 +326,7 @@ const InputGroupSizing = () => {
     </Col>
 </Row>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //Multiple Inputs code
@@ -370,11 +350,7 @@ const MultipleInputs = () => {
     <span className="input-group-text">0.00</span>
 </div>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //ButtonsCheckboxesRadiosGroup code
@@ -415,11 +391,7 @@ const ButtonsCheckboxesRadiosGroup = () => {
     <button className="btn btn-success" type="button">Button</button>
 </div>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //Buttons with dropdowns code
@@ -470,11 +442,7 @@ const ButtonsWithDropdowns = () => {
     </ul>
 </div>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //Custom Forms code
@@ -535,11 +503,7 @@ const CustomForms = () => {
     <button className="btn btn-outline-success" type="button" id="inputGroupFileAddon04">Button</button>
 </div>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 export {

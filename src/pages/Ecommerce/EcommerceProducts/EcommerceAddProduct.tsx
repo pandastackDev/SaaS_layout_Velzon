@@ -1,41 +1,37 @@
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import classnames from "classnames";
+//formik
+import { useFormik } from "formik";
 import React, { useState } from "react";
-import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import Dropzone from "react-dropzone";
+// Import React FilePond
+import { registerPlugin } from "react-filepond";
+import Flatpickr from "react-flatpickr";
+// Redux
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import Select from "react-select";
 import {
 	Card,
 	CardBody,
+	CardHeader,
 	Col,
 	Container,
-	CardHeader,
+	Form,
+	FormFeedback,
+	Input,
+	Label,
 	Nav,
 	NavItem,
 	NavLink,
 	Row,
 	TabContent,
 	TabPane,
-	Input,
-	Label,
-	FormFeedback,
-	Form,
 } from "reactstrap";
-
-// Redux
-import { useDispatch } from "react-redux";
-import { addNewProduct as onAddNewProduct } from "../../../slices/thunks";
-
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import classnames from "classnames";
-import Dropzone from "react-dropzone";
-import { Link, useNavigate } from "react-router-dom";
-
-//formik
-import { useFormik } from "formik";
 import * as Yup from "yup";
-
-// Import React FilePond
-import { registerPlugin } from "react-filepond";
-import Flatpickr from "react-flatpickr";
-import Select from "react-select";
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import { addNewProduct as onAddNewProduct } from "../../../slices/thunks";
 // Import FilePond styles
 import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
@@ -45,7 +41,7 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
-const EcommerceAddProduct = (props: any) => {
+const EcommerceAddProduct = (_props: any) => {
 	document.title = "Create Product | Velzon - React Admin & Dashboard Template";
 
 	const history = useNavigate();
@@ -84,7 +80,7 @@ const EcommerceAddProduct = (props: any) => {
 		const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
 
 		const i = Math.floor(Math.log(bytes) / Math.log(k));
-		return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
+		return `${parseFloat((bytes / k ** i).toFixed(dm))} ${sizes[i]}`;
 	}
 
 	const productCategory = [
@@ -103,7 +99,7 @@ const EcommerceAddProduct = (props: any) => {
 	];
 
 	const dateFormat = () => {
-		let d = new Date(),
+		const d = new Date(),
 			months = [
 				"Jan",
 				"Feb",
@@ -118,8 +114,8 @@ const EcommerceAddProduct = (props: any) => {
 				"Nov",
 				"Dec",
 			];
-		let h = d.getHours() % 12 || 12;
-		let ampm = d.getHours() < 12 ? "AM" : "PM";
+		const h = d.getHours() % 12 || 12;
+		const ampm = d.getHours() < 12 ? "AM" : "PM";
 		return (
 			d.getDate() +
 			" " +
@@ -140,14 +136,14 @@ const EcommerceAddProduct = (props: any) => {
 	const dateformate = (e: any) => {
 		const dateString = e.toString().split(" ");
 		let time = dateString[4];
-		let H = +time.substr(0, 2);
+		const H = +time.substr(0, 2);
 		let h: any = H % 12 || 12;
-		h = h <= 9 ? (h = "0" + h) : h;
-		let ampm = H < 12 ? "AM" : "PM";
-		time = h + time.substr(2, 3) + " " + ampm;
+		h = h <= 9 ? (h = `0${h}`) : h;
+		const ampm = H < 12 ? "AM" : "PM";
+		time = `${h + time.substr(2, 3)} ${ampm}`;
 
-		const date = dateString[2] + " " + dateString[1] + ", " + dateString[3];
-		const orderDate = (date + ", " + time).toString();
+		const date = `${dateString[2]} ${dateString[1]}, ${dateString[3]}`;
+		const orderDate = `${date}, ${time}`.toString();
 		setDate(orderDate);
 	};
 
@@ -269,9 +265,7 @@ const EcommerceAddProduct = (props: any) => {
 											onBlur={validation.handleBlur}
 											onChange={validation.handleChange}
 											invalid={
-												validation.errors.name && validation.touched.name
-													? true
-													: false
+												!!(validation.errors.name && validation.touched.name)
 											}
 										/>
 										{validation.errors.name && validation.touched.name ? (
@@ -299,7 +293,7 @@ const EcommerceAddProduct = (props: any) => {
                       <li>All Sizes available</li>
                       <li>4 Different Color</li>
                     </ul>"
-											onReady={(editor) => {
+											onReady={(_editor) => {
 												// You can store the "editor" and use when it is needed.
 											}}
 										/>
@@ -338,10 +332,10 @@ const EcommerceAddProduct = (props: any) => {
 														accept="image/png, image/gif, image/jpeg"
 														onChange={handleImageChange}
 														invalid={
-															validation.touched.image &&
-															validation.errors.image
-																? true
-																: false
+															!!(
+																validation.touched.image &&
+																validation.errors.image
+															)
 														}
 													/>
 												</div>
@@ -392,7 +386,7 @@ const EcommerceAddProduct = (props: any) => {
 												return (
 													<Card
 														className="mt-1 mb-0 shadow-none border dz-processing dz-image-preview dz-success dz-complete"
-														key={i + "-file"}
+														key={`${i}-file`}
 													>
 														<div className="p-2">
 															<Row className="align-items-center">
@@ -467,10 +461,10 @@ const EcommerceAddProduct = (props: any) => {
 															onBlur={validation.handleBlur}
 															onChange={validation.handleChange}
 															invalid={
-																validation.errors.manufacturer_name &&
-																validation.touched.manufacturer_name
-																	? true
-																	: false
+																!!(
+																	validation.errors.manufacturer_name &&
+																	validation.touched.manufacturer_name
+																)
 															}
 														/>
 														{validation.errors.manufacturer_name &&
@@ -499,10 +493,10 @@ const EcommerceAddProduct = (props: any) => {
 															onBlur={validation.handleBlur}
 															onChange={validation.handleChange}
 															invalid={
-																validation.errors.manufacturer_brand &&
-																validation.touched.manufacturer_brand
-																	? true
-																	: false
+																!!(
+																	validation.errors.manufacturer_brand &&
+																	validation.touched.manufacturer_brand
+																)
 															}
 														/>
 														{validation.errors.manufacturer_brand &&
@@ -534,10 +528,10 @@ const EcommerceAddProduct = (props: any) => {
 																onBlur={validation.handleBlur}
 																onChange={validation.handleChange}
 																invalid={
-																	validation.errors.stock &&
-																	validation.touched.stock
-																		? true
-																		: false
+																	!!(
+																		validation.errors.stock &&
+																		validation.touched.stock
+																	)
 																}
 															/>
 															{validation.errors.stock &&
@@ -577,10 +571,10 @@ const EcommerceAddProduct = (props: any) => {
 																onBlur={validation.handleBlur}
 																onChange={validation.handleChange}
 																invalid={
-																	validation.errors.price &&
-																	validation.touched.price
-																		? true
-																		: false
+																	!!(
+																		validation.errors.price &&
+																		validation.touched.price
+																	)
 																}
 															/>
 															{validation.errors.price &&
@@ -620,10 +614,10 @@ const EcommerceAddProduct = (props: any) => {
 																onBlur={validation.handleBlur}
 																onChange={validation.handleChange}
 																invalid={
-																	validation.errors.product_discount &&
-																	validation.touched.product_discount
-																		? true
-																		: false
+																	!!(
+																		validation.errors.product_discount &&
+																		validation.touched.product_discount
+																	)
 																}
 															/>
 															{validation.errors.product_discount &&
@@ -657,10 +651,10 @@ const EcommerceAddProduct = (props: any) => {
 																onBlur={validation.handleBlur}
 																onChange={validation.handleChange}
 																invalid={
-																	validation.errors.orders &&
-																	validation.touched.orders
-																		? true
-																		: false
+																	!!(
+																		validation.errors.orders &&
+																		validation.touched.orders
+																	)
 																}
 															/>
 															{validation.errors.orders &&
@@ -839,10 +833,10 @@ const EcommerceAddProduct = (props: any) => {
 											onBlur={validation.handleBlur}
 											onChange={validation.handleChange}
 											invalid={
-												validation.errors.product_tags &&
-												validation.touched.product_tags
-													? true
-													: false
+												!!(
+													validation.errors.product_tags &&
+													validation.touched.product_tags
+												)
 											}
 										/>
 										{validation.errors.product_tags &&

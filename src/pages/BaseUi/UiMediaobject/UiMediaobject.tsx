@@ -1,23 +1,21 @@
 import React from "react";
 import { Card, CardBody, Col, Container, Row } from "reactstrap";
-
-// Import Content
-import UiContent from "../../../Components/Common/UiContent";
-//import Components
-import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
-
 // Import Images
 import avatar2 from "../../../assets/images/users/avatar-2.jpg";
 import avatar3 from "../../../assets/images/users/avatar-3.jpg";
 import avatar4 from "../../../assets/images/users/avatar-4.jpg";
 import avatar6 from "../../../assets/images/users/avatar-6.jpg";
 import avatar8 from "../../../assets/images/users/avatar-8.jpg";
+//import Components
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
+// Import Content
+import UiContent from "../../../Components/Common/UiContent";
 
 import {
 	DefultExample,
-	NestingExample,
 	MediaExample,
+	NestingExample,
 } from "./UiMediaobjectCode";
 
 const UiMediaobject = () => {

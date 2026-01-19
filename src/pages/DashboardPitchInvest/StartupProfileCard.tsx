@@ -1,6 +1,6 @@
-import React from "react";
-import { Card, CardBody, Row, Col, Button, Badge, Progress } from "reactstrap";
-import { Startup } from "./types";
+import type React from "react";
+import { Badge, Button, Card, CardBody, Col, Progress, Row } from "reactstrap";
+import type { Startup } from "./types";
 
 interface StartupProfileCardProps {
 	startup: Startup;

@@ -1,4 +1,3 @@
-import React from "react";
 import ReactApexChart from "react-apexcharts";
 
 import getChartColorsArray from "../../../../Components/Common/ChartsDynamicColor";
@@ -70,16 +69,14 @@ const Basic = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="boxPlot"
-				height={350}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="boxPlot"
+			height={350}
+		/>
 	);
 };
 
@@ -161,9 +158,7 @@ const Scatter = ({ dataColors }: any) => {
 		xaxis: {
 			type: "datetime",
 			tooltip: {
-				formatter: function (val: any) {
-					return new Date(val).getFullYear();
-				},
+				formatter: (val: any) => new Date(val).getFullYear(),
 			},
 		},
 		plotOptions: {
@@ -184,16 +179,14 @@ const Scatter = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="boxPlot"
-				height={350}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="boxPlot"
+			height={350}
+		/>
 	);
 };
 
@@ -260,16 +253,14 @@ const Horizontal = ({ dataColors }: any) => {
 		},
 	};
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="boxPlot"
-				height={350}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="boxPlot"
+			height={350}
+		/>
 	);
 };
 

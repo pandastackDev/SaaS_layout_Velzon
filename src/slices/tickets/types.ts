@@ -1,4 +1,4 @@
 export interface Ticket {
-  id: string | number;
-  [key: string]: any;
+	id: string | number;
+	[key: string]: unknown;
 }

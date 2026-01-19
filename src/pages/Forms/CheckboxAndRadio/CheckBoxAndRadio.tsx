@@ -1,21 +1,21 @@
 import React from "react";
-import UiContent from "../../../Components/Common/UiContent";
-import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
 import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
+import UiContent from "../../../Components/Common/UiContent";
 
 import {
 	Checkbox,
 	CustomCheckbox,
-	Radio,
 	CustomRadio,
-	Switches,
-	SwitchColor,
 	CustomSwitches,
 	InlineCheckboxRadio,
-	WithoutLabels,
-	RadioToggleButtons,
 	OutlinedStyles,
+	Radio,
+	RadioToggleButtons,
+	SwitchColor,
+	Switches,
+	WithoutLabels,
 } from "../CheckboxAndRadio/CheckboxAndRadioCode";
 
 const CheckBoxAndRadio = () => {

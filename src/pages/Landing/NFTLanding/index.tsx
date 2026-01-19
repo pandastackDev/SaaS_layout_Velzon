@@ -1,19 +1,18 @@
-import React from "react";
-import Navbar from "./Navbar";
-import Home from "./Home";
 import Connect from "./Connect";
-import Products from "./Products";
-import Features from "./Features";
-import Trending from "./Trending ";
-import DiscoverItems from "./DiscoverItems";
-import TopCreator from "./TopCreator ";
 import CTA from "./CTA";
+import DiscoverItems from "./DiscoverItems";
+import Features from "./Features";
 import Footer from "./footer";
+import Home from "./Home";
+import Navbar from "./Navbar";
+import Products from "./Products";
+import TopCreator from "./TopCreator ";
+import Trending from "./Trending ";
 
 const index = () => {
 	document.title = " Landing | Velzon - React Admin & Dashboard Template";
 
-	window.onscroll = function () {
+	window.onscroll = () => {
 		scrollFunction();
 	};
 
@@ -37,27 +36,25 @@ const index = () => {
 	};
 
 	return (
-		<React.Fragment>
-			<div className="layout-wrapper landing">
-				<Navbar />
-				<Home />
-				<Connect />
-				<Products />
-				<Features />
-				<Trending />
-				<DiscoverItems />
-				<TopCreator />
-				<CTA />
-				<Footer />
-				<button
-					onClick={() => toTop()}
-					className="btn btn-danger btn-icon landing-back-top"
-					id="back-to-top"
-				>
-					<i className="ri-arrow-up-line"></i>
-				</button>
-			</div>
-		</React.Fragment>
+		<div className="layout-wrapper landing">
+			<Navbar />
+			<Home />
+			<Connect />
+			<Products />
+			<Features />
+			<Trending />
+			<DiscoverItems />
+			<TopCreator />
+			<CTA />
+			<Footer />
+			<button
+				onClick={() => toTop()}
+				className="btn btn-danger btn-icon landing-back-top"
+				id="back-to-top"
+			>
+				<i className="ri-arrow-up-line"></i>
+			</button>
+		</div>
 	);
 };
 

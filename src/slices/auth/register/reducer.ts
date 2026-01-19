@@ -14,23 +14,26 @@ const registerSlice = createSlice({
 	name: "register",
 	initialState,
 	reducers: {
-		registerUserSuccessful(state: any, action: any) {
+		registerUserSuccessful(
+			state,
+			action: { payload: { user?: unknown; [key: string]: unknown } },
+		) {
 			state.user = action.payload.user;
 			state.loading = false;
 			state.success = true;
 			state.registrationError = null;
 		},
-		registerUserFailed(state: any, action: any) {
+		registerUserFailed(state, action: { payload: unknown }) {
 			state.user = null;
 			state.loading = false;
 			state.registrationError = action.payload;
 			state.error = true;
 		},
-		resetRegisterFlagChange(state: any) {
+		resetRegisterFlagChange(state) {
 			state.success = false;
 			state.error = false;
 		},
-		apiErrorChange(state: any, action: any) {
+		apiErrorChange(state, action: { payload: unknown }) {
 			state.error = action.payload;
 			state.loading = false;
 			state.isUserLogout = false;

@@ -1,4 +1,3 @@
-import React from "react";
 import ReactApexChart from "react-apexcharts";
 
 import getChartColorsArray from "../../../../Components/Common/ChartsDynamicColor";
@@ -27,9 +26,8 @@ const FunnelChartCode = ({ dataColors }: any) => {
 		},
 		dataLabels: {
 			enabled: true,
-			formatter: function (val: any, opt: any) {
-				return opt.w.globals.labels[opt.dataPointIndex] + ":  " + val;
-			},
+			formatter: (val: any, opt: any) =>
+				`${opt.w.globals.labels[opt.dataPointIndex]}:  ${val}`,
 			dropShadow: {
 				enabled: true,
 			},
@@ -92,9 +90,8 @@ const PyramidChartCode = ({ dataColors }: any) => {
 		colors: pyramidChartColors,
 		dataLabels: {
 			enabled: true,
-			formatter: function (val: any, opt: any) {
-				return opt.w.globals.labels[opt.dataPointIndex];
-			},
+			formatter: (_val: any, opt: any) =>
+				opt.w.globals.labels[opt.dataPointIndex],
 			dropShadow: {
 				enabled: true,
 			},

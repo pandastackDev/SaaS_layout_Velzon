@@ -1,11 +1,14 @@
-import React from "react";
-import { Card, CardBody, CardHeader } from "reactstrap";
 import ReactApexChart from "react-apexcharts";
+import { Card, CardBody, CardHeader } from "reactstrap";
 
 import getChartColorsArray from "../../../Components/Common/ChartsDynamicColor";
 
-const PortfolioStatistics = ({ dataColors }: any) => {
-	var portfolioStatisticsColors = getChartColorsArray(dataColors);
+interface PortfolioStatisticsProps {
+	dataColors: string;
+}
+
+const PortfolioStatistics = ({ dataColors }: PortfolioStatisticsProps) => {
+	const portfolioStatisticsColors = getChartColorsArray(dataColors);
 	const series = [
 		{
 			data: [
@@ -362,61 +365,59 @@ const PortfolioStatistics = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<Card>
-				<CardHeader>
-					<div className="d-flex align-items-center">
-						<div className="flex-grow-1">
-							<h5 className="card-title mb-0">My Portfolio Statistics</h5>
-						</div>
-						<div className="toolbar d-flex align-items-start justify-content-center flex-wrap gap-2">
-							<button
-								type="button"
-								className="btn btn-soft-primary timeline-btn btn-sm"
-								id="one_month"
-							>
-								1M
-							</button>
-							<button
-								type="button"
-								className="btn btn-soft-primary timeline-btn btn-sm"
-								id="six_months"
-							>
-								6M
-							</button>
-							<button
-								type="button"
-								className="btn btn-soft-primary timeline-btn btn-sm"
-								id="one_year"
-							>
-								1Y
-							</button>
-							<button
-								type="button"
-								className="btn btn-soft-primary timeline-btn btn-sm active"
-								id="all"
-							>
-								ALL
-							</button>
-						</div>
+		<Card>
+			<CardHeader>
+				<div className="d-flex align-items-center">
+					<div className="flex-grow-1">
+						<h5 className="card-title mb-0">My Portfolio Statistics</h5>
 					</div>
-				</CardHeader>
-				<CardBody>
-					<div>
-						<div className="apex-charts" dir="ltr">
-							<ReactApexChart
-								dir="ltr"
-								options={option}
-								series={series}
-								type="area"
-								height="320"
-								className="apex-charts"
-							/>
-						</div>
+					<div className="toolbar d-flex align-items-start justify-content-center flex-wrap gap-2">
+						<button
+							type="button"
+							className="btn btn-soft-primary timeline-btn btn-sm"
+							id="one_month"
+						>
+							1M
+						</button>
+						<button
+							type="button"
+							className="btn btn-soft-primary timeline-btn btn-sm"
+							id="six_months"
+						>
+							6M
+						</button>
+						<button
+							type="button"
+							className="btn btn-soft-primary timeline-btn btn-sm"
+							id="one_year"
+						>
+							1Y
+						</button>
+						<button
+							type="button"
+							className="btn btn-soft-primary timeline-btn btn-sm active"
+							id="all"
+						>
+							ALL
+						</button>
 					</div>
-				</CardBody>
-			</Card>
-		</React.Fragment>
+				</div>
+			</CardHeader>
+			<CardBody>
+				<div>
+					<div className="apex-charts" dir="ltr">
+						<ReactApexChart
+							dir="ltr"
+							options={option}
+							series={series}
+							type="area"
+							height="320"
+							className="apex-charts"
+						/>
+					</div>
+				</div>
+			</CardBody>
+		</Card>
 	);
 };
 

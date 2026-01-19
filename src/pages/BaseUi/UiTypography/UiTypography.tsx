@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
 	Badge,
 	Button,
@@ -9,34 +10,32 @@ import {
 	Container,
 	Row,
 } from "reactstrap";
-import { Link } from "react-router-dom";
-
-// Import Content
-import UiContent from "../../../Components/Common/UiContent";
 //import Components
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
+// Import Content
+import UiContent from "../../../Components/Common/UiContent";
 
 import {
-	DisplayHeadingExample,
-	HeadingsExample,
-	BlockquotesExample,
-	BlockquoteColorExample,
 	BlockquoteBorderColorExample,
-	InlineTextExample,
-	UnstyleListExample,
-	InlineListExample,
-	DescriptionListExample,
-	TextWrappingExample,
-	FontSizeExample,
-	WordBreakExample,
-	FontWeightExample,
-	LineHeightExample,
-	TextTransformExample,
-	TextDecrationExample,
-	TextTruncationExample,
-	VisibilityExample,
+	BlockquoteColorExample,
+	BlockquotesExample,
 	ClearfixExample,
+	DescriptionListExample,
+	DisplayHeadingExample,
+	FontSizeExample,
+	FontWeightExample,
+	HeadingsExample,
+	InlineListExample,
+	InlineTextExample,
+	LineHeightExample,
+	TextDecrationExample,
+	TextTransformExample,
+	TextTruncationExample,
+	TextWrappingExample,
+	UnstyleListExample,
+	VisibilityExample,
+	WordBreakExample,
 } from "./UiTypographyCode";
 
 const UiTypography = () => {

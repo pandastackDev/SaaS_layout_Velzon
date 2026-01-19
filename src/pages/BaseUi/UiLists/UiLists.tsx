@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
 	Card,
 	CardBody,
@@ -9,39 +10,36 @@ import {
 	ListGroupItem,
 	Row,
 } from "reactstrap";
-import { Link } from "react-router-dom";
-
-import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
 import SimpleBar from "simplebar-react";
-// Import Content
-import UiContent from "../../../Components/Common/UiContent";
-//import Components
-import BreadCrumb from "../../../Components/Common/BreadCrumb";
-
 // Import Images
 import avatar1 from "../../../assets/images/users/avatar-1.jpg";
 import avatar2 from "../../../assets/images/users/avatar-2.jpg";
 import avatar3 from "../../../assets/images/users/avatar-3.jpg";
 import avatar4 from "../../../assets/images/users/avatar-4.jpg";
+//import Components
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
+// Import Content
+import UiContent from "../../../Components/Common/UiContent";
 
 import {
-	DefaultListExample,
 	ActiveItemExample,
-	DisabledItemExample,
-	ListlinkExample,
-	ListButtonExample,
-	FlushListExample,
-	HorizontalListExample,
+	ColoredListExample,
 	ContextualClassExample,
 	ContextualLinkExample,
-	ColoredListExample,
 	CustomContentExample,
-	ListBadgeExample,
-	ListCheckboxExample,
-	ListRadioExample,
-	ListIconExample,
-	ListNumberedExample,
 	CustomListExample,
+	DefaultListExample,
+	DisabledItemExample,
+	FlushListExample,
+	HorizontalListExample,
+	ListBadgeExample,
+	ListButtonExample,
+	ListCheckboxExample,
+	ListIconExample,
+	ListlinkExample,
+	ListNumberedExample,
+	ListRadioExample,
 } from "./UiListCode";
 
 const UiList = () => {
@@ -259,7 +257,7 @@ const UiList = () => {
 												tag="a"
 												to="#"
 												className="list-group-item-action disabled"
-												tabIndex={1}
+												tabIndex="0"
 											>
 												<i className="ri-moon-fill align-middle me-2"></i>Dark
 												Mode

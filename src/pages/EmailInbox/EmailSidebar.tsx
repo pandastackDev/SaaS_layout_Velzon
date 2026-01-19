@@ -1,18 +1,18 @@
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
+	DropdownItem,
+	DropdownMenu,
+	DropdownToggle,
+	Input,
 	Modal,
 	ModalBody,
 	ModalHeader,
-	Input,
 	Progress,
 	UncontrolledDropdown,
-	DropdownToggle,
-	DropdownMenu,
-	DropdownItem,
 } from "reactstrap";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 // import FeatherIcon from 'feather-icons-react';
 
 //SimpleBar
@@ -20,8 +20,8 @@ import SimpleBar from "simplebar-react";
 
 //import images
 import image2 from "../../assets/images/users/avatar-2.jpg";
-import image4 from "../../assets/images/users/avatar-4.jpg";
 import image3 from "../../assets/images/users/avatar-3.jpg";
+import image4 from "../../assets/images/users/avatar-4.jpg";
 import image5 from "../../assets/images/users/avatar-5.jpg";
 
 const EmailSidebar = () => {
@@ -278,7 +278,7 @@ const EmailSidebar = () => {
 						<div className="ck-editor-reverse">
 							<CKEditor
 								editor={ClassicEditor as any}
-								onReady={(editor) => {
+								onReady={(_editor) => {
 									// You can store the "editor" and use when it is needed.
 								}}
 								// onChange={(event, editor) => {

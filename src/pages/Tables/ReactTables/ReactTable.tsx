@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
-import TableContainer from "../../../Components/Common/TableContainerReactTable";
 import { Link } from "react-router-dom";
 import { Spinner } from "reactstrap";
+import TableContainer from "../../../Components/Common/TableContainerReactTable";
 
 const DefaultTable = () => {
 	const defaultTable = [
@@ -127,14 +127,12 @@ const DefaultTable = () => {
 	);
 
 	return (
-		<React.Fragment>
-			<TableContainer
-				columns={columns || []}
-				data={defaultTable || []}
-				customPageSize={5}
-				SearchPlaceholder="Search..."
-			/>
-		</React.Fragment>
+		<TableContainer
+			columns={columns || []}
+			data={defaultTable || []}
+			customPageSize={5}
+			SearchPlaceholder="Search..."
+		/>
 	);
 };
 
@@ -275,7 +273,7 @@ const PaginationTable = () => {
 			{
 				header: "Actions",
 				enableColumnFilter: false,
-				cell: (cell: any) => {
+				cell: (_cell: any) => {
 					return <React.Fragment>Details</React.Fragment>;
 				},
 			},
@@ -284,16 +282,14 @@ const PaginationTable = () => {
 	);
 
 	return (
-		<React.Fragment>
-			<TableContainer
-				columns={columns || []}
-				data={paginationTable || []}
-				customPageSize={5}
-				tableClass="table-centered align-middle table-nowrap mb-0"
-				theadClass="text-muted table-light"
-				SearchPlaceholder="Search Products..."
-			/>
-		</React.Fragment>
+		<TableContainer
+			columns={columns || []}
+			data={paginationTable || []}
+			customPageSize={5}
+			tableClass="table-centered align-middle table-nowrap mb-0"
+			theadClass="text-muted table-light"
+			SearchPlaceholder="Search Products..."
+		/>
 	);
 };
 
@@ -422,15 +418,13 @@ const SearchTable = () => {
 	);
 
 	return (
-		<React.Fragment>
-			<TableContainer
-				columns={columns || []}
-				data={searchTable || []}
-				isGlobalFilter={true}
-				customPageSize={5}
-				SearchPlaceholder="Search..."
-			/>
-		</React.Fragment>
+		<TableContainer
+			columns={columns || []}
+			data={searchTable || []}
+			isGlobalFilter={true}
+			customPageSize={5}
+			SearchPlaceholder="Search..."
+		/>
 	);
 };
 
@@ -550,14 +544,12 @@ const SortingTable = () => {
 	);
 
 	return (
-		<React.Fragment>
-			<TableContainer
-				columns={columns || []}
-				data={sortingTable || []}
-				customPageSize={5}
-				SearchPlaceholder="Search Products..."
-			/>
-		</React.Fragment>
+		<TableContainer
+			columns={columns || []}
+			data={sortingTable || []}
+			customPageSize={5}
+			SearchPlaceholder="Search Products..."
+		/>
 	);
 };
 
@@ -813,14 +805,12 @@ const HiddenColumns = () => {
 	);
 
 	return (
-		<React.Fragment>
-			<TableContainer
-				columns={columns || []}
-				data={sortingTable || []}
-				customPageSize={5}
-				SearchPlaceholder="Search Products..."
-			/>
-		</React.Fragment>
+		<TableContainer
+			columns={columns || []}
+			data={sortingTable || []}
+			customPageSize={5}
+			SearchPlaceholder="Search Products..."
+		/>
 	);
 };
 

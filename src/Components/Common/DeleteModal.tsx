@@ -1,5 +1,6 @@
-import React from "react";
+import type React from "react";
 import { Modal, ModalBody } from "reactstrap";
+
 // import { loadAnimation } from "lottie-web";
 // import { defineElement } from "lord-icon-element";
 

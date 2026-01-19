@@ -1,4 +1,3 @@
-import React from "react";
 import PrismCode from "../../../Components/Common/Prism";
 
 //DefaultTables code
@@ -47,11 +46,7 @@ const DefaultTables = () => {
 </Table>
 </div>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} />;
 };
 
 //StrippedRow code
@@ -100,11 +95,7 @@ const StrippedRow = () => {
 </Table>
 </div>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} />;
 };
 
 //Tables Colors code
@@ -223,11 +214,7 @@ const TablesColors = () => {
 </Col>
 </Row>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} />;
 };
 
 //Hoverable Rows code
@@ -376,11 +363,7 @@ const HoverableRows = () => {
 </Col>
 </Row>
     `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} />;
 };
 
 //Card Tables code
@@ -472,11 +455,7 @@ const CardTables = () => {
 </Table>
 </div>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} />;
 };
 
 //Bordered Tables code
@@ -555,11 +534,7 @@ const ActiveTables = () => {
 </Table>
 </div>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} />;
 };
 
 //Bordered Tables code
@@ -662,11 +637,7 @@ const BorderedTables = () => {
 </Table>
 </div>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} />;
 };
 
 //Tables Border Colors
@@ -768,11 +739,7 @@ const TablesBorderColors = () => {
 </Table>
 </div>
     `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} />;
 };
 
 //Tables Without Borders
@@ -846,11 +813,7 @@ const TablesWithoutBorders = () => {
 </Table>
 </div>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} />;
 };
 
 //Small Tables
@@ -900,11 +863,7 @@ const SmallTables = () => {
 </Table>
 </div>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} />;
 };
 
 //TableHead
@@ -962,11 +921,7 @@ const TableHead = () => {
 </Table>
 </div>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} />;
 };
 
 //TableFoot
@@ -1014,11 +969,7 @@ const TableFoot = () => {
 </Table>
 </div>
     `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} />;
 };
 
 //Captions
@@ -1057,11 +1008,7 @@ const Captions = () => {
 </Table>
 </div>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} />;
 };
 
 //Table Nesting
@@ -1100,11 +1047,7 @@ const TableNesting = () => {
 </Table>
 </div>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} />;
 };
 
 //Variants
@@ -1178,11 +1121,7 @@ const Variants = () => {
 </Table>
 </div>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} />;
 };
 
 //Vertical Alignment
@@ -1220,11 +1159,7 @@ const VerticalAlignment = () => {
 </Table>
 </div>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} />;
 };
 
 //Responsive Tables
@@ -1373,11 +1308,7 @@ const ResponsiveTables = () => {
 </Table>                                                
 </div> 
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} />;
 };
 
 //Striped Columns Tables
@@ -1469,11 +1400,7 @@ const StripedColumnsTables = () => {
     </table>
 </div>
     `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} />;
 };
 
 export {

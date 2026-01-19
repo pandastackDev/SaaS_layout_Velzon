@@ -1,57 +1,56 @@
+import classnames from "classnames";
+import moment from "moment";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
+import Flatpickr from "react-flatpickr";
+import Select from "react-select";
+import { ToastContainer } from "react-toastify";
 import {
+	Button,
 	Card,
 	CardBody,
 	CardHeader,
 	Col,
 	Container,
 	Form,
+	FormFeedback,
 	Input,
-	Nav,
-	NavItem,
-	Row,
-	UncontrolledTooltip,
+	Label,
 	Modal,
 	ModalBody,
-	Label,
-	Button,
-	NavLink,
-	ModalHeader,
 	ModalFooter,
-	FormFeedback,
+	ModalHeader,
+	Nav,
+	NavItem,
+	NavLink,
+	Row,
+	UncontrolledTooltip,
 } from "reactstrap";
-import Select from "react-select";
-import Flatpickr from "react-flatpickr";
-import moment from "moment";
 import DeleteModal from "../../../Components/Common/DeleteModal";
-import classnames from "classnames";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import { useSelector, useDispatch } from "react-redux";
-import {
-	getApplicationList,
-	addNewJobApplicationList,
-	updateJobApplicationList,
-	deleteJobApplicationList,
-} from "../../../slices/thunks";
-import TableContainer from "../../../Components/Common/TableContainer";
+import ExportCSVModal from "Components/Common/ExportCSVModal";
+import { useFormik } from "formik";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { createSelector } from "reselect";
+// Formik
+import * as Yup from "yup";
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import TableContainer from "../../../Components/Common/TableContainer";
+import {
+	addNewJobApplicationList,
+	deleteJobApplicationList,
+	getApplicationList,
+	updateJobApplicationList,
+} from "../../../slices/thunks";
 import {
 	AppId,
+	Contact,
 	// Name,
 	Designation,
-	Contact,
 	Status,
 	Type,
 } from "./ApplicationCol";
-import { createSelector } from "reselect";
-
-// Formik
-import * as Yup from "yup";
-import { useFormik } from "formik";
-import ExportCSVModal from "Components/Common/ExportCSVModal";
 
 const Application = () => {
 	document.title = "Application | Velzon - React Admin & Dashboard Template";
@@ -297,7 +296,7 @@ const Application = () => {
 				},
 			},
 		],
-		[],
+		[handleUpdateApplicationClick, onClickDelete],
 	);
 
 	// Image Validation
@@ -311,7 +310,7 @@ const Application = () => {
 	};
 
 	useEffect(() => {
-		setImgStore((eventData && eventData.img) || []);
+		setImgStore(eventData?.img || []);
 	}, [eventData]);
 
 	const handleImageChange = (event: any) => {
@@ -362,13 +361,13 @@ const Application = () => {
 		enableReinitialize: true,
 
 		initialValues: {
-			img: (eventData && eventData.img) || "",
-			company: (eventData && eventData.company) || "",
-			designation: (eventData && eventData.designation) || "",
-			contacts: (eventData && eventData.contacts) || "",
-			date: (eventData && eventData.date) || "",
-			type: (eventData && eventData.type) || "",
-			status: (eventData && eventData.status) || "",
+			img: eventData?.img || "",
+			company: eventData?.company || "",
+			designation: eventData?.designation || "",
+			contacts: eventData?.contacts || "",
+			date: eventData?.date || "",
+			type: eventData?.type || "",
+			status: eventData?.status || "",
 		},
 		validationSchema: Yup.object({
 			img: Yup.string().required("Please Add Company Image"),
@@ -492,7 +491,7 @@ const Application = () => {
 															altFormat: "F j, Y",
 															mode: "range",
 															dateFormat: "d.m.y",
-															onChange: function (selectedDates: any) {
+															onChange: (selectedDates: any) => {
 																setDate(selectedDates.map((item: any) => item));
 															},
 														}}
@@ -624,7 +623,7 @@ const Application = () => {
 
 									<Modal isOpen={show} toggle={toggle} centered={true}>
 										<ModalHeader className="bg-light p-3" toggle={toggle}>
-											{!!isEdit ? "Edit Application" : "Add Application"}
+											{isEdit ? "Edit Application" : "Add Application"}
 										</ModalHeader>
 										<Form
 											className="tablelist-form"
@@ -672,10 +671,10 @@ const Application = () => {
 																accept="image/png, image/gif, image/jpeg"
 																onChange={handleImageChange}
 																invalid={
-																	validation.touched.img &&
-																	validation.errors.img
-																		? true
-																		: false
+																	!!(
+																		validation.touched.img &&
+																		validation.errors.img
+																	)
 																}
 															/>
 														</div>
@@ -716,10 +715,10 @@ const Application = () => {
 														onBlur={validation.handleBlur}
 														value={validation.values.company || ""}
 														invalid={
-															validation.touched.company &&
-															validation.errors.company
-																? true
-																: false
+															!!(
+																validation.touched.company &&
+																validation.errors.company
+															)
 														}
 													/>
 													{validation.touched.company &&
@@ -748,10 +747,10 @@ const Application = () => {
 														onBlur={validation.handleBlur}
 														value={validation.values.designation || ""}
 														invalid={
-															validation.touched.designation &&
-															validation.errors.designation
-																? true
-																: false
+															!!(
+																validation.touched.designation &&
+																validation.errors.designation
+															)
 														}
 													/>
 													{validation.touched.designation &&
@@ -806,10 +805,10 @@ const Application = () => {
 														onBlur={validation.handleBlur}
 														value={validation.values.contacts || ""}
 														invalid={
-															validation.touched.contacts &&
-															validation.errors.contacts
-																? true
-																: false
+															!!(
+																validation.touched.contacts &&
+																validation.errors.contacts
+															)
 														}
 													/>
 													{validation.touched.contacts &&
@@ -839,10 +838,10 @@ const Application = () => {
 																onBlur={validation.handleBlur}
 																value={validation.values.status || ""}
 																invalid={
-																	validation.touched.status &&
-																	validation.errors.status
-																		? true
-																		: false
+																	!!(
+																		validation.touched.status &&
+																		validation.errors.status
+																	)
 																}
 															>
 																<option value="">Status</option>
@@ -877,10 +876,10 @@ const Application = () => {
 																onBlur={validation.handleBlur}
 																value={validation.values.type || ""}
 																invalid={
-																	validation.touched.type &&
-																	validation.errors.type
-																		? true
-																		: false
+																	!!(
+																		validation.touched.type &&
+																		validation.errors.type
+																	)
 																}
 															>
 																<option value="">Select Type</option>
@@ -907,7 +906,7 @@ const Application = () => {
 														Close
 													</Button>
 													<Button type="submit" className="btn btn-success">
-														{!!isEdit ? "Update" : "Add"}
+														{isEdit ? "Update" : "Add"}
 													</Button>
 												</div>
 											</ModalFooter>

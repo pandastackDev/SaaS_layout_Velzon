@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { Card, CardBody, Col, Container, Row } from "reactstrap";
-import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import { Link } from "react-router-dom";
 import Masonry from "react-masonry-css";
-
-import { gallery } from "../../../common/data";
-
+import { Link } from "react-router-dom";
+import { Card, CardBody, Col, Container, Row } from "reactstrap";
 import Lightbox from "yet-another-react-lightbox";
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import { gallery } from "../../../common/data";
 import "yet-another-react-lightbox/styles.css";
 
 const Gallery = () => {

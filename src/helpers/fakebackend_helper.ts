@@ -17,47 +17,55 @@ export const isUserAuthenticated = () => {
 };
 
 // Register Method
-export const postFakeRegister = (data: any) =>
+export const postFakeRegister = (data: Record<string, unknown>) =>
 	api.create(url.POST_FAKE_REGISTER, data);
 
 // Login Method
-export const postFakeLogin = (data: any) =>
+export const postFakeLogin = (data: Record<string, unknown>) =>
 	api.create(url.POST_FAKE_LOGIN, data);
 
 // postForgetPwd
-export const postFakeForgetPwd = (data: any) =>
+export const postFakeForgetPwd = (data: string | Record<string, unknown>) =>
 	api.create(url.POST_FAKE_PASSWORD_FORGET, data);
 
 // Edit profile
-export const postJwtProfile = (data: any) =>
+export const postJwtProfile = (data: Record<string, unknown>) =>
 	api.create(url.POST_EDIT_JWT_PROFILE, data);
 
-export const postFakeProfile = (data: any) =>
-	api.update(url.POST_EDIT_PROFILE + "/" + data.idx, data);
+export const postFakeProfile = (data: Record<string, unknown>) =>
+	api.update(
+		`${url.POST_EDIT_PROFILE}/${(data as { idx?: string | number }).idx}`,
+		data,
+	);
 
 // Register Method
-export const postJwtRegister = (url: string, data: any) => {
-	return api.create(url, data).catch((err) => {
-		var message;
-		if (err.response && err.response.status) {
-			switch (err.response.status) {
-				case 404:
-					message = "Sorry! the page you are looking for could not be found";
-					break;
-				case 500:
-					message =
-						"Sorry! something went wrong, please contact our support team";
-					break;
-				case 401:
-					message = "Invalid credentials";
-					break;
-				default:
-					message = err[1];
-					break;
-			}
-		}
-		throw message;
-	});
+export const postJwtRegister = (url: string, data: Record<string, unknown>) => {
+	return api
+		.create(url, data)
+		.catch(
+			(err: { response?: { status?: number }; [key: string]: unknown }) => {
+				let message: string = "An error occurred";
+				if (err.response?.status) {
+					switch (err.response.status) {
+						case 404:
+							message =
+								"Sorry! the page you are looking for could not be found";
+							break;
+						case 500:
+							message =
+								"Sorry! something went wrong, please contact our support team";
+							break;
+						case 401:
+							message = "Invalid credentials";
+							break;
+						default:
+							message = (err[1] as string) || "An error occurred";
+							break;
+					}
+				}
+				throw message;
+			},
+		);
 };
 
 // Login Method
@@ -101,12 +109,13 @@ export const getMessages = (roomId: any) =>
 	api.get(`${url.GET_MESSAGES}/${roomId}`, { params: { roomId } });
 
 // add Message
-export const addMessage = (message: any) =>
+export const addMessage = (message: Record<string, unknown>) =>
 	api.create(url.ADD_MESSAGE, message);
 
 // add Message
-export const deleteMessage = (message: any) =>
-	api.delete(url.DELETE_MESSAGE, { headers: { message } });
+export const deleteMessage = (
+	message: string | number | Record<string, unknown>,
+) => api.delete(url.DELETE_MESSAGE, { headers: { message } });
 
 // get Channels
 export const getChannels = () => api.get(url.GET_CHANNELS);
@@ -116,23 +125,23 @@ export const getChannels = () => api.get(url.GET_CHANNELS);
 export const getMailDetails = () => api.get(url.GET_MAIL_DETAILS);
 
 // delete Mail
-export const deleteMail = (forId: any) =>
+export const deleteMail = (forId: string | number) =>
 	api.delete(url.DELETE_MAIL, { headers: { forId } });
 
 // unread Mail
-export const unreadMail = (forId: any) =>
+export const unreadMail = (forId: string | number) =>
 	api.delete(url.UNREAD_MAIL, { headers: { forId } });
 
 // star Mail
-export const staredMail = (forId: any) =>
+export const staredMail = (forId: string | number) =>
 	api.delete(url.STARED_MAIL, { headers: { forId } });
 
 // label Mail
-export const labelMail = (forId: any) =>
+export const labelMail = (forId: string | number | Record<string, unknown>) =>
 	api.delete(url.LABEL_MAIL, { headers: { forId } });
 
 // trash Mail
-export const trashMail = (forId: any) =>
+export const trashMail = (forId: string | number) =>
 	api.delete(url.TRASH_MAIL, { headers: { forId } });
 
 // Ecommerce
@@ -140,43 +149,47 @@ export const trashMail = (forId: any) =>
 export const getProducts = () => api.get(url.GET_PRODUCTS);
 
 // delete Product
-export const deleteProducts = (product: any) =>
-	api.delete(url.DELETE_PRODUCT, { headers: { product } });
+export const deleteProducts = (
+	product: string | number | Record<string, unknown>,
+) => api.delete(url.DELETE_PRODUCT, { headers: { product } });
 
 // add Products
-export const addNewProduct = (product: any) =>
+export const addNewProduct = (product: Record<string, unknown>) =>
 	api.create(url.ADD_NEW_PRODUCT, product);
 // update Products
-export const updateProduct = (product: any) =>
+export const updateProduct = (product: Record<string, unknown>) =>
 	api.update(url.UPDATE_PRODUCT, product);
 
 // get Orders
 export const getOrders = () => api.get(url.GET_ORDERS);
 
 // add Order
-export const addNewOrder = (order: any) => api.create(url.ADD_NEW_ORDER, order);
+export const addNewOrder = (order: Record<string, unknown>) =>
+	api.create(url.ADD_NEW_ORDER, order);
 
 // update Order
-export const updateOrder = (order: any) => api.update(url.UPDATE_ORDER, order);
+export const updateOrder = (order: Record<string, unknown>) =>
+	api.update(url.UPDATE_ORDER, order);
 
 // delete Order
-export const deleteOrder = (order: any) =>
+export const deleteOrder = (order: string | number | Record<string, unknown>) =>
 	api.delete(url.DELETE_ORDER, { headers: { order } });
 
 // get Customers
 export const getCustomers = () => api.get(url.GET_CUSTOMERS);
 
 // add Customers
-export const addNewCustomer = (customer: any) =>
+export const addNewCustomer = (customer: Record<string, unknown>) =>
 	api.create(url.ADD_NEW_CUSTOMER, customer);
 
 // update Customers
-export const updateCustomer = (customer: any) =>
+export const updateCustomer = (customer: Record<string, unknown>) =>
 	api.update(url.UPDATE_CUSTOMER, customer);
 
 // delete Customers
-export const deleteCustomer = (customer: any) =>
-	api.delete(url.DELETE_CUSTOMER, { headers: { customer } });
+export const deleteCustomer = (
+	customer: string | number | Record<string, unknown>,
+) => api.delete(url.DELETE_CUSTOMER, { headers: { customer } });
 
 // get Sellers
 export const getSellers = () => api.get(url.GET_SELLERS);
@@ -190,20 +203,24 @@ export const getProjectList = () => api.get(url.GET_PROJECT_LIST);
 export const getTaskList = () => api.get(url.GET_TASK_LIST);
 
 // add Task
-export const addNewTask = (task: any) => api.create(url.ADD_NEW_TASK, task);
+export const addNewTask = (task: Record<string, unknown>) =>
+	api.create(url.ADD_NEW_TASK, task);
 
 // update Task
-export const updateTask = (task: any) => api.update(url.UPDATE_TASK, task);
+export const updateTask = (task: Record<string, unknown>) =>
+	api.update(url.UPDATE_TASK, task);
 
 // delete Task
-export const deleteTask = (task: any) =>
+export const deleteTask = (task: string | number | Record<string, unknown>) =>
 	api.delete(url.DELETE_TASK, { headers: { task } });
 
 // Kanban Board
 export const getTasks = () => api.get(url.GET_TASKS);
-export const addNewTasks = (card: any) => api.create(url.ADD_TASKS, card);
-export const updateTasks = (card: any) => api.put(url.UPDATE_TASKS, card);
-export const deleteTasks = (card: any) =>
+export const addNewTasks = (card: Record<string, unknown>) =>
+	api.create(url.ADD_TASKS, card);
+export const updateTasks = (card: Record<string, unknown>) =>
+	api.put(url.UPDATE_TASKS, card);
+export const deleteTasks = (card: string | number | Record<string, unknown>) =>
 	api.delete(url.DELETE_TASKS, { headers: { card } });
 
 // CRM
@@ -211,31 +228,33 @@ export const deleteTasks = (card: any) =>
 export const getContacts = () => api.get(url.GET_CONTACTS);
 
 // add Contact
-export const addNewContact = (contact: any) =>
+export const addNewContact = (contact: Record<string, unknown>) =>
 	api.create(url.ADD_NEW_CONTACT, contact);
 
 // update Contact
-export const updateContact = (contact: any) =>
+export const updateContact = (contact: Record<string, unknown>) =>
 	api.update(url.UPDATE_CONTACT, contact);
 
 // delete Contact
-export const deleteContact = (contact: any) =>
-	api.delete(url.DELETE_CONTACT, { headers: { contact } });
+export const deleteContact = (
+	contact: string | number | Record<string, unknown>,
+) => api.delete(url.DELETE_CONTACT, { headers: { contact } });
 
 // get Companies
 export const getCompanies = () => api.get(url.GET_COMPANIES);
 
 // add Companies
-export const addNewCompanies = (company: any) =>
+export const addNewCompanies = (company: Record<string, unknown>) =>
 	api.create(url.ADD_NEW_COMPANIES, company);
 
 // update Companies
-export const updateCompanies = (company: any) =>
+export const updateCompanies = (company: Record<string, unknown>) =>
 	api.update(url.UPDATE_COMPANIES, company);
 
 // delete Companies
-export const deleteCompanies = (company: any) =>
-	api.delete(url.DELETE_COMPANIES, { headers: { company } });
+export const deleteCompanies = (
+	company: string | number | Record<string, unknown>,
+) => api.delete(url.DELETE_COMPANIES, { headers: { company } });
 
 // get Deals
 export const getDeals = () => api.get(url.GET_DEALS);
@@ -244,13 +263,15 @@ export const getDeals = () => api.get(url.GET_DEALS);
 export const getLeads = () => api.get(url.GET_LEADS);
 
 // add Lead
-export const addNewLead = (lead: any) => api.create(url.ADD_NEW_LEAD, lead);
+export const addNewLead = (lead: Record<string, unknown>) =>
+	api.create(url.ADD_NEW_LEAD, lead);
 
 // update Lead
-export const updateLead = (lead: any) => api.update(url.UPDATE_LEAD, lead);
+export const updateLead = (lead: Record<string, unknown>) =>
+	api.update(url.UPDATE_LEAD, lead);
 
 // delete Lead
-export const deleteLead = (lead: any) =>
+export const deleteLead = (lead: string | number | Record<string, unknown>) =>
 	api.delete(url.DELETE_LEAD, { headers: { lead } });
 
 // Crypto
@@ -270,27 +291,28 @@ export const addNewInvoice = (invoice: any) =>
 
 // update Invoice
 export const updateInvoice = (invoice: any) =>
-	api.update(url.UPDATE_INVOICE + "/" + invoice._id, invoice);
+	api.update(`${url.UPDATE_INVOICE}/${invoice._id}`, invoice);
 
 // delete Invoice
 export const deleteInvoice = (invoice: any) =>
-	api.delete(url.DELETE_INVOICE + "/" + invoice);
+	api.delete(`${url.DELETE_INVOICE}/${invoice}`);
 
 // Support Tickets
 // Tickets
 export const getTicketsList = () => api.get(url.GET_TICKETS_LIST);
 
 // add Tickets
-export const addNewTicket = (ticket: any) =>
+export const addNewTicket = (ticket: Record<string, unknown>) =>
 	api.create(url.ADD_NEW_TICKET, ticket);
 
 // update Tickets
-export const updateTicket = (ticket: any) =>
+export const updateTicket = (ticket: Record<string, unknown>) =>
 	api.update(url.UPDATE_TICKET, ticket);
 
 // delete Tickets
-export const deleteTicket = (ticket: any) =>
-	api.delete(url.DELETE_TICKET, { headers: { ticket } });
+export const deleteTicket = (
+	ticket: string | number | Record<string, unknown>,
+) => api.delete(url.DELETE_TICKET, { headers: { ticket } });
 
 // Dashboard Analytics
 
@@ -399,48 +421,57 @@ export const getYearMarketplaceData = () =>
 	api.get(url.GET_YEARMARKETPLACE_DATA);
 
 // Project
-export const addProjectList = (project: any) =>
+export const addProjectList = (project: Record<string, unknown>) =>
 	api.create(url.ADD_NEW_PROJECT, project);
-export const updateProjectList = (project: any) =>
+export const updateProjectList = (project: Record<string, unknown>) =>
 	api.put(url.UPDATE_PROJECT, project);
-export const deleteProjectList = (project: any) =>
-	api.delete(url.DELETE_PROJECT, { headers: { project } });
+export const deleteProjectList = (
+	project: string | number | Record<string, unknown>,
+) => api.delete(url.DELETE_PROJECT, { headers: { project } });
 
 // Pages > Team
 export const getTeamData = () => api.get(url.GET_TEAMDATA);
-export const deleteTeamData = (team: any) =>
-	api.delete(url.DELETE_TEAMDATA, { headers: { team } });
-export const addTeamData = (team: any) =>
+export const deleteTeamData = (
+	team: string | number | Record<string, unknown>,
+) => api.delete(url.DELETE_TEAMDATA, { headers: { team } });
+export const addTeamData = (team: Record<string, unknown>) =>
 	api.create(url.ADD_NEW_TEAMDATA, team);
-export const updateTeamData = (team: any) => api.put(url.UPDATE_TEAMDATA, team);
+export const updateTeamData = (team: Record<string, unknown>) =>
+	api.put(url.UPDATE_TEAMDATA, team);
 
 // File Manager
 
 // Folder
 export const getFolders = () => api.get(url.GET_FOLDERS);
-export const deleteFolder = (folder: any) =>
-	api.delete(url.DELETE_FOLDER, { headers: { folder } });
-export const addNewFolder = (folder: any) =>
+export const deleteFolder = (
+	folder: string | number | Record<string, unknown>,
+) => api.delete(url.DELETE_FOLDER, { headers: { folder } });
+export const addNewFolder = (folder: Record<string, unknown>) =>
 	api.create(url.ADD_NEW_FOLDER, folder);
-export const updateFolder = (folder: any) => api.put(url.UPDATE_FOLDER, folder);
+export const updateFolder = (folder: Record<string, unknown>) =>
+	api.put(url.UPDATE_FOLDER, folder);
 
 // File
 export const getFiles = () => api.get(url.GET_FILES);
-export const deleteFile = (file: any) =>
+export const deleteFile = (file: string | number | Record<string, unknown>) =>
 	api.delete(url.DELETE_FILE, { headers: { file } });
-export const addNewFile = (file: any) => api.create(url.ADD_NEW_FILE, file);
-export const updateFile = (file: any) => api.put(url.UPDATE_FILE, file);
+export const addNewFile = (file: Record<string, unknown>) =>
+	api.create(url.ADD_NEW_FILE, file);
+export const updateFile = (file: Record<string, unknown>) =>
+	api.put(url.UPDATE_FILE, file);
 
 // To Do
 export const getTodos = () => api.get(url.GET_TODOS);
-export const deleteTodo = (todo: any) =>
+export const deleteTodo = (todo: string | number | Record<string, unknown>) =>
 	api.delete(url.DELETE_TODO, { headers: { todo } });
-export const addNewTodo = (todo: any) => api.create(url.ADD_NEW_TODO, todo);
-export const updateTodo = (todo: any) => api.put(url.UPDATE_TODO, todo);
+export const addNewTodo = (todo: Record<string, unknown>) =>
+	api.create(url.ADD_NEW_TODO, todo);
+export const updateTodo = (todo: Record<string, unknown>) =>
+	api.put(url.UPDATE_TODO, todo);
 
 // To do Project
 export const getProjects = () => api.get(url.GET_PROJECTS);
-export const addNewProject = (project: any) =>
+export const addNewProject = (project: Record<string, unknown>) =>
 	api.create(url.ADD_NEW_TODO_PROJECT, project);
 
 //API Key
@@ -448,28 +479,30 @@ export const getAPIKey = () => api.get(url.GET_API_KEY);
 
 //Job Application
 export const getJobApplicationList = () => api.get(url.GET_APPLICATION_LIST);
-export const addNewJobApplicationList = (job: any) =>
+export const addNewJobApplicationList = (job: Record<string, unknown>) =>
 	api.create(url.ADD_NEW_APPLICATION_LIST, job);
-export const updateJobApplicationList = (job: any) =>
+export const updateJobApplicationList = (job: Record<string, unknown>) =>
 	api.put(url.UPDATE_APPLICATION_LIST, job);
-export const deleteJobApplicationList = (job: any) =>
-	api.delete(url.DELETE_APPLICATION_LIST, { headers: { job } });
+export const deleteJobApplicationList = (
+	job: string | number | Record<string, unknown>,
+) => api.delete(url.DELETE_APPLICATION_LIST, { headers: { job } });
 
 // candidate list
 export const getJobCandidateList = () => api.get(url.GET_CANDIDATE, "");
-export const addJobCandidate = (candidate: any) =>
+export const addJobCandidate = (candidate: Record<string, unknown>) =>
 	api.create(url.ADD_NEW_CANDIDATE, candidate);
-export const updateJobCandidate = (candidate: any) =>
+export const updateJobCandidate = (candidate: Record<string, unknown>) =>
 	api.update(url.UPDATE_CANDIDATE, candidate);
-export const deleteJobCandidate = (candidate: any) =>
-	api.delete(url.DELETE_CANDIDATE, { headers: { candidate } });
+export const deleteJobCandidate = (
+	candidate: string | number | Record<string, unknown>,
+) => api.delete(url.DELETE_CANDIDATE, { headers: { candidate } });
 
 // category list
 export const getcategoryList = () => api.get(url.GET_CATEGORY_LIST);
-export const addcategoryList = (category: any) =>
+export const addcategoryList = (category: Record<string, unknown>) =>
 	api.create(url.ADD_CATEGORY_LIST, category);
 
 // grid
 export const getCandidateGrid = () => api.get(url.GET_CANDIDATE_GRID);
-export const addCandidateGrid = (category: any) =>
+export const addCandidateGrid = (category: Record<string, unknown>) =>
 	api.create(url.ADD_CANDIDATE_GRID, category);

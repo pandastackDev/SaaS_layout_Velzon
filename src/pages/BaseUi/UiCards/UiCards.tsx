@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Masonry from "react-masonry-css";
+import { Link } from "react-router-dom";
 import {
 	Card,
 	CardBody,
@@ -8,16 +10,13 @@ import {
 	Container,
 	Row,
 } from "reactstrap";
-import { Link } from "react-router-dom";
-
-// Import Content
-import UiContent from "../../../Components/Common/UiContent";
 //import Components
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-
-import Masonry from "react-masonry-css";
+// Import Content
+import UiContent from "../../../Components/Common/UiContent";
 import "./masonry.css";
 
+import spinner1 from "../../../assets/images/logo-sm.png";
 // Import Images
 import img1 from "../../../assets/images/small/img-1.jpg";
 import img2 from "../../../assets/images/small/img-2.jpg";
@@ -31,7 +30,6 @@ import img9 from "../../../assets/images/small/img-9.jpg";
 import img10 from "../../../assets/images/small/img-10.jpg";
 import img11 from "../../../assets/images/small/img-11.jpg";
 import img12 from "../../../assets/images/small/img-12.jpg";
-
 import avatar1 from "../../../assets/images/users/avatar-1.jpg";
 import avatar2 from "../../../assets/images/users/avatar-2.jpg";
 import avatar3 from "../../../assets/images/users/avatar-3.jpg";
@@ -40,8 +38,6 @@ import avatar5 from "../../../assets/images/users/avatar-5.jpg";
 import avatar6 from "../../../assets/images/users/avatar-6.jpg";
 import avatar7 from "../../../assets/images/users/avatar-7.jpg";
 import avatar8 from "../../../assets/images/users/avatar-8.jpg";
-
-import spinner1 from "../../../assets/images/logo-sm.png";
 
 const UiCards = () => {
 	const breakpointColumnsObj = {
@@ -63,7 +59,7 @@ const UiCards = () => {
 	const spinner = (id: any) => {
 		document.getElementById(id)?.classList.remove("d-none");
 		document.getElementById(id)?.classList.add("d-block");
-		setTimeout(function () {
+		setTimeout(() => {
 			document.getElementById(id)?.classList.remove("d-block");
 			document.getElementById(id)?.classList.add("d-none");
 		}, 3000);

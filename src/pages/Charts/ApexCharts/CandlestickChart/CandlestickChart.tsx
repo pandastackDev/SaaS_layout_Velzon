@@ -1,9 +1,7 @@
-import React from "react";
-import ReactApexChart from "react-apexcharts";
-import { seriesData1, seriesDataLinear } from "../series";
 import * as moment from "moment";
-
+import ReactApexChart from "react-apexcharts";
 import getChartColorsArray from "../../../../Components/Common/ChartsDynamicColor";
+import { seriesData1, seriesDataLinear } from "../series";
 
 const Basic = ({ dataColors }: any) => {
 	var chartCandlestickBasicColors = getChartColorsArray(dataColors);
@@ -288,16 +286,14 @@ const Basic = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="candlestick"
-				height={350}
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="candlestick"
+			height={350}
+			className="apex-charts"
+		/>
 	);
 };
 
@@ -334,16 +330,14 @@ const ComboCandlestick = ({ dataColors }: any) => {
 		},
 	};
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="candlestick"
-				height={200}
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="candlestick"
+			height={200}
+			className="apex-charts"
+		/>
 	);
 };
 
@@ -416,16 +410,14 @@ const ComboCandlestick1 = ({ dataColors }: any) => {
 		},
 	};
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="bar"
-				height={150}
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="bar"
+			height={150}
+			className="apex-charts"
+		/>
 	);
 };
 
@@ -723,9 +715,7 @@ const Category = ({ dataColors }: any) => {
 		xaxis: {
 			type: "category",
 			labels: {
-				formatter: function (val: any) {
-					return moment(val).format("MMM DD HH:mm");
-				},
+				formatter: (val: any) => moment(val).format("MMM DD HH:mm"),
 			},
 		},
 		yaxis: {
@@ -736,16 +726,14 @@ const Category = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="candlestick"
-				height={350}
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="candlestick"
+			height={350}
+			className="apex-charts"
+		/>
 	);
 };
 
@@ -1053,16 +1041,14 @@ const CandlestickLine = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="candlestick"
-				height={350}
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="candlestick"
+			height={350}
+			className="apex-charts"
+		/>
 	);
 };
 

@@ -1,33 +1,27 @@
-import React, { useEffect, useState } from "react";
-
-import {
-	CardBody,
-	Row,
-	Col,
-	Card,
-	Container,
-	Form,
-	Input,
-	Label,
-	Table,
-	FormFeedback,
-} from "reactstrap";
-
-import { Link, useNavigate } from "react-router-dom";
-import Flatpickr from "react-flatpickr";
-
-import BreadCrumb from "../../Components/Common/BreadCrumb";
-import Select from "react-select";
-
-import logoDark from "../../assets/images/logo-dark.png";
-import logoLight from "../../assets/images/logo-light.png";
-
 //formik
 import { useFormik } from "formik";
-import * as Yup from "yup";
-
+import React, { useEffect, useState } from "react";
+import Flatpickr from "react-flatpickr";
 //redux
 import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import Select from "react-select";
+import {
+	Card,
+	CardBody,
+	Col,
+	Container,
+	Form,
+	FormFeedback,
+	Input,
+	Label,
+	Row,
+	Table,
+} from "reactstrap";
+import * as Yup from "yup";
+import logoDark from "../../assets/images/logo-dark.png";
+import logoLight from "../../assets/images/logo-light.png";
+import BreadCrumb from "../../Components/Common/BreadCrumb";
 import { addNewInvoice as onAddNewInvoice } from "../../slices/thunks";
 
 const InvoiceCreate = () => {
@@ -86,11 +80,11 @@ const InvoiceCreate = () => {
 	const [charge, setCharge] = useState<number>(0);
 
 	useEffect(() => {
-		let tax = 0.125 * rate * count;
-		let dis = 0.15 * rate * count;
+		const tax = 0.125 * rate * count;
+		const dis = 0.15 * rate * count;
 
 		// if ((rate && count) && isNaN !== 0) {
-		if (rate && count && !isNaN(rate) && !isNaN(count)) {
+		if (rate && count && !Number.isNaN(rate) && !Number.isNaN(count)) {
 			setCharge(65);
 		} else {
 			setCharge(0);
@@ -100,7 +94,7 @@ const InvoiceCreate = () => {
 	}, [rate, count]);
 
 	const dateFormat = () => {
-		let d = new Date(),
+		const d = new Date(),
 			months = [
 				"Jan",
 				"Feb",
@@ -128,7 +122,7 @@ const InvoiceCreate = () => {
 
 	const dateformate = (e: any) => {
 		const date = e.toString().split(" ");
-		const joinDate = (date[2] + " " + date[1] + ", " + date[3]).toString();
+		const joinDate = `${date[2]} ${date[1]}, ${date[3]}`.toString();
 		setDate(joinDate);
 	};
 
@@ -277,10 +271,10 @@ const InvoiceCreate = () => {
 														onChange={validation.handleChange}
 														placeholder="Enter Postal Code"
 														invalid={
-															validation.errors.postalcode &&
-															validation.touched.postalcode
-																? true
-																: false
+															!!(
+																validation.errors.postalcode &&
+																validation.touched.postalcode
+															)
 														}
 													/>
 													{validation.errors.postalcode &&
@@ -305,10 +299,10 @@ const InvoiceCreate = () => {
 													maxLength={12}
 													placeholder="Legal Registration No"
 													invalid={
-														validation.errors.registration &&
-														validation.touched.registration
-															? true
-															: false
+														!!(
+															validation.errors.registration &&
+															validation.touched.registration
+														)
 													}
 												/>
 												{validation.errors.registration &&
@@ -329,9 +323,10 @@ const InvoiceCreate = () => {
 													onChange={validation.handleChange}
 													placeholder="Email Address"
 													invalid={
-														validation.errors.email && validation.touched.email
-															? true
-															: false
+														!!(
+															validation.errors.email &&
+															validation.touched.email
+														)
 													}
 												/>
 												{validation.errors.email && validation.touched.email ? (
@@ -351,10 +346,10 @@ const InvoiceCreate = () => {
 													onChange={validation.handleChange}
 													placeholder="Website"
 													invalid={
-														validation.errors.website &&
-														validation.touched.website
-															? true
-															: false
+														!!(
+															validation.errors.website &&
+															validation.touched.website
+														)
 													}
 												/>
 												{validation.errors.website &&
@@ -376,10 +371,10 @@ const InvoiceCreate = () => {
 													onChange={validation.handleChange}
 													placeholder="Contact No"
 													invalid={
-														validation.errors.contact &&
-														validation.touched.contact
-															? true
-															: false
+														!!(
+															validation.errors.contact &&
+															validation.touched.contact
+														)
 													}
 												/>
 												{validation.errors.contact &&
@@ -406,10 +401,10 @@ const InvoiceCreate = () => {
 												onChange={validation.handleChange}
 												placeholder="#VL20499516"
 												invalid={
-													validation.errors.invoiceId &&
-													validation.touched.invoiceId
-														? true
-														: false
+													!!(
+														validation.errors.invoiceId &&
+														validation.touched.invoiceId
+													)
 												}
 											/>
 											{validation.errors.invoiceId &&
@@ -481,9 +476,7 @@ const InvoiceCreate = () => {
 													id="totalamountInput"
 													placeholder="$0.00"
 													readOnly
-													value={
-														"$" + Math.round(rate * count + tax + charge - dis)
-													}
+													value={`$${Math.round(rate * count + tax + charge - dis)}`}
 												/>
 											</div>
 										</Col>
@@ -511,9 +504,9 @@ const InvoiceCreate = () => {
 													onChange={validation.handleChange}
 													placeholder="Full Name"
 													invalid={
-														validation.errors.name && validation.touched.name
-															? true
-															: false
+														!!(
+															validation.errors.name && validation.touched.name
+														)
 													}
 												/>
 												{validation.errors.name && validation.touched.name ? (
@@ -534,10 +527,10 @@ const InvoiceCreate = () => {
 													rows="3"
 													placeholder="Address"
 													invalid={
-														validation.errors.billing_address &&
-														validation.touched.billing_address
-															? true
-															: false
+														!!(
+															validation.errors.billing_address &&
+															validation.touched.billing_address
+														)
 													}
 												/>
 												{validation.errors.billing_address &&
@@ -559,10 +552,10 @@ const InvoiceCreate = () => {
 													onChange={validation.handleChange}
 													placeholder="(123)456-7890"
 													invalid={
-														validation.errors.billing_phone &&
-														validation.touched.billing_phone
-															? true
-															: false
+														!!(
+															validation.errors.billing_phone &&
+															validation.touched.billing_phone
+														)
 													}
 												/>
 												{validation.errors.billing_phone &&
@@ -583,10 +576,10 @@ const InvoiceCreate = () => {
 													onChange={validation.handleChange}
 													placeholder="Tax Number"
 													invalid={
-														validation.errors.billing_taxno &&
-														validation.touched.billing_taxno
-															? true
-															: false
+														!!(
+															validation.errors.billing_taxno &&
+															validation.touched.billing_taxno
+														)
 													}
 												/>
 												{validation.errors.billing_taxno &&
@@ -630,10 +623,10 @@ const InvoiceCreate = () => {
 															onChange={validation.handleChange}
 															placeholder="Full Name"
 															invalid={
-																validation.errors.shipping_name &&
-																validation.touched.shipping_name
-																	? true
-																	: false
+																!!(
+																	validation.errors.shipping_name &&
+																	validation.touched.shipping_name
+																)
 															}
 														/>
 														{validation.errors.shipping_name &&
@@ -655,10 +648,10 @@ const InvoiceCreate = () => {
 															onChange={validation.handleChange}
 															placeholder="Address"
 															invalid={
-																validation.errors.shipping_address &&
-																validation.touched.shipping_address
-																	? true
-																	: false
+																!!(
+																	validation.errors.shipping_address &&
+																	validation.touched.shipping_address
+																)
 															}
 														/>
 														{validation.errors.shipping_address &&
@@ -680,10 +673,10 @@ const InvoiceCreate = () => {
 															onChange={validation.handleChange}
 															placeholder="(123)456-7890"
 															invalid={
-																validation.errors.shipping_phone &&
-																validation.touched.shipping_phone
-																	? true
-																	: false
+																!!(
+																	validation.errors.shipping_phone &&
+																	validation.touched.shipping_phone
+																)
 															}
 														/>
 														{validation.errors.shipping_phone &&
@@ -704,10 +697,10 @@ const InvoiceCreate = () => {
 															onBlur={validation.handleBlur}
 															onChange={validation.handleChange}
 															invalid={
-																validation.errors.shipping_taxno &&
-																validation.touched.shipping_taxno
-																	? true
-																	: false
+																!!(
+																	validation.errors.shipping_taxno &&
+																	validation.touched.shipping_taxno
+																)
 															}
 														/>
 														{validation.errors.shipping_taxno &&
@@ -779,10 +772,10 @@ const InvoiceCreate = () => {
 																onBlur={validation.handleBlur}
 																onChange={validation.handleChange}
 																invalid={
-																	validation.errors.product_name &&
-																	validation.touched.product_name
-																		? true
-																		: false
+																	!!(
+																		validation.errors.product_name &&
+																		validation.touched.product_name
+																	)
 																}
 															/>
 															{validation.errors.product_name &&
@@ -849,7 +842,7 @@ const InvoiceCreate = () => {
 																className="form-control bg-light border-0 product-line-price"
 																id="productPrice-1"
 																placeholder="$0.00"
-																value={"$" + rate * count}
+																value={`$${rate * count}`}
 																readOnly
 															/>
 														</div>
@@ -893,7 +886,7 @@ const InvoiceCreate = () => {
 																			id="cart-subtotal"
 																			placeholder="$0.00"
 																			readOnly
-																			value={"$" + rate * count}
+																			value={`$${rate * count}`}
 																		/>
 																	</td>
 																</tr>
@@ -906,7 +899,7 @@ const InvoiceCreate = () => {
 																			id="cart-tax"
 																			placeholder="$0.00"
 																			readOnly
-																			value={"$" + tax}
+																			value={`$${tax}`}
 																		/>
 																	</td>
 																</tr>
@@ -924,7 +917,7 @@ const InvoiceCreate = () => {
 																			id="cart-discount"
 																			placeholder="$0.00"
 																			readOnly
-																			value={"$" + dis}
+																			value={`$${dis}`}
 																		/>
 																	</td>
 																</tr>
@@ -937,7 +930,7 @@ const InvoiceCreate = () => {
 																			id="cart-shipping"
 																			placeholder="$0.00"
 																			readOnly
-																			value={"$" + charge}
+																			value={`$${charge}`}
 																		/>
 																	</td>
 																</tr>

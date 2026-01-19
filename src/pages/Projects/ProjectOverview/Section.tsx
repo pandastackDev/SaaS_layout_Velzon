@@ -1,3 +1,4 @@
+import classnames from "classnames";
 import React, { useState } from "react";
 import {
 	Card,
@@ -10,13 +11,12 @@ import {
 	TabContent,
 	TabPane,
 } from "reactstrap";
-import classnames from "classnames";
 
 //import images
 import slack from "../../../assets/images/brands/slack.png";
-import OverviewTab from "./OverviewTab";
-import DocumentsTab from "./DocumentsTab";
 import ActivitiesTab from "./ActivitiesTab";
+import DocumentsTab from "./DocumentsTab";
+import OverviewTab from "./OverviewTab";
 import TeamTab from "./TeamTab";
 
 const Section = () => {

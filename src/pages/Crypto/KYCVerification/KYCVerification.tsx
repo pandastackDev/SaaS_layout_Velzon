@@ -1,8 +1,15 @@
+import classnames from "classnames";
 import React, { useState } from "react";
+import Dropzone from "react-dropzone";
+import Flatpickr from "react-flatpickr";
+import { Link } from "react-router-dom";
+import Select from "react-select";
 import {
 	Card,
 	CardBody,
 	Col,
+	Input,
+	Label,
 	Modal,
 	ModalBody,
 	ModalHeader,
@@ -12,26 +19,19 @@ import {
 	Row,
 	TabContent,
 	TabPane,
-	Label,
-	Input,
 } from "reactstrap";
-import { Link } from "react-router-dom";
 import vertication from "../../../assets/images/verification-img.png";
-import classnames from "classnames";
-import Select from "react-select";
-import Flatpickr from "react-flatpickr";
-import Dropzone from "react-dropzone";
 
 const KYCVerification = () => {
 	const [isKycVerification, setIsKycVerification] = useState<boolean>(false);
 	const toggleKycVerification = () => setIsKycVerification(!isKycVerification);
-	const [activeTab, setActiveTab] = useState<any>(1);
-	const [passedSteps, setPassedSteps] = useState<any>([1]);
-	const [selectedFiles, setselectedFiles] = useState<any>([]);
+	const [activeTab, setActiveTab] = useState<number>(1);
+	const [passedSteps, setPassedSteps] = useState<number[]>([1]);
+	const [selectedFiles, setselectedFiles] = useState<File[]>([]);
 
-	function toggleTab(tab: any) {
+	function toggleTab(tab: number) {
 		if (activeTab !== tab) {
-			var modifiedSteps = [...passedSteps, tab];
+			const modifiedSteps = [...passedSteps, tab];
 
 			if (tab >= 1 && tab <= 4) {
 				setActiveTab(tab);
@@ -42,24 +42,26 @@ const KYCVerification = () => {
 
 	const [selectCountry, setselectCountry] = useState(null);
 
-	function handleselectCountry(selectCountry: any) {
+	function handleselectCountry(
+		selectCountry: { value: string; label: string } | null,
+	) {
 		setselectCountry(selectCountry);
 	}
 	/**
 	 * Formats the size
 	 */
-	function formatBytes(bytes: any, decimals = 2) {
+	function formatBytes(bytes: number, decimals = 2) {
 		if (bytes === 0) return "0 Bytes";
 		const k = 1024;
 		const dm = decimals < 0 ? 0 : decimals;
 		const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
 
 		const i = Math.floor(Math.log(bytes) / Math.log(k));
-		return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
+		return `${parseFloat((bytes / k ** i).toFixed(dm))} ${sizes[i]}`;
 	}
 
-	function handleAcceptedFiles(files: any) {
-		files.map((file: any) =>
+	function handleAcceptedFiles(files: File[]) {
+		files.map((file) =>
 			Object.assign(file, {
 				preview: URL.createObjectURL(file),
 				formattedSize: formatBytes(file.size),
@@ -546,7 +548,7 @@ const KYCVerification = () => {
 										return (
 											<Card
 												className="mt-1 mb-0 shadow-none border dz-processing dz-image-preview dz-success dz-complete"
-												key={i + "-file"}
+												key={`${i}-file`}
 											>
 												<div className="p-2">
 													<Row className="align-items-center">

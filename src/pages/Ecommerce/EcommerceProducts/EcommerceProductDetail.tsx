@@ -1,3 +1,4 @@
+import classnames from "classnames";
 import React, { useState } from "react";
 import {
 	Card,
@@ -6,28 +7,22 @@ import {
 	Container,
 	Input,
 	Label,
-	Tooltip,
 	Nav,
 	NavItem,
 	NavLink,
 	Row,
 	TabContent,
 	TabPane,
+	Tooltip,
 } from "reactstrap";
-
 //Simple bar
 import SimpleBar from "simplebar-react";
-
-import BreadCrumb from "../../../Components/Common/BreadCrumb";
-
+import { Swiper, SwiperSlide } from "swiper/react";
 import product1 from "../../../assets/images/products/img-1.png";
 import product6 from "../../../assets/images/products/img-6.png";
 import product8 from "../../../assets/images/products/img-8.png";
-
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import { productDetailsWidgets, reviews } from "../../../common/data/ecommerce";
-
-import { Swiper, SwiperSlide } from "swiper/react";
-import classnames from "classnames";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -40,70 +35,66 @@ import { FreeMode, Navigation, Pagination, Thumbs } from "swiper/modules";
 
 const ProductReview = (props: any) => {
 	return (
-		<React.Fragment>
-			<li className="py-2">
-				<div className="border border-dashed rounded p-3">
-					<div className="d-flex align-items-start mb-3">
-						<div className="hstack gap-3">
-							<div className="badge rounded-pill bg-primary mb-0">
-								<i className="mdi mdi-star"></i> {props.review.rating}
-							</div>
-							<div className="vr"></div>
-							<div className="flex-grow-1">
-								<p className="text-muted mb-0">{props.review.comment}</p>
-							</div>
+		<li className="py-2">
+			<div className="border border-dashed rounded p-3">
+				<div className="d-flex align-items-start mb-3">
+					<div className="hstack gap-3">
+						<div className="badge rounded-pill bg-primary mb-0">
+							<i className="mdi mdi-star"></i> {props.review.rating}
 						</div>
-					</div>
-					{props.review.subitem && (
-						<div className="d-flex flex-grow-1 gap-2 mb-3">
-							{(props.review.subitem || []).map((subItem: any, key: number) => (
-								<React.Fragment key={key}>
-									<Link to="#" className="d-block">
-										<img
-											src={subItem.img}
-											alt=""
-											className="avatar-sm rounded object-fit-cover"
-										/>
-									</Link>
-								</React.Fragment>
-							))}
-						</div>
-					)}
-
-					<div className="d-flex align-items-end">
+						<div className="vr"></div>
 						<div className="flex-grow-1">
-							<h5 className="fs-14 mb-0">{props.review.name}</h5>
-						</div>
-
-						<div className="flex-shrink-0">
-							<p className="text-muted fs-13 mb-0">{props.review.date}</p>
+							<p className="text-muted mb-0">{props.review.comment}</p>
 						</div>
 					</div>
 				</div>
-			</li>
-		</React.Fragment>
+				{props.review.subitem && (
+					<div className="d-flex flex-grow-1 gap-2 mb-3">
+						{(props.review.subitem || []).map((subItem: any, key: number) => (
+							<React.Fragment key={key}>
+								<Link to="#" className="d-block">
+									<img
+										src={subItem.img}
+										alt=""
+										className="avatar-sm rounded object-fit-cover"
+									/>
+								</Link>
+							</React.Fragment>
+						))}
+					</div>
+				)}
+
+				<div className="d-flex align-items-end">
+					<div className="flex-grow-1">
+						<h5 className="fs-14 mb-0">{props.review.name}</h5>
+					</div>
+
+					<div className="flex-shrink-0">
+						<p className="text-muted fs-13 mb-0">{props.review.date}</p>
+					</div>
+				</div>
+			</div>
+		</li>
 	);
 };
 
 const PricingWidgetList = (props: any) => {
 	return (
-		<React.Fragment>
-			<Col lg={3} sm={6}>
-				<div className="p-2 border border-dashed rounded">
-					<div className="d-flex align-items-center">
-						<div className="avatar-sm me-2">
-							<div className="avatar-title rounded bg-transparent text-primary fs-24">
-								<i className={props.pricingDetails.icon}></i>
-							</div>
-						</div>
-						<div className="flex-grow-1">
-							<p className="text-muted mb-1">{props.pricingDetails.label} :</p>
-							<h5 className="mb-0">{props.pricingDetails.labelDetail}</h5>
+		<Col lg={3} sm={6}>
+			<div className="p-2 border border-dashed rounded">
+				<div className="d-flex align-items-center">
+					<div className="avatar-sm me-2">
+						<div className="avatar-title rounded bg-transparent text-primary fs-24">
+							<i className={props.pricingDetails.icon}></i>
 						</div>
 					</div>
+					<div className="flex-grow-1">
+						<p className="text-muted mb-1">{props.pricingDetails.label} :</p>
+						<h5 className="mb-0">{props.pricingDetails.labelDetail}</h5>
+					</div>
 				</div>
-			</Col>
-		</React.Fragment>
+			</div>
+		</Col>
 	);
 };
 

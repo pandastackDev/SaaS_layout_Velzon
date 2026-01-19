@@ -1,6 +1,6 @@
+import moment from "moment";
 import React from "react";
 import { Link } from "react-router-dom";
-import moment from "moment";
 
 const handleValidDate = (date: any) => {
 	const date1 = moment(new Date(date)).format("DD MMM Y");
@@ -9,11 +9,9 @@ const handleValidDate = (date: any) => {
 
 const TicketsId = (cell: any) => {
 	return (
-		<React.Fragment>
-			<Link to="/apps-tickets-details" className="fw-medium link-primary">
-				{cell.value}
-			</Link>
-		</React.Fragment>
+		<Link to="/apps-tickets-details" className="fw-medium link-primary">
+			{cell.value}
+		</Link>
 	);
 };
 

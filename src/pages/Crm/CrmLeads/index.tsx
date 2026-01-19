@@ -1,61 +1,57 @@
-import React, { useEffect, useState, useCallback, useMemo } from "react";
+import { useFormik } from "formik";
+import { isEmpty } from "lodash";
+import moment from "moment";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import Flatpickr from "react-flatpickr";
+//redux
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Select from "react-select";
+import { ToastContainer, toast } from "react-toastify";
 import {
+	Card,
+	CardBody,
+	CardHeader,
 	Col,
 	Container,
-	Row,
-	Card,
-	CardHeader,
-	CardBody,
-	Input,
-	ModalHeader,
-	ModalBody,
-	Label,
-	ModalFooter,
-	Modal,
-	Form,
-	UncontrolledDropdown,
-	DropdownToggle,
-	DropdownMenu,
 	DropdownItem,
+	DropdownMenu,
+	DropdownToggle,
+	Form,
 	FormFeedback,
+	Input,
+	Label,
+	Modal,
+	ModalBody,
+	ModalFooter,
+	ModalHeader,
+	Row,
+	UncontrolledDropdown,
 } from "reactstrap";
-import Select from "react-select";
-import Flatpickr from "react-flatpickr";
-import moment from "moment";
-
-import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import { isEmpty } from "lodash";
-
-// Import Images
-import dummyImg from "../../../assets/images/users/user-dummy-img.jpg";
-
-//Import actions
-import {
-	getLeads as onGetLeads,
-	addNewLead as onAddNewLead,
-	updateLead as onUpdateLead,
-	deleteLead as onDeleteLead,
-} from "../../../slices/thunks";
-//redux
-import { useSelector, useDispatch } from "react-redux";
-import TableContainer from "../../../Components/Common/TableContainer";
-import DeleteModal from "../../../Components/Common/DeleteModal";
-import CrmFilter from "./CrmFilter";
-
 // Formik
 import * as Yup from "yup";
-import { useFormik } from "formik";
-
+// Import Images
+import dummyImg from "../../../assets/images/users/user-dummy-img.jpg";
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import DeleteModal from "../../../Components/Common/DeleteModal";
 import Loader from "../../../Components/Common/Loader";
-import { toast, ToastContainer } from "react-toastify";
+import TableContainer from "../../../Components/Common/TableContainer";
+//Import actions
+import {
+	addNewLead as onAddNewLead,
+	deleteLead as onDeleteLead,
+	getLeads as onGetLeads,
+	updateLead as onUpdateLead,
+} from "../../../slices/thunks";
+import CrmFilter from "./CrmFilter";
 import "react-toastify/dist/ReactToastify.css";
 import { createSelector } from "reselect";
 
 const CrmLeads = () => {
-	const dispatch: any = useDispatch();
+	const dispatch = useDispatch();
 
-	const selectLayoutState = (state: any) => state.Crm;
+	const selectLayoutState = (state: { Crm: Record<string, unknown> }) =>
+		state.Crm;
 	const crmleadsProperties = createSelector(selectLayoutState, (state) => ({
 		leads: state.leads,
 		// isLeadsSuccess: state.isLeadsSuccess,
@@ -86,7 +82,7 @@ const CrmLeads = () => {
 	}, [leads]);
 
 	const [isEdit, setIsEdit] = useState<boolean>(false);
-	const [lead, setLead] = useState<any>([]);
+	const [lead, setLead] = useState<Record<string, unknown>[]>([]);
 
 	//delete lead
 	const [deleteModal, setDeleteModal] = useState<boolean>(false);
@@ -96,12 +92,12 @@ const CrmLeads = () => {
 
 	const [isInfoDetails, setIsInfoDetails] = useState<boolean>(false);
 
-	const [tag, setTag] = useState<any>([]);
-	const [assignTag, setAssignTag] = useState<any>([]);
+	const [tag, setTag] = useState<Array<{ value: string; label: string }>>([]);
+	const [assignTag, setAssignTag] = useState<string[]>([]);
 
-	const handlestag = (tags: any) => {
+	const handlestag = (tags: Array<{ value: string; label: string }>) => {
 		setTag(tags);
-		const assigned = tags.map((item: any) => item.value);
+		const assigned = tags.map((item) => item.value);
 		setAssignTag(assigned);
 	};
 
@@ -146,14 +142,14 @@ const CrmLeads = () => {
 		enableReinitialize: true,
 
 		initialValues: {
-			img: (lead && lead.img) || "",
-			name: (lead && lead.name) || "",
-			company: (lead && lead.company) || "",
-			score: (lead && lead.score) || "",
-			phone: (lead && lead.phone) || "",
-			location: (lead && lead.location) || "",
-			date: (lead && lead.date) || "",
-			tags: (lead && lead.tags) || "",
+			img: lead?.img || "",
+			name: lead?.name || "",
+			company: lead?.company || "",
+			score: lead?.score || "",
+			phone: lead?.phone || "",
+			location: lead?.location || "",
+			date: lead?.date || "",
+			tags: lead?.tags || "",
 		},
 		validationSchema: Yup.object({
 			name: Yup.string().required("Please Enter Name"),
@@ -184,11 +180,11 @@ const CrmLeads = () => {
 				const newLead = {
 					id: (Math.floor(Math.random() * (30 - 20)) + 20).toString(),
 					img: values.img,
-					name: values["name"],
-					company: values["company"],
-					score: values["score"],
-					phone: values["phone"],
-					location: values["location"],
+					name: values.name,
+					company: values.company,
+					score: values.score,
+					phone: values.phone,
+					location: values.location,
 					date: values.date,
 					tags: assignTag,
 				};
@@ -234,7 +230,7 @@ const CrmLeads = () => {
 	};
 
 	useEffect(() => {
-		setImgStore((lead && lead.img) || []);
+		setImgStore(lead?.img || []);
 	}, [lead]);
 
 	const handleImageChange = (event: any) => {
@@ -278,7 +274,7 @@ const CrmLeads = () => {
 			});
 		}
 		deleteCheckbox();
-	}, []);
+	}, [deleteCheckbox]);
 
 	// Delete Multiple
 	const [selectedCheckBoxDelete, setSelectedCheckBoxDelete] = useState<any>([]);
@@ -455,7 +451,13 @@ const CrmLeads = () => {
 				},
 			},
 		],
-		[handleLeadClick, checkedAll],
+		[
+			handleLeadClick,
+			checkedAll,
+			deleteCheckbox,
+			handleValidDate,
+			onClickDelete,
+		],
 	);
 
 	document.title = "Leads | Velzon - React Admin & Dashboard Template";
@@ -564,7 +566,7 @@ const CrmLeads = () => {
 								</CardHeader>
 								<CardBody className="pt-3">
 									<div>
-										{leads && leads.length ? (
+										{leads?.length ? (
 											<TableContainer
 												columns={columns}
 												data={leads || []}
@@ -582,7 +584,7 @@ const CrmLeads = () => {
 
 									<Modal id="showModal" isOpen={modal} toggle={toggle} centered>
 										<ModalHeader className="bg-light p-3" toggle={toggle}>
-											{!!isEdit ? "Edit Lead" : "Add Lead"}
+											{isEdit ? "Edit Lead" : "Add Lead"}
 										</ModalHeader>
 										<Form
 											className="tablelist-form"
@@ -616,10 +618,10 @@ const CrmLeads = () => {
 																		accept="image/png, image/gif, image/jpeg"
 																		onChange={handleImageChange}
 																		invalid={
-																			validation.touched.img &&
-																			validation.errors.img
-																				? true
-																				: false
+																			!!(
+																				validation.touched.img &&
+																				validation.errors.img
+																			)
 																		}
 																	/>
 																</div>
@@ -673,10 +675,10 @@ const CrmLeads = () => {
 																onBlur={validation.handleBlur}
 																value={validation.values.name || ""}
 																invalid={
-																	validation.touched.name &&
-																	validation.errors.name
-																		? true
-																		: false
+																	!!(
+																		validation.touched.name &&
+																		validation.errors.name
+																	)
 																}
 															/>
 															{validation.touched.name &&
@@ -708,10 +710,10 @@ const CrmLeads = () => {
 																onBlur={validation.handleBlur}
 																value={validation.values.company || ""}
 																invalid={
-																	validation.touched.company &&
-																	validation.errors.company
-																		? true
-																		: false
+																	!!(
+																		validation.touched.company &&
+																		validation.errors.company
+																	)
 																}
 															/>
 															{validation.touched.company &&
@@ -743,10 +745,10 @@ const CrmLeads = () => {
 																onBlur={validation.handleBlur}
 																value={validation.values.score || ""}
 																invalid={
-																	validation.touched.score &&
-																	validation.errors.score
-																		? true
-																		: false
+																	!!(
+																		validation.touched.score &&
+																		validation.errors.score
+																	)
 																}
 															/>
 															{validation.touched.score &&
@@ -778,10 +780,10 @@ const CrmLeads = () => {
 																onBlur={validation.handleBlur}
 																value={validation.values.phone || ""}
 																invalid={
-																	validation.touched.phone &&
-																	validation.errors.phone
-																		? true
-																		: false
+																	!!(
+																		validation.touched.phone &&
+																		validation.errors.phone
+																	)
 																}
 															/>
 															{validation.touched.phone &&
@@ -813,10 +815,10 @@ const CrmLeads = () => {
 																onBlur={validation.handleBlur}
 																value={validation.values.location || ""}
 																invalid={
-																	validation.touched.location &&
-																	validation.errors.location
-																		? true
-																		: false
+																	!!(
+																		validation.touched.location &&
+																		validation.errors.location
+																	)
 																}
 															/>
 															{validation.touched.location &&
@@ -914,7 +916,7 @@ const CrmLeads = () => {
 														id="add-btn"
 													>
 														{" "}
-														{!!isEdit ? "Update" : "Add Lead"}{" "}
+														{isEdit ? "Update" : "Add Lead"}{" "}
 													</button>
 												</div>
 											</ModalFooter>

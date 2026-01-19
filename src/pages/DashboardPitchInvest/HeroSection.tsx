@@ -1,10 +1,10 @@
-import React from "react";
-import { Row, Col } from "reactstrap";
-import { announcements } from "./data";
+import type React from "react";
+import { Col, Row } from "reactstrap";
+import heroBack from "../../assets/images/hero-back.png";
 
 // Import hero images
 import heroLogo from "../../assets/images/main-logo/hero-logo.png";
-import heroBack from "../../assets/images/hero-back.png";
+import { announcements } from "./data";
 
 const HeroSection: React.FC = () => {
 	const leftAnnouncement = announcements.find((a) => a.type === "left");

@@ -1,6 +1,6 @@
 import React from "react";
-import { jobWidgets } from "../../../common/data/appsJobs";
 import { Card, Col } from "reactstrap";
+import { jobWidgets } from "../../../common/data/appsJobs";
 import Charts from "./Charts";
 
 const Widgets = () => {
@@ -14,12 +14,10 @@ const Widgets = () => {
 								<h5 className="mb-3">{item.lable}</h5>
 								<p className="mb-0 text-muted">
 									<span
-										className={
-											"badge bg-light text-" + item.badgeColor + " mb-0"
-										}
+										className={`badge bg-light text-${item.badgeColor} mb-0`}
 									>
 										{" "}
-										<i className={item.icon + "align-middle"}></i> {item.number}
+										<i className={`${item.icon}align-middle`}></i> {item.number}
 									</span>{" "}
 									vs. previous month
 								</p>

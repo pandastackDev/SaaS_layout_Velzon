@@ -1,4 +1,3 @@
-import React from "react";
 import ReactApexChart from "react-apexcharts";
 import avatar1 from "../../../../assets/images/users/avatar-1.jpg";
 import avatar2 from "../../../../assets/images/users/avatar-2.jpg";
@@ -130,9 +129,7 @@ const Basic = ({ dataColors }: any) => {
 		xaxis: {
 			tickAmount: 10,
 			labels: {
-				formatter: function (val: any) {
-					return parseFloat(val).toFixed(1);
-				},
+				formatter: (val: any) => parseFloat(val).toFixed(1),
 			},
 		},
 		yaxis: {
@@ -142,16 +139,14 @@ const Basic = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="scatter"
-				height={350}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="scatter"
+			height={350}
+		/>
 	);
 };
 
@@ -263,16 +258,14 @@ const Datetime = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="scatter"
-				height={350}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="scatter"
+			height={350}
+		/>
 	);
 };
 
@@ -356,29 +349,20 @@ const ImagesChart = ({ dataColors }: any) => {
 				useSeriesColors: !0,
 			},
 			markers: {
-				customHTML: [
-					function () {
-						return "";
-					},
-					function () {
-						return "";
-					},
-				],
+				customHTML: [() => "", () => ""],
 			},
 		},
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="scatter"
-				height={350}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="scatter"
+			height={350}
+		/>
 	);
 };
 

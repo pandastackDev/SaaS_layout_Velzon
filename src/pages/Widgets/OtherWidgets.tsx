@@ -1,15 +1,12 @@
-import React from "react";
-import { Alert, Card, CardBody, Col, Row } from "reactstrap";
-import { Link } from "react-router-dom";
-
 //Import Icons
 import FeatherIcon from "feather-icons-react";
-
-import { otherWidgets2 } from "../../common/data/index";
-
+import React from "react";
+import { Link } from "react-router-dom";
+import { Alert, Card, CardBody, Col, Row } from "reactstrap";
 // Import Images
 import illustarator1 from "../../assets/images/user-illustarator-1.png";
 import illustarator2 from "../../assets/images/user-illustarator-2.png";
+import { otherWidgets2 } from "../../common/data/index";
 
 const OtherWidgets = () => {
 	return (
@@ -163,24 +160,30 @@ const OtherWidgets = () => {
 			</Row>
 
 			<Row>
-				{(otherWidgets2 || []).map((item: any, key: any) => (
-					<Col lg={4} key={key}>
+				{(otherWidgets2 || []).map((item, index) => (
+					<Col
+						lg={4}
+						key={`widget-${index}-${(item as { title?: string }).title || index}`}
+					>
 						<Card>
 							<CardBody>
 								<h5 className="fs-15 fw-semibold">{item.title}</h5>
 								<p className="text-muted">{item.subTitle}</p>
 								<div className="d-flex flex-wrap justify-content-evenly">
-									{item.subItem.map((item: any, key: any) => (
-										<p className="text-muted mb-0" key={key}>
+									{item.subItem.map((subItem, subIndex) => (
+										<p
+											className="text-muted mb-0"
+											key={`subitem-${index}-${subIndex}-${subItem.label || subIndex}`}
+										>
 											<i
 												className={
 													"fs-18 align-middle me-2 " +
-													item.icon +
+													subItem.icon +
 													" text-" +
-													item.iconClass
+													subItem.iconClass
 												}
 											></i>
-											{item.label}
+											{subItem.label}
 										</p>
 									))}
 								</div>
@@ -189,12 +192,12 @@ const OtherWidgets = () => {
 								className="progress animated-progess rounded-bottom rounded-0"
 								style={{ height: "6px" }}
 							>
-								{item.progressBar.map((item: any, key: any) => (
+								{item.progressBar.map((progressItem, progressIndex) => (
 									<div
-										className={"progress-bar rounded-0 " + item.bgColor}
+										className={`progress-bar rounded-0 ${progressItem.bgColor}`}
 										role="progressbar"
-										style={{ width: item.width }}
-										key={key}
+										style={{ width: progressItem.width }}
+										key={`progress-${progressIndex}-${progressItem.width || progressIndex}`}
 									></div>
 								))}
 							</div>

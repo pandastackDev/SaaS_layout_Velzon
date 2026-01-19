@@ -1,56 +1,49 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
-import TableContainer from "../../../Components/Common/TableContainer";
-import DeleteModal from "../../../Components/Common/DeleteModal";
-
-// Import Scroll Bar - SimpleBar
-import SimpleBar from "simplebar-react";
+import { useFormik } from "formik";
+import { isEmpty } from "lodash";
+import moment from "moment";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 //Import Flatepicker
 import Flatpickr from "react-flatpickr";
-import moment from "moment";
-
 //redux
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import {
+	Button,
 	Col,
+	Form,
+	FormFeedback,
+	Input,
+	Label,
 	Modal,
 	ModalBody,
-	Row,
-	Label,
-	Input,
-	Button,
 	ModalHeader,
-	FormFeedback,
-	Form,
+	Row,
 } from "reactstrap";
-
-import {
-	getTaskList,
-	addNewTask,
-	updateTask,
-	deleteTask,
-} from "../../../slices/thunks";
-
-import {
-	OrdersId,
-	Project,
-	CreateBy,
-	DueDate,
-	Status,
-	Priority,
-} from "./TaskListCol";
+// Import Scroll Bar - SimpleBar
+import SimpleBar from "simplebar-react";
 
 // Formik
 import * as Yup from "yup";
-import { useFormik } from "formik";
-import { isEmpty } from "lodash";
-import { Link } from "react-router-dom";
-
-import { toast, ToastContainer } from "react-toastify";
+import DeleteModal from "../../../Components/Common/DeleteModal";
+import TableContainer from "../../../Components/Common/TableContainer";
+import {
+	addNewTask,
+	deleteTask,
+	getTaskList,
+	updateTask,
+} from "../../../slices/thunks";
+import {
+	CreateBy,
+	DueDate,
+	OrdersId,
+	Priority,
+	Project,
+	Status,
+} from "./TaskListCol";
 import "react-toastify/dist/ReactToastify.css";
-import Loader from "../../../Components/Common/Loader";
 import { createSelector } from "reselect";
-
 import avatar1 from "../../../assets/images/users/avatar-1.jpg";
 import avatar2 from "../../../assets/images/users/avatar-2.jpg";
 import avatar3 from "../../../assets/images/users/avatar-3.jpg";
@@ -59,6 +52,7 @@ import avatar6 from "../../../assets/images/users/avatar-6.jpg";
 import avatar7 from "../../../assets/images/users/avatar-7.jpg";
 import avatar8 from "../../../assets/images/users/avatar-8.jpg";
 import avatar10 from "../../../assets/images/users/avatar-10.jpg";
+import Loader from "../../../Components/Common/Loader";
 
 const Assigned = [
 	{ id: 1, imgId: "anna-adame", img: avatar1, name: "Anna Adame" },
@@ -134,14 +128,14 @@ const AllTasks = () => {
 		enableReinitialize: true,
 
 		initialValues: {
-			taskId: (task && task.taskId) || "",
-			project: (task && task.project) || "",
-			task: (task && task.task) || "",
-			creater: (task && task.creater) || "",
-			dueDate: (task && task.dueDate) || "",
-			status: (task && task.status) || "",
-			priority: (task && task.priority) || "",
-			subItem: (task && task.subItem) || [],
+			taskId: task?.taskId || "",
+			project: task?.project || "",
+			task: task?.task || "",
+			creater: task?.creater || "",
+			dueDate: task?.dueDate || "",
+			status: task?.status || "",
+			priority: task?.priority || "",
+			subItem: task?.subItem || [],
 		},
 		validationSchema: Yup.object({
 			taskId: Yup.string().required("Please Enter Task Id"),
@@ -172,14 +166,14 @@ const AllTasks = () => {
 			} else {
 				const newTask = {
 					id: (Math.floor(Math.random() * (30 - 20)) + 20).toString(),
-					taskId: values["taskId"],
-					project: values["project"],
-					task: values["task"],
-					creater: values["creater"],
-					dueDate: values["dueDate"],
-					status: values["status"],
-					priority: values["priority"],
-					subItem: values["subItem"],
+					taskId: values.taskId,
+					project: values.project,
+					task: values.task,
+					creater: values.creater,
+					dueDate: values.dueDate,
+					status: values.status,
+					priority: values.priority,
+					subItem: values.subItem,
 				};
 				// save new customer
 				dispatch(addNewTask(newTask));
@@ -249,7 +243,7 @@ const AllTasks = () => {
 			});
 		}
 		deleteCheckbox();
-	}, []);
+	}, [deleteCheckbox]);
 
 	// Delete Multiple
 	const [selectedCheckBoxDelete, setSelectedCheckBoxDelete] = useState<any>([]);
@@ -324,43 +318,41 @@ const AllTasks = () => {
 				enableColumnFilter: false,
 				cell: (cell: any) => {
 					return (
-						<React.Fragment>
-							<div className="d-flex">
-								<div className="flex-grow-1 tasks_name">{cell.getValue()}</div>
-								<div className="flex-shrink-0 ms-4">
-									<ul className="list-inline tasks-list-menu mb-0">
-										<li className="list-inline-item">
-											<Link to="/apps-tasks-details">
-												<i className="ri-eye-fill align-bottom me-2 text-muted"></i>
-											</Link>
-										</li>
-										<li className="list-inline-item">
-											<Link
-												to="#"
-												onClick={() => {
-													const taskData = cell.row.original;
-													handleCustomerClick(taskData);
-												}}
-											>
-												<i className="ri-pencil-fill align-bottom me-2 text-muted"></i>
-											</Link>
-										</li>
-										<li className="list-inline-item">
-											<Link
-												to="#"
-												className="remove-item-btn"
-												onClick={() => {
-													const taskData = cell.row.original;
-													onClickDelete(taskData);
-												}}
-											>
-												<i className="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-											</Link>
-										</li>
-									</ul>
-								</div>
+						<div className="d-flex">
+							<div className="flex-grow-1 tasks_name">{cell.getValue()}</div>
+							<div className="flex-shrink-0 ms-4">
+								<ul className="list-inline tasks-list-menu mb-0">
+									<li className="list-inline-item">
+										<Link to="/apps-tasks-details">
+											<i className="ri-eye-fill align-bottom me-2 text-muted"></i>
+										</Link>
+									</li>
+									<li className="list-inline-item">
+										<Link
+											to="#"
+											onClick={() => {
+												const taskData = cell.row.original;
+												handleCustomerClick(taskData);
+											}}
+										>
+											<i className="ri-pencil-fill align-bottom me-2 text-muted"></i>
+										</Link>
+									</li>
+									<li className="list-inline-item">
+										<Link
+											to="#"
+											className="remove-item-btn"
+											onClick={() => {
+												const taskData = cell.row.original;
+												onClickDelete(taskData);
+											}}
+										>
+											<i className="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
+										</Link>
+									</li>
+								</ul>
 							</div>
-						</React.Fragment>
+						</div>
 					);
 				},
 			},
@@ -381,20 +373,18 @@ const AllTasks = () => {
 						.getValue()
 						.map((item: any) => (item.img ? item.img : item));
 					return (
-						<React.Fragment>
-							<div className="avatar-group">
-								{assigned.map((item: any, index: any) => (
-									<Link key={index} to="#" className="avatar-group-item">
-										<img
-											src={item}
-											alt=""
-											className="rounded-circle avatar-xxs"
-										/>
-										{/* process.env.REACT_APP_API_URL + "/images/users/" + */}
-									</Link>
-								))}
-							</div>
-						</React.Fragment>
+						<div className="avatar-group">
+							{assigned.map((item: any, index: any) => (
+								<Link key={index} to="#" className="avatar-group-item">
+									<img
+										src={item}
+										alt=""
+										className="rounded-circle avatar-xxs"
+									/>
+									{/* process.env.REACT_APP_API_URL + "/images/users/" + */}
+								</Link>
+							))}
+						</div>
 					);
 				},
 			},
@@ -423,7 +413,7 @@ const AllTasks = () => {
 				},
 			},
 		],
-		[handleCustomerClick, checkedAll],
+		[handleCustomerClick, checkedAll, deleteCheckbox, onClickDelete],
 	);
 
 	return (
@@ -503,7 +493,7 @@ const AllTasks = () => {
 				modalClassName="modal fade zoomIn"
 			>
 				<ModalHeader className="p-3 bg-info-subtle" toggle={toggle}>
-					{!!isEdit ? "Edit Task" : "Create Task"}
+					{isEdit ? "Edit Task" : "Create Task"}
 				</ModalHeader>
 				<Form
 					className="tablelist-form"
@@ -532,9 +522,7 @@ const AllTasks = () => {
 									onBlur={validation.handleBlur}
 									value={validation.values.taskId || ""}
 									invalid={
-										validation.touched.taskId && validation.errors.taskId
-											? true
-											: false
+										!!(validation.touched.taskId && validation.errors.taskId)
 									}
 								/>
 								{validation.touched.taskId && validation.errors.taskId ? (
@@ -561,9 +549,7 @@ const AllTasks = () => {
 									onBlur={validation.handleBlur}
 									value={validation.values.project || ""}
 									invalid={
-										validation.touched.project && validation.errors.project
-											? true
-											: false
+										!!(validation.touched.project && validation.errors.project)
 									}
 								/>
 								{validation.touched.project && validation.errors.project ? (
@@ -590,9 +576,7 @@ const AllTasks = () => {
 										onBlur={validation.handleBlur}
 										value={validation.values.task || ""}
 										invalid={
-											validation.touched.task && validation.errors.task
-												? true
-												: false
+											!!(validation.touched.task && validation.errors.task)
 										}
 									/>
 									{validation.touched.task && validation.errors.task ? (
@@ -619,9 +603,7 @@ const AllTasks = () => {
 									onBlur={validation.handleBlur}
 									value={validation.values.creater || ""}
 									invalid={
-										validation.touched.creater && validation.errors.creater
-											? true
-											: false
+										!!(validation.touched.creater && validation.errors.creater)
 									}
 								/>
 								{validation.touched.creater && validation.errors.creater ? (
@@ -646,10 +628,10 @@ const AllTasks = () => {
 														onBlur={validation.handleBlur}
 														value={item.img}
 														invalid={
-															validation.touched.subItem &&
-															validation.errors.subItem
-																? true
-																: false
+															!!(
+																validation.touched.subItem &&
+																validation.errors.subItem
+															)
 														}
 														id={item.imgId}
 													/>
@@ -723,9 +705,7 @@ const AllTasks = () => {
 									onBlur={validation.handleBlur}
 									value={validation.values.status || ""}
 									invalid={
-										validation.touched.status && validation.errors.status
-											? true
-											: false
+										!!(validation.touched.status && validation.errors.status)
 									}
 								>
 									<option value="">Status</option>
@@ -753,9 +733,9 @@ const AllTasks = () => {
 									onBlur={validation.handleBlur}
 									value={validation.values.priority || ""}
 									invalid={
-										validation.touched.priority && validation.errors.priority
-											? true
-											: false
+										!!(
+											validation.touched.priority && validation.errors.priority
+										)
 									}
 								>
 									<option value="">Priority</option>
@@ -783,7 +763,7 @@ const AllTasks = () => {
 								Close
 							</Button>
 							<button type="submit" className="btn btn-success" id="add-btn">
-								{!!isEdit ? "Update Task" : "Add Task"}
+								{isEdit ? "Update Task" : "Add Task"}
 							</button>
 						</div>
 					</div>

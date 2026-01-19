@@ -1,4 +1,3 @@
-import React from "react";
 import PrismCode from "../../../Components/Common/Prism";
 
 //BrowserDefaults code
@@ -48,11 +47,7 @@ const BrowserDefaults = () => {
 </Col>
 </form>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //CustomStyles code
@@ -223,11 +218,7 @@ onSubmit={(e) => {
 </Button>
 </Form>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 //Supported Elements code
 const SupportedElements = () => {
@@ -277,11 +268,7 @@ const SupportedElements = () => {
 </div>
 </Form>
  `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 export { BrowserDefaults, CustomStyles, SupportedElements };

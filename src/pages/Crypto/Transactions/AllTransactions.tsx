@@ -1,21 +1,19 @@
 import React, { useEffect, useMemo, useState } from "react";
+//redux
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Card, CardBody, CardHeader, Col, Row } from "reactstrap";
-
-//redux
-import { useSelector, useDispatch } from "react-redux";
+import { createSelector } from "reselect";
 import TableContainer from "../../../Components/Common/TableContainer";
 import { getTransationList } from "../../../slices/thunks";
-
 import {
-	FromCol,
-	ToCol,
 	DetailsCol,
+	FromCol,
+	Status,
+	ToCol,
 	TransactionID,
 	TypeCol,
-	Status,
 } from "./TransactionsCol";
-import { createSelector } from "reselect";
 
 const AllTransactions = () => {
 	const dispatch: any = useDispatch();
@@ -146,9 +144,7 @@ const AllTransactions = () => {
 				enableColumnFilter: false,
 				cell: (cell: any) => (
 					<>
-						<h6
-							className={"text-" + cell.row.original.iconClass + " amount mb-1"}
-						>
+						<h6 className={`text-${cell.row.original.iconClass} amount mb-1`}>
 							-{cell.getValue()}
 						</h6>
 						<p className="text-muted mb-0">{cell.row.original.amount1}</p>

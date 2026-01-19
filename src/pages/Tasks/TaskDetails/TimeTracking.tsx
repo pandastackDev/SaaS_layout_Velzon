@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
 	Card,
 	CardBody,
@@ -7,11 +8,9 @@ import {
 	DropdownToggle,
 	UncontrolledDropdown,
 } from "reactstrap";
-
-import avatar10 from "../../../assets/images/users/avatar-10.jpg";
-import avatar8 from "../../../assets/images/users/avatar-8.jpg";
 import avatar2 from "../../../assets/images/users/avatar-2.jpg";
-import { Link } from "react-router-dom";
+import avatar8 from "../../../assets/images/users/avatar-8.jpg";
+import avatar10 from "../../../assets/images/users/avatar-10.jpg";
 
 const TimeTracking = () => {
 	return (

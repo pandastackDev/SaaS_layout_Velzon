@@ -28,8 +28,8 @@
 
 // export default PrismCode;
 
-import React, { useEffect, useRef } from "react";
 import Prism from "prismjs";
+import { useEffect, useRef } from "react";
 
 interface PrismCodeProps {
 	code: string;
@@ -40,27 +40,22 @@ interface PrismCodeProps {
 const PrismCode = (props: PrismCodeProps) => {
 	const ref = useRef<HTMLElement>(null);
 
-	useEffect(() => {
-		highlight();
-	}, []);
+	const { code, language = "markup", plugins = [] } = props;
 
-	const highlight = () => {
-		if (ref && ref.current) {
+	useEffect(() => {
+		if (ref?.current) {
 			Prism.highlightElement(ref.current);
 		}
-	};
+	}, [code, language, plugins]);
 
-	const { code, language = "markup", plugins = [] } = props;
 	return (
-		<React.Fragment>
-			<pre
-				className={`line-numbers ${plugins.includes("line-numbers") ? "line-numbers" : ""}`}
-			>
-				<code ref={ref} className={`language-${language}`}>
-					{code.trim()}
-				</code>
-			</pre>
-		</React.Fragment>
+		<pre
+			className={`line-numbers ${plugins.includes("line-numbers") ? "line-numbers" : ""}`}
+		>
+			<code ref={ref} className={`language-${language}`}>
+				{code.trim()}
+			</code>
+		</pre>
 	);
 };
 

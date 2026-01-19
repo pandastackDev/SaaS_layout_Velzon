@@ -1,6 +1,5 @@
-import React from "react";
-import ReactApexChart from "react-apexcharts";
 import * as moment from "moment";
+import ReactApexChart from "react-apexcharts";
 
 import getChartColorsArray from "../../../../Components/Common/ChartsDynamicColor";
 
@@ -59,16 +58,14 @@ const Basic = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="rangeBar"
-				height={350}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="rangeBar"
+			height={350}
+		/>
 	);
 };
 
@@ -140,12 +137,12 @@ const DifferentColor = ({ dataColors }: any) => {
 		},
 		dataLabels: {
 			enabled: true,
-			formatter: function (val: any, opts: any) {
+			formatter: (val: any, opts: any) => {
 				var label = opts.w.globals.labels[opts.dataPointIndex];
 				var a = moment(val[0]);
 				var b = moment(val[1]);
 				var diff = b.diff(a, "days");
-				return label + ": " + diff + (diff > 1 ? " days" : " day");
+				return `${label}: ${diff}${diff > 1 ? " days" : " day"}`;
 			},
 		},
 		xaxis: {
@@ -157,16 +154,14 @@ const DifferentColor = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="rangeBar"
-				height={350}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="rangeBar"
+			height={350}
+		/>
 	);
 };
 
@@ -240,7 +235,7 @@ const MultiSeries = ({ dataColors }: any) => {
 		},
 		dataLabels: {
 			enabled: true,
-			formatter: function (val: any) {
+			formatter: (val: any) => {
 				var a = moment(val[0]);
 				var b = moment(val[1]);
 				var diff = b.diff(a, "days");
@@ -270,16 +265,14 @@ const MultiSeries = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="rangeBar"
-				height={350}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="rangeBar"
+			height={350}
+		/>
 	);
 };
 
@@ -431,16 +424,14 @@ const Advanced = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="rangeBar"
-				height={350}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="rangeBar"
+			height={350}
+		/>
 	);
 };
 
@@ -591,7 +582,7 @@ const MultipleSeries = ({ dataColors }: any) => {
 			type: "datetime",
 		},
 		tooltip: {
-			custom: function ({ series, seriesIndex, dataPointIndex, w }: any) {
+			custom: ({ series, seriesIndex, dataPointIndex, w }: any) => {
 				const fromYear = new Date(
 					series[seriesIndex].data[dataPointIndex].y[0],
 				).getFullYear();
@@ -621,15 +612,13 @@ const MultipleSeries = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="rangeBar"
-				height={350}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="rangeBar"
+			height={350}
+		/>
 	);
 };
 
@@ -719,16 +708,14 @@ const Dumbbell = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="rangeBar"
-				height={350}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="rangeBar"
+			height={350}
+		/>
 	);
 };
 

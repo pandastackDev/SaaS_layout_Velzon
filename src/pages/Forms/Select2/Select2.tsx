@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import Select from "react-select";
 import { Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import Select from "react-select";
 
 const Select2 = () => {
 	document.title = "Select2 | Velzon - React Admin & Dashboard Template";
@@ -184,160 +184,155 @@ const Select2 = () => {
 	};
 
 	return (
-		<React.Fragment>
-			<div className="page-content">
-				<Container fluid>
-					<BreadCrumb title="Select2" pageTitle="Forms" />
-					<Row>
-						<Col lg={12}>
-							<Card>
-								<CardHeader>
-									<h5 className="card-title mb-0">Basic Select2</h5>
-								</CardHeader>
-								<CardBody>
-									<p className="text-muted">
-										Use <code>js-example-basic-single</code>,{" "}
-										<code>js-example-basic-multiple</code>,{" "}
-										<code>js-example-data-array</code>,{" "}
-										<code>js-example-templating</code>,{" "}
-										<code>select-flag-templating</code>, class to show select2
-										example.
-									</p>
-									<Row className="g-4">
-										<Col lg={4}>
-											<h6 className="fw-semibold">Basic Select</h6>
-											<Select
-												value={sortBy}
-												onChange={(sortBy: any) => {
-													setsortBy(sortBy);
-												}}
-												options={sortbyname}
-												id="choices-single-default"
-												className="js-example-basic-single mb-0"
-												name="state"
-											/>
-										</Col>
-										<Col lg={4}>
-											<h6 className="fw-semibold">Multi Select</h6>
-
-											<Select
-												value={selectMulti}
-												isMulti={true}
-												onChange={(sortBy: any) => {
-													setselectMulti(sortBy);
-												}}
-												options={sortbyMulti}
-												classNamePrefix="js-example-basic-multiple mb-0"
-												styles={customStyles}
-											/>
-										</Col>
-										<Col lg={4}>
-											<h6 className="fw-semibold">Ajax Select</h6>
-
-											<Select
-												value={ajaxSelect}
-												onChange={(sortBy: any) => {
-													setajaxSelect(sortBy);
-												}}
-												options={ajaxSelectOption}
-												classNamePrefix="js-example-data-array"
-												isLoading={true}
-											/>
-										</Col>
-
-										<Col lg={4}>
-											<h6 className="fw-semibold">Templating</h6>
-
-											<Select
-												value={temp}
-												onChange={(sortBy: any) => {
-													settemp(sortBy);
-												}}
-												options={tempOption}
-												id="choices-single-default"
-												className="js-example-templating mb-0"
-											/>
-										</Col>
-										<Col lg={4}>
-											<h6 className="fw-semibold">Selections Templating</h6>
-
-											<Select
-												value={selTemp}
-												onChange={(sortBy: any) => {
-													setselTemp(sortBy);
-												}}
-												options={selTempOption}
-												id="choices-single-default"
-												className="select-flag-templating mb-0"
-											/>
-										</Col>
-									</Row>
-								</CardBody>
-							</Card>
-						</Col>
-					</Row>
-
-					<Row>
-						<Col lg={12}>
-							<Card>
-								<CardHeader>
-									<h5 className="card-title mb-0">
-										Disabling a Select2 Control
-									</h5>
-								</CardHeader>
-								<CardBody>
-									<p className="text-muted">
-										Select2 will respond to the disabled attribute on{" "}
-										<code>&lt;select&gt;</code> elements. You can also
-										initialize Select2 with disabled: true to get the same
-										effect.
-									</p>
-									<div className="vstack gap-3">
+		<div className="page-content">
+			<Container fluid>
+				<BreadCrumb title="Select2" pageTitle="Forms" />
+				<Row>
+					<Col lg={12}>
+						<Card>
+							<CardHeader>
+								<h5 className="card-title mb-0">Basic Select2</h5>
+							</CardHeader>
+							<CardBody>
+								<p className="text-muted">
+									Use <code>js-example-basic-single</code>,{" "}
+									<code>js-example-basic-multiple</code>,{" "}
+									<code>js-example-data-array</code>,{" "}
+									<code>js-example-templating</code>,{" "}
+									<code>select-flag-templating</code>, class to show select2
+									example.
+								</p>
+								<Row className="g-4">
+									<Col lg={4}>
+										<h6 className="fw-semibold">Basic Select</h6>
 										<Select
-											value={dissortBy}
+											value={sortBy}
 											onChange={(sortBy: any) => {
-												setdissortBy(sortBy);
+												setsortBy(sortBy);
 											}}
-											options={dissortbyname}
-											className="js-example-disabled mb-0"
-											isDisabled={disable}
+											options={sortbyname}
+											id="choices-single-default"
+											className="js-example-basic-single mb-0"
+											name="state"
 										/>
+									</Col>
+									<Col lg={4}>
+										<h6 className="fw-semibold">Multi Select</h6>
 
 										<Select
-											value={disselectMulti}
+											value={selectMulti}
 											isMulti={true}
 											onChange={(sortBy: any) => {
-												setdisselectMulti(sortBy);
+												setselectMulti(sortBy);
 											}}
-											options={dissortbyMulti}
-											classNamePrefix="js-example-disabled-multi mb-0"
-											isDisabled={disable}
+											options={sortbyMulti}
+											classNamePrefix="js-example-basic-multiple mb-0"
 											styles={customStyles}
 										/>
-									</div>
-									<div className="hstack gap-2 mt-3">
-										<button
-											type="button"
-											className="js-programmatic-enable btn btn-primary"
-											onClick={() => setdisable(false)}
-										>
-											Enable
-										</button>
-										<button
-											type="button"
-											className="js-programmatic-disable btn btn-success"
-											onClick={() => setdisable(true)}
-										>
-											Disable
-										</button>
-									</div>
-								</CardBody>
-							</Card>
-						</Col>
-					</Row>
-				</Container>
-			</div>
-		</React.Fragment>
+									</Col>
+									<Col lg={4}>
+										<h6 className="fw-semibold">Ajax Select</h6>
+
+										<Select
+											value={ajaxSelect}
+											onChange={(sortBy: any) => {
+												setajaxSelect(sortBy);
+											}}
+											options={ajaxSelectOption}
+											classNamePrefix="js-example-data-array"
+											isLoading={true}
+										/>
+									</Col>
+
+									<Col lg={4}>
+										<h6 className="fw-semibold">Templating</h6>
+
+										<Select
+											value={temp}
+											onChange={(sortBy: any) => {
+												settemp(sortBy);
+											}}
+											options={tempOption}
+											id="choices-single-default"
+											className="js-example-templating mb-0"
+										/>
+									</Col>
+									<Col lg={4}>
+										<h6 className="fw-semibold">Selections Templating</h6>
+
+										<Select
+											value={selTemp}
+											onChange={(sortBy: any) => {
+												setselTemp(sortBy);
+											}}
+											options={selTempOption}
+											id="choices-single-default"
+											className="select-flag-templating mb-0"
+										/>
+									</Col>
+								</Row>
+							</CardBody>
+						</Card>
+					</Col>
+				</Row>
+
+				<Row>
+					<Col lg={12}>
+						<Card>
+							<CardHeader>
+								<h5 className="card-title mb-0">Disabling a Select2 Control</h5>
+							</CardHeader>
+							<CardBody>
+								<p className="text-muted">
+									Select2 will respond to the disabled attribute on{" "}
+									<code>&lt;select&gt;</code> elements. You can also initialize
+									Select2 with disabled: true to get the same effect.
+								</p>
+								<div className="vstack gap-3">
+									<Select
+										value={dissortBy}
+										onChange={(sortBy: any) => {
+											setdissortBy(sortBy);
+										}}
+										options={dissortbyname}
+										className="js-example-disabled mb-0"
+										isDisabled={disable}
+									/>
+
+									<Select
+										value={disselectMulti}
+										isMulti={true}
+										onChange={(sortBy: any) => {
+											setdisselectMulti(sortBy);
+										}}
+										options={dissortbyMulti}
+										classNamePrefix="js-example-disabled-multi mb-0"
+										isDisabled={disable}
+										styles={customStyles}
+									/>
+								</div>
+								<div className="hstack gap-2 mt-3">
+									<button
+										type="button"
+										className="js-programmatic-enable btn btn-primary"
+										onClick={() => setdisable(false)}
+									>
+										Enable
+									</button>
+									<button
+										type="button"
+										className="js-programmatic-disable btn btn-success"
+										onClick={() => setdisable(true)}
+									>
+										Disable
+									</button>
+								</div>
+							</CardBody>
+						</Card>
+					</Col>
+				</Row>
+			</Container>
+		</div>
 	);
 };
 

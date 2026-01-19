@@ -1,36 +1,32 @@
+import { useFormik } from "formik";
 import PropTypes from "prop-types";
-import React from "react";
+
+//redux
+import { useDispatch, useSelector } from "react-redux";
+
+import { Link } from "react-router-dom";
 import {
-	Row,
-	Col,
 	Alert,
 	Card,
 	CardBody,
+	Col,
 	Container,
+	Form,
 	FormFeedback,
 	Input,
 	Label,
-	Form,
+	Row,
 } from "reactstrap";
-
-//redux
-import { useSelector, useDispatch } from "react-redux";
-
-import { Link } from "react-router-dom";
-import withRouter from "../../Components/Common/withRouter";
-
+import { createSelector } from "reselect";
 // Formik Validation
 import * as Yup from "yup";
-import { useFormik } from "formik";
-
-// action
-import { userForgetPassword } from "../../slices/thunks";
-
 // import images
 // import profile from "../../assets/images/bg.png";
 import logoLight from "../../assets/images/logo-light.png";
+import withRouter from "../../Components/Common/withRouter";
+// action
+import { userForgetPassword } from "../../slices/thunks";
 import ParticlesAuth from "../AuthenticationInner/ParticlesAuth";
-import { createSelector } from "reselect";
 
 const ForgetPasswordPage = (props: any) => {
 	const dispatch: any = useDispatch();
@@ -124,9 +120,10 @@ const ForgetPasswordPage = (props: any) => {
 													onBlur={validation.handleBlur}
 													value={validation.values.email || ""}
 													invalid={
-														validation.touched.email && validation.errors.email
-															? true
-															: false
+														!!(
+															validation.touched.email &&
+															validation.errors.email
+														)
 													}
 												/>
 												{validation.touched.email && validation.errors.email ? (

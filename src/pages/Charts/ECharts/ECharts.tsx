@@ -1,6 +1,5 @@
-import React from "react";
-import ReactEcharts from "echarts-for-react";
 import * as echarts from "echarts/core";
+import ReactEcharts from "echarts-for-react";
 
 import getChartColorsArray from "../../../Components/Common/ChartsDynamicColor";
 
@@ -49,11 +48,7 @@ const LineChart = ({ dataColors }: any) => {
 		color: chartLineColors,
 	};
 
-	return (
-		<React.Fragment>
-			<ReactEcharts style={{ height: "350px" }} option={option} />
-		</React.Fragment>
-	);
+	return <ReactEcharts style={{ height: "350px" }} option={option} />;
 };
 
 //Stacked Line Chart
@@ -142,11 +137,7 @@ const StackedLineChart = ({ dataColors }: any) => {
 		color: chartLineStackedColors,
 	};
 
-	return (
-		<React.Fragment>
-			<ReactEcharts style={{ height: "350px" }} option={option} />
-		</React.Fragment>
-	);
+	return <ReactEcharts style={{ height: "350px" }} option={option} />;
 };
 
 //AreaChart
@@ -197,11 +188,7 @@ const AreaChart = ({ dataColors }: any) => {
 		backgroundColor: chartAreaColors[1],
 	};
 
-	return (
-		<React.Fragment>
-			<ReactEcharts style={{ height: "350px" }} option={option} />
-		</React.Fragment>
-	);
+	return <ReactEcharts style={{ height: "350px" }} option={option} />;
 };
 
 //StackedAreaChart
@@ -322,11 +309,7 @@ const StackedAreaChart = ({ dataColors }: any) => {
 		],
 	};
 
-	return (
-		<React.Fragment>
-			<ReactEcharts style={{ height: "350px" }} option={option} />
-		</React.Fragment>
-	);
+	return <ReactEcharts style={{ height: "350px" }} option={option} />;
 };
 
 //StepLine Chart
@@ -402,11 +385,7 @@ const StepLineChart = ({ dataColors }: any) => {
 		],
 	};
 
-	return (
-		<React.Fragment>
-			<ReactEcharts style={{ height: "350px" }} option={option} />
-		</React.Fragment>
-	);
+	return <ReactEcharts style={{ height: "350px" }} option={option} />;
 };
 
 //Line Y Chart
@@ -487,11 +466,7 @@ const LineYChart = ({ dataColors }: any) => {
 		],
 	};
 
-	return (
-		<React.Fragment>
-			<ReactEcharts style={{ height: "350px" }} option={option} />
-		</React.Fragment>
-	);
+	return <ReactEcharts style={{ height: "350px" }} option={option} />;
 };
 
 //Basic bar Chart
@@ -543,11 +518,7 @@ const BasicBarChart = ({ dataColors }: any) => {
 		],
 	};
 
-	return (
-		<React.Fragment>
-			<ReactEcharts style={{ height: "350px" }} option={option} />
-		</React.Fragment>
-	);
+	return <ReactEcharts style={{ height: "350px" }} option={option} />;
 };
 
 //Bar Label Chart
@@ -591,7 +562,7 @@ const BarLabelChart = ({ dataColors }: any) => {
 			},
 		},
 		position: {
-			options: posList.reduce(function (map: any, pos: any) {
+			options: posList.reduce((map: any, pos: any) => {
 				map[pos] = pos;
 				return map;
 			}, {}),
@@ -607,7 +578,7 @@ const BarLabelChart = ({ dataColors }: any) => {
 		verticalAlign: "middle",
 		position: "insideBottom",
 		distance: 15,
-		onChange: function () {
+		onChange: () => {
 			var labelOption: any = {
 				rotate: app.config.rotate,
 				align: app.config.align,
@@ -763,11 +734,7 @@ const BarLabelChart = ({ dataColors }: any) => {
 		],
 	};
 
-	return (
-		<React.Fragment>
-			<ReactEcharts style={{ height: "350px" }} option={option} />
-		</React.Fragment>
-	);
+	return <ReactEcharts style={{ height: "350px" }} option={option} />;
 };
 
 //Horizontal Bar Chart
@@ -838,11 +805,7 @@ const HorizontalBarChart = ({ dataColors }: any) => {
 		],
 	};
 
-	return (
-		<React.Fragment>
-			<ReactEcharts style={{ height: "350px" }} option={option} />
-		</React.Fragment>
-	);
+	return <ReactEcharts style={{ height: "350px" }} option={option} />;
 };
 
 //Stacked Horizontal Bar Chart
@@ -963,11 +926,7 @@ const StackedHorizontalBarChart = ({ dataColors }: any) => {
 		],
 	};
 
-	return (
-		<React.Fragment>
-			<ReactEcharts style={{ height: "350px" }} option={option} />
-		</React.Fragment>
-	);
+	return <ReactEcharts style={{ height: "350px" }} option={option} />;
 };
 
 //Pie Chart
@@ -1027,11 +986,7 @@ const PieChart = ({ dataColors }: any) => {
 		},
 	};
 
-	return (
-		<React.Fragment>
-			<ReactEcharts style={{ height: "350px" }} option={option} />
-		</React.Fragment>
-	);
+	return <ReactEcharts style={{ height: "350px" }} option={option} />;
 };
 
 //Doughnut Chart
@@ -1099,11 +1054,7 @@ const DoughnutChart = ({ dataColors }: any) => {
 		},
 	};
 
-	return (
-		<React.Fragment>
-			<ReactEcharts style={{ height: "350px" }} option={option} />
-		</React.Fragment>
-	);
+	return <ReactEcharts style={{ height: "350px" }} option={option} />;
 };
 
 //Basic Scatter Chart
@@ -1177,11 +1128,7 @@ const BasicScatterChart = ({ dataColors }: any) => {
 		color: chartDoughnutColors,
 	};
 
-	return (
-		<React.Fragment>
-			<ReactEcharts style={{ height: "350px" }} option={option} />
-		</React.Fragment>
-	);
+	return <ReactEcharts style={{ height: "350px" }} option={option} />;
 };
 
 //CandleStick Chart
@@ -1243,11 +1190,7 @@ const CandleStickChart = ({ dataColors }: any) => {
 			},
 		],
 	};
-	return (
-		<React.Fragment>
-			<ReactEcharts style={{ height: "350px" }} option={option} />
-		</React.Fragment>
-	);
+	return <ReactEcharts style={{ height: "350px" }} option={option} />;
 };
 
 //Graph Chart
@@ -1346,11 +1289,7 @@ const GraphChart = ({ dataColors }: any) => {
 			fontFamily: "Poppins, sans-serif",
 		},
 	};
-	return (
-		<React.Fragment>
-			<ReactEcharts style={{ height: "350px" }} option={option} />
-		</React.Fragment>
-	);
+	return <ReactEcharts style={{ height: "350px" }} option={option} />;
 };
 
 //Treemap Chart
@@ -1399,11 +1338,7 @@ const TreemapChart = ({ dataColors }: any) => {
 			fontFamily: "Poppins, sans-serif",
 		},
 	};
-	return (
-		<React.Fragment>
-			<ReactEcharts style={{ height: "350px" }} option={option} />
-		</React.Fragment>
-	);
+	return <ReactEcharts style={{ height: "350px" }} option={option} />;
 };
 
 //Sunburst Chart
@@ -1489,11 +1424,7 @@ const SunburstChart = ({ dataColors }: any) => {
 			fontFamily: "Poppins, sans-serif",
 		},
 	};
-	return (
-		<React.Fragment>
-			<ReactEcharts style={{ height: "350px" }} option={option} />
-		</React.Fragment>
-	);
+	return <ReactEcharts style={{ height: "350px" }} option={option} />;
 };
 
 //Parallel Chart
@@ -1543,11 +1474,7 @@ const ParallelChart = ({ dataColors }: any) => {
 			fontFamily: "Poppins, sans-serif",
 		},
 	};
-	return (
-		<React.Fragment>
-			<ReactEcharts style={{ height: "350px" }} option={option} />
-		</React.Fragment>
-	);
+	return <ReactEcharts style={{ height: "350px" }} option={option} />;
 };
 
 //Sankey Chart
@@ -1618,11 +1545,7 @@ const SankeyChart = ({ dataColors }: any) => {
 			fontFamily: "Poppins, sans-serif",
 		},
 	};
-	return (
-		<React.Fragment>
-			<ReactEcharts style={{ height: "350px" }} option={option} />
-		</React.Fragment>
-	);
+	return <ReactEcharts style={{ height: "350px" }} option={option} />;
 };
 
 //funnel Chart
@@ -1712,11 +1635,7 @@ const FunnelChart = ({ dataColors }: any) => {
 			fontFamily: "Poppins, sans-serif",
 		},
 	};
-	return (
-		<React.Fragment>
-			<ReactEcharts style={{ height: "350px" }} option={option} />
-		</React.Fragment>
-	);
+	return <ReactEcharts style={{ height: "350px" }} option={option} />;
 };
 
 //Gauge Chart
@@ -1757,11 +1676,7 @@ const GaugeChart = ({ dataColors }: any) => {
 			},
 		],
 	};
-	return (
-		<React.Fragment>
-			<ReactEcharts style={{ height: "350px" }} option={option} />
-		</React.Fragment>
-	);
+	return <ReactEcharts style={{ height: "350px" }} option={option} />;
 };
 
 //Heatmap Chart
@@ -1769,8 +1684,8 @@ const HeatmapChart = ({ dataColors }: any) => {
 	var chartHeatmapColors = getChartColorsArray(dataColors);
 	function getVirtulData(year: any) {
 		year = year || "2017";
-		var date = +echarts.number.parseDate(year + "-01-01");
-		var end = +echarts.number.parseDate(+year + 1 + "-01-01");
+		var date = +echarts.number.parseDate(`${year}-01-01`);
+		var end = +echarts.number.parseDate(`${+year + 1}-01-01`);
 		var dayTime = 3600 * 24 * 1000;
 		var data = [];
 		for (var time = date; time < end; time += dayTime) {
@@ -1800,11 +1715,7 @@ const HeatmapChart = ({ dataColors }: any) => {
 			data: getVirtulData("2017"),
 		},
 	};
-	return (
-		<React.Fragment>
-			<ReactEcharts style={{ height: "350px" }} option={option} />
-		</React.Fragment>
-	);
+	return <ReactEcharts style={{ height: "350px" }} option={option} />;
 };
 
 export {

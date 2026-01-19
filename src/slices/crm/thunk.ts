@@ -4,19 +4,19 @@ import "react-toastify/dist/ReactToastify.css";
 
 //Include Both Helper File with needed methods
 import {
-	getContacts as getContactsApi,
+	addNewCompanies as addNewCompaniesApi,
+	addNewContact as addNewContactApi,
+	addNewLead as addNewLeadApi,
+	deleteCompanies as deleteCompaniesApi,
+	deleteContact as deleteContactApi,
+	deleteLead as deleteLeadApi,
 	getCompanies as getCompaniesApi,
+	getContacts as getContactsApi,
 	getDeals as getDealsApi,
 	getLeads as getLeadsApi,
-	addNewCompanies as addNewCompaniesApi,
 	updateCompanies as updateCompaniesApi,
-	deleteCompanies as deleteCompaniesApi,
-	addNewContact as addNewContactApi,
 	updateContact as updateContactApi,
-	deleteContact as deleteContactApi,
-	addNewLead as addNewLeadApi,
 	updateLead as updateLeadApi,
-	deleteLead as deleteLeadApi,
 } from "../../helpers/fakebackend_helper";
 
 export const getContacts = createAsyncThunk("crm/getContacts", async () => {
@@ -39,7 +39,7 @@ export const getCompanies = createAsyncThunk("crm/getCompanies", async () => {
 
 export const addNewCompanies = createAsyncThunk(
 	"crm/addNewCompanies",
-	async (companies: any) => {
+	async (companies: Record<string, unknown>) => {
 		try {
 			const response = addNewCompaniesApi(companies);
 			toast.success("Company Added Successfully", { autoClose: 3000 });
@@ -53,7 +53,7 @@ export const addNewCompanies = createAsyncThunk(
 
 export const updateCompanies = createAsyncThunk(
 	"crm/updateCompanies",
-	async (companies: any) => {
+	async (companies: Record<string, unknown>) => {
 		try {
 			const response = updateCompaniesApi(companies);
 			toast.success("Company Updated Successfully", { autoClose: 3000 });
@@ -67,7 +67,7 @@ export const updateCompanies = createAsyncThunk(
 
 export const deleteCompanies = createAsyncThunk(
 	"crm/deleteCompanies",
-	async (companies: any) => {
+	async (companies: string | number | Record<string, unknown>) => {
 		try {
 			const response = deleteCompaniesApi(companies);
 			toast.success("Company Deleted Successfully", { autoClose: 3000 });
@@ -81,7 +81,7 @@ export const deleteCompanies = createAsyncThunk(
 
 export const addNewContact = createAsyncThunk(
 	"crm/addNewContact",
-	async (contact: any) => {
+	async (contact: Record<string, unknown>) => {
 		try {
 			const response = addNewContactApi(contact);
 			toast.success("Contact Added Successfully", { autoClose: 3000 });
@@ -95,7 +95,7 @@ export const addNewContact = createAsyncThunk(
 
 export const updateContact = createAsyncThunk(
 	"crm/updateContact",
-	async (contact: any) => {
+	async (contact: Record<string, unknown>) => {
 		try {
 			const response = updateContactApi(contact);
 			toast.success("Contact Updated Successfully", { autoClose: 3000 });
@@ -109,7 +109,7 @@ export const updateContact = createAsyncThunk(
 
 export const deleteContact = createAsyncThunk(
 	"crm/deleteContact",
-	async (contact: any) => {
+	async (contact: string | number | Record<string, unknown>) => {
 		try {
 			const response = deleteContactApi(contact);
 			toast.success("Contact Deleted Successfully", { autoClose: 3000 });
@@ -132,7 +132,7 @@ export const getLeads = createAsyncThunk("crm/getLeads", async () => {
 
 export const addNewLead = createAsyncThunk(
 	"crm/addNewLead",
-	async (lead: any) => {
+	async (lead: Record<string, unknown>) => {
 		try {
 			const response = addNewLeadApi(lead);
 			toast.success("Lead Added Successfully", { autoClose: 3000 });
@@ -146,7 +146,7 @@ export const addNewLead = createAsyncThunk(
 
 export const updateLead = createAsyncThunk(
 	"crm/updateLead",
-	async (lead: any) => {
+	async (lead: Record<string, unknown>) => {
 		try {
 			const response = updateLeadApi(lead);
 			toast.success("Lead Updated Successfully", { autoClose: 3000 });
@@ -160,7 +160,7 @@ export const updateLead = createAsyncThunk(
 
 export const deleteLead = createAsyncThunk(
 	"crm/deleteLead",
-	async (leads: any) => {
+	async (leads: string | number | Record<string, unknown>) => {
 		try {
 			const response = deleteLeadApi(leads);
 			toast.success("Lead Deleted Successfully", { autoClose: 3000 });

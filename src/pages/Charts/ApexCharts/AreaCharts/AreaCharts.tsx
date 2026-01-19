@@ -1,9 +1,7 @@
-import React from "react";
-import ReactApexChart from "react-apexcharts";
-import { dataSeries, githubdata, seriesData } from "../series";
 import * as moment from "moment";
-
+import ReactApexChart from "react-apexcharts";
 import getChartColorsArray from "../../../../Components/Common/ChartsDynamicColor";
+import { dataSeries, githubdata, seriesData } from "../series";
 
 const BasicAreaCharts = ({ dataColors }: any) => {
 	var BasicAreaChartsColors = getChartColorsArray(dataColors);
@@ -53,16 +51,14 @@ const BasicAreaCharts = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="area"
-				height="350"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="area"
+			height="350"
+			className="apex-charts"
+		/>
 	);
 };
 
@@ -113,16 +109,14 @@ const SplineAreaChart = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="area"
-				height="350"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="area"
+			height="350"
+			className="apex-charts"
+		/>
 	);
 };
 
@@ -483,16 +477,14 @@ const AxisChart = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="area"
-				height="320"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="area"
+			height="320"
+			className="apex-charts"
+		/>
 	);
 };
 
@@ -746,16 +738,14 @@ const NegativeAreaChart = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="area"
-				height="350"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="area"
+			height="350"
+			className="apex-charts"
+		/>
 	);
 };
 
@@ -777,7 +767,7 @@ const GithubStyleCharts = ({ dataColors }: any) => {
 				autoSelected: "pan",
 			},
 			events: {
-				mounted: function (chart: any) {
+				mounted: (chart: any) => {
 					var commitsEl = document.querySelector(".cmeta span.commits");
 					var commits = chart.getSeriesTotalXRange(
 						chart.w.globals.minX,
@@ -786,7 +776,7 @@ const GithubStyleCharts = ({ dataColors }: any) => {
 
 					commitsEl!.innerHTML = commits;
 				},
-				updated: function (chart: any) {
+				updated: (chart: any) => {
 					var commitsEl = document.querySelector(".cmeta span.commits");
 					var commits = chart.getSeriesTotalXRange(
 						chart.w.globals.minX,
@@ -819,16 +809,14 @@ const GithubStyleCharts = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="area"
-				height="120"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="area"
+			height="120"
+			className="apex-charts"
+		/>
 	);
 };
 
@@ -881,26 +869,20 @@ const GithubStyleCharts1 = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="area"
-				height="170"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="area"
+			height="170"
+			className="apex-charts"
+		/>
 	);
 };
 
 const StackedAreaChart = ({ dataColors }: any) => {
 	var BasicAreaChartsColors = getChartColorsArray(dataColors);
-	var generateDayWiseTimeSeries = function (
-		baseval: any,
-		count: any,
-		yrange: any,
-	) {
+	var generateDayWiseTimeSeries = (baseval: any, count: any, yrange: any) => {
 		var i = 0;
 		var series = [];
 		while (i < count) {
@@ -959,7 +941,7 @@ const StackedAreaChart = ({ dataColors }: any) => {
 				show: false,
 			},
 			events: {
-				selection: function (chart: any, e: any) {
+				selection: (_chart: any, e: any) => {
 					console.log(new Date(e.xaxis.min));
 				},
 			},
@@ -988,16 +970,14 @@ const StackedAreaChart = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="area"
-				height="350"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="area"
+			height="350"
+			className="apex-charts"
+		/>
 	);
 };
 
@@ -1073,9 +1053,7 @@ const IrregularAreaCharts = ({ dataColors }: any) => {
 					colors: "#8e8da4",
 				},
 				offsetX: 0,
-				formatter: function (val: any) {
-					return (val / 1000000).toFixed(2);
-				},
+				formatter: (val: any) => (val / 1000000).toFixed(2),
 			},
 			axisBorder: {
 				show: false,
@@ -1092,9 +1070,8 @@ const IrregularAreaCharts = ({ dataColors }: any) => {
 			labels: {
 				rotate: -15,
 				rotateAlways: true,
-				formatter: function (val: any, timestamp: any) {
-					return moment(new Date(timestamp)).format("DD MMM YYYY");
-				},
+				formatter: (_val: any, timestamp: any) =>
+					moment(new Date(timestamp)).format("DD MMM YYYY"),
 			},
 		},
 		title: {
@@ -1117,16 +1094,14 @@ const IrregularAreaCharts = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="area"
-				height="350"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="area"
+			height="350"
+			className="apex-charts"
+		/>
 	);
 };
 
@@ -1290,16 +1265,14 @@ const AreaNullValueChart = ({ dataColors }: any) => {
 		colors: BasicAreaChartsColors,
 	};
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="area"
-				height="350"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="area"
+			height="350"
+			className="apex-charts"
+		/>
 	);
 };
 

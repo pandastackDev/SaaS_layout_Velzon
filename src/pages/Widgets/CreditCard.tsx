@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { Card, CardBody, Col, Row } from "reactstrap";
 // import Cards from 'react-credit-cards';
 // import 'react-credit-cards/es/styles-compiled.css';
 // import 'react-credit-cards/lib/styles.scss';
 import Cleave from "cleave.js/react";
+import React, { useState } from "react";
+import { Card, CardBody, Col, Row } from "reactstrap";
 import "cleave.js/dist/addons/cleave-phone.in";
 
 const CreditCard = () => {
@@ -15,7 +15,10 @@ const CreditCard = () => {
 		focus: "",
 	});
 
-	const onChangeHandler = (e: any, name: any) => {
+	const onChangeHandler = (
+		e: React.ChangeEvent<HTMLInputElement>,
+		name: string,
+	) => {
 		if (name === "cardNumber") {
 			setState({ ...state, cardNumber: e.target.value });
 		} else if (name === "cardHolder") {
@@ -27,7 +30,7 @@ const CreditCard = () => {
 		}
 	};
 
-	const handleInputFocus = (e: any) => {
+	const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>) => {
 		setState({ ...state, focus: e.target.name });
 	};
 
@@ -256,8 +259,12 @@ const CreditCard = () => {
 													}}
 													value={state.expiry}
 													name="expiry"
-													onChange={(e: any) => onChangeHandler(e, "expiry")}
-													onFocus={(e: any) => handleInputFocus(e)}
+													onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+														onChangeHandler(e, "expiry")
+													}
+													onFocus={(e: React.FocusEvent<HTMLInputElement>) =>
+														handleInputFocus(e)
+													}
 													className="form-control"
 													id="card-cvc-input"
 												/>

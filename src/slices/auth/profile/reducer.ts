@@ -20,7 +20,7 @@ const ProfileSlice = createSlice({
 		editProfileChange(state) {
 			state = { ...state };
 		},
-		resetProfileFlagChange(state: any) {
+		resetProfileFlagChange(state) {
 			state.success = null;
 		},
 	},

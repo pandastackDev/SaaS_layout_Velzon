@@ -1,4 +1,3 @@
-import React from "react";
 import ReactApexChart from "react-apexcharts";
 import getChartColorsArray from "../../Components/Common/ChartsDynamicColor";
 
@@ -32,9 +31,7 @@ const PortfolioCharts = ({ dataColors, series }: any) => {
 							color: "#343a40",
 							fontWeight: 500,
 							offsetY: 5,
-							formatter: function (val: any) {
-								return "$" + val;
-							},
+							formatter: (val: number) => `$${val}`,
 						},
 						total: {
 							show: true,
@@ -42,14 +39,12 @@ const PortfolioCharts = ({ dataColors, series }: any) => {
 							label: "Total value",
 							color: "#9599ad",
 							fontWeight: 500,
-							formatter: function (w: any) {
-								return (
-									"$" +
-									w.globals.seriesTotals.reduce(function (a: any, b: any) {
-										return a + b;
-									}, 0)
-								);
-							},
+							formatter: (w: { globals: { seriesTotals: number[] } }) =>
+								"$" +
+								w.globals.seriesTotals.reduce(
+									(a: number, b: number) => a + b,
+									0,
+								),
 						},
 					},
 				},
@@ -63,9 +58,7 @@ const PortfolioCharts = ({ dataColors, series }: any) => {
 		},
 		yaxis: {
 			labels: {
-				formatter: function (value: any) {
-					return "$" + value;
-				},
+				formatter: (value: number) => `$${value}`,
 			},
 		},
 		stroke: {
@@ -75,23 +68,26 @@ const PortfolioCharts = ({ dataColors, series }: any) => {
 		colors: donutchartportfolioColors,
 	};
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="donut"
-				height="224"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="donut"
+			height="224"
+			className="apex-charts"
+		/>
 	);
 };
 
-const MarkerCharts = ({ dataColors, series }: any) => {
-	var MarketchartColors = getChartColorsArray(dataColors);
+interface MarkerChartsProps {
+	dataColors: string;
+	series: Array<{ data: Array<{ x: Date; y: number[] }> }>;
+}
 
-	var options: any = {
+const MarkerCharts = ({ dataColors, series }: MarkerChartsProps) => {
+	const MarketchartColors = getChartColorsArray(dataColors);
+
+	const options: Record<string, unknown> = {
 		chart: {
 			type: "candlestick",
 			height: 294,
@@ -115,16 +111,14 @@ const MarkerCharts = ({ dataColors, series }: any) => {
 				enabled: true,
 			},
 			labels: {
-				formatter: function (value: any) {
-					return "$" + value;
-				},
+				formatter: (value: any) => `$${value}`,
 			},
 		},
 		tooltip: {
 			shared: true,
 			y: [
 				{
-					formatter: function (y: any) {
+					formatter: (y: any) => {
 						if (typeof y !== "undefined") {
 							return y.toFixed(0);
 						}
@@ -132,17 +126,17 @@ const MarkerCharts = ({ dataColors, series }: any) => {
 					},
 				},
 				{
-					formatter: function (y: any) {
+					formatter: (y: any) => {
 						if (typeof y !== "undefined") {
-							return "$" + y.toFixed(2) + "k";
+							return `$${y.toFixed(2)}k`;
 						}
 						return y;
 					},
 				},
 				{
-					formatter: function (y: any) {
+					formatter: (y: any) => {
 						if (typeof y !== "undefined") {
-							return y.toFixed(0) + " Sales";
+							return `${y.toFixed(0)} Sales`;
 						}
 						return y;
 					},
@@ -151,16 +145,14 @@ const MarkerCharts = ({ dataColors, series }: any) => {
 		},
 	};
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="candlestick"
-				height="294"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="candlestick"
+			height="294"
+			className="apex-charts"
+		/>
 	);
 };
 
@@ -198,16 +190,14 @@ const WidgetsCharts = ({ seriesData, chartsColor }: any) => {
 		colors: areachartlitecoinColors,
 	};
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={[...seriesData]}
-				type="area"
-				height="46"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={[...seriesData]}
+			type="area"
+			height="46"
+			className="apex-charts"
+		/>
 	);
 };
 

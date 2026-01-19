@@ -1,14 +1,17 @@
-import React, { useEffect } from "react";
-import { Navigate } from "react-router-dom";
-import { setAuthorization } from "../helpers/api_helper";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-
+import { Navigate } from "react-router-dom";
 import { useProfile } from "../Components/Hooks/UserHooks";
+import { setAuthorization } from "../helpers/api_helper";
 
 import { logoutUser } from "../slices/auth/login/thunk";
 
-const AuthProtected = (props: any) => {
-	const dispatch: any = useDispatch();
+interface AuthProtectedProps {
+	children: React.ReactNode;
+}
+
+const AuthProtected = (props: AuthProtectedProps) => {
+	const dispatch = useDispatch();
 	const { userProfile, loading, token } = useProfile();
 
 	useEffect(() => {

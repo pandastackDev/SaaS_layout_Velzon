@@ -3,7 +3,7 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 
 class FirebaseAuthBackend {
-	constructor(firebaseConfig: any) {
+	constructor(firebaseConfig: Record<string, unknown>) {
 		if (firebaseConfig) {
 			// Initialize Firebase
 			firebase.initializeApp(firebaseConfig);
@@ -17,13 +17,13 @@ class FirebaseAuthBackend {
 		}
 	}
 
-	registerUser = (email: any, password: any) => {
+	registerUser = (email: string, password: string) => {
 		return new Promise((resolve, reject) => {
 			firebase
 				.auth()
 				.createUserWithEmailAndPassword(email, password)
 				.then(
-					(user) => {
+					(_user) => {
 						resolve(firebase.auth().currentUser);
 					},
 					(error) => {
@@ -33,13 +33,16 @@ class FirebaseAuthBackend {
 		});
 	};
 
-	editProfileAPI = (email: any, password: any) => {
+	editProfileAPI = (
+		email: string | undefined,
+		password: string | number | undefined,
+	) => {
 		return new Promise((resolve, reject) => {
 			firebase
 				.auth()
 				.createUserWithEmailAndPassword(email, password)
 				.then(
-					(user) => {
+					(_user) => {
 						resolve(firebase.auth().currentUser);
 					},
 					(error) => {
@@ -49,13 +52,13 @@ class FirebaseAuthBackend {
 		});
 	};
 
-	loginUser = (email: any, password: any) => {
+	loginUser = (email: string, password: string) => {
 		return new Promise((resolve, reject) => {
 			firebase
 				.auth()
 				.signInWithEmailAndPassword(email, password)
 				.then(
-					(user) => {
+					(_user) => {
 						resolve(firebase.auth().currentUser);
 					},
 					(error) => {
@@ -65,7 +68,7 @@ class FirebaseAuthBackend {
 		});
 	};
 
-	forgetPassword = (email: any): Promise<boolean> => {
+	forgetPassword = (email: string): Promise<boolean> => {
 		return new Promise((resolve, reject) => {
 			firebase
 				.auth()
@@ -95,7 +98,7 @@ class FirebaseAuthBackend {
 		});
 	};
 
-	socialLoginUser = async (type: any) => {
+	socialLoginUser = async (type: string) => {
 		let provider: firebase.auth.AuthProvider | null = null;
 		if (type === "google") {
 			provider = new firebase.auth.GoogleAuthProvider();
@@ -126,7 +129,7 @@ class FirebaseAuthBackend {
 			createdDtm: firebase.firestore.FieldValue.serverTimestamp(),
 			lastLoginTime: firebase.firestore.FieldValue.serverTimestamp(),
 		};
-		collection.doc(firebase.auth().currentUser!.uid).set(details);
+		collection.doc(firebase.auth().currentUser?.uid).set(details);
 		return { user, details };
 	};
 

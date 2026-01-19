@@ -1,7 +1,21 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { getTransationList, getOrderList } from "./thunk";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { getOrderList, getTransationList } from "./thunk";
 
-export const initialState: any = {
+interface Transaction {
+	[key: string]: unknown;
+}
+
+interface Order {
+	[key: string]: unknown;
+}
+
+interface CryptoState {
+	transationList: Transaction[];
+	orderList: Order[];
+	error?: Record<string, unknown> | null;
+}
+
+export const initialState: CryptoState = {
 	transationList: [],
 	orderList: [],
 };
@@ -11,18 +25,24 @@ const Cryptoslice = createSlice({
 	initialState,
 	reducers: {},
 	extraReducers: (builder) => {
-		builder.addCase(getTransationList.fulfilled, (state: any, action: any) => {
-			state.transationList = action.payload;
-		});
-		builder.addCase(getTransationList.rejected, (state: any, action: any) => {
-			state.error = action.payload.error || null;
+		builder.addCase(
+			getTransationList.fulfilled,
+			(state, action: PayloadAction<Transaction[]>) => {
+				state.transationList = action.payload;
+			},
+		);
+		builder.addCase(getTransationList.rejected, (state, action) => {
+			state.error = (action.payload as { error?: unknown })?.error || null;
 		});
 
-		builder.addCase(getOrderList.fulfilled, (state: any, action: any) => {
-			state.orderList = action.payload;
-		});
-		builder.addCase(getOrderList.rejected, (state: any, action: any) => {
-			state.error = action.payload.error || null;
+		builder.addCase(
+			getOrderList.fulfilled,
+			(state, action: PayloadAction<Order[]>) => {
+				state.orderList = action.payload;
+			},
+		);
+		builder.addCase(getOrderList.rejected, (state, action) => {
+			state.error = (action.payload as { error?: unknown })?.error || null;
 		});
 	},
 });

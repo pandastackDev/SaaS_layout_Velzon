@@ -2,8 +2,6 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Autoplay, Mousewheel } from "swiper/modules";
-import { watchlist } from "../../../common/data";
 import {
 	Card,
 	CardBody,
@@ -14,7 +12,10 @@ import {
 	Row,
 	UncontrolledDropdown,
 } from "reactstrap";
+import { Autoplay, Mousewheel } from "swiper/modules";
+import { watchlist } from "../../../common/data";
 import WatchListChart from "./watchListChart";
+
 const Watchlist = () => {
 	return (
 		<React.Fragment>
@@ -73,9 +74,7 @@ const Watchlist = () => {
 									<Col xs={6}>
 										<h5 className="mb-1 mt-4">{item.price}</h5>
 										<p
-											className={
-												"fs-13 fw-medium mb-0 text-" + item.percentageClass
-											}
+											className={`fs-13 fw-medium mb-0 text-${item.percentageClass}`}
 										>
 											{item.percentage}
 											<span className="text-muted ms-2 fs-10">

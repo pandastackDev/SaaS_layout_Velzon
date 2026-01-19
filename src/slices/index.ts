@@ -1,58 +1,44 @@
 import { combineReducers } from "redux";
-
-// Front
-import LayoutReducer from "./layouts/reducer";
-
+// API Key
+import APIKeyReducer from "./apiKey/reducer";
+import ForgetPasswordReducer from "./auth/forgetpwd/reducer";
 // Authentication
 import LoginReducer from "./auth/login/reducer";
-import AccountReducer from "./auth/register/reducer";
-import ForgetPasswordReducer from "./auth/forgetpwd/reducer";
 import ProfileReducer from "./auth/profile/reducer";
+import AccountReducer from "./auth/register/reducer";
 
 //Calendar
 import CalendarReducer from "./calendar/reducer";
 //Chat
 import chatReducer from "./chat/reducer";
-//Ecommerce
-import EcommerceReducer from "./ecommerce/reducer";
-
-//Project
-import ProjectsReducer from "./projects/reducer";
-
-// Tasks
-import TasksReducer from "./tasks/reducer";
-
-//Crypto
-import CryptoReducer from "./crypto/reducer";
-
-//TicketsList
-import TicketsReducer from "./tickets/reducer";
 //Crm
 import CrmReducer from "./crm/reducer";
-
-//Invoice
-import InvoiceReducer from "./invoice/reducer";
-
-//Mailbox
-import MailboxReducer from "./mailbox/reducer";
-
+//Crypto
+import CryptoReducer from "./crypto/reducer";
 // Dashboard Crypto
 import DashboardCryptoReducer from "./dashboardCrypto/reducer";
-
-// Pages > Team
-import TeamDataReducer from "./team/reducer";
-
+//Ecommerce
+import EcommerceReducer from "./ecommerce/reducer";
 // File Manager
 import FileManagerReducer from "./fileManager/reducer";
-
-// To do
-import TodosReducer from "./todos/reducer";
-
+//Invoice
+import InvoiceReducer from "./invoice/reducer";
 // Job
 import JobReducer from "./jobs/reducer";
-
-// API Key
-import APIKeyReducer from "./apiKey/reducer";
+// Front
+import LayoutReducer from "./layouts/reducer";
+//Mailbox
+import MailboxReducer from "./mailbox/reducer";
+//Project
+import ProjectsReducer from "./projects/reducer";
+// Tasks
+import TasksReducer from "./tasks/reducer";
+// Pages > Team
+import TeamDataReducer from "./team/reducer";
+//TicketsList
+import TicketsReducer from "./tickets/reducer";
+// To do
+import TodosReducer from "./todos/reducer";
 
 const rootReducer = combineReducers({
 	Layout: LayoutReducer,

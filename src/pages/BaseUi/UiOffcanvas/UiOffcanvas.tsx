@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
 	Button,
 	Card,
@@ -11,20 +12,14 @@ import {
 	Row,
 	UncontrolledTooltip,
 } from "reactstrap";
-import { Link } from "react-router-dom";
-
-// Import Content
-import UiContent from "../../../Components/Common/UiContent";
-//import Components
-import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
 import SimpleBar from "simplebar-react";
-import {
-	DefaultOffcanvasExample,
-	PlacementOffcanvasExample,
-	BackdropOffcanvasExample,
-} from "./UiOffcanvasCode";
-
+import img2 from "../../../assets/images/small/img-2.jpg";
+import img3 from "../../../assets/images/small/img-3.jpg";
+import img4 from "../../../assets/images/small/img-4.jpg";
+import img9 from "../../../assets/images/small/img-9.jpg";
+import img10 from "../../../assets/images/small/img-10.jpg";
+import img11 from "../../../assets/images/small/img-11.jpg";
+import img12 from "../../../assets/images/small/img-12.jpg";
 // Import Images
 import avatar1 from "../../../assets/images/users/avatar-1.jpg";
 import avatar2 from "../../../assets/images/users/avatar-2.jpg";
@@ -33,14 +28,16 @@ import avatar4 from "../../../assets/images/users/avatar-4.jpg";
 import avatar6 from "../../../assets/images/users/avatar-6.jpg";
 import avatar7 from "../../../assets/images/users/avatar-7.jpg";
 import avatar8 from "../../../assets/images/users/avatar-8.jpg";
-
-import img2 from "../../../assets/images/small/img-2.jpg";
-import img3 from "../../../assets/images/small/img-3.jpg";
-import img4 from "../../../assets/images/small/img-4.jpg";
-import img9 from "../../../assets/images/small/img-9.jpg";
-import img10 from "../../../assets/images/small/img-10.jpg";
-import img11 from "../../../assets/images/small/img-11.jpg";
-import img12 from "../../../assets/images/small/img-12.jpg";
+//import Components
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
+// Import Content
+import UiContent from "../../../Components/Common/UiContent";
+import {
+	BackdropOffcanvasExample,
+	DefaultOffcanvasExample,
+	PlacementOffcanvasExample,
+} from "./UiOffcanvasCode";
 
 const UiOffcanvas = () => {
 	const [open, setOpen] = useState(false);

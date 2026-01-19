@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import type React from "react";
+import { useEffect } from "react";
 
 const UiContent: React.FC = () => {
 	useEffect(() => {
 		const checkboxElements = document.getElementsByClassName("code-switcher");
-		Array.from(checkboxElements).forEach(function (checkbox) {
-			checkbox.addEventListener("change", function () {
+		Array.from(checkboxElements).forEach((checkbox) => {
+			checkbox.addEventListener("change", () => {
 				const card = checkbox.closest(".card") as HTMLElement | null;
 				const preview = card?.querySelector(
 					".live-preview",

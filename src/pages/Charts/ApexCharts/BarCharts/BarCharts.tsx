@@ -1,4 +1,3 @@
-import React from "react";
 import ReactApexChart from "react-apexcharts";
 import user from "../../../../assets/images/small/img-4.jpg";
 
@@ -47,16 +46,14 @@ const Basic = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="bar"
-				height={350}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="bar"
+			height={350}
+		/>
 	);
 };
 
@@ -92,9 +89,8 @@ const CustomDataLabel = ({ dataColors }: any) => {
 			style: {
 				colors: ["#fff"],
 			},
-			formatter: function (val: any, opt: any) {
-				return opt.w.globals.labels[opt.dataPointIndex] + ":  " + val;
-			},
+			formatter: (val: any, opt: any) =>
+				`${opt.w.globals.labels[opt.dataPointIndex]}:  ${val}`,
 			offsetX: 0,
 			dropShadow: {
 				enabled: false,
@@ -142,24 +138,20 @@ const CustomDataLabel = ({ dataColors }: any) => {
 			},
 			y: {
 				title: {
-					formatter: function () {
-						return "";
-					},
+					formatter: () => "",
 				},
 			},
 		},
 	};
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="bar"
-				height={350}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="bar"
+			height={350}
+		/>
 	);
 };
 
@@ -214,9 +206,7 @@ const Stacked = ({ dataColors }: any) => {
 		xaxis: {
 			categories: [2008, 2009, 2010, 2011, 2012, 2013, 2014],
 			labels: {
-				formatter: function (val: any) {
-					return val + "K";
-				},
+				formatter: (val: any) => `${val}K`,
 			},
 		},
 		yaxis: {
@@ -226,9 +216,7 @@ const Stacked = ({ dataColors }: any) => {
 		},
 		tooltip: {
 			y: {
-				formatter: function (val: any) {
-					return val + "K";
-				},
+				formatter: (val: any) => `${val}K`,
 			},
 		},
 		fill: {
@@ -243,16 +231,14 @@ const Stacked = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="bar"
-				height={350}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="bar"
+			height={350}
+		/>
 	);
 };
 
@@ -309,9 +295,7 @@ const Stacked2 = ({ dataColors }: any) => {
 		},
 		tooltip: {
 			y: {
-				formatter: function (val: any) {
-					return val + "K";
-				},
+				formatter: (val: any) => `${val}K`,
 			},
 		},
 		fill: {
@@ -326,16 +310,14 @@ const Stacked2 = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="bar"
-				height={350}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="bar"
+			height={350}
+		/>
 	);
 };
 
@@ -402,14 +384,10 @@ const Negative = ({ dataColors }: any) => {
 		tooltip: {
 			shared: !1,
 			x: {
-				formatter: function (val: any) {
-					return val;
-				},
+				formatter: (val: any) => val,
 			},
 			y: {
-				formatter: function (val: any) {
-					return Math.abs(val) + "%";
-				},
+				formatter: (val: any) => `${Math.abs(val)}%`,
 			},
 		},
 		title: {
@@ -443,24 +421,20 @@ const Negative = ({ dataColors }: any) => {
 				text: "Percent",
 			},
 			labels: {
-				formatter: function (val: any) {
-					return Math.abs(Math.round(val)) + "%";
-				},
+				formatter: (val: any) => `${Math.abs(Math.round(val))}%`,
 			},
 		},
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="bar"
-				height={350}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="bar"
+			height={350}
+		/>
 	);
 };
 
@@ -559,11 +533,11 @@ const Markers = ({ dataColors }: any) => {
 		},
 		colors: chartBarMarkersColors,
 		dataLabels: {
-			formatter: function (val: any, opt: any) {
+			formatter: (val: any, opt: any) => {
 				var goals =
 					opt.w.config.series[opt.seriesIndex].data[opt.dataPointIndex].goals;
 
-				if (goals && goals.length) {
+				if (goals?.length) {
 					return `${val} / ${goals[0].value}`;
 				}
 				return val;
@@ -580,16 +554,14 @@ const Markers = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="bar"
-				height={350}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="bar"
+			height={350}
+		/>
 	);
 };
 
@@ -670,16 +642,14 @@ const Reversed = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="bar"
-				height={350}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="bar"
+			height={350}
+		/>
 	);
 };
 
@@ -746,9 +716,7 @@ const Patterned = ({ dataColors }: any) => {
 		tooltip: {
 			shared: false,
 			y: {
-				formatter: function (val: any) {
-					return val + "K";
-				},
+				formatter: (val: any) => `${val}K`,
 			},
 		},
 		fill: {
@@ -771,16 +739,14 @@ const Patterned = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="bar"
-				height={350}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="bar"
+			height={350}
+		/>
 	);
 };
 
@@ -834,16 +800,14 @@ const Groupes = ({ dataColors }: any) => {
 		colors: chartGroupbarColors,
 	};
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="bar"
-				height={410}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="bar"
+			height={410}
+		/>
 	);
 };
 
@@ -924,16 +888,14 @@ const BarwithImages = () => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="bar"
-				height={410}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="bar"
+			height={410}
+		/>
 	);
 };
 

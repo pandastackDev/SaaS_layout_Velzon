@@ -1,19 +1,19 @@
-import { userForgetPasswordSuccess, userForgetPasswordError } from "./reducer";
-
-//Include Both Helper File with needed methods
-import { getFirebaseBackend } from "../../../helpers/firebase_helper";
-
 import {
 	postFakeForgetPwd,
 	postJwtForgetPwd,
 } from "../../../helpers/fakebackend_helper";
 
-const fireBaseBackend: any = getFirebaseBackend();
+//Include Both Helper File with needed methods
+import { getFirebaseBackend } from "../../../helpers/firebase_helper";
+import { userForgetPasswordError, userForgetPasswordSuccess } from "./reducer";
+
+const fireBaseBackend = getFirebaseBackend();
 
 export const userForgetPassword =
-	(user: any, history: any) => async (dispatch: any) => {
+	(user: { email: string; [key: string]: unknown }, _history: unknown) =>
+	async (dispatch: (action: unknown) => void) => {
 		try {
-			let response;
+			let response: Promise<unknown>;
 			if (import.meta.env.VITE_APP_DEFAULTAUTH === "firebase") {
 				response = fireBaseBackend.forgetPassword(user.email);
 			} else if (import.meta.env.VITE_APP_DEFAULTAUTH === "jwt") {

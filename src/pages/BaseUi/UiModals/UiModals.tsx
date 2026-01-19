@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
 	Alert,
 	Button,
@@ -16,34 +17,31 @@ import {
 	UncontrolledPopover,
 	UncontrolledTooltip,
 } from "reactstrap";
-import { Link } from "react-router-dom";
-
-// Import Content
-import UiContent from "../../../Components/Common/UiContent";
-//import Components
-import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
-import {
-	DefaultModalExample,
-	CenteredModalExample,
-	GridsModalExample,
-	StaticBackdropModalExample,
-	TogglebetweenExample,
-	TooltipModalExample,
-	ScrollableModalExample,
-	VaryingModalExample,
-	OptionalModalExample,
-	FullscreenResponsiveExample,
-	AnimationModalExample,
-	PositionModalExample,
-} from "./UiModalCode";
-
+import authbg from "../../../assets/images/auth-one-bg.jpg";
 // Import Images
 import loginImg from "../../../assets/images/modals/login.png";
 import signupImg from "../../../assets/images/modals/signup.png";
 import subscribeImg from "../../../assets/images/modals/subscribe.png";
 import paymentImg from "../../../assets/images/modals/success-payment.png";
-import authbg from "../../../assets/images/auth-one-bg.jpg";
+//import Components
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
+// Import Content
+import UiContent from "../../../Components/Common/UiContent";
+import {
+	AnimationModalExample,
+	CenteredModalExample,
+	DefaultModalExample,
+	FullscreenResponsiveExample,
+	GridsModalExample,
+	OptionalModalExample,
+	PositionModalExample,
+	ScrollableModalExample,
+	StaticBackdropModalExample,
+	TogglebetweenExample,
+	TooltipModalExample,
+	VaryingModalExample,
+} from "./UiModalCode";
 
 const UiModals = () => {
 	const [modal_standard, setmodal_standard] = useState(false);
@@ -2970,7 +2968,7 @@ const UiModals = () => {
 			{/* Success Message */}
 			<Modal
 				id="success-Payment"
-				tabIndex={1}
+				tabIndex="0"
 				isOpen={modal_successMessage}
 				toggle={() => {
 					tog_successMessage();
@@ -3018,7 +3016,7 @@ const UiModals = () => {
 			{/* Login Modals */}
 			<Modal
 				id="loginModals"
-				tabIndex={1}
+				tabIndex="0"
 				isOpen={modal_loginModals}
 				toggle={() => {
 					tog_loginModals();
@@ -3076,7 +3074,7 @@ const UiModals = () => {
 			{/* Subscribe Modals */}
 			<Modal
 				id="subscribeModals"
-				tabIndex={1}
+				tabIndex="0"
 				isOpen={subscribeModals}
 				toggle={() => {
 					tog_subscribeModals();
@@ -3144,7 +3142,7 @@ const UiModals = () => {
 			{/* Subscribe Modals */}
 			<Modal
 				id="signupModals"
-				tabIndex={1}
+				tabIndex="0"
 				isOpen={modal_signUpModals}
 				toggle={() => {
 					tog_signUpModals();

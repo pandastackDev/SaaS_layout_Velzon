@@ -1,7 +1,18 @@
 import React from "react";
 
+interface MenuItem {
+	label: string;
+	isHeader?: boolean;
+	id?: string;
+	icon?: string;
+	link?: string;
+	badgeName?: string;
+	badgeColor?: string;
+	subItems?: MenuItem[];
+}
+
 const Navdata = () => {
-	const menuItems: any = [
+	const menuItems: MenuItem[] = [
 		{
 			label: "Menu",
 			isHeader: true,

@@ -1,4 +1,3 @@
-import React from "react";
 import ReactApexChart from "react-apexcharts";
 
 import getChartColorsArray from "../../../../Components/Common/ChartsDynamicColor";
@@ -75,16 +74,14 @@ const Line = ({ dataColors }: any) => {
 		colors: chartLineColumnColors,
 	};
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="line"
-				height={350}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="line"
+			height={350}
+		/>
 	);
 };
 
@@ -220,16 +217,14 @@ const YAxis = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="line"
-				height={350}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="line"
+			height={350}
+		/>
 	);
 };
 
@@ -294,9 +289,9 @@ const Area = ({ dataColors }: any) => {
 			shared: !0,
 			intersect: !1,
 			y: {
-				formatter: function (y: any) {
+				formatter: (y: any) => {
 					if (typeof y !== "undefined") {
-						return y.toFixed(0) + " points";
+						return `${y.toFixed(0)} points`;
 					}
 					return y;
 				},
@@ -306,16 +301,14 @@ const Area = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="line"
-				height={350}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="line"
+			height={350}
+		/>
 	);
 };
 
@@ -395,9 +388,9 @@ const LineColumnArea = ({ dataColors }: any) => {
 			shared: !0,
 			intersect: !1,
 			y: {
-				formatter: function (y: any) {
+				formatter: (y: any) => {
 					if (typeof y !== "undefined") {
-						return y.toFixed(0) + " points";
+						return `${y.toFixed(0)} points`;
 					}
 					return y;
 				},
@@ -407,16 +400,14 @@ const LineColumnArea = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				className="apex-charts"
-				options={options}
-				series={series}
-				type="line"
-				height={350}
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			className="apex-charts"
+			options={options}
+			series={series}
+			type="line"
+			height={350}
+		/>
 	);
 };
 

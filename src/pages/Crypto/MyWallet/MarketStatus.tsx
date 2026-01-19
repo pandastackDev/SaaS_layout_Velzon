@@ -1,10 +1,10 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
+import { Link } from "react-router-dom";
 import { Card, CardBody, CardHeader } from "reactstrap";
 import TableContainer from "../../../Components/Common/TableContainer";
 import { marketStatus } from "../../../common/data";
-import { Link } from "react-router-dom";
 
-import { Quantity, AvgPrice, CurrentValue, Returns } from "./MarketStatusCol";
+import { AvgPrice, CurrentValue, Quantity, Returns } from "./MarketStatusCol";
 
 const MarketStatus = () => {
 	const columns = useMemo(
@@ -67,11 +67,9 @@ const MarketStatus = () => {
 				cell: (cell: any) => (
 					<>
 						<h6
-							className={
-								"text-" + cell.row.original.percentageClass + " fs-13 mb-0"
-							}
+							className={`text-${cell.row.original.percentageClass} fs-13 mb-0`}
 						>
-							<i className={cell.row.original.icon + " align-middle me-1"}></i>
+							<i className={`${cell.row.original.icon} align-middle me-1`}></i>
 							{cell.getValue()}
 						</h6>
 					</>
@@ -81,33 +79,31 @@ const MarketStatus = () => {
 		[],
 	);
 	return (
-		<React.Fragment>
-			<Card>
-				<CardHeader className="border-bottom-dashed d-flex align-items-center">
-					<h4 className="card-title mb-0 flex-grow-1">Market Status</h4>
-					<div className="flex-shrink-0">
-						<div className="btn-group" role="group" aria-label="Basic example">
-							<button type="button" className="btn btn-primary btn-sm">
-								Today
-							</button>
-							<button type="button" className="btn btn-outline-primary btn-sm">
-								Overall
-							</button>
-						</div>
+		<Card>
+			<CardHeader className="border-bottom-dashed d-flex align-items-center">
+				<h4 className="card-title mb-0 flex-grow-1">Market Status</h4>
+				<div className="flex-shrink-0">
+					<div className="btn-group" role="group" aria-label="Basic example">
+						<button type="button" className="btn btn-primary btn-sm">
+							Today
+						</button>
+						<button type="button" className="btn btn-outline-primary btn-sm">
+							Overall
+						</button>
 					</div>
-				</CardHeader>
-				<CardBody>
-					<TableContainer
-						columns={columns}
-						data={marketStatus || []}
-						customPageSize={6}
-						divClass="table-responsive table-card mb-3"
-						tableClass="align-middle table-nowrap"
-						theadClass="table-light text-muted"
-					/>
-				</CardBody>
-			</Card>
-		</React.Fragment>
+				</div>
+			</CardHeader>
+			<CardBody>
+				<TableContainer
+					columns={columns}
+					data={marketStatus || []}
+					customPageSize={6}
+					divClass="table-responsive table-card mb-3"
+					tableClass="align-middle table-nowrap"
+					theadClass="table-light text-muted"
+				/>
+			</CardBody>
+		</Card>
 	);
 };
 

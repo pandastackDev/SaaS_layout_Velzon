@@ -1,8 +1,7 @@
 import React from "react";
-import UiContent from "../../../Components/Common/UiContent";
-
-//import Components
-import BreadCrumb from "../../../Components/Common/BreadCrumb";
+//Import Flatepicker
+import Flatpickr from "react-flatpickr";
+import { Link } from "react-router-dom";
 import {
 	Card,
 	CardBody,
@@ -14,22 +13,21 @@ import {
 	Label,
 	Row,
 } from "reactstrap";
+//import Components
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
-import { Link } from "react-router-dom";
+import UiContent from "../../../Components/Common/UiContent";
 import {
+	AutoSizing,
+	ColumnSizing,
+	FloatingLabels,
 	FormGrid,
 	Gutters,
-	VerticalForm,
 	HorizontalForm,
 	HorizontalFormLabelSizing,
-	ColumnSizing,
-	AutoSizing,
 	InlineForms,
-	FloatingLabels,
+	VerticalForm,
 } from "./FormlayoutsCode";
-
-//Import Flatepicker
-import Flatpickr from "react-flatpickr";
 
 const Formlayouts = () => {
 	document.title = "Form Layouts | Velzon - React Admin & Dashboard Template";

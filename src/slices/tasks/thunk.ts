@@ -3,14 +3,14 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 //Include Both Helper File with needed methods
 import {
-	getTaskList as getTaskListApi,
 	addNewTask as addNewTaskApi,
-	updateTask as updateTaskApi,
-	deleteTask as deleteTaskApi,
-	getTasks as getTasksApi,
 	addNewTasks as addNewTasksApi,
-	updateTasks as updateTasksApi,
+	deleteTask as deleteTaskApi,
 	deleteTasks as deleteTasksApi,
+	getTaskList as getTaskListApi,
+	getTasks as getTasksApi,
+	updateTask as updateTaskApi,
+	updateTasks as updateTasksApi,
 } from "../../helpers/fakebackend_helper";
 export const getTaskList = createAsyncThunk("tasks/getTaskList", async () => {
 	try {
@@ -22,7 +22,7 @@ export const getTaskList = createAsyncThunk("tasks/getTaskList", async () => {
 });
 export const addNewTask = createAsyncThunk(
 	"tasks/addNewTask",
-	async (task: any) => {
+	async (task: Record<string, unknown>) => {
 		try {
 			const response = addNewTaskApi(task);
 			toast.success("Task Added Successfully", { autoClose: 3000 });
@@ -35,7 +35,7 @@ export const addNewTask = createAsyncThunk(
 );
 export const updateTask = createAsyncThunk(
 	"tasks/updateTask",
-	async (task: any) => {
+	async (task: Record<string, unknown>) => {
 		try {
 			const response = updateTaskApi(task);
 			toast.success("Task Updated Successfully", { autoClose: 3000 });
@@ -48,7 +48,7 @@ export const updateTask = createAsyncThunk(
 );
 export const deleteTask = createAsyncThunk(
 	"tasks/deleteTask",
-	async (task: any) => {
+	async (task: string | number | Record<string, unknown>) => {
 		try {
 			const response = deleteTaskApi(task);
 			toast.success("Task Updated Successfully", { autoClose: 3000 });
@@ -70,7 +70,7 @@ export const getTasks = createAsyncThunk("tasks/getTasks", async () => {
 });
 export const addCardData = createAsyncThunk(
 	"tasks/addCardData",
-	async (card: any) => {
+	async (card: Record<string, unknown>) => {
 		try {
 			const response = addNewTasksApi(card);
 			const data = await response;
@@ -84,7 +84,7 @@ export const addCardData = createAsyncThunk(
 );
 export const updateCardData = createAsyncThunk(
 	"tasks/updateCardData",
-	async (card: any) => {
+	async (card: Record<string, unknown>) => {
 		try {
 			const response = updateTasksApi(card);
 			const data = await response;
@@ -98,7 +98,7 @@ export const updateCardData = createAsyncThunk(
 );
 export const deleteKanban = createAsyncThunk(
 	"tasks/deleteKanban",
-	async (card: any) => {
+	async (card: string | number | Record<string, unknown>) => {
 		try {
 			const response = deleteTasksApi(card);
 			toast.success("Card Delete Successfully", { autoClose: 2000 });

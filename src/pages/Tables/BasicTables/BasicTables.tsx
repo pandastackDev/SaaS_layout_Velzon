@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
 	Card,
 	CardBody,
@@ -9,37 +10,35 @@ import {
 	Row,
 	Table,
 } from "reactstrap";
-import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
-import UiContent from "../../../Components/Common/UiContent";
-import { Link } from "react-router-dom";
-import {
-	DefaultTables,
-	StrippedRow,
-	TablesColors,
-	HoverableRows,
-	CardTables,
-	ActiveTables,
-	BorderedTables,
-	TablesBorderColors,
-	TablesWithoutBorders,
-	SmallTables,
-	TableHead,
-	TableFoot,
-	Captions,
-	TableNesting,
-	Variants,
-	VerticalAlignment,
-	ResponsiveTables,
-	StripedColumnsTables,
-} from "./BasicTablesCode";
-
 //Import images
 import avtarImage1 from "../../../assets/images/users/avatar-1.jpg";
 import avtarImage3 from "../../../assets/images/users/avatar-3.jpg";
 import avtarImage4 from "../../../assets/images/users/avatar-4.jpg";
 import avtarImage5 from "../../../assets/images/users/avatar-5.jpg";
 import avtarImage6 from "../../../assets/images/users/avatar-6.jpg";
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import PreviewCardHeader from "../../../Components/Common/PreviewCardHeader";
+import UiContent from "../../../Components/Common/UiContent";
+import {
+	ActiveTables,
+	BorderedTables,
+	Captions,
+	CardTables,
+	DefaultTables,
+	HoverableRows,
+	ResponsiveTables,
+	SmallTables,
+	StripedColumnsTables,
+	StrippedRow,
+	TableFoot,
+	TableHead,
+	TableNesting,
+	TablesBorderColors,
+	TablesColors,
+	TablesWithoutBorders,
+	Variants,
+	VerticalAlignment,
+} from "./BasicTablesCode";
 
 const BasicTables = () => {
 	document.title = "Basic Tables | Velzon - React Admin & Dashboard Template";

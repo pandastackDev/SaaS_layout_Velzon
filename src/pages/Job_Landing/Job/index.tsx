@@ -1,4 +1,3 @@
-import React from "react";
 import Blog from "./Blog";
 import Candidates from "./Candidates";
 import Categories from "./Categories";
@@ -12,7 +11,7 @@ import Process from "./Process";
 const JobLanding = () => {
 	document.title = "Job Landing | Velzon - React Admin & Dashboard Template";
 
-	window.onscroll = function () {
+	window.onscroll = () => {
 		scrollFunction();
 	};
 
@@ -36,26 +35,24 @@ const JobLanding = () => {
 	};
 
 	return (
-		<React.Fragment>
-			<div className="layout-wrapper landing">
-				<Navbar />
-				<Home />
-				<Process />
-				<Features />
-				<Categories />
-				<FindJob />
-				<Candidates />
-				<Blog />
-				<Footer />
-				<button
-					onClick={() => toTop()}
-					className="btn btn-info btn-icon landing-back-top"
-					id="back-to-top"
-				>
-					<i className="ri-arrow-up-line"></i>
-				</button>
-			</div>
-		</React.Fragment>
+		<div className="layout-wrapper landing">
+			<Navbar />
+			<Home />
+			<Process />
+			<Features />
+			<Categories />
+			<FindJob />
+			<Candidates />
+			<Blog />
+			<Footer />
+			<button
+				onClick={() => toTop()}
+				className="btn btn-info btn-icon landing-back-top"
+				id="back-to-top"
+			>
+				<i className="ri-arrow-up-line"></i>
+			</button>
+		</div>
 	);
 };
 

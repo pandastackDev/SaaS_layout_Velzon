@@ -4,12 +4,12 @@ import "react-toastify/dist/ReactToastify.css";
 
 //Include Both Helper File with needed methods
 import {
-	getMailDetails as getMailDetailsApi,
 	deleteMail as deleteMailApi,
-	trashMail as trashMailApi,
-	staredMail as staredMailApi,
-	unreadMail as unreadMailApi,
+	getMailDetails as getMailDetailsApi,
 	labelMail as labelMailApi,
+	staredMail as staredMailApi,
+	trashMail as trashMailApi,
+	unreadMail as unreadMailApi,
 } from "../../helpers/fakebackend_helper";
 
 export const getMailDetails = createAsyncThunk(
@@ -26,7 +26,7 @@ export const getMailDetails = createAsyncThunk(
 
 export const unreadMail = createAsyncThunk(
 	"mailbox/unreadMail",
-	async (mail: any) => {
+	async (mail: string | number | Record<string, unknown>) => {
 		try {
 			const response = unreadMailApi(mail);
 			// toast.success("Mail Added Favorite Successfully", { autoClose: 3000 });
@@ -40,7 +40,7 @@ export const unreadMail = createAsyncThunk(
 
 export const staredMail = createAsyncThunk(
 	"mailbox/staredMail",
-	async (mail: any) => {
+	async (mail: string | number | Record<string, unknown>) => {
 		try {
 			const response = staredMailApi(mail);
 			// toast.success("Mail Added Favorite Successfully", { autoClose: 3000 });
@@ -54,7 +54,7 @@ export const staredMail = createAsyncThunk(
 
 export const trashMail = createAsyncThunk(
 	"mailbox/trashMail",
-	async (mail: any) => {
+	async (mail: string | number | Record<string, unknown>) => {
 		try {
 			const response = trashMailApi(mail);
 			toast.success("Mail Moved Trash Successfully", { autoClose: 3000 });
@@ -68,7 +68,7 @@ export const trashMail = createAsyncThunk(
 
 export const deleteMail = createAsyncThunk(
 	"mailbox/deleteMail",
-	async (mail: any) => {
+	async (mail: string | number | Record<string, unknown>) => {
 		try {
 			const response = deleteMailApi(mail);
 			toast.success("Mail Delete Successfully", { autoClose: 3000 });
@@ -82,7 +82,7 @@ export const deleteMail = createAsyncThunk(
 
 export const labelMail = createAsyncThunk(
 	"mailbox/labelMail",
-	async (mail: any) => {
+	async (mail: { forId: string | number; e: string }) => {
 		try {
 			const data = labelMailApi(mail.forId);
 			const response = await data;

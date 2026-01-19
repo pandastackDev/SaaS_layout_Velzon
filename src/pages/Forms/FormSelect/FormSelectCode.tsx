@@ -1,4 +1,3 @@
-import React from "react";
 import PrismCode from "../../../Components/Common/Prism";
 
 //DefaultSelect code
@@ -30,11 +29,7 @@ const DefaultSelect = () => {
 </Col>
 </Row>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //MenuSize code
@@ -66,11 +61,7 @@ const MenuSize = () => {
     </Col>
     </Row>
     `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 //SelectSize code
@@ -102,11 +93,7 @@ const SelectSize = () => {
 </Col>
 </Row>
 `;
-	return (
-		<React.Fragment>
-			<PrismCode code={code} language={"react"} />
-		</React.Fragment>
-	);
+	return <PrismCode code={code} language={"react"} />;
 };
 
 export { DefaultSelect, MenuSize, SelectSize };

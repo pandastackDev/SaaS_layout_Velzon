@@ -1,10 +1,11 @@
 // Import Images
-import dribble from "../../assets/images/brands/dribbble.png";
+
 import bitbucket from "../../assets/images/brands/bitbucket.png";
+import dribble from "../../assets/images/brands/dribbble.png";
 import dropbox from "../../assets/images/brands/dropbox.png";
+import github from "../../assets/images/brands/github.png";
 import mail_chimp from "../../assets/images/brands/mail_chimp.png";
 import slack from "../../assets/images/brands/slack.png";
-import github from "../../assets/images/brands/github.png";
 
 import company1 from "../../assets/images/companies/img-1.png";
 import company3 from "../../assets/images/companies/img-3.png";

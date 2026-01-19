@@ -1,45 +1,43 @@
-import React, { useState, useEffect } from "react";
+import DeleteModal from "Components/Common/DeleteModal";
+import Spinners from "Components/Common/Spinner";
+import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
+import { AddTeamMember, headData } from "common/data";
+import { useFormik } from "formik";
+import moment from "moment";
+import React, { useEffect, useState } from "react";
+import Flatpickr from "react-flatpickr";
+//redux
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import Select from "react-select";
+// import moment from "moment"
+import { ToastContainer } from "react-toastify";
 import {
 	Card,
 	CardBody,
 	Col,
-	Row,
-	DropdownMenu,
 	DropdownItem,
+	DropdownMenu,
 	DropdownToggle,
-	UncontrolledDropdown,
+	Form,
+	FormFeedback,
+	Input,
+	Label,
 	Modal,
 	ModalBody,
 	ModalHeader,
-	Form,
-	Label,
-	Input,
-	FormFeedback,
+	Row,
+	UncontrolledDropdown,
 } from "reactstrap";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import Select from "react-select";
-
-import {
-	getTasks as onGetTasks,
-	addCardData as onAddCardData,
-	updateCardData as onUpdateCardData,
-	deleteKanban as OnDeleteKanban,
-} from "../../../slices/thunks";
-
-//redux
-import { useSelector, useDispatch } from "react-redux";
 import { createSelector } from "reselect";
-import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-import { Link } from "react-router-dom";
 import SimpleBar from "simplebar-react";
-// import moment from "moment"
-import { ToastContainer } from "react-toastify";
-import Spinners from "Components/Common/Spinner";
-import { AddTeamMember, headData } from "common/data";
-import DeleteModal from "Components/Common/DeleteModal";
-import Flatpickr from "react-flatpickr";
-import moment from "moment";
+import * as Yup from "yup";
+import {
+	deleteKanban as OnDeleteKanban,
+	addCardData as onAddCardData,
+	getTasks as onGetTasks,
+	updateCardData as onUpdateCardData,
+} from "../../../slices/thunks";
 
 //Import Breadcrumb
 interface CardData {
@@ -153,8 +151,8 @@ const TasksKanban = () => {
 		enableReinitialize: true,
 
 		initialValues: {
-			id: (cardhead && cardhead.id) || "",
-			name: (cardhead && cardhead.name) || "",
+			id: cardhead?.id || "",
+			name: cardhead?.name || "",
 		} as KanbanColumn,
 		validationSchema: Yup.object({
 			name: Yup.string().required("Please Enter Your Card Title"),
@@ -162,7 +160,7 @@ const TasksKanban = () => {
 		onSubmit: (values: KanbanColumn) => {
 			const newCardheaderData: KanbanColumn = {
 				id: (Math.floor(Math.random() * (30 - 20)) + 20).toString(),
-				name: values["name"],
+				name: values.name,
 				cards: [],
 			};
 
@@ -220,15 +218,15 @@ const TasksKanban = () => {
 		enableReinitialize: true,
 
 		initialValues: {
-			id: (card && card.cardId) || "",
-			title: (card && card.title) || "",
-			text: (card && card.text) || "",
-			badge1: (card && card.badge1) || [],
-			userImages: (card && card.userImages) || [],
-			botId: (card && card.botId) || "",
-			eye: (card && card.eye) || "",
-			que: (card && card.que) || "",
-			clip: (card && card.clip) || "",
+			id: card?.cardId || "",
+			title: card?.title || "",
+			text: card?.text || "",
+			badge1: card?.badge1 || [],
+			userImages: card?.userImages || [],
+			botId: card?.botId || "",
+			eye: card?.eye || "",
+			que: card?.que || "",
+			clip: card?.clip || "",
 		} as CardData,
 		validationSchema: Yup.object({
 			title: Yup.string().required("Please Enter Your Job Title"),
@@ -262,15 +260,15 @@ const TasksKanban = () => {
 				const newCardData: CardData = {
 					id: (Math.floor(Math.random() * (30 - 20)) + 20).toString(),
 					kanId: kanbanTasksCards,
-					cardId: values["id"],
-					title: values["title"],
-					text: values["text"],
+					cardId: values.id,
+					title: values.title,
+					text: values.text,
 					badge1: assignTag,
-					botId: values["botId"],
-					userImages: values["userImages"],
-					eye: values["eye"],
-					que: values["que"],
-					clip: values["clip"],
+					botId: values.botId,
+					userImages: values.userImages,
+					eye: values.eye,
+					que: values.que,
+					clip: values.clip,
 				};
 
 				dispatch(onAddCardData(newCardData));
@@ -284,7 +282,7 @@ const TasksKanban = () => {
 		setModal(true);
 		setCard(arg);
 
-		let card = arg;
+		const card = arg;
 		setCard({
 			id: card.id,
 			title: card.title,
@@ -480,7 +478,7 @@ const TasksKanban = () => {
 																			{...provided.dragHandleProps}
 																			// className="card task-list"
 																			className="pb-1 task-list"
-																			id={line.name + "-task"}
+																			id={`${line.name}-task`}
 																		>
 																			<div
 																				className="card task-box"
@@ -740,9 +738,7 @@ const TasksKanban = () => {
 										onChange={formik.handleChange}
 										onBlur={formik.handleBlur}
 										value={formik.values.name}
-										invalid={
-											formik.touched.name && formik.errors.name ? true : false
-										}
+										invalid={!!(formik.touched.name && formik.errors.name)}
 									/>
 									{formik.touched.name && formik.errors.name ? (
 										<FormFeedback type="invalid">
@@ -782,7 +778,7 @@ const TasksKanban = () => {
 				size="lg"
 			>
 				<ModalHeader toggle={toggle}>
-					{!!isEdit ? "Update Task" : "Add New Task"}
+					{isEdit ? "Update Task" : "Add New Task"}
 				</ModalHeader>
 				<ModalBody>
 					<Form
@@ -808,9 +804,7 @@ const TasksKanban = () => {
 									onBlur={validation.handleBlur}
 									value={validation.values.title || ""}
 									invalid={
-										validation.touched.title && validation.errors.title
-											? true
-											: false
+										!!(validation.touched.title && validation.errors.title)
 									}
 								/>
 								{validation.touched.title && validation.errors.title ? (
@@ -869,7 +863,7 @@ const TasksKanban = () => {
 													<input
 														className="form-check-input"
 														type="checkbox"
-														id={"member" + image.id}
+														id={`member${image.id}`}
 														name="userImages"
 														onBlur={validation.handleBlur}
 														value={validation.values.userImages}
@@ -878,7 +872,7 @@ const TasksKanban = () => {
 													/>
 													<label
 														className="form-check-label ms-2"
-														htmlFor={"member" + image.id}
+														htmlFor={`member${image.id}`}
 													>
 														{image.name}
 													</label>
@@ -945,9 +939,7 @@ const TasksKanban = () => {
 										onBlur={validation.handleBlur}
 										value={validation.values.eye || ""}
 										invalid={
-											validation.touched.eye && validation.errors.eye
-												? true
-												: false
+											!!(validation.touched.eye && validation.errors.eye)
 										}
 									/>
 									{validation.touched.eye && validation.errors.eye ? (
@@ -972,9 +964,7 @@ const TasksKanban = () => {
 										onBlur={validation.handleBlur}
 										value={validation.values.que || ""}
 										invalid={
-											validation.touched.que && validation.errors.que
-												? true
-												: false
+											!!(validation.touched.que && validation.errors.que)
 										}
 									/>
 									{validation.touched.que && validation.errors.que ? (
@@ -999,9 +989,7 @@ const TasksKanban = () => {
 										onBlur={validation.handleBlur}
 										value={validation.values.clip || ""}
 										invalid={
-											validation.touched.clip && validation.errors.clip
-												? true
-												: false
+											!!(validation.touched.clip && validation.errors.clip)
 										}
 									/>
 									{validation.touched.clip && validation.errors.clip ? (
@@ -1043,7 +1031,7 @@ const TasksKanban = () => {
 									className="btn btn-primary"
 									id="updatetaskdetail"
 								>
-									{!!isEdit ? "Update Task" : "Create Task"}
+									{isEdit ? "Update Task" : "Create Task"}
 								</button>
 							</Col>
 						</Row>

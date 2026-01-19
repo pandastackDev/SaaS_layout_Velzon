@@ -1,4 +1,7 @@
+import { VectorMap } from "@south-paw/react-vector-maps";
 import React from "react";
+import CountUp from "react-countup";
+import { Link } from "react-router-dom";
 import {
 	Alert,
 	Button,
@@ -15,17 +18,15 @@ import {
 	Row,
 	UncontrolledDropdown,
 } from "reactstrap";
-import { Link } from "react-router-dom";
-
-import CountUp from "react-countup";
-import { VectorMap } from "@south-paw/react-vector-maps";
+import { widgetsAudiences, widgetsPortfolio } from "../../common/data/index";
 import world from "../../common/world.svg.json";
 import at from "../../common/world.svg.json";
-import { MyPortfolioCharts } from "./WidgetsCharts";
-import { SessionsByCountriesCharts } from "./WidgetsCharts";
-import { AudiencesMetricsCharts } from "./WidgetsCharts";
-import { TopReferralsPagesCharts } from "./WidgetsCharts";
-import { widgetsAudiences, widgetsPortfolio } from "../../common/data/index";
+import {
+	AudiencesMetricsCharts,
+	MyPortfolioCharts,
+	SessionsByCountriesCharts,
+	TopReferralsPagesCharts,
+} from "./WidgetsCharts";
 
 const ChartMapWidgets = () => {
 	return (
@@ -190,15 +191,18 @@ const ChartMapWidgets = () => {
 						</CardHeader>
 						<CardHeader className="p-0 border-0 bg-light-subtle">
 							<Row className="g-0 text-center">
-								{(widgetsAudiences || []).map((item, key) => (
-									<div className="col-6 col-sm-4" key={key}>
+								{(widgetsAudiences || []).map((item, index) => (
+									<div
+										className="col-6 col-sm-4"
+										key={`audience-${index}-${item.title || index}`}
+									>
 										<div className="p-3 border border-dashed border-start-0">
 											<h5 className="mb-1">
-												{item.subCounter.map((item, key) => (
+												{item.subCounter.map((subCounterItem, subIndex) => (
 													<span
 														className="counter-value"
 														data-target="3"
-														key={key}
+														key={`counter-${index}-${subIndex}-${subCounterItem.value || subIndex}`}
 													>
 														<CountUp
 															start={0}
@@ -330,8 +334,11 @@ const ChartMapWidgets = () => {
 							</div>
 
 							<ListGroup className="border-dashed mb-0" flush>
-								{(widgetsPortfolio || []).map((item, key) => (
-									<ListGroupItem className="px-0" key={key}>
+								{(widgetsPortfolio || []).map((item, index) => (
+									<ListGroupItem
+										className="px-0"
+										key={`portfolio-${index}-${item.label || index}`}
+									>
 										<div className="d-flex">
 											<div className="flex-shrink-0 avatar-xs">
 												<span className="avatar-title bg-light p-1 rounded-circle">
@@ -354,7 +361,7 @@ const ChartMapWidgets = () => {
 												<h6 className="mb-1">
 													{item.coinName} {item.coinVolume}
 												</h6>
-												<p className={"fs-12 mb-0 text-" + item.priceClass}>
+												<p className={`fs-12 mb-0 text-${item.priceClass}`}>
 													{item.price}
 												</p>
 											</div>

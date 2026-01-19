@@ -1,46 +1,42 @@
+import { useFormik } from "formik";
+import * as moment from "moment";
 import React, { useEffect, useState } from "react";
 import Flatpickr from "react-flatpickr";
-import * as moment from "moment";
-
+// redux
+import { useDispatch, useSelector } from "react-redux";
+import Select from "react-select";
 import {
-	Col,
-	Container,
-	Row,
+	Button,
 	Card,
 	CardBody,
-	Input,
-	Button,
-	UncontrolledDropdown,
-	DropdownToggle,
-	DropdownMenu,
+	Col,
+	Container,
 	DropdownItem,
-	Modal,
+	DropdownMenu,
+	DropdownToggle,
 	Form,
+	FormFeedback,
+	Input,
+	Modal,
 	ModalBody,
 	ModalFooter,
 	ModalHeader,
-	FormFeedback,
+	Row,
+	UncontrolledDropdown,
 } from "reactstrap";
-
-import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import Select from "react-select";
-import LeadDiscover from "./leadDiscover";
-
+import { createSelector } from "reselect";
 // Formik
 import * as Yup from "yup";
-import { useFormik } from "formik";
-
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
 // Import actions
 import { getDeals as onGetDeals } from "../../../slices/thunks";
-// redux
-import { useSelector, useDispatch } from "react-redux";
-import { createSelector } from "reselect";
+import LeadDiscover from "./leadDiscover";
 
 const CrmDeals = () => {
-	const dispatch: any = useDispatch();
+	const dispatch = useDispatch();
 
 	const crmdealsData = createSelector(
-		(state: any) => state.Crm,
+		(state: { Crm: Record<string, unknown> }) => state.Crm,
 		(deals) => deals.deals,
 	);
 	// Inside your component
@@ -55,7 +51,7 @@ const CrmDeals = () => {
 	const [sortBy, setsortBy] = useState<string>("Owner");
 	const [modal, setModal] = useState<boolean>(false);
 
-	const handlesortBy = (sortBy: any) => {
+	const handlesortBy = (sortBy: string) => {
 		setsortBy(sortBy);
 	};
 
@@ -78,7 +74,7 @@ const CrmDeals = () => {
 		}
 	};
 
-	const validation: any = useFormik({
+	const validation = useFormik({
 		// enableReinitialize : use this flag when initial values needs to be changed
 		enableReinitialize: true,
 		initialValues: {
@@ -102,7 +98,7 @@ const CrmDeals = () => {
 			subTitle: Yup.string().required("Please Enter Your Title"),
 			dealType: Yup.string().required("Please Enter Your Deal Type"),
 		}),
-		onSubmit: (values) => {
+		onSubmit: (_values) => {
 			// console.log(values);
 			toggle();
 		},
@@ -213,9 +209,7 @@ const CrmDeals = () => {
 								onChange={validation.handleChange}
 								onBlur={validation.handleBlur}
 								invalid={
-									validation.touched.dealType && validation.errors.dealType
-										? true
-										: false
+									!!(validation.touched.dealType && validation.errors.dealType)
 								}
 							>
 								<option value="">Select deals type</option>
@@ -246,9 +240,7 @@ const CrmDeals = () => {
 								onChange={validation.handleChange}
 								onBlur={validation.handleBlur}
 								invalid={
-									validation.touched.title && validation.errors.title
-										? true
-										: false
+									!!(validation.touched.title && validation.errors.title)
 								}
 							/>
 							{validation.touched.title && validation.errors.title ? (
@@ -273,9 +265,7 @@ const CrmDeals = () => {
 								onChange={validation.handleChange}
 								onBlur={validation.handleBlur}
 								invalid={
-									validation.touched.price && validation.errors.price
-										? true
-										: false
+									!!(validation.touched.price && validation.errors.price)
 								}
 							/>
 							{validation.touched.price && validation.errors.price ? (
@@ -299,9 +289,7 @@ const CrmDeals = () => {
 								onChange={validation.handleChange}
 								onBlur={validation.handleBlur}
 								invalid={
-									validation.touched.subTitle && validation.errors.subTitle
-										? true
-										: false
+									!!(validation.touched.subTitle && validation.errors.subTitle)
 								}
 							/>
 							{validation.touched.subTitle && validation.errors.subTitle ? (
@@ -352,9 +340,7 @@ const CrmDeals = () => {
 								onChange={validation.handleChange}
 								onBlur={validation.handleBlur}
 								invalid={
-									validation.touched.email && validation.errors.email
-										? true
-										: false
+									!!(validation.touched.email && validation.errors.email)
 								}
 							/>
 							{validation.touched.email && validation.errors.email ? (
@@ -378,9 +364,7 @@ const CrmDeals = () => {
 								onChange={validation.handleChange}
 								onBlur={validation.handleBlur}
 								invalid={
-									validation.touched.contact && validation.errors.contact
-										? true
-										: false
+									!!(validation.touched.contact && validation.errors.contact)
 								}
 							/>
 							{validation.touched.contact && validation.errors.contact ? (
@@ -404,10 +388,10 @@ const CrmDeals = () => {
 								onChange={validation.handleChange}
 								onBlur={validation.handleBlur}
 								invalid={
-									validation.touched.description &&
-									validation.errors.description
-										? true
-										: false
+									!!(
+										validation.touched.description &&
+										validation.errors.description
+									)
 								}
 							/>
 							{validation.touched.description &&

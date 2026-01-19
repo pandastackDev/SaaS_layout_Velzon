@@ -1,15 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 //constants
 import {
-	LAYOUT_TYPES,
 	LAYOUT_MODE_TYPES,
-	LAYOUT_SIDEBAR_TYPES,
-	LAYOUT_WIDTH_TYPES,
 	LAYOUT_POSITION_TYPES,
+	LAYOUT_SIDEBAR_TYPES,
 	LAYOUT_TOPBAR_THEME_TYPES,
+	LAYOUT_TYPES,
+	LAYOUT_WIDTH_TYPES,
+	LEFT_SIDEBAR_IMAGE_TYPES,
 	LEFT_SIDEBAR_SIZE_TYPES,
 	LEFT_SIDEBAR_VIEW_TYPES,
-	LEFT_SIDEBAR_IMAGE_TYPES,
 	PERLOADER_TYPES,
 	SIDEBAR_VISIBILITY_TYPES,
 } from "../../Components/constants/layout";
@@ -48,38 +48,43 @@ const LayoutSlice = createSlice({
 	name: "LayoutSlice",
 	initialState,
 	reducers: {
-		changeLayoutAction(state: any, action: any) {
-			state.layoutType = action.payload;
+		changeLayoutAction(state, action: PayloadAction<string>) {
+			state.layoutType = action.payload as LayoutState["layoutType"];
 		},
-		changeLayoutModeAction(state: any, action: any) {
-			state.layoutModeType = action.payload;
+		changeLayoutModeAction(state, action: PayloadAction<string>) {
+			state.layoutModeType = action.payload as LayoutState["layoutModeType"];
 		},
-		changeSidebarThemeAction(state: any, action: any) {
-			state.leftSidebarType = action.payload;
+		changeSidebarThemeAction(state, action: PayloadAction<string>) {
+			state.leftSidebarType = action.payload as LayoutState["leftSidebarType"];
 		},
-		changeLayoutWidthAction(state: any, action: any) {
-			state.layoutWidthType = action.payload;
+		changeLayoutWidthAction(state, action: PayloadAction<string>) {
+			state.layoutWidthType = action.payload as LayoutState["layoutWidthType"];
 		},
-		changeLayoutPositionAction(state: any, action: any) {
-			state.layoutPositionType = action.payload;
+		changeLayoutPositionAction(state, action: PayloadAction<string>) {
+			state.layoutPositionType =
+				action.payload as LayoutState["layoutPositionType"];
 		},
-		changeTopbarThemeAction(state: any, action: any) {
-			state.topbarThemeType = action.payload;
+		changeTopbarThemeAction(state, action: PayloadAction<string>) {
+			state.topbarThemeType = action.payload as LayoutState["topbarThemeType"];
 		},
-		changeLeftsidebarSizeTypeAction(state: any, action: any) {
-			state.leftsidbarSizeType = action.payload;
+		changeLeftsidebarSizeTypeAction(state, action: PayloadAction<string>) {
+			state.leftsidbarSizeType =
+				action.payload as LayoutState["leftsidbarSizeType"];
 		},
-		changeLeftsidebarViewTypeAction(state: any, action: any) {
-			state.leftSidebarViewType = action.payload;
+		changeLeftsidebarViewTypeAction(state, action: PayloadAction<string>) {
+			state.leftSidebarViewType =
+				action.payload as LayoutState["leftSidebarViewType"];
 		},
-		changeSidebarImageTypeAction(state: any, action: any) {
-			state.leftSidebarImageType = action.payload;
+		changeSidebarImageTypeAction(state, action: PayloadAction<string>) {
+			state.leftSidebarImageType =
+				action.payload as LayoutState["leftSidebarImageType"];
 		},
-		changePreLoaderAction(state: any, action: any) {
-			state.preloader = action.payload;
+		changePreLoaderAction(state, action: PayloadAction<string>) {
+			state.preloader = action.payload as LayoutState["preloader"];
 		},
-		changeSidebarVisibilityAction(state: any, action: any) {
-			state.sidebarVisibilitytype = action.payload;
+		changeSidebarVisibilityAction(state, action: PayloadAction<string>) {
+			state.sidebarVisibilitytype =
+				action.payload as LayoutState["sidebarVisibilitytype"];
 		},
 	},
 });

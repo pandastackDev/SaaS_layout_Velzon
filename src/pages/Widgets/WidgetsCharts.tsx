@@ -1,9 +1,14 @@
-import React from "react";
 import ReactApexChart from "react-apexcharts";
 import getChartColorsArray from "../../Components/Common/ChartsDynamicColor";
 
-const AudiencesMetricsCharts = ({ dataColors }: any) => {
-	var chartAudienceColumnChartsColors = getChartColorsArray(dataColors);
+interface AudiencesMetricsChartsProps {
+	dataColors: string;
+}
+
+const AudiencesMetricsCharts = ({
+	dataColors,
+}: AudiencesMetricsChartsProps) => {
+	const chartAudienceColumnChartsColors = getChartColorsArray(dataColors);
 	const series = [
 		{
 			name: "Last Year",
@@ -18,7 +23,7 @@ const AudiencesMetricsCharts = ({ dataColors }: any) => {
 			],
 		},
 	];
-	var options: any = {
+	const options: Record<string, unknown> = {
 		chart: {
 			type: "bar",
 			height: 309,
@@ -95,23 +100,21 @@ const AudiencesMetricsCharts = ({ dataColors }: any) => {
 		},
 	};
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="bar"
-				height="309"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="bar"
+			height="309"
+			className="apex-charts"
+		/>
 	);
 };
 
-const MyPortfolioCharts = ({ dataColors }: any) => {
-	var donutchartportfolioColors = getChartColorsArray(dataColors);
+const MyPortfolioCharts = ({ dataColors }: AudiencesMetricsChartsProps) => {
+	const donutchartportfolioColors = getChartColorsArray(dataColors);
 	const series = [19405, 40552, 15824, 30635];
-	var options: any = {
+	const options: Record<string, unknown> = {
 		labels: ["Bitcoin", "Ethereum", "Litecoin", "Dash"],
 		chart: {
 			type: "donut",
@@ -138,9 +141,7 @@ const MyPortfolioCharts = ({ dataColors }: any) => {
 							color: "#343a40",
 							fontWeight: 500,
 							offsetY: 5,
-							formatter: function (val: any) {
-								return "$" + val;
-							},
+							formatter: (val: number) => `$${val}`,
 						},
 						total: {
 							show: true,
@@ -148,14 +149,12 @@ const MyPortfolioCharts = ({ dataColors }: any) => {
 							label: "Total value",
 							color: "#9599ad",
 							fontWeight: 500,
-							formatter: function (w: any) {
-								return (
-									"$" +
-									w.globals.seriesTotals.reduce(function (a: any, b: any) {
-										return a + b;
-									}, 0)
-								);
-							},
+							formatter: (w: { globals: { seriesTotals: number[] } }) =>
+								"$" +
+								w.globals.seriesTotals.reduce(
+									(a: number, b: number) => a + b,
+									0,
+								),
 						},
 					},
 				},
@@ -169,9 +168,7 @@ const MyPortfolioCharts = ({ dataColors }: any) => {
 		},
 		yaxis: {
 			labels: {
-				formatter: function (value: any) {
-					return "$" + value;
-				},
+				formatter: (value: number) => `$${value}`,
 			},
 		},
 		stroke: {
@@ -181,28 +178,28 @@ const MyPortfolioCharts = ({ dataColors }: any) => {
 		colors: donutchartportfolioColors,
 	};
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="donut"
-				height="210"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="donut"
+			height="210"
+			className="apex-charts"
+		/>
 	);
 };
 
-const SessionsByCountriesCharts = ({ dataColors }: any) => {
-	var barchartCountriesColors = getChartColorsArray(dataColors);
+const SessionsByCountriesCharts = ({
+	dataColors,
+}: AudiencesMetricsChartsProps) => {
+	const barchartCountriesColors = getChartColorsArray(dataColors);
 	const series = [
 		{
 			data: [1010, 1640, 490, 1255, 1050, 689, 800, 420, 1085, 589],
 			name: "Sessions",
 		},
 	];
-	var options: any = {
+	const options: Record<string, unknown> = {
 		chart: {
 			type: "bar",
 			height: 436,
@@ -253,28 +250,33 @@ const SessionsByCountriesCharts = ({ dataColors }: any) => {
 		},
 	};
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={series}
-				type="bar"
-				height="436"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={series}
+			type="bar"
+			height="436"
+			className="apex-charts"
+		/>
 	);
 };
 
-const TopReferralsPagesCharts = ({ dataColors }: any) => {
-	var chartHeatMapColors = getChartColorsArray(dataColors);
+interface YRange {
+	min: number;
+	max: number;
+}
 
-	function generateData(count: any, yrange: any) {
-		var i = 0;
-		var series = [];
+const TopReferralsPagesCharts = ({
+	dataColors,
+}: AudiencesMetricsChartsProps) => {
+	const chartHeatMapColors = getChartColorsArray(dataColors);
+
+	function generateData(count: number, yrange: YRange) {
+		let i = 0;
+		const series: Array<{ x: string; y: number }> = [];
 		while (i < count) {
-			var x = "w" + (i + 1).toString();
-			var y =
+			const x = `w${(i + 1).toString()}`;
+			const y =
 				Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
 
 			series.push({
@@ -286,7 +288,7 @@ const TopReferralsPagesCharts = ({ dataColors }: any) => {
 		return series;
 	}
 
-	const dataChart: any = {
+	const dataChart: Record<string, unknown> = {
 		series: [
 			{
 				name: "Jan",
@@ -417,22 +419,28 @@ const TopReferralsPagesCharts = ({ dataColors }: any) => {
 	};
 
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={dataChart.options}
-				series={dataChart.series}
-				type="heatmap"
-				height={350}
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={dataChart.options}
+			series={dataChart.series}
+			type="heatmap"
+			height={350}
+			className="apex-charts"
+		/>
 	);
 };
 
-const OtherWidgetsCharts = ({ dataColors, seriesData }: any) => {
-	var areachartbitcoinColors = getChartColorsArray(dataColors);
-	var options: any = {
+interface OtherWidgetsChartsProps {
+	dataColors: string;
+	seriesData: number[];
+}
+
+const OtherWidgetsCharts = ({
+	dataColors,
+	seriesData,
+}: OtherWidgetsChartsProps) => {
+	const areachartbitcoinColors = getChartColorsArray(dataColors);
+	const options: Record<string, unknown> = {
 		chart: {
 			width: 140,
 			type: "area",
@@ -463,17 +471,15 @@ const OtherWidgetsCharts = ({ dataColors, seriesData }: any) => {
 		colors: areachartbitcoinColors,
 	};
 	return (
-		<React.Fragment>
-			<ReactApexChart
-				dir="ltr"
-				options={options}
-				series={[...seriesData]}
-				type="area"
-				width="140"
-				// height="46"
-				className="apex-charts"
-			/>
-		</React.Fragment>
+		<ReactApexChart
+			dir="ltr"
+			options={options}
+			series={[...seriesData]}
+			type="area"
+			width="140"
+			// height="46"
+			className="apex-charts"
+		/>
 	);
 };
 

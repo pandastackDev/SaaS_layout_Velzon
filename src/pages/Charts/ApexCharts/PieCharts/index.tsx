@@ -1,14 +1,13 @@
-import React from "react";
 import { Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
 import BreadCrumb from "../../../../Components/Common/BreadCrumb";
 import {
-	SimplePie,
-	SimpleDonut,
-	UpdateDonut,
-	MonochromePie,
 	GradientDonut,
-	PatternedDonut,
 	ImagePieChart,
+	MonochromePie,
+	PatternedDonut,
+	SimpleDonut,
+	SimplePie,
+	UpdateDonut,
 } from "./PieCharts";
 
 const PieCharts = () => {

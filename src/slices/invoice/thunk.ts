@@ -4,10 +4,10 @@ import "react-toastify/dist/ReactToastify.css";
 
 //Include Both Helper File with needed methods
 import {
-	getInvoices as getInvoicesApi,
 	addNewInvoice as addNewInvoiceApi,
-	updateInvoice as updateInvoiceApi,
 	deleteInvoice as deleteInvoiceApi,
+	getInvoices as getInvoicesApi,
+	updateInvoice as updateInvoiceApi,
 } from "../../helpers/fakebackend_helper";
 
 export const getInvoices = createAsyncThunk("invoice/getInvoices", async () => {
@@ -21,7 +21,7 @@ export const getInvoices = createAsyncThunk("invoice/getInvoices", async () => {
 
 export const addNewInvoice = createAsyncThunk(
 	"invoice/addNewInvoice",
-	async (invoice: any) => {
+	async (invoice: Record<string, unknown>) => {
 		try {
 			const response = addNewInvoiceApi(invoice);
 			toast.success("Invoice Added Successfully", { autoClose: 3000 });
@@ -35,7 +35,7 @@ export const addNewInvoice = createAsyncThunk(
 
 export const updateInvoice = createAsyncThunk(
 	"invoice/updateInvoice",
-	async (invoice: any) => {
+	async (invoice: Record<string, unknown>) => {
 		try {
 			const response = updateInvoiceApi(invoice);
 			toast.success("Invoice Updated Successfully", { autoClose: 3000 });
@@ -50,7 +50,7 @@ export const updateInvoice = createAsyncThunk(
 
 export const deleteInvoice = createAsyncThunk(
 	"invoice/deleteInvoice",
-	async (invoice: any) => {
+	async (invoice: string | number | Record<string, unknown>) => {
 		try {
 			const response = deleteInvoiceApi(invoice);
 			toast.success("Invoice Delete Successfully", { autoClose: 3000 });

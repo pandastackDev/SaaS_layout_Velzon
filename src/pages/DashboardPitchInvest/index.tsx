@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { Container } from "reactstrap";
-
-// Import types and data
-import { Startup } from "./types";
 import { mockStartups } from "./data";
+import FeaturedCarousel from "./FeaturedCarousel";
 
 // Import components
 import HeroSection from "./HeroSection";
-import FeaturedCarousel from "./FeaturedCarousel";
 import InvestmentOpportunities from "./InvestmentOpportunities";
+// Import types and data
+import type { Startup } from "./types";
 import VideoLightbox from "./VideoLightbox";
 
 // ============================================

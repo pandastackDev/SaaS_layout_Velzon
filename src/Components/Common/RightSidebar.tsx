@@ -1,11 +1,19 @@
 import React, { useEffect } from "react";
-import withRouter from "./withRouter";
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
+import withRouter from "./withRouter";
 
-const RightSidebar = (props: any) => {
+interface RightSidebarProps {
+	router: {
+		location: {
+			pathname: string;
+		};
+	};
+}
+
+const RightSidebar = (props: RightSidebarProps) => {
 	const selectLayoutProperties = createSelector(
-		(state: any) => state.Layout,
+		(state: { Layout: { preloader: string } }) => state.Layout,
 		(layout) => ({
 			preloader: layout.preloader,
 		}),
@@ -13,7 +21,7 @@ const RightSidebar = (props: any) => {
 
 	const { preloader } = useSelector(selectLayoutProperties);
 
-	window.onscroll = function () {
+	window.onscroll = () => {
 		scrollFunction();
 	};
 
@@ -36,7 +44,7 @@ const RightSidebar = (props: any) => {
 		document.documentElement.scrollTop = 0;
 	};
 
-	const pathName = props.router.location.pathname;
+	const _pathName = props.router.location.pathname;
 
 	useEffect(() => {
 		const preloaderElement = document.getElementById(
@@ -47,17 +55,18 @@ const RightSidebar = (props: any) => {
 			preloaderElement.style.opacity = "1";
 			preloaderElement.style.visibility = "visible";
 
-			setTimeout(function () {
+			setTimeout(() => {
 				preloaderElement.style.opacity = "0";
 				preloaderElement.style.visibility = "hidden";
 			}, 1000);
 		}
-	}, [preloader, pathName]);
+	}, []);
 
 	return (
 		<React.Fragment>
 			{/* Back to Top Button */}
 			<button
+				type="button"
 				onClick={() => toTop()}
 				className="btn btn-danger btn-icon"
 				id="back-to-top"
@@ -68,11 +77,8 @@ const RightSidebar = (props: any) => {
 			{/* Preloader - Always Enabled */}
 			{preloader === "enable" && (
 				<div id="preloader">
-					<div id="status">
-						<div
-							className="spinner-border text-primary avatar-sm"
-							role="status"
-						>
+					<div id="status" role="status" aria-label="Loading">
+						<div className="spinner-border text-primary avatar-sm">
 							<span className="visually-hidden">Loading...</span>
 						</div>
 					</div>

@@ -1,4 +1,3 @@
-import React from "react";
 import ReactApexChart from "react-apexcharts";
 
 const SellerChats = (props: any) => {
@@ -38,9 +37,7 @@ const SellerChats = (props: any) => {
 			},
 			y: {
 				title: {
-					formatter: function (seriesName: any) {
-						return "";
-					},
+					formatter: (_seriesName: any) => "",
 				},
 			},
 			marker: {

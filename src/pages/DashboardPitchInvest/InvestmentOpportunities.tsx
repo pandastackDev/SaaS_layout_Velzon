@@ -1,15 +1,16 @@
-import React, { useState } from "react";
-import { Row, Col, Card, CardBody, Button, Badge, Input } from "reactstrap";
-import { Startup } from "./types";
+import type React from "react";
+import { useState } from "react";
+import { Badge, Button, Card, CardBody, Col, Input, Row } from "reactstrap";
 import {
-	statuses,
-	countries,
 	categories,
 	cities,
-	investmentRanges,
+	countries,
 	equityRanges,
+	investmentRanges,
+	statuses,
 } from "./data";
 import StartupProfileCard from "./StartupProfileCard";
+import type { Startup } from "./types";
 
 interface InvestmentOpportunitiesProps {
 	startups: Startup[];

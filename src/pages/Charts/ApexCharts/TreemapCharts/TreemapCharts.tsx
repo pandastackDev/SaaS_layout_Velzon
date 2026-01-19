@@ -1,4 +1,3 @@
-import React from "react";
 import ReactApexChart from "react-apexcharts";
 
 import getChartColorsArray from "../../../../Components/Common/ChartsDynamicColor";
@@ -358,9 +357,7 @@ const ColorRangeTreemap = ({ dataColors }: any) => {
 			style: {
 				fontSize: "12px",
 			},
-			formatter: function (text: any, op: any) {
-				return [text, op.value];
-			},
+			formatter: (text: any, op: any) => [text, op.value],
 			offsetY: -4,
 		},
 		plotOptions: {

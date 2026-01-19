@@ -1,5 +1,5 @@
-import React from "react";
 import moment from "moment";
+import React from "react";
 
 const handleValidDate = (date: any) => {
 	const date1 = moment(new Date(date)).format("DD MMM Y");
@@ -17,38 +17,34 @@ const handleValidTime = (time: any) => {
 	} else {
 		meridiem = "AM";
 	}
-	const updateTime = moment(getTime, "hh:mm").format("hh:mm") + " " + meridiem;
+	const updateTime = `${moment(getTime, "hh:mm").format("hh:mm")} ${meridiem}`;
 	return updateTime;
 };
 
 const Rating = (cell: any) => {
 	return (
-		<React.Fragment>
-			<span>
-				<span className="badge bg-light text-body fs-12 fw-medium">
-					<i className="mdi mdi-star text-warning me-1"></i>
-					{cell.getValue()}
-				</span>
+		<span>
+			<span className="badge bg-light text-body fs-12 fw-medium">
+				<i className="mdi mdi-star text-warning me-1"></i>
+				{cell.getValue()}
 			</span>
-		</React.Fragment>
+		</span>
 	);
 };
 
 const Published = (cell: any) => {
 	return (
-		<React.Fragment>
-			<span>
-				{handleValidDate(cell.getValue())}
-				<small className="text-muted ms-1">
-					{handleValidTime(cell.getValue())}
-				</small>
-			</span>
-		</React.Fragment>
+		<span>
+			{handleValidDate(cell.getValue())}
+			<small className="text-muted ms-1">
+				{handleValidTime(cell.getValue())}
+			</small>
+		</span>
 	);
 };
 
 const Price = (cell: any) => {
-	return <React.Fragment>{"$ " + cell.getValue() + ".00"}</React.Fragment>;
+	return <React.Fragment>{`$ ${cell.getValue()}.00`}</React.Fragment>;
 };
 
 export { Rating, Published, Price };

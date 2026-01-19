@@ -4,10 +4,10 @@ import "react-toastify/dist/ReactToastify.css";
 
 //Include Both Helper File with needed methods
 import {
-	getProjectList as getProjectListApi,
 	addProjectList as addProjectListApi,
-	updateProjectList as updateProjectListApi,
 	deleteProjectList as deleteProjectListApi,
+	getProjectList as getProjectListApi,
+	updateProjectList as updateProjectListApi,
 } from "../../helpers/fakebackend_helper";
 
 export const getProjectList = createAsyncThunk(
@@ -24,7 +24,7 @@ export const getProjectList = createAsyncThunk(
 
 export const addProjectList = createAsyncThunk(
 	"projects/addProjectList",
-	async (project: any) => {
+	async (project: Record<string, unknown>) => {
 		try {
 			const response = addProjectListApi(project);
 			const data = await response;
@@ -39,7 +39,7 @@ export const addProjectList = createAsyncThunk(
 
 export const updateProjectList = createAsyncThunk(
 	"projects/updateProjectList",
-	async (project: any) => {
+	async (project: Record<string, unknown>) => {
 		try {
 			const response = updateProjectListApi(project);
 			const data = await response;
@@ -54,7 +54,7 @@ export const updateProjectList = createAsyncThunk(
 
 export const deleteProjectList = createAsyncThunk(
 	"projects/deleteProjectList",
-	async (data: any) => {
+	async (data: string | number | Record<string, unknown>) => {
 		try {
 			const response = deleteProjectListApi(data);
 			const newdata = await response;

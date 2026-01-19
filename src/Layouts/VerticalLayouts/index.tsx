@@ -1,24 +1,55 @@
-import React, { useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { Collapse } from "reactstrap";
-// Import Data
-import navdata from "../LayoutMenuData";
+import React, { useCallback, useEffect } from "react";
 //i18n
 import { withTranslation } from "react-i18next";
-import withRouter from "../../Components/Common/withRouter";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { Collapse } from "reactstrap";
 import { createSelector } from "reselect";
+import withRouter from "../../Components/Common/withRouter";
+// Import Data
+import navdata from "../LayoutMenuData";
 
-const VerticalLayout = (props: any) => {
-	const navData = navdata().props.children;
+interface MenuItem {
+	label: string;
+	isHeader?: boolean;
+	id?: string;
+	icon?: string;
+	link?: string;
+	badgeName?: string;
+	badgeColor?: string;
+	subItems?: MenuItem[];
+	childItems?: MenuItem[];
+	isChildItem?: boolean;
+	stateVariables?: boolean;
+	click?: () => void;
+	[key: string]: unknown;
+}
+
+interface VerticalLayoutProps {
+	router: {
+		location: {
+			pathname: string;
+		};
+	};
+	t: (key: string) => string;
+	layoutType?: string;
+	[key: string]: unknown;
+}
+
+const VerticalLayout = (props: VerticalLayoutProps) => {
+	const navDataResult = navdata();
+	const navData =
+		((navDataResult as { props?: { children?: MenuItem[] } })?.props
+			?.children as MenuItem[]) || [];
 	const path = props.router.location.pathname;
 
 	/*
- layout settings
- */
+	 layout settings
+	*/
 
-	const selectLayoutState = (state: any) => state.Layout;
+	const selectLayoutState = (state: { Layout: Record<string, unknown> }) =>
+		state.Layout;
 	const selectLayoutProperties = createSelector(
 		selectLayoutState,
 		(layout) => ({
@@ -34,9 +65,9 @@ const VerticalLayout = (props: any) => {
 
 	//vertical and semibox resize events
 	const resizeSidebarMenu = useCallback(() => {
-		var windowSize = document.documentElement.clientWidth;
+		const windowSize = document.documentElement.clientWidth;
 		const humberIcon = document.querySelector(".hamburger-icon") as HTMLElement;
-		var hamburgerIcon = document.querySelector(".hamburger-icon");
+		const hamburgerIcon = document.querySelector(".hamburger-icon");
 		if (windowSize >= 1025) {
 			if (document.documentElement.getAttribute("data-layout") === "vertical") {
 				document.documentElement.setAttribute(
@@ -73,8 +104,8 @@ const VerticalLayout = (props: any) => {
 			if (document.documentElement.getAttribute("data-layout") === "semibox") {
 				document.documentElement.setAttribute("data-sidebar-size", "sm");
 			}
-			if (humberIcon) {
-				humberIcon.classList.add("open");
+			if (hamburgerIcon) {
+				hamburgerIcon.classList.add("open");
 			}
 		} else if (windowSize <= 767) {
 			document.body.classList.remove("vertical-sidebar-enable");
@@ -83,8 +114,8 @@ const VerticalLayout = (props: any) => {
 			) {
 				document.documentElement.setAttribute("data-sidebar-size", "lg");
 			}
-			if (humberIcon) {
-				humberIcon.classList.add("open");
+			if (hamburgerIcon) {
+				hamburgerIcon.classList.add("open");
 			}
 		}
 	}, [leftsidbarSizeType, sidebarVisibilitytype, layoutType]);
@@ -93,29 +124,9 @@ const VerticalLayout = (props: any) => {
 		window.addEventListener("resize", resizeSidebarMenu, true);
 	}, [resizeSidebarMenu]);
 
-	useEffect(() => {
-		window.scrollTo({ top: 0, behavior: "smooth" });
-		const initMenu = () => {
-			const pathName = path;
-			const ul = document.getElementById("navbar-nav") as HTMLElement;
-			const items: any = ul.getElementsByTagName("a");
-			let itemsArray = [...items]; // converts NodeList to Array
-			removeActivation(itemsArray);
-			let matchingMenuItem = itemsArray.find((x) => {
-				return x.pathname === pathName;
-			});
-			if (matchingMenuItem) {
-				activateParentDropdown(matchingMenuItem);
-			}
-		};
-		if (props.layoutType === "vertical") {
-			initMenu();
-		}
-	}, [path, props.layoutType]);
-
-	function activateParentDropdown(item: any) {
+	function activateParentDropdown(item: HTMLAnchorElement) {
 		item.classList.add("active");
-		let parentCollapseDiv = item.closest(".collapse.menu-dropdown");
+		const parentCollapseDiv = item.closest(".collapse.menu-dropdown");
 
 		if (parentCollapseDiv) {
 			// to set aria expand true remaining
@@ -156,10 +167,10 @@ const VerticalLayout = (props: any) => {
 		return false;
 	}
 
-	const removeActivation = (items: any) => {
-		let actiItems = items.filter((x: any) => x.classList.contains("active"));
+	const removeActivation = (items: HTMLAnchorElement[]) => {
+		const actiItems = items.filter((x) => x.classList.contains("active"));
 
-		actiItems.forEach((item: any) => {
+		actiItems.forEach((item) => {
 			if (item.classList.contains("menu-link")) {
 				if (!item.classList.contains("active")) {
 					item.setAttribute("aria-expanded", false);
@@ -181,11 +192,13 @@ const VerticalLayout = (props: any) => {
 	return (
 		<React.Fragment>
 			{/* menu Items */}
-			{(navData || []).map((item: any, key: number) => {
+			{(navData || []).map((item, index) => {
 				return (
-					<React.Fragment key={key}>
+					<React.Fragment
+						key={`menu-${index}-${item.id || item.label || index}`}
+					>
 						{/* Main Header */}
-						{item["isHeader"] ? (
+						{item.isHeader ? (
 							<li className="menu-title">
 								<span data-key="t-menu">{props.t(item.label)} </span>
 							</li>
@@ -201,7 +214,7 @@ const VerticalLayout = (props: any) => {
 									<span data-key="t-apps">{props.t(item.label)}</span>
 									{item.badgeName ? (
 										<span
-											className={"badge badge-pill bg-" + item.badgeColor}
+											className={`badge badge-pill bg-${item.badgeColor}`}
 											data-key="t-new"
 										>
 											{item.badgeName}
@@ -216,8 +229,10 @@ const VerticalLayout = (props: any) => {
 									<ul className="nav nav-sm flex-column test">
 										{/* subItms  */}
 										{item.subItems &&
-											(item.subItems || []).map((subItem: any, key: number) => (
-												<React.Fragment key={key}>
+											(item.subItems || []).map((subItem, subIndex) => (
+												<React.Fragment
+													key={`submenu-${subIndex}-${subItem.id || subItem.label || subIndex}`}
+												>
 													{!subItem.isChildItem ? (
 														<li className="nav-item">
 															<Link
@@ -268,8 +283,10 @@ const VerticalLayout = (props: any) => {
 																	{/* child subItms  */}
 																	{subItem.childItems &&
 																		(subItem.childItems || []).map(
-																			(childItem: any, key: number) => (
-																				<React.Fragment key={key}>
+																			(childItem, childIndex) => (
+																				<React.Fragment
+																					key={`childmenu-${childIndex}-${childItem.id || childItem.label || childIndex}`}
+																				>
 																					{!childItem.childItems ? (
 																						<li className="nav-item">
 																							<Link
@@ -303,12 +320,12 @@ const VerticalLayout = (props: any) => {
 																								<ul className="nav nav-sm flex-column">
 																									{childItem.childItems.map(
 																										(
-																											subChildItem: any,
-																											key: number,
+																											subChildItem,
+																											subChildIndex,
 																										) => (
 																											<li
 																												className="nav-item"
-																												key={key}
+																												key={`subchildmenu-${subChildIndex}-${subChildItem.id || subChildItem.label || subChildIndex}`}
 																											>
 																												<Link
 																													to={subChildItem.link}
@@ -348,7 +365,7 @@ const VerticalLayout = (props: any) => {
 									<span>{props.t(item.label)}</span>
 									{item.badgeName ? (
 										<span
-											className={"badge badge-pill bg-" + item.badgeColor}
+											className={`badge badge-pill bg-${item.badgeColor}`}
 											data-key="t-new"
 										>
 											{item.badgeName}
