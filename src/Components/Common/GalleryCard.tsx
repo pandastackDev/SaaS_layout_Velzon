@@ -63,24 +63,9 @@ const GalleryCard: React.FC<GalleryCardProps> = ({
 									}}
 								/>
 								<div className="position-absolute bottom-0 start-0 end-0 p-2 card-overlay-gradient">
-									<div className="d-flex align-items-center gap-1 gap-sm-2">
-										{author?.avatarUrl && (
-											<img
-												src={author.avatarUrl}
-												alt={author.name}
-												className="card-startup-logo"
-												style={{
-													width: "24px",
-													height: "24px",
-													borderRadius: "50%",
-													objectFit: "cover",
-												}}
-											/>
-										)}
-										<span className="text-white fw-medium card-startup-name">
-											{title}
-										</span>
-									</div>
+									<span className="text-white fw-medium card-startup-name">
+										{title}
+									</span>
 								</div>
 								{/* Badges overlay */}
 								{badges && badges.length > 0 && (

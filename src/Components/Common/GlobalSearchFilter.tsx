@@ -309,9 +309,9 @@ const CryptoOrdersGlobalFilter = () => {
 };
 
 const InvoiceListGlobalSearch = () => {
-	const [isStatus, setisStatus] = useState(null);
+	const [isStatus, setisStatus] = useState<{ value: string; label: string } | null>(null);
 
-	function handleisStatus(isStatus: string | null) {
+	function handleisStatus(isStatus: { value: string; label: string } | null) {
 		setisStatus(isStatus);
 	}
 
@@ -347,9 +347,7 @@ const InvoiceListGlobalSearch = () => {
 				<div className="input-light">
 					<Select
 						value={isStatus}
-						onChange={(e: { value: string } | null) => {
-							handleisStatus(e?.value || null);
-						}}
+						onChange={handleisStatus}
 						options={allstatus}
 						name="choices-single-default"
 						id="idStatus"
