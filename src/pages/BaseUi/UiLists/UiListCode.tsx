@@ -2,8 +2,7 @@ import PrismCode from "../../../Components/Common/Prism";
 
 // Default List
 
-const defaultListCode =
-    `
+const defaultListCode = `
 <!-- Default List -->
 <ListGroup>
     <ListGroupItem><i className="ri-bill-line align-middle me-2"></i> Send the billing agreement</ListGroupItem>
@@ -14,16 +13,15 @@ const defaultListCode =
 `;
 
 const DefaultListExample = () => (
-    <PrismCode
-        code={defaultListCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={defaultListCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Active Item
-const activeItemCode =
-    `
+const activeItemCode = `
 <!-- Active Item -->
 <ListGroup>
     <ListGroupItem active>Send the billing agreement</ListGroupItem>
@@ -35,16 +33,11 @@ const activeItemCode =
 `;
 
 const ActiveItemExample = () => (
-    <PrismCode
-        code={activeItemCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={activeItemCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Disabled Items
-const disabledItemCode =
-    `
+const disabledItemCode = `
 <!-- Disabled Items -->
 <ListGroup>
     <ListGroupItem disabled>
@@ -91,16 +84,15 @@ const disabledItemCode =
 `;
 
 const DisabledItemExample = () => (
-    <PrismCode
-        code={disabledItemCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={disabledItemCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // List with Link
-const listlinkCode =
-    `
+const listlinkCode = `
 <!-- List with Link -->
 <ListGroup className="list-group-fill-success">
     <ListGroupItem tag="a" to="#" className="list-group-item-action active"><i className="ri-download-2-fill align-middle me-2"></i>Category Download</ListGroupItem>
@@ -112,16 +104,11 @@ const listlinkCode =
 `;
 
 const ListlinkExample = () => (
-    <PrismCode
-        code={listlinkCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={listlinkCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // List with Button
-const listButtonCode =
-    `
+const listButtonCode = `
 <!-- List with Button -->
 <ListGroup>
     <ListGroupItem tag="button" className="list-group-item-action active"><i className="ri-reply-fill align-middle me-2"></i>Reply</ListGroupItem>
@@ -133,16 +120,11 @@ const listButtonCode =
 `;
 
 const ListButtonExample = () => (
-    <PrismCode
-        code={listButtonCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={listButtonCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Flush List
-const flushListCode =
-    `
+const flushListCode = `
 <!-- Flush List -->
 <ListGroup flush>
     <ListGroupItem>Send the billing agreement</ListGroupItem>
@@ -154,16 +136,11 @@ const flushListCode =
 `;
 
 const FlushListExample = () => (
-    <PrismCode
-        code={flushListCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={flushListCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Horizontal List
-const horizontalListCode =
-    `
+const horizontalListCode = `
 <!-- Start Alignment -->
 <ListGroup className="mb-3" horizontal>
     <ListGroupItem>Inbox</ListGroupItem>
@@ -183,16 +160,15 @@ const horizontalListCode =
 `;
 
 const HorizontalListExample = () => (
-    <PrismCode
-        code={horizontalListCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={horizontalListCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Contextual Classes
-const contextualClassCode =
-    `
+const contextualClassCode = `
 <!-- Contextual Classes -->
 <ListGroup>
     <ListGroupItem >Dapibus ac facilisis in</ListGroupItem>
@@ -208,16 +184,15 @@ const contextualClassCode =
 `;
 
 const ContextualClassExample = () => (
-    <PrismCode
-        code={contextualClassCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={contextualClassCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Contextual Classes with Link
-const contextualLinkCode =
-    `
+const contextualLinkCode = `
 <!-- Contextual Classes with Link -->
 <ListGroup>
     <ListGroupItem color="" tag="a" to="#" className="list-group-item-action">A simple default list group item</ListGroupItem>
@@ -233,16 +208,15 @@ const contextualLinkCode =
 `;
 
 const ContextualLinkExample = () => (
-    <PrismCode
-        code={contextualLinkCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={contextualLinkCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Colored Lists
-const coloredListCode =
-    `
+const coloredListCode = `
 <!-- Colored Lists -->
 <ListGroup>
     <ListGroupItem >Dapibus ac facilisis in</ListGroupItem>
@@ -258,16 +232,15 @@ const coloredListCode =
 `;
 
 const ColoredListExample = () => (
-    <PrismCode
-        code={coloredListCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={coloredListCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Custom Content
-const customContentCode =
-    `
+const customContentCode = `
 <!-- Custom Content -->
 <ListGroup>
     <ListGroupItem tag="a" to="#" className="list-group-item-action active">
@@ -334,16 +307,15 @@ const customContentCode =
 `;
 
 const CustomContentExample = () => (
-    <PrismCode
-        code={customContentCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={customContentCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // List with Badges
-const listBadgeCode =
-    `
+const listBadgeCode = `
 <!-- List with Badges -->
 <ListGroup>
     <ListGroupItem className="d-flex justify-content-between align-items-center">
@@ -365,16 +337,11 @@ const listBadgeCode =
 `;
 
 const ListBadgeExample = () => (
-    <PrismCode
-        code={listBadgeCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={listBadgeCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // List with Checkboxs
-const listCheckboxCode =
-    `
+const listCheckboxCode = `
 <!-- List with Checkboxs -->
 <ListGroup>
     <ListGroupItem tag="label">
@@ -401,16 +368,15 @@ const listCheckboxCode =
 `;
 
 const ListCheckboxExample = () => (
-    <PrismCode
-        code={listCheckboxCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={listCheckboxCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // List with Radios
-const listRadioCode =
-    `
+const listRadioCode = `
 <!-- List with Radios -->
 <ListGroup>
     <ListGroupItem tag="label">
@@ -437,16 +403,11 @@ const listRadioCode =
 `;
 
 const ListRadioExample = () => (
-    <PrismCode
-        code={listRadioCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={listRadioCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // List with Icon
-const listIconCode =
-    `
+const listIconCode = `
 <!-- List with Icon -->
 <ListGroup>
     <ListGroupItem><i className="mdi mdi-check-bold align-middle lh-1 me-2"></i> Send the billing agreement</ListGroupItem>
@@ -458,16 +419,11 @@ const listIconCode =
 `;
 
 const ListIconExample = () => (
-    <PrismCode
-        code={listIconCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={listIconCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // List with Numbered
-const listNumberedCode =
-    `
+const listNumberedCode = `
 <!-- List with Numbered -->
 <ListGroup className="list-group-numbered">
     <ListGroupItem>Send the billing agreement</ListGroupItem>
@@ -479,16 +435,15 @@ const listNumberedCode =
 `;
 
 const ListNumberedExample = () => (
-    <PrismCode
-        code={listNumberedCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={listNumberedCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Custom Content Lists
-const customListCode =
-    `
+const customListCode = `
 <!-- Custom Content Lists -->
 <SimpleBar style={{ maxHeight: "215px" }}>
     <ListGroup className="mb-1">
@@ -593,11 +548,25 @@ const customListCode =
 `;
 
 const CustomListExample = () => (
-    <PrismCode
-        code={customListCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={customListCode} language={"js"} plugins={["line-numbers"]} />
 );
 
-export { DefaultListExample, ActiveItemExample, DisabledItemExample, ListlinkExample, ListButtonExample, FlushListExample, HorizontalListExample, ContextualClassExample, ContextualLinkExample, ColoredListExample, CustomContentExample, ListBadgeExample, ListCheckboxExample, ListRadioExample, ListIconExample, ListNumberedExample, CustomListExample };
+export {
+	DefaultListExample,
+	ActiveItemExample,
+	DisabledItemExample,
+	ListlinkExample,
+	ListButtonExample,
+	FlushListExample,
+	HorizontalListExample,
+	ContextualClassExample,
+	ContextualLinkExample,
+	ColoredListExample,
+	CustomContentExample,
+	ListBadgeExample,
+	ListCheckboxExample,
+	ListRadioExample,
+	ListIconExample,
+	ListNumberedExample,
+	CustomListExample,
+};

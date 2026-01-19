@@ -2,8 +2,7 @@ import PrismCode from "../../../Components/Common/Prism";
 
 // Default Offcanvas
 
-const defaultOffcanvasCode =
-    `
+const defaultOffcanvasCode = `
 <!-- Base Examples -->
 const [open, setOpen] = useState(false);
 
@@ -30,16 +29,15 @@ const toggleDefultCanvas = () => {
 `;
 
 const DefaultOffcanvasExample = () => (
-    <PrismCode
-        code={defaultOffcanvasCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={defaultOffcanvasCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Placement Offcanvas
-const placementOffcanvasCode =
-    `
+const placementOffcanvasCode = `
 <!-- Placement Offcanvas -->
 
 const [isTop, setIsTop] = useState(false);
@@ -112,17 +110,16 @@ const toggleLeftCanvas = () => {
 `;
 
 const PlacementOffcanvasExample = () => (
-    <PrismCode
-        code={placementOffcanvasCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={placementOffcanvasCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Backdrop Offcanvas
 
-const backdropOffcanvasCode =
-    `
+const backdropOffcanvasCode = `
 <!-- Backdrop Offcanvas -->
 
 const [isEnableScroll, setIsEnableScroll] = useState(false);
@@ -175,11 +172,15 @@ const toggleScrollBackDrop = () => {
 `;
 
 const BackdropOffcanvasExample = () => (
-    <PrismCode
-        code={backdropOffcanvasCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={backdropOffcanvasCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
-export { DefaultOffcanvasExample, PlacementOffcanvasExample, BackdropOffcanvasExample };
+export {
+	DefaultOffcanvasExample,
+	PlacementOffcanvasExample,
+	BackdropOffcanvasExample,
+};

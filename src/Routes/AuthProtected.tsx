@@ -7,30 +7,27 @@ import { useProfile } from "../Components/Hooks/UserHooks";
 
 import { logoutUser } from "../slices/auth/login/thunk";
 
-const AuthProtected = (props : any) =>{
-  const dispatch : any = useDispatch();
-  const { userProfile, loading, token } = useProfile();
-  
-  useEffect(() => {
-    if (userProfile && !loading && token) {
-      setAuthorization(token);
-    } else if (!userProfile && loading && !token) {
-      dispatch(logoutUser());
-    }
-  }, [token, userProfile, loading, dispatch]);
+const AuthProtected = (props: any) => {
+	const dispatch: any = useDispatch();
+	const { userProfile, loading, token } = useProfile();
 
-  /*
+	useEffect(() => {
+		if (userProfile && !loading && token) {
+			setAuthorization(token);
+		} else if (!userProfile && loading && !token) {
+			dispatch(logoutUser());
+		}
+	}, [token, userProfile, loading, dispatch]);
+
+	/*
     Navigate is un-auth access protected routes via url
     */
 
-  if (!userProfile && loading && !token) {
-    return (
-      <Navigate to={{ pathname: "/login"}} />
-    );
-  }
+	if (!userProfile && loading && !token) {
+		return <Navigate to={{ pathname: "/login" }} />;
+	}
 
-  return <>{props.children}</>;
+	return <>{props.children}</>;
 };
-
 
 export default AuthProtected;

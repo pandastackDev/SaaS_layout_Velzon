@@ -1,10 +1,9 @@
-import React from 'react';
-import PrismCode from '../../../Components/Common/Prism';
+import React from "react";
+import PrismCode from "../../../Components/Common/Prism";
 
 //FormGrid code
 const FormGrid = () => {
-const code =
-`<Col md={6}>
+	const code = `<Col md={6}>
 <div className="mb-3">
     <Label for="firstNameinput" className="form-label">First Name</Label>
     <Input type="text" className="form-control" placeholder="Enter your firstname" id="firstNameinput"/>
@@ -62,19 +61,16 @@ const code =
 </Col>
 `;
 
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-                 language={"react"}
-            />
-        </React.Fragment>
-    );
+	return (
+		<React.Fragment>
+			<PrismCode code={code} language={"react"} />
+		</React.Fragment>
+	);
 };
 
 //Gutters
 const Gutters = () => {
-    const code = `
+	const code = `
 <Col md={12}>
 <Label for="fullnameInput" className="form-label">Name</Label>
 <Input type="text" className="form-control" id="fullnameInput" placeholder="Enter your name"/>
@@ -125,19 +121,16 @@ const Gutters = () => {
 </Col>
 `;
 
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-                 language={"react"}
-            />
-        </React.Fragment>
-    );
+	return (
+		<React.Fragment>
+			<PrismCode code={code} language={"react"} />
+		</React.Fragment>
+	);
 };
 
 //Vertical Form
 const VerticalForm = () => {
-    const code = `
+	const code = `
 <div className="mb-3">
 <Label htmlFor="employeeName" className="form-label">Employee Name</Label>
     <Input type="text" className="form-control" id="employeeName" placeholder="Enter emploree name"/>
@@ -173,19 +166,16 @@ const VerticalForm = () => {
 </div>
 `;
 
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-                 language={"react"}
-            />
-        </React.Fragment>
-    );
+	return (
+		<React.Fragment>
+			<PrismCode code={code} language={"react"} />
+		</React.Fragment>
+	);
 };
 
 //Horizontal Form
 const HorizontalForm = () => {
-    const code = `<Row className="mb-3">
+	const code = `<Row className="mb-3">
 <Col lg={3} >
     <Label htmlFor="nameInput" className="form-label">Name</Label>
 </Col>
@@ -257,19 +247,16 @@ const HorizontalForm = () => {
 <button type="submit" className="btn btn-primary">Add Leave</button>
 </div>
 `;
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-                 language={"react"}
-            />
-        </React.Fragment>
-    );
+	return (
+		<React.Fragment>
+			<PrismCode code={code} language={"react"} />
+		</React.Fragment>
+	);
 };
 
 //Horizontal Form Label Sizing
 const HorizontalFormLabelSizing = () => {
-    const code = `<Col xxl={4}>
+	const code = `<Col xxl={4}>
 <Row>
     <Label htmlFor="colFormLabelSm" className="col-sm-2 col-form-label col-form-label-sm">Email</Label>
     <div className="col-sm-10">
@@ -294,19 +281,16 @@ const HorizontalFormLabelSizing = () => {
 </Row>
 </Col>
 `;
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-                 language={"react"}
-            />
-        </React.Fragment>
-    );
+	return (
+		<React.Fragment>
+			<PrismCode code={code} language={"react"} />
+		</React.Fragment>
+	);
 };
 
 //Column Sizing
 const ColumnSizing = () => {
-    const code = `<Col sm={6}>
+	const code = `<Col sm={6}>
 <Input type="text" className="form-control" placeholder="Firstname" aria-label="First-Name"/>
 </Col>
 <Col sm={6}>
@@ -331,19 +315,16 @@ const ColumnSizing = () => {
     <Input type="text" className="form-control" placeholder="Zip" aria-label="Zip"/>
 </Col>
     `;
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-                 language={"react"}
-            />
-        </React.Fragment>
-    );
+	return (
+		<React.Fragment>
+			<PrismCode code={code} language={"react"} />
+		</React.Fragment>
+	);
 };
 
 //Auto Sizing
 const AutoSizing = () => {
-const code = `<Form action="#">
+	const code = `<Form action="#">
 <Row className="gy-2 gx-3 mb-3 align-items-center">
     <Col sm>
         <Label className="visually-hidden" htmlFor="autoSizingInput">Name</Label>
@@ -415,19 +396,16 @@ const code = `<Form action="#">
 </Row>
 </Form>
 `;
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-                 language={"react"}
-            />
-        </React.Fragment>
-    );
+	return (
+		<React.Fragment>
+			<PrismCode code={code} language={"react"} />
+		</React.Fragment>
+	);
 };
 
 //Inline Forms
 const InlineForms = () => {
-const code = `<Row className="row-cols-lg-auto g-3 align-items-center">
+	const code = `<Row className="row-cols-lg-auto g-3 align-items-center">
 <Col xs={12}>
     <Label className="visually-hidden" htmlFor="inlineFormInputGroupUsername">Username</Label>
     <div className="input-group">
@@ -457,19 +435,16 @@ const code = `<Row className="row-cols-lg-auto g-3 align-items-center">
 </Col>
 </Row>
 `;
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-                 language={"react"}
-            />
-        </React.Fragment>
-    );
+	return (
+		<React.Fragment>
+			<PrismCode code={code} language={"react"} />
+		</React.Fragment>
+	);
 };
 
 //Inline Forms
 const FloatingLabels = () => {
-    const code = `<Form action="#">
+	const code = `<Form action="#">
 <Row className="g-3">
     <Col lg={6}>
         <div className="form-floating">
@@ -533,13 +508,20 @@ const FloatingLabels = () => {
 </Row>
 </Form>
 `;
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-                 language={"react"}
-            />
-        </React.Fragment>
-    );
+	return (
+		<React.Fragment>
+			<PrismCode code={code} language={"react"} />
+		</React.Fragment>
+	);
 };
-export { FormGrid, Gutters, VerticalForm, HorizontalForm, HorizontalFormLabelSizing, ColumnSizing, AutoSizing, InlineForms, FloatingLabels };
+export {
+	FormGrid,
+	Gutters,
+	VerticalForm,
+	HorizontalForm,
+	HorizontalFormLabelSizing,
+	ColumnSizing,
+	AutoSizing,
+	InlineForms,
+	FloatingLabels,
+};

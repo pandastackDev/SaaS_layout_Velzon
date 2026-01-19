@@ -10,33 +10,31 @@ import { useSelector, useDispatch } from "react-redux";
 import withRouter from "../../Components/Common/withRouter";
 import { createSelector } from "reselect";
 
-const Logout = (props : any) => {
-  const dispatch : any = useDispatch();
+const Logout = (props: any) => {
+	const dispatch: any = useDispatch();
 
+	const logoutData = createSelector(
+		// (state) => state.Dashboard.productOverviewChart,
+		(state) => state.Login,
+		(isUserLogout: any) => isUserLogout.isUserLogout,
+	);
 
-  const logoutData = createSelector(
-    // (state) => state.Dashboard.productOverviewChart,
-    (state) => state.Login,
-    (isUserLogout : any) => isUserLogout.isUserLogout
-    );
-    
-  // Inside your component
-  const isUserLogout = useSelector(logoutData);
+	// Inside your component
+	const isUserLogout = useSelector(logoutData);
 
-  useEffect(() => {
-    dispatch(logoutUser());
-  }, [dispatch]);
+	useEffect(() => {
+		dispatch(logoutUser());
+	}, [dispatch]);
 
-  if (isUserLogout) {
-    return <Navigate to="/login" />;
-  }
+	if (isUserLogout) {
+		return <Navigate to="/login" />;
+	}
 
-  return <></>;
+	return <></>;
 };
 
 Logout.propTypes = {
-  history: PropTypes.object,
+	history: PropTypes.object,
 };
-
 
 export default withRouter(Logout);

@@ -2,8 +2,7 @@ import PrismCode from "../../../Components/Common/Prism";
 
 // Stacks - Vertical
 
-const stacksVerticalCode =
-    `
+const stacksVerticalCode = `
 <!-- Stacks - Vertical -->
 <div className="vstack gap-3">
     <div className="bg-light border p-1 px-2">First item</div>
@@ -18,17 +17,16 @@ const stacksVerticalCode =
 `;
 
 const StacksVerticalExample = () => (
-    <PrismCode
-        code={stacksVerticalCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={stacksVerticalCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Stacks - Horizontal
 
-const stacksHorizontalCode =
-    `
+const stacksHorizontalCode = `
 <!-- Stacks - Horizontal -->
 <div className="hstack gap-3">
     <div className="bg-light border p-1 px-2">First item</div>
@@ -59,18 +57,16 @@ const stacksHorizontalCode =
 `;
 
 const StacksHorizontalExample = () => (
-    <PrismCode
-        code={stacksHorizontalCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={stacksHorizontalCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
-
 
 // Text Selection
 
-const textSelectionCode =
-    `
+const textSelectionCode = `
 <!-- Text Selection -->
 <p className="user-select-all">This paragraph will be entirely selected when clicked by the user.</p>
 
@@ -80,17 +76,16 @@ const textSelectionCode =
 `;
 
 const TextSelectionExample = () => (
-    <PrismCode
-        code={textSelectionCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={textSelectionCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Pointer Events
 
-const pointerEventsCode =
-    `
+const pointerEventsCode = `
 <!-- Pointer events -->
 <p><Link to="#" className="text-success pe-none" tabIndex="-1" aria-disabled="true">This link</Link> can not be clicked.</p>
 
@@ -100,17 +95,16 @@ const pointerEventsCode =
 `;
 
 const PointerEventsExample = () => (
-    <PrismCode
-        code={pointerEventsCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={pointerEventsCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Overflow
 
-const overflowCode =
-    `
+const overflowCode = `
 <!-- Overflow -->
     <div className="overflow-hidden p-3 mb-0 bg-light" style={{height: "100px"}}>
         This is an example of using <code>.overflow-hidden</code> on an element with set width and height dimensions. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -126,17 +120,12 @@ const overflowCode =
 `;
 
 const OverflowExample = () => (
-    <PrismCode
-        code={overflowCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={overflowCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Position
 
-const positionCode =
-    `
+const positionCode = `
 <!-- Arrange elements -->
 <div className="position-relative p-5 bg-light m-3 border rounded" style={{height: "180px"}}>
     <div className="position-absolute top-0 start-0 avatar-xs bg-dark rounded"></div>
@@ -179,17 +168,12 @@ const positionCode =
 `;
 
 const PositionExample = () => (
-    <PrismCode
-        code={positionCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={positionCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Shadows
 
-const shadowsCode =
-    `
+const shadowsCode = `
 <!-- Shadows -->
 <div className="shadow-none p-3 bg-light rounded">No shadow</div>
 
@@ -201,17 +185,12 @@ const shadowsCode =
 `;
 
 const ShadowsExample = () => (
-    <PrismCode
-        code={shadowsCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={shadowsCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Width
 
-const widthCode =
-    `
+const widthCode = `
 <!-- Width -->
 <div className="w-25 p-3 bg-light">Width 25%</div>
 
@@ -225,17 +204,12 @@ const widthCode =
 `;
 
 const WidthExample = () => (
-    <PrismCode
-        code={widthCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={widthCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Height
 
-const heightCode =
-    `
+const heightCode = `
 <!-- Height -->
 <div className="h-25 p-3 bg-light">Height25%</div>
 
@@ -249,11 +223,17 @@ const heightCode =
 `;
 
 const HeightExample = () => (
-    <PrismCode
-        code={heightCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={heightCode} language={"js"} plugins={["line-numbers"]} />
 );
 
-export { StacksVerticalExample, StacksHorizontalExample, TextSelectionExample, PointerEventsExample, OverflowExample, PositionExample, ShadowsExample, WidthExample, HeightExample };
+export {
+	StacksVerticalExample,
+	StacksHorizontalExample,
+	TextSelectionExample,
+	PointerEventsExample,
+	OverflowExample,
+	PositionExample,
+	ShadowsExample,
+	WidthExample,
+	HeightExample,
+};

@@ -2,393 +2,318 @@ import PrismCode from "../../../Components/Common/Prism";
 
 // Fade Up
 
-const fadeUpCode =
-    `
+const fadeUpCode = `
 <div data-aos="fade-up"></div>
 `;
 
 const FadeUpExample = () => (
-    <PrismCode
-        code={fadeUpCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={fadeUpCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Fade Down
-const fadeDownCode =
-`
+const fadeDownCode = `
 <div data-aos="fade-down"></div>
 `;
 
 const FadeDownExample = () => (
-    <PrismCode
-        code={fadeDownCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={fadeDownCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Fade Right
-const fadeRightCode =
-    `
+const fadeRightCode = `
 <div data-aos="fade-right"></div>
 `;
 
 const FadeRightExample = () => (
-    <PrismCode
-        code={fadeRightCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={fadeRightCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Fade Left
-const fadeLeftCode =
-    `
+const fadeLeftCode = `
 <div data-aos="fade-left"></div>
 `;
 
 const FadeLeftExample = () => (
-    <PrismCode
-        code={fadeLeftCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={fadeLeftCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Fade Up Right
-const fadeUpRightCode =
-    `
+const fadeUpRightCode = `
 <div data-aos="fade-up-right"></div>
 `;
 
 const FadeUpRightExample = () => (
-    <PrismCode
-        code={fadeUpRightCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={fadeUpRightCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Fade Up Left
-const fadeUpLeftCode =
-    `
+const fadeUpLeftCode = `
 <div data-aos="fade-up-left"></div>
 `;
 
 const FadeUpLeftExample = () => (
-    <PrismCode
-        code={fadeUpLeftCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={fadeUpLeftCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Fade Down Right
-const fadeDownRightCode =
-    `
+const fadeDownRightCode = `
 <div data-aos="fade-down-right"></div>
 `;
 
 const FadeDownRightExample = () => (
-    <PrismCode
-        code={fadeDownRightCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={fadeDownRightCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Fade Down Left
-const fadeDownLeftCode =
-    `
+const fadeDownLeftCode = `
 <div data-aos="fade-down-left"></div>
 `;
 
 const FadeDownLeftExample = () => (
-    <PrismCode
-        code={fadeDownLeftCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={fadeDownLeftCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Flip Left
-const flipLeftCode =
-    `
+const flipLeftCode = `
 <div data-aos="flip-left"></div>
 `;
 
 const FlipLeftExample = () => (
-    <PrismCode
-        code={flipLeftCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={flipLeftCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Flip Right
-const flipRightCode =
-    `
+const flipRightCode = `
 <div data-aos="flip-right"></div>
 `;
 
 const FlipRightExample = () => (
-    <PrismCode
-        code={flipRightCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={flipRightCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Flip Up
-const filpUpCode =
-    `
+const filpUpCode = `
 <div data-aos="flip-up"></div>
 `;
 
 const FilpUpExample = () => (
-    <PrismCode
-        code={filpUpCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={filpUpCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Flip Down
-const filpDownCode =
-    `
+const filpDownCode = `
 <div data-aos="flip-down"></div>
 `;
 
 const FilpDownExample = () => (
-    <PrismCode
-        code={filpDownCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={filpDownCode} language={"js"} plugins={["line-numbers"]} />
 );
 // Zoom In
-const zoomInCode =
-    `
+const zoomInCode = `
 <div data-aos="zoom-in"></div>
 `;
 
 const ZoomInExample = () => (
-    <PrismCode
-        code={zoomInCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={zoomInCode} language={"js"} plugins={["line-numbers"]} />
 );
 // Zoom Out
-const zoomOutCode =
-    `
+const zoomOutCode = `
 <div data-aos="zoom-out"></div>
 `;
 
 const ZoomOutExample = () => (
-    <PrismCode
-        code={zoomOutCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={zoomOutCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Zoom In Up
-const zoomInUpCode =
-    `
+const zoomInUpCode = `
 <div data-aos="zoom-in-up"></div>
 `;
 
 const ZoomInUpExample = () => (
-    <PrismCode
-        code={zoomInUpCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={zoomInUpCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Zoom Out Up
-const zoomOutUpCode =
-    `
+const zoomOutUpCode = `
 <div data-aos="zoom-out-up"></div>
 `;
 
 const ZoomOutUpExample = () => (
-    <PrismCode
-        code={zoomOutUpCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={zoomOutUpCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Zoom In Down
-const zoomInDownCode =
-    `
+const zoomInDownCode = `
 <div data-aos="zoom-in-down"></div>
 `;
 
 const ZoomInDownExample = () => (
-    <PrismCode
-        code={zoomInDownCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={zoomInDownCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Zoom Out Down
-const zoomOutDownCode =
-    `
+const zoomOutDownCode = `
 <div data-aos="zoom-out-down"></div>
 `;
 
 const ZoomOutDownExample = () => (
-    <PrismCode
-        code={zoomOutDownCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={zoomOutDownCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Zoom In Right
-const zoomInRightCode =
-    `
+const zoomInRightCode = `
 <div data-aos="zoom-in-right"></div>
 `;
 
 const ZoomInRightExample = () => (
-    <PrismCode
-        code={zoomInRightCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={zoomInRightCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Zoom Out Right
-const zoomOutRightCode =
-    `
+const zoomOutRightCode = `
 <div data-aos="zoom-out-right"></div>
 `;
 
 const ZoomOutRightExample = () => (
-    <PrismCode
-        code={zoomOutRightCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={zoomOutRightCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Zoom In Left
-const zoomInLeftCode =
-    `
+const zoomInLeftCode = `
 <div data-aos="zoom-in-left"></div>
 `;
 
 const ZoomInLeftExample = () => (
-    <PrismCode
-        code={zoomInLeftCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={zoomInLeftCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Zoom Out Left
-const zoomOutLeftCode =
-    `
+const zoomOutLeftCode = `
 <div data-aos="zoom-out-left"></div>
 `;
 
 const ZoomOutLeftExample = () => (
-    <PrismCode
-        code={zoomOutLeftCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={zoomOutLeftCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Duration
-const durationCode =
-    `
+const durationCode = `
 <div data-aos="fade-up" data-aos-duration="3000"></div>
 `;
 
 const DurationExample = () => (
-    <PrismCode
-        code={durationCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={durationCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Easing="linear"
-const easingLinearCode =
-    `
+const easingLinearCode = `
 <div data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1500"></div>
 `;
 
 const EasingLinearExample = () => (
-    <PrismCode
-        code={easingLinearCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={easingLinearCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Offset
-const offset1Code =
-    `
+const offset1Code = `
 <div data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine"></div>
 `;
 
 const Offset1Example = () => (
-    <PrismCode
-        code={offset1Code}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={offset1Code} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Offset
-const offset2Code =
-    `
+const offset2Code = `
 <div data-aos="fade-left" data-aos-offset="500" data-aos-duration="500"></div>
 `;
 
 const Offset2Example = () => (
-    <PrismCode
-        code={offset2Code}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={offset2Code} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Easing="ease-in-back"
-const easeInBackCode =
-    `
+const easeInBackCode = `
 <div data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0"></div>
 `;
 
 const EaseInBackExample = () => (
-    <PrismCode
-        code={easeInBackCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={easeInBackCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Easing="ease-out-cubic"
-const easeOutCubicCode =
-    `
+const easeOutCubicCode = `
 <div data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="2000"></div>
 `;
 
 const EaseOutCubicExample = () => (
-    <PrismCode
-        code={easeOutCubicCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={easeOutCubicCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
-export { FadeUpExample, FadeDownExample, FadeRightExample, FadeLeftExample, FadeUpRightExample, FadeUpLeftExample, FadeDownRightExample, FadeDownLeftExample, FlipLeftExample, FlipRightExample, FilpUpExample, FilpDownExample, ZoomInExample, ZoomOutExample, ZoomInUpExample, ZoomOutUpExample, ZoomInDownExample, ZoomOutDownExample, ZoomInRightExample, ZoomOutRightExample, ZoomInLeftExample, ZoomOutLeftExample, DurationExample, EasingLinearExample, Offset1Example, Offset2Example, EaseInBackExample, EaseOutCubicExample };
+export {
+	FadeUpExample,
+	FadeDownExample,
+	FadeRightExample,
+	FadeLeftExample,
+	FadeUpRightExample,
+	FadeUpLeftExample,
+	FadeDownRightExample,
+	FadeDownLeftExample,
+	FlipLeftExample,
+	FlipRightExample,
+	FilpUpExample,
+	FilpDownExample,
+	ZoomInExample,
+	ZoomOutExample,
+	ZoomInUpExample,
+	ZoomOutUpExample,
+	ZoomInDownExample,
+	ZoomOutDownExample,
+	ZoomInRightExample,
+	ZoomOutRightExample,
+	ZoomInLeftExample,
+	ZoomOutLeftExample,
+	DurationExample,
+	EasingLinearExample,
+	Offset1Example,
+	Offset2Example,
+	EaseInBackExample,
+	EaseOutCubicExample,
+};

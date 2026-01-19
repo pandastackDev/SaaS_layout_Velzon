@@ -2,8 +2,7 @@ import PrismCode from "../../../Components/Common/Prism";
 
 // Popovers
 
-const popoversCode =
-    `
+const popoversCode = `
 <!-- Popovers -->
 <div className="hstack flex-wrap gap-2">
     <Button color="light" id="PopoverTop">
@@ -45,16 +44,11 @@ const popoversCode =
 `;
 
 const PopoversExample = () => (
-    <PrismCode
-        code={popoversCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={popoversCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Tooltips
-const tooltipsCode =
-    `
+const tooltipsCode = `
 <!-- Tooltips -->
 <div className="hstack flex-wrap gap-2">
     <Button color="light" id="tooltipTop">
@@ -85,16 +79,11 @@ const tooltipsCode =
 `;
 
 const TooltipsExample = () => (
-    <PrismCode
-        code={tooltipsCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={tooltipsCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Breadcrumb
-const breadcrumbCode =
-    `
+const breadcrumbCode = `
 <Breadcrumb listClassName='p-3 py-2 bg-light'>
     <BreadcrumbItem active> Home </BreadcrumbItem>
 </Breadcrumb>
@@ -115,16 +104,11 @@ const breadcrumbCode =
 `;
 
 const BreadcrumbExample = () => (
-    <PrismCode
-        code={breadcrumbCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={breadcrumbCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Pagination
-const paginationCode =
-    `
+const paginationCode = `
 <Pagination>
     <PaginationItem> <PaginationLink to="#"> Previous </PaginationLink> </PaginationItem>
     <PaginationItem> <PaginationLink to="#"> 1 </PaginationLink> </PaginationItem>
@@ -215,16 +199,11 @@ const paginationCode =
 `;
 
 const PaginationExample = () => (
-    <PrismCode
-        code={paginationCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={paginationCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Spinners
-const spinnersCode =
-    `
+const spinnersCode = `
 <!-- Border spinner -->
 
 <Spinner color="primary"> Loading... </Spinner>
@@ -264,11 +243,13 @@ const spinnersCode =
 `;
 
 const SpinnersExample = () => (
-    <PrismCode
-        code={spinnersCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={spinnersCode} language={"js"} plugins={["line-numbers"]} />
 );
 
-export { PopoversExample, TooltipsExample, BreadcrumbExample, PaginationExample, SpinnersExample };
+export {
+	PopoversExample,
+	TooltipsExample,
+	BreadcrumbExample,
+	PaginationExample,
+	SpinnersExample,
+};

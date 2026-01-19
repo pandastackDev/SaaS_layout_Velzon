@@ -2,8 +2,7 @@ import PrismCode from "../../../Components/Common/Prism";
 
 // Default Alerts
 
-const defaultAlertsCode =
-    `
+const defaultAlertsCode = `
 <!-- Primary Alert -->
 <Alert color="primary">
     <strong> Hi! </strong> A simple <b>Primary alert</b> —check it out!
@@ -46,13 +45,12 @@ const defaultAlertsCode =
 `;
 
 const DefaultAlertsExample = () => (
-    <PrismCode
-        code={defaultAlertsCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={defaultAlertsCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
-
 
 // Borderless Alerts
 
@@ -98,11 +96,11 @@ const borderlessAlertsCode = `
 </Alert>`;
 
 const BorderlessExample = () => (
-    <PrismCode
-        code={borderlessAlertsCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={borderlessAlertsCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Dismissing Alerts
@@ -149,11 +147,11 @@ const dismissingAlertsCode = `
 </UncontrolledAlert>`;
 
 const DismissingExample = () => (
-    <PrismCode
-        code={dismissingAlertsCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={dismissingAlertsCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Link Color Alerts
@@ -200,11 +198,11 @@ const linkColorAlertsCode = `
 </Alert>`;
 
 const LinkColorExample = () => (
-    <PrismCode
-        code={linkColorAlertsCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={linkColorAlertsCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Live Alert Example
@@ -217,11 +215,11 @@ const [show, setShow] = useState(false);
 <button type="button" className="btn btn-primary" id="liveAlertBtn" onClick={() => setShow(true)}>Show live alert</button>`;
 
 const LiveExample = () => (
-    <PrismCode
-        code={liveAlertsCode}
-        language={("jsx")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={liveAlertsCode}
+		language={"jsx"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Outline Alerts
@@ -263,13 +261,12 @@ const outlineAlertsCode = `
 </UncontrolledAlert>`;
 
 const OutlineAlertsExample = () => (
-    <PrismCode
-        code={outlineAlertsCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={outlineAlertsCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
-
 
 // Left Border Alerts
 
@@ -315,13 +312,12 @@ const leftBorderAlertsCode = `
 </UncontrolledAlert>`;
 
 const LeftBorderAlertsExample = () => (
-    <PrismCode
-        code={leftBorderAlertsCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={leftBorderAlertsCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
-
 
 // Label Icon Alerts
 
@@ -367,13 +363,12 @@ const labelIconAlertsCode = `
 </UncontrolledAlert>`;
 
 const LabelIconAlertsExample = () => (
-    <PrismCode
-        code={labelIconAlertsCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={labelIconAlertsCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
-
 
 // Top Border with Outline Alerts Alerts
 
@@ -419,13 +414,12 @@ const topBarAlertsCode = `
 </UncontrolledAlert>`;
 
 const TopBarAlertsExample = () => (
-    <PrismCode
-        code={topBarAlertsCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={topBarAlertsCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
-
 
 // Label Icon Arrow Alerts Alerts Alerts
 
@@ -471,13 +465,12 @@ const labelIconArrowAlertsCode = `
 </UncontrolledAlert>`;
 
 const LabelIconArrowAlertsExample = () => (
-    <PrismCode
-        code={labelIconArrowAlertsCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={labelIconArrowAlertsCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
-
 
 // Rounded Label Icon Alerts
 
@@ -523,13 +516,12 @@ const roundedLabelIconAlertsCode = `
 </UncontrolledAlert>`;
 
 const RoundedLabelIconAlertsExample = () => (
-    <PrismCode
-        code={roundedLabelIconAlertsCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={roundedLabelIconAlertsCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
-
 
 // Additional Content Alerts
 
@@ -608,14 +600,12 @@ const additionalContentAlertsCode = `
 `;
 
 const AdditionalContentAlertsExample = () => (
-    <PrismCode
-        code={additionalContentAlertsCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={additionalContentAlertsCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
-
-
 
 // Solid Alerts
 
@@ -661,12 +651,25 @@ const solidAlertsCode = `
 </Alert>`;
 
 const SolidAlertsExample = () => (
-    <PrismCode
-        code={solidAlertsCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={solidAlertsCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
-
-export { DefaultAlertsExample, BorderlessExample, DismissingExample, LinkColorExample, LiveExample, OutlineAlertsExample, LeftBorderAlertsExample, LabelIconAlertsExample, TopBarAlertsExample, LabelIconArrowAlertsExample, RoundedLabelIconAlertsExample, SolidAlertsExample, AdditionalContentAlertsExample };
+export {
+	DefaultAlertsExample,
+	BorderlessExample,
+	DismissingExample,
+	LinkColorExample,
+	LiveExample,
+	OutlineAlertsExample,
+	LeftBorderAlertsExample,
+	LabelIconAlertsExample,
+	TopBarAlertsExample,
+	LabelIconArrowAlertsExample,
+	RoundedLabelIconAlertsExample,
+	SolidAlertsExample,
+	AdditionalContentAlertsExample,
+};

@@ -2,8 +2,7 @@ import PrismCode from "../../../Components/Common/Prism";
 
 // Bootstrap Toasts
 
-const bootstrapToastsCode =
-`<!-- Default Toast --> 
+const bootstrapToastsCode = `<!-- Default Toast --> 
 const [toast1, setToast1] = useState(true);
 
 <Toast isOpen={toast1}>
@@ -79,16 +78,15 @@ const [toast6, setToast6] = useState(true);
 `;
 
 const BootstrapToastsExample = () => (
-    <PrismCode
-        code={bootstrapToastsCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={bootstrapToastsCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Toast Placement
-const toastPlacementCode =
-    `
+const toastPlacementCode = `
 <!-- Toast Placement -->
 
 const [toast11, setToast11] = useState(true);
@@ -128,16 +126,15 @@ const [position, setPosition] = useState();
 `;
 
 const ToastPlacementExample = () => (
-    <PrismCode
-        code={toastPlacementCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={toastPlacementCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Bordered with Icon Toast
-const borderIconCode =
-    `
+const borderIconCode = `
 <!-- Bordered With Icon Toast -->
 <div className="hstack flex-wrap gap-2">
     <Button className="btn btn-primary" id="borderedToast1Btn" onClick={() => setToast7(!toast7)} >Primary Toast</Button>
@@ -208,16 +205,11 @@ const borderIconCode =
 `;
 
 const BorderIconExample = () => (
-    <PrismCode
-        code={borderIconCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={borderIconCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Toastify JS
-const toastifyCode =
-`<!-- Toast -->
+const toastifyCode = `<!-- Toast -->
 const defaultnotify = () => toast("Welcome Back! This is a Toast Notification", { position: "top-right", hideProgressBar: true, className: 'bg-primary text-white' });
 const successnotify = () => toast("Your application was successfully sent", { position: "top-center", hideProgressBar: true, closeOnClick: false, className: 'bg-success text-white' });
 const warningnotify = () => toast("Warning ! Something went wrong try again", { position: "top-center", hideProgressBar: true, closeOnClick: false, className: 'bg-warning text-white' });
@@ -258,11 +250,12 @@ const durationnotify = () => toast("Toast Duration 5s", { position: "top-right",
 `;
 
 const ToastifyExample = () => (
-    <PrismCode
-        code={toastifyCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={toastifyCode} language={"js"} plugins={["line-numbers"]} />
 );
 
-export { BootstrapToastsExample, ToastPlacementExample, BorderIconExample, ToastifyExample };
+export {
+	BootstrapToastsExample,
+	ToastPlacementExample,
+	BorderIconExample,
+	ToastifyExample,
+};

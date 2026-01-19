@@ -2,8 +2,7 @@ import PrismCode from "../../../Components/Common/Prism";
 
 // Display Headings
 
-const displayHeadingCode =
-    `
+const displayHeadingCode = `
 <!-- Display Headings -->
 <h1 className="display-1">Display 1</h1>
 
@@ -19,17 +18,16 @@ const displayHeadingCode =
 `;
 
 const DisplayHeadingExample = () => (
-    <PrismCode
-        code={displayHeadingCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={displayHeadingCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Headings
 
-const headingsCode =
-    `
+const headingsCode = `
 <!-- Headings -->
 <h1 className="mb-3">h1. Bootstrap heading <small className="text-muted">Semibold 2.03125rem (32.5px)</small></h1>
 
@@ -45,17 +43,12 @@ const headingsCode =
 `;
 
 const HeadingsExample = () => (
-    <PrismCode
-        code={headingsCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={headingsCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Blockquotes
 
-const blockquotesCode =
-    `
+const blockquotesCode = `
 <!-- Blockquotes -->
 <blockquote className="blockquote fs-14">
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
@@ -69,17 +62,16 @@ const blockquotesCode =
 `;
 
 const BlockquotesExample = () => (
-    <PrismCode
-        code={blockquotesCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={blockquotesCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Blockquote Background Color
 
-const blockquoteColorCode =
-    `
+const blockquoteColorCode = `
 <!-- Blockquote Background Color -->
 <blockquote className="blockquote custom-blockquote blockquote-primary rounded mb-0">
     <p className="text-body mb-2">Custom Blockquote Primary Example</p>
@@ -118,17 +110,16 @@ const blockquoteColorCode =
 `;
 
 const BlockquoteColorExample = () => (
-    <PrismCode
-        code={blockquoteColorCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={blockquoteColorCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Blockquote Border Color
 
-const blockquoteBorderColorCode =
-    `
+const blockquoteBorderColorCode = `
 <!-- Blockquote Border Color -->
 <blockquote className="blockquote custom-blockquote blockquote-outline blockquote-primary rounded mb-0">
     <p className="text-body mb-2">Custom Blockquote Outline Primary Example</p>
@@ -167,17 +158,16 @@ const blockquoteBorderColorCode =
 `;
 
 const BlockquoteBorderColorExample = () => (
-    <PrismCode
-        code={blockquoteBorderColorCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={blockquoteBorderColorCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Inline Text Elements
 
-const inlineTextCode =
-    `
+const inlineTextCode = `
 <!-- Inline Text -->
 <p className="lead">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
 
@@ -199,17 +189,12 @@ const inlineTextCode =
 `;
 
 const InlineTextExample = () => (
-    <PrismCode
-        code={inlineTextCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={inlineTextCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Unstyled List
 
-const unstyleListCode =
-    `
+const unstyleListCode = `
 <!-- Unstyle List -->
 <ul className="list-unstyled">
     <li>Integer molestie lorem at massa</li>
@@ -225,17 +210,16 @@ const unstyleListCode =
 `;
 
 const UnstyleListExample = () => (
-    <PrismCode
-        code={unstyleListCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={unstyleListCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Inline List
 
-const inlineListCode =
-    `
+const inlineListCode = `
 <!-- Inline List -->
 <ul className="list-inline">
     <li className="list-inline-item">Lorem ipsum</li>
@@ -245,17 +229,12 @@ const inlineListCode =
 `;
 
 const InlineListExample = () => (
-    <PrismCode
-        code={inlineListCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={inlineListCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Description List Alignment
 
-const descriptionListCode =
-    `
+const descriptionListCode = `
 <!-- Description List -->
 <dl className="row mb-0">
     <dt className="col-sm-3">Description lists</dt>
@@ -282,17 +261,16 @@ const descriptionListCode =
 `;
 
 const DescriptionListExample = () => (
-    <PrismCode
-        code={descriptionListCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={descriptionListCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Text Wrapping and Overflow
 
-const textWrappingCode =
-    `
+const textWrappingCode = `
 <!-- Text Wrap -->
 <Badge color="primary" className="text-wrap" style={{ width: "6rem" }}>
     This text should wrap.
@@ -305,17 +283,16 @@ const textWrappingCode =
 `;
 
 const TextWrappingExample = () => (
-    <PrismCode
-        code={textWrappingCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={textWrappingCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Font size
 
-const fontSizeCode =
-    `
+const fontSizeCode = `
 <!-- Font size -->
 <p className="fs-1">.fs-1 text</p>
 
@@ -331,33 +308,23 @@ const fontSizeCode =
 `;
 
 const FontSizeExample = () => (
-    <PrismCode
-        code={fontSizeCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={fontSizeCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Word Break
 
-const wordBreakCode =
-    `
+const wordBreakCode = `
 <!-- Word Break -->
 <p className="text-break mb-0">mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm</p>;
 `;
 
 const WordBreakExample = () => (
-    <PrismCode
-        code={wordBreakCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={wordBreakCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Font weight and italics
 
-const fontWeightCode =
-    `
+const fontWeightCode = `
 <!-- Font weight and italics -->
 <p className="fw-bold">Bold text.</p>
 
@@ -375,17 +342,12 @@ const fontWeightCode =
 `;
 
 const FontWeightExample = () => (
-    <PrismCode
-        code={fontWeightCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={fontWeightCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Line height
 
-const lineHeightCode =
-    `
+const lineHeightCode = `
 <!-- Line height -->
 <p className="lh-1">This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are applied to the element itself or sometimes the parent element. These classes can be customized as needed with our utility API.</p>
 
@@ -397,17 +359,12 @@ const lineHeightCode =
 `;
 
 const LineHeightExample = () => (
-    <PrismCode
-        code={lineHeightCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={lineHeightCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Text Transform
 
-const textTransformCode =
-    `
+const textTransformCode = `
 <!-- Text Transform -->
 <p className="text-lowercase">Lowercased text.</p>
 
@@ -417,17 +374,16 @@ const textTransformCode =
 `;
 
 const TextTransformExample = () => (
-    <PrismCode
-        code={textTransformCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={textTransformCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Text Decoration
 
-const textDecrationCode =
-    `
+const textDecrationCode = `
 <!-- Text Decoration -->
 <p className="text-decoration-underline">This text has a line underneath it.</p>
 
@@ -437,17 +393,16 @@ const textDecrationCode =
 `;
 
 const TextDecrationExample = () => (
-    <PrismCode
-        code={textDecrationCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={textDecrationCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Text Truncation
 
-const textTruncationCode =
-    `
+const textTruncationCode = `
 <!-- Block level -->
 <Row>
     <div className="col-2 text-truncate">
@@ -462,17 +417,16 @@ const textTruncationCode =
 `;
 
 const TextTruncationExample = () => (
-    <PrismCode
-        code={textTruncationCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={textTruncationCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Visibility
 
-const visibilityCode =
-    `
+const visibilityCode = `
 <!-- Visibility -->
 <div className="visible">text visible Lorem ipsum dolor sit amet</div>
 
@@ -480,17 +434,12 @@ const visibilityCode =
 `;
 
 const VisibilityExample = () => (
-    <PrismCode
-        code={visibilityCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={visibilityCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Clearfix
 
-const clearfixCode =
-    `
+const clearfixCode = `
 <!-- Clearfix -->
 <div className="bg-light clearfix">
     <Button color="secondary" className="float-start">Example Button floated left</Button>
@@ -499,12 +448,27 @@ const clearfixCode =
 `;
 
 const ClearfixExample = () => (
-    <PrismCode
-        code={clearfixCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={clearfixCode} language={"js"} plugins={["line-numbers"]} />
 );
 
-
-export { DisplayHeadingExample, HeadingsExample, BlockquotesExample, BlockquoteColorExample, BlockquoteBorderColorExample, InlineTextExample, UnstyleListExample, InlineListExample, DescriptionListExample, TextWrappingExample, FontSizeExample, WordBreakExample, FontWeightExample, LineHeightExample, TextTransformExample, TextDecrationExample, TextTruncationExample, VisibilityExample, ClearfixExample };
+export {
+	DisplayHeadingExample,
+	HeadingsExample,
+	BlockquotesExample,
+	BlockquoteColorExample,
+	BlockquoteBorderColorExample,
+	InlineTextExample,
+	UnstyleListExample,
+	InlineListExample,
+	DescriptionListExample,
+	TextWrappingExample,
+	FontSizeExample,
+	WordBreakExample,
+	FontWeightExample,
+	LineHeightExample,
+	TextTransformExample,
+	TextDecrationExample,
+	TextTruncationExample,
+	VisibilityExample,
+	ClearfixExample,
+};

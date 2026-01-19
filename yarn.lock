@@ -1104,6 +1104,25 @@
   resolved "https://registry.npmjs.org/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@biomejs/biome@^2.3.11":
+  version "2.3.11"
+  resolved "https://registry.npmjs.org/@biomejs/biome/-/biome-2.3.11.tgz"
+  integrity sha512-/zt+6qazBWguPG6+eWmiELqO+9jRsMZ/DBU3lfuU2ngtIQYzymocHhKiZRyrbra4aCOoyTg/BmY+6WH5mv9xmQ==
+  optionalDependencies:
+    "@biomejs/cli-darwin-arm64" "2.3.11"
+    "@biomejs/cli-darwin-x64" "2.3.11"
+    "@biomejs/cli-linux-arm64" "2.3.11"
+    "@biomejs/cli-linux-arm64-musl" "2.3.11"
+    "@biomejs/cli-linux-x64" "2.3.11"
+    "@biomejs/cli-linux-x64-musl" "2.3.11"
+    "@biomejs/cli-win32-arm64" "2.3.11"
+    "@biomejs/cli-win32-x64" "2.3.11"
+
+"@biomejs/cli-win32-x64@2.3.11":
+  version "2.3.11"
+  resolved "https://registry.npmjs.org/@biomejs/cli-win32-x64/-/cli-win32-x64-2.3.11.tgz"
+  integrity sha512-43VrG813EW+b5+YbDbz31uUsheX+qFKCpXeY9kfdAx+ww3naKxeVkTD9zLIWxUPfJquANMHrmW3wbe/037G0Qg==
+
 "@ckeditor/ckeditor5-adapter-ckfinder@44.3.0":
   version "44.3.0"
   resolved "https://registry.npmjs.org/@ckeditor/ckeditor5-adapter-ckfinder/-/ckeditor5-adapter-ckfinder-44.3.0.tgz"
@@ -3475,6 +3494,13 @@
   dependencies:
     "@types/node" "*"
 
+"@types/cleave.js@^1.4.12":
+  version "1.4.12"
+  resolved "https://registry.npmjs.org/@types/cleave.js/-/cleave.js-1.4.12.tgz"
+  integrity sha512-d+TDoy5wsWfG/lTLNV4CCziGzJovbX5RCrYzrfG2iB5F6yvrzeTtGEgoXW3/7oRj0H6gAzLxuvwmgNEx4Og4QA==
+  dependencies:
+    "@types/react" "*"
+
 "@types/color-convert@2.0.4":
   version "2.0.4"
   resolved "https://registry.npmjs.org/@types/color-convert/-/color-convert-2.0.4.tgz"
@@ -3705,6 +3731,13 @@
   resolved "https://registry.npmjs.org/@types/range-parser/-/range-parser-1.2.7.tgz"
   integrity sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ==
 
+"@types/react-color@^3.0.13":
+  version "3.0.13"
+  resolved "https://registry.npmjs.org/@types/react-color/-/react-color-3.0.13.tgz"
+  integrity sha512-2c/9FZ4ixC5T3JzN0LP5Cke2Mf0MKOP2Eh0NPDPWmuVH3NjPyhEjqNMQpN1Phr5m74egAy+p2lYNAFrX1z9Yrg==
+  dependencies:
+    "@types/reactcss" "*"
+
 "@types/react-csv@^1.1.10":
   version "1.1.10"
   resolved "https://registry.npmjs.org/@types/react-csv/-/react-csv-1.1.10.tgz"
@@ -3747,6 +3780,11 @@
     "@types/prop-types" "*"
     "@types/scheduler" "^0.16"
     csstype "^3.0.2"
+
+"@types/reactcss@*":
+  version "1.2.13"
+  resolved "https://registry.npmjs.org/@types/reactcss/-/reactcss-1.2.13.tgz"
+  integrity sha512-gi3S+aUi6kpkF5vdhUsnkwbiSEIU/BEJyD7kBy2SudWBUuKmJk8AQKE0OVcQQeEy40Azh0lV6uynxlikYIJuwg==
 
 "@types/resolve@1.17.1":
   version "1.17.1"
@@ -4691,6 +4729,11 @@ balanced-match@^1.0.0:
   resolved "https://registry.npmjs.org/balanced-match/-/balanced-match-1.0.2.tgz"
   integrity sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==
 
+baseline-browser-mapping@^2.9.15:
+  version "2.9.15"
+  resolved "https://registry.npmjs.org/baseline-browser-mapping/-/baseline-browser-mapping-2.9.15.tgz"
+  integrity sha512-kX8h7K2srmDyYnXRIppo4AH/wYgzWVCs+eKr3RusRSQ5PvRYoEFmR/I0PbdTjKFAoKqp5+kbxnNTFO9jOfSVJg==
+
 batch@0.6.1:
   version "0.6.1"
   resolved "https://registry.npmjs.org/batch/-/batch-0.6.1.tgz"
@@ -4876,10 +4919,10 @@ caniuse-api@^3.0.0:
     lodash.memoize "^4.1.2"
     lodash.uniq "^4.5.0"
 
-caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001646, caniuse-lite@^1.0.30001663:
-  version "1.0.30001668"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001668.tgz"
-  integrity sha512-nWLrdxqCdblixUO+27JtGJJE/txpJlyUy5YN1u53wLZkP0emYCo5zgS6QYft7VUYR42LGgi/S5hdLZTrnyIddw==
+caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001646, caniuse-lite@^1.0.30001663, caniuse-lite@^1.0.30001765:
+  version "1.0.30001765"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001765.tgz"
+  integrity sha512-LWcNtSyZrakjECqmpP4qdg0MMGdN368D7X8XvvAqOcqMv0RxnlqVKZl2V6/mBR68oYMxOZPLw/gO7DuisMHUvQ==
 
 case-sensitive-paths-webpack-plugin@^2.4.0:
   version "2.4.0"

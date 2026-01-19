@@ -2,8 +2,7 @@ import PrismCode from "../../../Components/Common/Prism";
 
 // Vertical alignment (align-items-start)
 
-const verticalStartCode =
-    `
+const verticalStartCode = `
 <!-- Vertical alignment (align-items-start) -->
 <Row className="align-items-start">
     <Col sm={4}>
@@ -19,17 +18,16 @@ const verticalStartCode =
 `;
 
 const VerticalStartExample = () => (
-    <PrismCode
-        code={verticalStartCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={verticalStartCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Vertical alignment (align-items-center)
 
-const verticalCenterCode =
-    `
+const verticalCenterCode = `
 <!-- Vertical alignment (align-items-center) -->
 <Row className="align-items-center">
     <Col sm={4}>
@@ -45,17 +43,16 @@ const verticalCenterCode =
 `;
 
 const VerticalCenterExample = () => (
-    <PrismCode
-        code={verticalCenterCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={verticalCenterCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Vertical alignment (align-items-end)
 
-const verticalEndCode =
-    `
+const verticalEndCode = `
 <!-- Vertical alignment (align-items-end) -->
 <Row className="align-items-end">
     <Col sm={4}>
@@ -71,17 +68,16 @@ const verticalEndCode =
 `;
 
 const VerticalEndExample = () => (
-    <PrismCode
-        code={verticalEndCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={verticalEndCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Align Self
 
-const alignSelfCode =
-    `
+const alignSelfCode = `
 <!-- Align Self -->
 <Row>
     <Col sm={4} className="align-self-start">
@@ -97,18 +93,12 @@ const alignSelfCode =
 `;
 
 const AlignSelfExample = () => (
-    <PrismCode
-        code={alignSelfCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={alignSelfCode} language={"js"} plugins={["line-numbers"]} />
 );
-
 
 // Horizontal Alignment
 
-const horizontalAlignCode =
-    `
+const horizontalAlignCode = `
 <!-- Horizontal Alignment -->
 <Row className="justify-content-start">
     <Col sm={4}>
@@ -128,12 +118,17 @@ const horizontalAlignCode =
 `;
 
 const HorizontalAlignExample = () => (
-    <PrismCode
-        code={horizontalAlignCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={horizontalAlignCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
-
-export { VerticalStartExample, VerticalCenterExample, VerticalEndExample, AlignSelfExample, HorizontalAlignExample };
+export {
+	VerticalStartExample,
+	VerticalCenterExample,
+	VerticalEndExample,
+	AlignSelfExample,
+	HorizontalAlignExample,
+};

@@ -1,9 +1,8 @@
 import PrismCode from "../../../Components/Common/Prism";
 
-// Basic Rater	
+// Basic Rater
 
-const basicRaterCode =
-    `
+const basicRaterCode = `
 <Rating
 initialRating={3}
 emptySymbol="mdi mdi-star-outline text-muted "
@@ -12,16 +11,11 @@ fullSymbol="mdi mdi-star text-warning "
 `;
 
 const BasicRaterExample = () => (
-    <PrismCode
-        code={basicRaterCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={basicRaterCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 // Rater with Step
-const raterWithStepCode =
-    `
+const raterWithStepCode = `
 <Rating
 initialRating={1.5}
 fractions={2}
@@ -31,17 +25,15 @@ fullSymbol="mdi mdi-star text-warning "
 `;
 
 const RaterWithStepExample = () => (
-    <PrismCode
-        code={raterWithStepCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={raterWithStepCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
-
 // Custom Messages
-const customMsgCode =
-    `
+const customMsgCode = `
 <Rating
 emptySymbol="mdi mdi-star-outline text-muted "
 fullSymbol="mdi mdi-star text-warning "
@@ -49,17 +41,11 @@ fullSymbol="mdi mdi-star text-warning "
 `;
 
 const CustomMsgExample = () => (
-    <PrismCode
-        code={customMsgCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={customMsgCode} language={"js"} plugins={["line-numbers"]} />
 );
 
-
 // Example with unlimited number of stars. readOnly option is set to true.
-const readOnlyRaterCode =
-    `
+const readOnlyRaterCode = `
 <Rating
 stop={16}
 emptySymbol="mdi mdi-star-outline text-muted fa-1x"
@@ -70,17 +56,15 @@ readonly
 `;
 
 const ReadOnlyRaterExample = () => (
-    <PrismCode
-        code={readOnlyRaterCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={readOnlyRaterCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
-
 // On Hover Event
-const onHoverCode =
-    `
+const onHoverCode = `
 const [customize, setcustomize] = useState("");
 
 <Rating
@@ -92,17 +76,11 @@ onChange={(customize) => setcustomize(customize)}
 `;
 
 const OnHoverExample = () => (
-    <PrismCode
-        code={onHoverCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={onHoverCode} language={"js"} plugins={["line-numbers"]} />
 );
 
-
-// Clear/Reset Rater	
-const reasetRaterCode =
-    `
+// Clear/Reset Rater
+const reasetRaterCode = `
 const [reset, setreset] = useState("");
 
 <Rating
@@ -113,11 +91,18 @@ onHover={() => setreset("mdi mdi-star text-warning")}
 `;
 
 const ReasetRaterExample = () => (
-    <PrismCode
-        code={reasetRaterCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={reasetRaterCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
-export { BasicRaterExample, RaterWithStepExample, CustomMsgExample, ReadOnlyRaterExample, OnHoverExample, ReasetRaterExample };
+export {
+	BasicRaterExample,
+	RaterWithStepExample,
+	CustomMsgExample,
+	ReadOnlyRaterExample,
+	OnHoverExample,
+	ReasetRaterExample,
+};

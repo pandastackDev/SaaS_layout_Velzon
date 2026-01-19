@@ -1,51 +1,49 @@
 //Include Both Helper File with needed methods
 import { getFirebaseBackend } from "../../../helpers/firebase_helper";
-import { postFakeProfile, postJwtProfile } from "../../../helpers/fakebackend_helper";
+import {
+	postFakeProfile,
+	postJwtProfile,
+} from "../../../helpers/fakebackend_helper";
 
 // action
-import { profileSuccess, profileError, resetProfileFlagChange } from "./reducer";
+import {
+	profileSuccess,
+	profileError,
+	resetProfileFlagChange,
+} from "./reducer";
 
-const fireBaseBackend : any = getFirebaseBackend();
+const fireBaseBackend: any = getFirebaseBackend();
 
-export const editProfile = (user : any) => async (dispatch : any) => {
-    try {
-        let response;
+export const editProfile = (user: any) => async (dispatch: any) => {
+	try {
+		let response;
 
-        if (import.meta.env.VITE_APP_DEFAULTAUTH === "firebase") {
-            response = fireBaseBackend.editProfileAPI(
-                user.username,
-                user.idx
-            );
+		if (import.meta.env.VITE_APP_DEFAULTAUTH === "firebase") {
+			response = fireBaseBackend.editProfileAPI(user.username, user.idx);
+		} else if (import.meta.env.VITE_APP_DEFAULTAUTH === "jwt") {
+			response = postJwtProfile({
+				username: user.username,
+				idx: user.idx,
+			});
+		} else if (import.meta.env.VITE_APP_DEFAULTAUTH === "fake") {
+			response = postFakeProfile(user);
+		}
 
-        } else if (import.meta.env.VITE_APP_DEFAULTAUTH === "jwt") {
+		const data = await response;
 
-            response = postJwtProfile(
-                {
-                    username: user.username,
-                    idx: user.idx,
-                }
-            );
-
-        } else if (import.meta.env.VITE_APP_DEFAULTAUTH === "fake") {
-            response = postFakeProfile(user);
-        }
-
-        const data = await response;
-
-        if (data) {
-            dispatch(profileSuccess(data));
-        }
-
-    } catch (error) {
-        dispatch(profileError(error));
-    }
+		if (data) {
+			dispatch(profileSuccess(data));
+		}
+	} catch (error) {
+		dispatch(profileError(error));
+	}
 };
 
 export const resetProfileFlag = () => {
-    try {
-        const response = resetProfileFlagChange();
-        return response;
-    } catch (error) {
-        return error;
-    }
+	try {
+		const response = resetProfileFlagChange();
+		return response;
+	} catch (error) {
+		return error;
+	}
 };

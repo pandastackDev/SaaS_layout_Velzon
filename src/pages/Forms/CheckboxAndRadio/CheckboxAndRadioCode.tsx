@@ -1,9 +1,9 @@
-import React from 'react';
-import PrismCode from '../../../Components/Common/Prism';
+import React from "react";
+import PrismCode from "../../../Components/Common/Prism";
 
 //Checkbox
 const Checkbox = () => {
-const code =`<Col lg={4} md={6}>                                                    
+	const code = `<Col lg={4} md={6}>                                                    
 <div>   
     <p className="text-muted fw-medium">Default Checkbox</p>
     <p className="text-muted">Use <code>type="checkbox"</code> attribute to set a checkbox and add <code>checked</code> 
@@ -83,19 +83,16 @@ const code =`<Col lg={4} md={6}>
 </Col>
 `;
 
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-                 language={"react"}
-            />
-        </React.Fragment>
-    );
+	return (
+		<React.Fragment>
+			<PrismCode code={code} language={"react"} />
+		</React.Fragment>
+	);
 };
 
 //Custom Checkbox
 const CustomCheckbox = () => {
-    const code = `<Col md={6}>
+	const code = `<Col md={6}>
     <div>                                               
         <p className="text-muted">Use <code>form-check-</code> class with below-mentioned color variation to set a color checkbox.</p>                                                        
         <div>
@@ -197,19 +194,16 @@ const CustomCheckbox = () => {
 </Col> 
 `;
 
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-                 language={"react"}
-            />
-        </React.Fragment>
-    );
+	return (
+		<React.Fragment>
+			<PrismCode code={code} language={"react"} />
+		</React.Fragment>
+	);
 };
 
 //Radio
 const Radio = () => {
-    const code = `<Col lg={4} md={6}>
+	const code = `<Col lg={4} md={6}>
 <div>
     <p className="text-muted fw-medium">Default Radios</p>
     <p className="text-muted">Use <code>type="radio"</code> attribute to set a radio button and add <code>defaultChecked</code> attribute to set a radio checked by default.</p>
@@ -270,19 +264,16 @@ const Radio = () => {
 </Col>
 `;
 
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-                 language={"react"}
-            />
-        </React.Fragment>
-    );
+	return (
+		<React.Fragment>
+			<PrismCode code={code} language={"react"} />
+		</React.Fragment>
+	);
 };
 
 //Custom Radio
 const CustomRadio = () => {
-    const code = `<Col md={6}>
+	const code = `<Col md={6}>
 <div>
 <p className="text-muted">Use <code>form-check-</code> class with below-mentioned color variation to set a color radio.</p>
 
@@ -393,18 +384,15 @@ const CustomRadio = () => {
     </div>
 </Col>
 `;
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-                 language={"react"}
-            />
-        </React.Fragment>
-    );
+	return (
+		<React.Fragment>
+			<PrismCode code={code} language={"react"} />
+		</React.Fragment>
+	);
 };
 //Switches
 const Switches = () => {
-    const code = `<Col lg={4} md={6}>
+	const code = `<Col lg={4} md={6}>
 <div>
     <p className="text-muted fw-medium">Default Switches</p>
     <p className="text-muted">Use <code>form-switch</code> class to form-check class to set a switch and add <code>defaultChecked</code> attribute to set a switch checked by default.</p>  
@@ -482,19 +470,16 @@ const Switches = () => {
     </div>
 </Col>
 `;
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-                 language={"react"}
-            />
-        </React.Fragment>
-    );
+	return (
+		<React.Fragment>
+			<PrismCode code={code} language={"react"} />
+		</React.Fragment>
+	);
 };
 
 //Switch Color
 const SwitchColor = () => {
-    const code = `<Col md={6}>
+	const code = `<Col md={6}>
 <div>
         <div className="form-check form-switch mb-3">
             <Input className="form-check-input" type="checkbox" role="switch" id="SwitchCheck1" defaultChecked/>
@@ -537,19 +522,16 @@ const SwitchColor = () => {
     </div>
 </Col>
     `;
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-                 language={"react"}
-            />
-        </React.Fragment>
-    );
+	return (
+		<React.Fragment>
+			<PrismCode code={code} language={"react"} />
+		</React.Fragment>
+	);
 };
 
 //Custom Switches
 const CustomSwitches = () => {
-    const code = `<Col md={6}>
+	const code = `<Col md={6}>
 <div>
         <div className="form-check form-switch form-switch-custom form-switch-primary mb-3">
             <Input className="form-check-input" type="checkbox" role="switch" id="SwitchCheck9" defaultChecked/>
@@ -592,19 +574,16 @@ const CustomSwitches = () => {
     </div>
 </Col>
         `;
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-                 language={"react"}
-            />
-        </React.Fragment>
-    );
+	return (
+		<React.Fragment>
+			<PrismCode code={code} language={"react"} />
+		</React.Fragment>
+	);
 };
 
 //Inline Checkbox & Radio
 const InlineCheckboxRadio = () => {
-    const code = `<Col lg={4}>
+	const code = `<Col lg={4}>
 <div className="mt-4 mt-lg-0">
         <div className="form-check form-check-inline">
             <Input className="form-check-input" type="checkbox" id="inlineCheckbox6" value="option1"/>
@@ -655,19 +634,16 @@ const InlineCheckboxRadio = () => {
     </div>
 </Col>
 `;
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-                 language={"react"}
-            />
-        </React.Fragment>
-    );
+	return (
+		<React.Fragment>
+			<PrismCode code={code} language={"react"} />
+		</React.Fragment>
+	);
 };
 
 //Without Labels
 const WithoutLabels = () => {
-    const code = `<Col lg={4}>
+	const code = `<Col lg={4}>
     <div className="mt-4 mt-lg-0">
         <div className="form-check form-check-inline">
             <Input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1"/>
@@ -711,19 +687,16 @@ const WithoutLabels = () => {
     </div>
 </Col>
 `;
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-                 language={"react"}
-            />
-        </React.Fragment>
-    );
+	return (
+		<React.Fragment>
+			<PrismCode code={code} language={"react"} />
+		</React.Fragment>
+	);
 };
 
 //Radio Toggle Buttons
 const RadioToggleButtons = () => {
-    const code = `<div className="hstack gap-2 flex-wrap">
+	const code = `<div className="hstack gap-2 flex-wrap">
 <Input type="radio" className="btn-check" name="options" id="option1" defaultChecked/>
 <Label className="btn btn-secondary" for="option1">Checked</Label>
 
@@ -737,19 +710,16 @@ const RadioToggleButtons = () => {
 <Label className="btn btn-secondary" for="option4">Radio</Label>
 </div>
 `;
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-                 language={"react"}
-            />
-        </React.Fragment>
-    );
+	return (
+		<React.Fragment>
+			<PrismCode code={code} language={"react"} />
+		</React.Fragment>
+	);
 };
 
 //Outlined Styles
 const OutlinedStyles = () => {
-    const code = `<div className="hstack gap-2 flex-wrap">
+	const code = `<div className="hstack gap-2 flex-wrap">
 <Input type="radio" className="btn-check" name="options" id="option1" defaultChecked/>
 <Label className="btn btn-secondary" for="option1">Checked</Label>
 
@@ -763,26 +733,23 @@ const OutlinedStyles = () => {
 <Label className="btn btn-secondary" for="option4">Radio</Label>
 </div>
 `;
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-                 language={"react"}
-            />
-        </React.Fragment>
-    );
+	return (
+		<React.Fragment>
+			<PrismCode code={code} language={"react"} />
+		</React.Fragment>
+	);
 };
 
 export {
-    Checkbox,
-    CustomCheckbox,
-    Radio,
-    CustomRadio,
-    Switches,
-    SwitchColor,
-    CustomSwitches,
-    InlineCheckboxRadio,
-    WithoutLabels,
-    RadioToggleButtons,
-    OutlinedStyles
+	Checkbox,
+	CustomCheckbox,
+	Radio,
+	CustomRadio,
+	Switches,
+	SwitchColor,
+	CustomSwitches,
+	InlineCheckboxRadio,
+	WithoutLabels,
+	RadioToggleButtons,
+	OutlinedStyles,
 };

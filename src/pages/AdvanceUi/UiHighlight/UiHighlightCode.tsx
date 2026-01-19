@@ -2,8 +2,7 @@ import PrismCode from "../../../Components/Common/Prism";
 
 // HTML Highlight
 
-const htmlHighlightCode =
-    `
+const htmlHighlightCode = `
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,17 +21,16 @@ const htmlHighlightCode =
 `;
 
 const HtmlHighlightExample = () => (
-    <PrismCode
-        code={htmlHighlightCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={htmlHighlightCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // CSS Highlight
 
-const cssHighlightCode =
-`body {
+const cssHighlightCode = `body {
     color: #212529; 
     background-color: #f3f3f9;
     font-family: "Poppins",sans-serif;
@@ -45,17 +43,16 @@ const cssHighlightCode =
 `;
 
 const CssHighlightExample = () => (
-    <PrismCode
-        code={cssHighlightCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode
+		code={cssHighlightCode}
+		language={"js"}
+		plugins={["line-numbers"]}
+	/>
 );
 
 // Javascript Highlight
 
-const javaScriptCode =
-`function myFunction() {
+const javaScriptCode = `function myFunction() {
     var divElement = document.getElementById("myDIV");
     if (divElement.style.display === "none") {
       divElement.style.display = "block";
@@ -66,11 +63,7 @@ const javaScriptCode =
 `;
 
 const JavaScriptExample = () => (
-    <PrismCode
-        code={javaScriptCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={javaScriptCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 export { HtmlHighlightExample, CssHighlightExample, JavaScriptExample };

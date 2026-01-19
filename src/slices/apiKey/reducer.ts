@@ -1,23 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAPIKey } from './thunk';
+import { getAPIKey } from "./thunk";
 
-export const initialState : any = {
-    apiKey: [],
-    error: {},
+export const initialState: any = {
+	apiKey: [],
+	error: {},
 };
 
-const APIKeyslice : any = createSlice({
-    name: 'APIKey',
-    initialState,
-    reducers: {},
-    extraReducers: (builder : any) => {
-        builder.addCase(getAPIKey.fulfilled, (state : any, action : any) => {
-            state.apiKey = action.payload;
-        });
-        builder.addCase(getAPIKey.rejected, (state : any, action : any) => {
-            state.error = action.payload.error || null;
-        });
-    }
+const APIKeyslice: any = createSlice({
+	name: "APIKey",
+	initialState,
+	reducers: {},
+	extraReducers: (builder: any) => {
+		builder.addCase(getAPIKey.fulfilled, (state: any, action: any) => {
+			state.apiKey = action.payload;
+		});
+		builder.addCase(getAPIKey.rejected, (state: any, action: any) => {
+			state.error = action.payload.error || null;
+		});
+	},
 });
 
 export default APIKeyslice.reducer;

@@ -120,7 +120,8 @@ export const GET_MONTHLY_DATA = "/monthly-data";
 // Audiences Metrics
 export const GET_ALLAUDIENCESMETRICS_DATA = "/allAudiencesMetrics-data";
 export const GET_MONTHLYAUDIENCESMETRICS_DATA = "/monthlyAudiencesMetrics-data";
-export const GET_HALFYEARLYAUDIENCESMETRICS_DATA = "/halfyearlyAudiencesMetrics-data";
+export const GET_HALFYEARLYAUDIENCESMETRICS_DATA =
+	"/halfyearlyAudiencesMetrics-data";
 export const GET_YEARLYAUDIENCESMETRICS_DATA = "/yearlyAudiencesMetrics-data";
 
 // Users by Device
@@ -155,7 +156,6 @@ export const GET_OCTSALES_DATA = "/octSales-data";
 export const GET_NOVSALES_DATA = "/novSales-data";
 export const GET_DECSALES_DATA = "/decSales-data";
 export const GET_JANSALES_DATA = "/janSales-data";
-
 
 // Dashboard Ecommerce
 // Revenue
@@ -244,7 +244,7 @@ export const GET_API_KEY = "/api-key";
 export const GET_CANDIDATE = "/candidates";
 export const ADD_NEW_CANDIDATE = "add/candidates";
 export const UPDATE_CANDIDATE = "update/candidates";
-export const DELETE_CANDIDATE = "delete/candidates"
+export const DELETE_CANDIDATE = "delete/candidates";
 
 export const GET_CANDIDATE_GRID = "/category-grid";
 export const ADD_CANDIDATE_GRID = "/add/category-grid";

@@ -2,8 +2,7 @@ import PrismCode from "../../../Components/Common/Prism";
 
 // TICKET DISCRIPATION
 
-const ticketCode =
-    `
+const ticketCode = `
 var app = document.getElementById("app");
 var run = (model) => get(model, "users", () =>
     get(model, "posts",
@@ -19,11 +18,7 @@ app.appendChild(Wrapper.generate("button", "Load").click(() => run({
 `;
 
 const TicketCodeExample = () => (
-    <PrismCode
-        code={ticketCode}
-        language={("js")}
-        plugins={["line-numbers"]}
-    />
+	<PrismCode code={ticketCode} language={"js"} plugins={["line-numbers"]} />
 );
 
 export default TicketCodeExample;

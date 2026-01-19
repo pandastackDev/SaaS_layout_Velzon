@@ -1,9 +1,9 @@
-import React from 'react'
-import PrismCode from '../../../Components/Common/Prism';
+import React from "react";
+import PrismCode from "../../../Components/Common/Prism";
 
 //DefaultTables code
 const DefaultTables = () => {
-    const code = `<div className="table-responsive">
+	const code = `<div className="table-responsive">
 <Table className="align-middle table-nowrap mb-0">
     <thead>
         <tr>
@@ -46,19 +46,17 @@ const DefaultTables = () => {
     </tbody>
 </Table>
 </div>
-`
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-            />
-        </React.Fragment>
-    )
-}
+`;
+	return (
+		<React.Fragment>
+			<PrismCode code={code} />
+		</React.Fragment>
+	);
+};
 
 //StrippedRow code
 const StrippedRow = () => {
-    const code = `<div className="table-responsive">
+	const code = `<div className="table-responsive">
 <Table className="table-striped table-nowrap align-middle mb-0">
     <thead>
         <tr>
@@ -101,19 +99,17 @@ const StrippedRow = () => {
     </tbody>
 </Table>
 </div>
-`
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-            />
-        </React.Fragment>
-    )
-}
+`;
+	return (
+		<React.Fragment>
+			<PrismCode code={code} />
+		</React.Fragment>
+	);
+};
 
 //Tables Colors code
 const TablesColors = () => {
-    const code = `<Row>
+	const code = `<Row>
 <Col xl={6}>
     <div className="table-responsive">
         <Table className="table-dark table-striped table-nowrap mb-0">
@@ -226,19 +222,17 @@ const TablesColors = () => {
     </div>
 </Col>
 </Row>
-`
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-            />
-        </React.Fragment>
-    )
-}
+`;
+	return (
+		<React.Fragment>
+			<PrismCode code={code} />
+		</React.Fragment>
+	);
+};
 
 //Hoverable Rows code
 const HoverableRows = () => {
-    const code = `<Row>
+	const code = `<Row>
 <Col xl={6}>
     <div className="table-responsive">
         <Table className="table-hover align-middle table-nowrap mb-0">
@@ -381,19 +375,17 @@ const HoverableRows = () => {
     </div>
 </Col>
 </Row>
-    `
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-            />
-        </React.Fragment>
-    )
-}
+    `;
+	return (
+		<React.Fragment>
+			<PrismCode code={code} />
+		</React.Fragment>
+	);
+};
 
 //Card Tables code
 const CardTables = () => {
-    const code = `<div className="table-responsive table-card">
+	const code = `<div className="table-responsive table-card">
 <Table className="align-middle table-nowrap mb-0">
     <thead className="table-light">
         <tr>
@@ -479,19 +471,17 @@ const CardTables = () => {
     </tbody>
 </Table>
 </div>
-`
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-            />
-        </React.Fragment>
-    )
-}
+`;
+	return (
+		<React.Fragment>
+			<PrismCode code={code} />
+		</React.Fragment>
+	);
+};
 
 //Bordered Tables code
 const ActiveTables = () => {
-    const code = `<div className="table-responsive">
+	const code = `<div className="table-responsive">
 <Table className="align-middle table-nowrap mb-0">
 <thead>
     <tr>
@@ -564,19 +554,17 @@ const ActiveTables = () => {
 </tbody>
 </Table>
 </div>
-`
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-            />
-        </React.Fragment>
-    )
-}
+`;
+	return (
+		<React.Fragment>
+			<PrismCode code={code} />
+		</React.Fragment>
+	);
+};
 
 //Bordered Tables code
 const BorderedTables = () => {
-    const code = `
+	const code = `
 <div className="table-responsive">
 <Table className="table-bordered align-middle table-nowrap mb-0">
     <thead>
@@ -673,19 +661,17 @@ const BorderedTables = () => {
     </tbody>
 </Table>
 </div>
-`
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-            />
-        </React.Fragment>
-    )
-}
+`;
+	return (
+		<React.Fragment>
+			<PrismCode code={code} />
+		</React.Fragment>
+	);
+};
 
 //Tables Border Colors
 const TablesBorderColors = () => {
-    const code = `<div className="table-responsive">
+	const code = `<div className="table-responsive">
 <Table className="table-bordered border-secondary table-nowrap align-middle mb-0">
     <thead>
         <tr>
@@ -781,19 +767,17 @@ const TablesBorderColors = () => {
     </tbody>
 </Table>
 </div>
-    `
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-            />
-        </React.Fragment>
-    )
-}
+    `;
+	return (
+		<React.Fragment>
+			<PrismCode code={code} />
+		</React.Fragment>
+	);
+};
 
 //Tables Without Borders
 const TablesWithoutBorders = () => {
-    const code = `<div className="table-responsive">
+	const code = `<div className="table-responsive">
 <Table className="table-borderless align-middle table-nowrap mb-0">
     <thead>
         <tr>
@@ -861,19 +845,17 @@ const TablesWithoutBorders = () => {
     </tbody>
 </Table>
 </div>
-`
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-            />
-        </React.Fragment>
-    )
-}
+`;
+	return (
+		<React.Fragment>
+			<PrismCode code={code} />
+		</React.Fragment>
+	);
+};
 
 //Small Tables
 const SmallTables = () => {
-    const code = `<div className="table-responsive">
+	const code = `<div className="table-responsive">
 <Table className="table-sm table-nowrap mb-0">
     <thead>
         <tr>
@@ -917,19 +899,17 @@ const SmallTables = () => {
     </tbody>
 </Table>
 </div>
-`
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-            />
-        </React.Fragment>
-    )
-}
+`;
+	return (
+		<React.Fragment>
+			<PrismCode code={code} />
+		</React.Fragment>
+	);
+};
 
 //TableHead
 const TableHead = () => {
-    const code = `<div className="table-responsive">
+	const code = `<div className="table-responsive">
 <Table className="align-middle table-nowrap mb-0">
 <thead className="table-light">
     <tr>
@@ -981,19 +961,17 @@ const TableHead = () => {
 </tbody>
 </Table>
 </div>
-`
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-            />
-        </React.Fragment>
-    )
-}
+`;
+	return (
+		<React.Fragment>
+			<PrismCode code={code} />
+		</React.Fragment>
+	);
+};
 
 //TableFoot
 const TableFoot = () => {
-    const code = `<div className="table-responsive">
+	const code = `<div className="table-responsive">
 <Table className="table-nowrap mb-0">
     <thead className="table-light">
         <tr>
@@ -1035,19 +1013,17 @@ const TableFoot = () => {
     </tfoot>
 </Table>
 </div>
-    `
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-            />
-        </React.Fragment>
-    )
-}
+    `;
+	return (
+		<React.Fragment>
+			<PrismCode code={code} />
+		</React.Fragment>
+	);
+};
 
 //Captions
 const Captions = () => {
-    const code = `<div className="table-responsive">
+	const code = `<div className="table-responsive">
 <Table className="caption-top table-nowrap mb-0">
     <caption>List of users</caption>
     <thead className="table-light">
@@ -1080,19 +1056,17 @@ const Captions = () => {
     </tbody>
 </Table>
 </div>
-`
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-            />
-        </React.Fragment>
-    )
-}
+`;
+	return (
+		<React.Fragment>
+			<PrismCode code={code} />
+		</React.Fragment>
+	);
+};
 
 //Table Nesting
 const TableNesting = () => {
-    const code = `<div className="table-responsive">
+	const code = `<div className="table-responsive">
 <Table className="caption-top table-nowrap mb-0">
     <caption>List of users</caption>
     <thead className="table-light">
@@ -1125,19 +1099,17 @@ const TableNesting = () => {
     </tbody>
 </Table>
 </div>
-`
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-            />
-        </React.Fragment>
-    )
-}
+`;
+	return (
+		<React.Fragment>
+			<PrismCode code={code} />
+		</React.Fragment>
+	);
+};
 
 //Variants
 const Variants = () => {
-    const code = `<div className="table-responsive">
+	const code = `<div className="table-responsive">
 <Table className="table-nowrap mb-0">
     <thead>
         <tr>
@@ -1205,19 +1177,17 @@ const Variants = () => {
     </tbody>
 </Table>
 </div>
-`
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-            />
-        </React.Fragment>
-    )
-}
+`;
+	return (
+		<React.Fragment>
+			<PrismCode code={code} />
+		</React.Fragment>
+	);
+};
 
 //Vertical Alignment
 const VerticalAlignment = () => {
-    const code = `<div className="table-responsive">
+	const code = `<div className="table-responsive">
 <Table className="align-middle">
     <thead>
         <tr>
@@ -1249,19 +1219,17 @@ const VerticalAlignment = () => {
     </tbody>
 </Table>
 </div>
-`
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-            />
-        </React.Fragment>
-    )
-}
+`;
+	return (
+		<React.Fragment>
+			<PrismCode code={code} />
+		</React.Fragment>
+	);
+};
 
 //Responsive Tables
 const ResponsiveTables = () => {
-    const code = `<div className="table-responsive">
+	const code = `<div className="table-responsive">
 <Table className="align-middle table-nowrap mb-0">
     <thead className="table-light">
         <tr>
@@ -1404,19 +1372,17 @@ const ResponsiveTables = () => {
     </tfoot>
 </Table>                                                
 </div> 
-`
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-            />
-        </React.Fragment>
-    )
-}
+`;
+	return (
+		<React.Fragment>
+			<PrismCode code={code} />
+		</React.Fragment>
+	);
+};
 
 //Striped Columns Tables
 const StripedColumnsTables = () => {
-    const code = `<div className="table-responsive table-card">
+	const code = `<div className="table-responsive table-card">
     <table className="table align-middle table-nowrap table-striped-columns mb-0">
         <thead className="table-light">
             <tr>
@@ -1502,34 +1468,31 @@ const StripedColumnsTables = () => {
         </tbody>
     </table>
 </div>
-    `
-    return (
-        <React.Fragment>
-            <PrismCode
-                code={code}
-            />
-        </React.Fragment>
-    )
-}
+    `;
+	return (
+		<React.Fragment>
+			<PrismCode code={code} />
+		</React.Fragment>
+	);
+};
 
 export {
-    DefaultTables,
-    StrippedRow,
-    TablesColors,
-    HoverableRows,
-    CardTables,
-    ActiveTables,
-    BorderedTables,
-    TablesBorderColors,
-    TablesWithoutBorders,
-    SmallTables,
-    TableHead,
-    TableFoot,
-    Captions,
-    TableNesting,
-    Variants,
-    VerticalAlignment,
-    ResponsiveTables,
-    StripedColumnsTables,
-}
-
+	DefaultTables,
+	StrippedRow,
+	TablesColors,
+	HoverableRows,
+	CardTables,
+	ActiveTables,
+	BorderedTables,
+	TablesBorderColors,
+	TablesWithoutBorders,
+	SmallTables,
+	TableHead,
+	TableFoot,
+	Captions,
+	TableNesting,
+	Variants,
+	VerticalAlignment,
+	ResponsiveTables,
+	StripedColumnsTables,
+};
