@@ -4,6 +4,7 @@ import { Container } from "reactstrap";
 import SimpleBar from "simplebar-react";
 //import logo
 import mainLogo from "../assets/images/main-logo/logo.png";
+import smallLogo from "../assets/images/main-logo/small-logo.png";
 //Import Components
 import VerticalLayout from "./VerticalLayouts";
 
@@ -47,7 +48,7 @@ const Sidebar = ({ layoutType }: SidebarProps) => {
 					<Link to="/" className="logo logo-dark">
 						<span className="logo-sm">
 							<img
-								src={mainLogo}
+								src={smallLogo}
 								alt=""
 								height="22"
 								style={{
@@ -72,7 +73,7 @@ const Sidebar = ({ layoutType }: SidebarProps) => {
 					<Link to="/" className="logo logo-light">
 						<span className="logo-sm">
 							<img
-								src={mainLogo}
+								src={smallLogo}
 								alt=""
 								height="22"
 								style={{

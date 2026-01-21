@@ -5,6 +5,8 @@ const { api } = config;
 
 // default
 axios.defaults.baseURL = api.API_URL;
+// Set timeout to prevent infinite loading (30 seconds)
+axios.defaults.timeout = 30000;
 // content type
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
@@ -22,20 +24,26 @@ axios.interceptors.response.use(
 	(error) => {
 		// Any status codes that falls outside the range of 2xx cause this function to trigger
 		let message;
-		switch (error.status) {
-			case 500:
-				message = "Internal Server Error";
-				break;
-			case 401:
-				message = "Invalid credentials";
-				break;
-			case 404:
-				message = "Sorry! the data you are looking for could not be found";
-				break;
-			default:
-				message = error.message || error;
+		const status = error.response?.status || error.status;
+		
+		if (error.code === 'ECONNABORTED' || error.message === 'timeout of 30000ms exceeded') {
+			message = "Request timeout. Please check your connection and try again.";
+		} else {
+			switch (status) {
+				case 500:
+					message = "Internal Server Error";
+					break;
+				case 401:
+					message = "Invalid credentials";
+					break;
+				case 404:
+					message = "Sorry! the data you are looking for could not be found";
+					break;
+				default:
+					message = error.response?.data?.message || error.message || "An error occurred";
+			}
 		}
-		return Promise.reject(message);
+		return Promise.reject({ message, data: message, response: error.response });
 	},
 );
 /**

@@ -18,7 +18,7 @@ import BreadCrumb from "../../../Components/Common/BreadCrumb";
 // RangeSlider
 
 import Nouislider from "nouislider-react";
-import "nouislider/distribute/nouislider.css";
+import "nouislider/dist/nouislider.css";
 
 import { expolreNow } from "../../../common/data/index";
 

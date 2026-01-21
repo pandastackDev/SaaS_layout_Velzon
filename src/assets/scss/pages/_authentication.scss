@@ -31,13 +31,15 @@
 }
 
 .auth-one-bg{
-    background-image: url("../../images/auth-one-bg.jpg");
+    // Map image background - Using hero-back.png
+    background-image: url("../../images/hero-back.png");
     background-position: center;
     background-size: cover;
+    background-repeat: no-repeat;
 
     .bg-overlay{
         background: linear-gradient(to right, darken($primary, 6%), $primary);
-        opacity: 0.9;
+        opacity: 0.85;
     }
 }
 

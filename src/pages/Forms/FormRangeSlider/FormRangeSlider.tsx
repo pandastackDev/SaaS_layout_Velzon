@@ -11,7 +11,7 @@ import {
 } from "reactstrap";
 //import Components
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import "nouislider/distribute/nouislider.css";
+import "nouislider/dist/nouislider.css";
 
 const FormRangeSlider = () => {
 	const [mincost, setMincost] = useState(0);

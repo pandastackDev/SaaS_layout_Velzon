@@ -18,43 +18,61 @@ const Navdata = () => {
 			isHeader: true,
 		},
 		{
-			id: "dashboard",
+			id: "admin-dashboard",
 			label: "Dashboard",
+			link: "/admin/dashboard",
 			icon: "ri-dashboard-2-line",
-			link: "/dashboard",
 		},
 		{
-			id: "gallery",
-			label: "Gallery",
-			icon: "ri-gallery-line",
-			link: "/gallery",
+			id: "admin-projects",
+			label: "Manage Projects",
+			link: "/admin/projects",
+			icon: "ri-file-edit-line",
 		},
 		{
-			id: "investors",
-			label: "Investors",
+			id: "admin-profile-approval",
+			label: "Profile Approval",
+			link: "/admin/profile-approval",
 			icon: "ri-user-star-line",
-			link: "/investors",
 		},
 		{
-			id: "blog",
-			label: "Blog",
-			icon: "ri-article-line",
-			link: "/blog",
+			id: "admin-users",
+			label: "Manage Users",
+			link: "/admin/users",
+			icon: "ri-user-settings-line",
 		},
 		{
-			id: "contact",
-			label: "Contact",
-			icon: "ri-contacts-line",
-			link: "/contact",
+			id: "admin-analytics",
+			label: "Analytics",
+			link: "/admin/analytics",
+			icon: "ri-bar-chart-line",
 		},
 		{
-			id: "about-us",
-			label: "About Us",
-			icon: "ri-information-line",
-			link: "/about-us",
+			id: "admin-invoices",
+			label: "View Invoices",
+			link: "/admin/invoices",
+			icon: "ri-file-list-line",
+		},
+		{
+			id: "admin-pricing",
+			label: "Manage Pricing",
+			link: "/admin/pricing",
+			icon: "ri-money-dollar-circle-line",
+		},
+		{
+			id: "admin-advertising",
+			label: "Advertising",
+			link: "/admin/advertising",
+			icon: "ri-image-line",
+		},
+		{
+			id: "admin-subscriptions",
+			label: "Subscriptions",
+			link: "/admin/subscriptions",
+			icon: "ri-vip-diamond-line",
 		},
 	];
-	return <React.Fragment>{menuItems}</React.Fragment>;
+	return menuItems;
 };
 
 export default Navdata;

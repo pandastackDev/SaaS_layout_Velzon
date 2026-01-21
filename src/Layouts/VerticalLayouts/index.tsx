@@ -39,9 +39,7 @@ interface VerticalLayoutProps {
 
 const VerticalLayout = (props: VerticalLayoutProps) => {
 	const navDataResult = navdata();
-	const navData =
-		((navDataResult as { props?: { children?: MenuItem[] } })?.props
-			?.children as MenuItem[]) || [];
+	const navData = (Array.isArray(navDataResult) ? navDataResult : []) as MenuItem[];
 	const path = props.router.location.pathname;
 
 	/*

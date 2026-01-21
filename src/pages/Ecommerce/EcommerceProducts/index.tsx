@@ -17,7 +17,7 @@ import {
 	UncontrolledCollapse,
 	UncontrolledDropdown,
 } from "reactstrap";
-import "nouislider/distribute/nouislider.css";
+import "nouislider/dist/nouislider.css";
 import { isEmpty } from "lodash";
 //redux
 import { useDispatch, useSelector } from "react-redux";

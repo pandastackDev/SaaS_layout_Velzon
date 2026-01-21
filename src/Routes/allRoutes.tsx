@@ -19,6 +19,7 @@ import ForgetPasswordPage from "../pages/Authentication/ForgetPassword";
 import Login from "../pages/Authentication/Login";
 import Logout from "../pages/Authentication/Logout";
 import Register from "../pages/Authentication/Register";
+import AuthCallback from "../pages/Authentication/Callback";
 // // User Profile
 import UserProfile from "../pages/Authentication/user-profile";
 import Alt404 from "../pages/AuthenticationInner/Errors/Alt404";
@@ -110,6 +111,16 @@ import Transactions from "../pages/Crypto/Transactions";
 import DashboardCrypto from "../pages/DashboardCrypto";
 //Dashboard
 import DashboardPitchInvest from "../pages/DashboardPitchInvest";
+//Admin Pages
+import AdminDashboard from "../pages/Admin/Dashboard";
+import ManageProjects from "../pages/Admin/Projects";
+import ProfileApproval from "../pages/Admin/ProfileApproval";
+import ManageUsers from "../pages/Admin/Users";
+import Analytics from "../pages/Admin/Analytics";
+import ViewInvoices from "../pages/Admin/Invoices";
+import ManagePricing from "../pages/Admin/Pricing";
+import Advertising from "../pages/Admin/Advertising";
+import SubscriptionsHistory from "../pages/Admin/Subscriptions";
 import EcommerceCart from "../pages/Ecommerce/EcommerceCart";
 import EcommerceCheckout from "../pages/Ecommerce/EcommerceCheckout";
 import EcommerceCustomers from "../pages/Ecommerce/EcommerceCustomers/index";
@@ -189,6 +200,7 @@ import Maintenance from "../pages/Pages/Maintenance/Maintenance";
 import Pricing from "../pages/Pages/Pricing/Pricing";
 import PrivacyPolicy from "../pages/Pages/PrivacyPolicy";
 import Settings from "../pages/Pages/Profile/Settings/Settings";
+import ProfileSettings from "../pages/Pages/Profile/ProfileSettings";
 import SimplePage from "../pages/Pages/Profile/SimplePage/SimplePage";
 import SearchResults from "../pages/Pages/SearchResults/SearchResults";
 import SiteMap from "../pages/Pages/SiteMap/SiteMap";
@@ -227,6 +239,17 @@ const authProtectedRoutes = [
 	{ path: "/dashboard", component: <DashboardPitchInvest /> },
 	{ path: "/index", component: <DashboardPitchInvest /> },
 	{ path: "/dashboard-crypto", component: <DashboardCrypto /> },
+
+	// Admin Routes
+	{ path: "/admin/dashboard", component: <AdminDashboard /> },
+	{ path: "/admin/projects", component: <ManageProjects /> },
+	{ path: "/admin/profile-approval", component: <ProfileApproval /> },
+	{ path: "/admin/users", component: <ManageUsers /> },
+	{ path: "/admin/analytics", component: <Analytics /> },
+	{ path: "/admin/invoices", component: <ViewInvoices /> },
+	{ path: "/admin/pricing", component: <ManagePricing /> },
+	{ path: "/admin/advertising", component: <Advertising /> },
+	{ path: "/admin/subscriptions", component: <SubscriptionsHistory /> },
 
 	{ path: "/apps-calendar", component: <Calendar /> },
 	{ path: "/apps-calendar-month-grid", component: <MonthGrid /> },
@@ -405,7 +428,7 @@ const authProtectedRoutes = [
 	// //Pages
 	{ path: "/pages-starter", component: <Starter /> },
 	{ path: "/pages-profile", component: <SimplePage /> },
-	{ path: "/pages-profile-settings", component: <Settings /> },
+	{ path: "/pages-profile-settings", component: <ProfileSettings /> },
 	{ path: "/pages-team", component: <Team /> },
 	{ path: "/pages-timeline", component: <Timeline /> },
 	{ path: "/pages-faqs", component: <Faqs /> },
@@ -439,9 +462,9 @@ const authProtectedRoutes = [
 	{
 		path: "/",
 		exact: true,
-		component: <Navigate to="/dashboard" />,
+		component: <Navigate to="/admin/dashboard" />,
 	},
-	{ path: "*", component: <Navigate to="/dashboard" /> },
+	{ path: "*", component: <Navigate to="/admin/dashboard" /> },
 ];
 
 const publicRoutes = [
@@ -455,6 +478,7 @@ const publicRoutes = [
 	{ path: "/login", component: <Login /> },
 	{ path: "/forgot-password", component: <ForgetPasswordPage /> },
 	{ path: "/register", component: <Register /> },
+	{ path: "/auth/callback", component: <AuthCallback /> },
 
 	// //AuthenticationInner pages
 	{ path: "/auth-signin-basic", component: <BasicSignIn /> },
