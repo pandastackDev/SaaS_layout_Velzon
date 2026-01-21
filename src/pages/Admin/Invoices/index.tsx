@@ -19,6 +19,7 @@ import {
 import { toast } from "react-toastify";
 import CountUp from "react-countup";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import Pagination from "../../../Components/Common/Pagination";
 import { supabase } from "../../../lib/supabase";
 import { useAdmin } from "../../../hooks/useAdmin";
 import { getErrorMessage } from "../../../lib/errorHandler";
@@ -77,6 +78,7 @@ const ViewInvoices = () => {
 
 	useEffect(() => {
 		filterInvoices();
+		setCurrentPage(1); // Reset to first page when filters change
 	}, [invoices, searchTerm, statusFilter, typeFilter]);
 
 	const loadInvoices = async () => {
@@ -179,6 +181,11 @@ const ViewInvoices = () => {
 	if (!isAdmin) {
 		return null;
 	}
+
+	// Calculate pagination
+	const indexOfLastData = currentPage * perPageData;
+	const indexOfFirstData = indexOfLastData - perPageData;
+	const currentInvoices = filteredInvoices.slice(indexOfFirstData, indexOfLastData);
 
 	return (
 		<div className="page-content">
@@ -321,7 +328,7 @@ const ViewInvoices = () => {
 													</td>
 												</tr>
 											) : (
-												filteredInvoices.map((invoice) => (
+												currentInvoices.map((invoice) => (
 													<tr key={invoice.id}>
 														<td>
 															<code className="text-primary">#{invoice.id.slice(0, 8)}</code>
@@ -370,6 +377,14 @@ const ViewInvoices = () => {
 										</tbody>
 									</Table>
 								</div>
+								{filteredInvoices.length > 0 && (
+									<Pagination
+										data={filteredInvoices}
+										currentPage={currentPage}
+										setCurrentPage={setCurrentPage}
+										perPageData={perPageData}
+									/>
+								)}
 							</CardBody>
 						</Card>
 					</Col>

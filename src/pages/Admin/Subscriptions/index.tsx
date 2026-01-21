@@ -18,6 +18,7 @@ import {
 } from "reactstrap";
 import { toast } from "react-toastify";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import Pagination from "../../../Components/Common/Pagination";
 import { supabase } from "../../../lib/supabase";
 import { useAdmin } from "../../../hooks/useAdmin";
 import { getErrorMessage } from "../../../lib/errorHandler";
@@ -53,6 +54,8 @@ const SubscriptionsHistory = () => {
 	const [loading, setLoading] = useState(true);
 	const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
 	const [filteredSubscriptions, setFilteredSubscriptions] = useState<Subscription[]>([]);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [perPageData] = useState(10);
 	const [searchTerm, setSearchTerm] = useState("");
 	const [statusFilter, setStatusFilter] = useState<string>("all");
 
@@ -77,6 +80,7 @@ const SubscriptionsHistory = () => {
 
 	useEffect(() => {
 		filterSubscriptions();
+		setCurrentPage(1); // Reset to first page when filters change
 	}, [subscriptions, searchTerm, statusFilter]);
 
 	const loadSubscriptions = async () => {
@@ -280,6 +284,11 @@ const SubscriptionsHistory = () => {
 		return null;
 	}
 
+	// Calculate pagination
+	const indexOfLastData = currentPage * perPageData;
+	const indexOfFirstData = indexOfLastData - perPageData;
+	const currentSubscriptions = filteredSubscriptions.slice(indexOfFirstData, indexOfLastData);
+
 	return (
 		<div className="page-content">
 			<Container fluid>
@@ -349,7 +358,7 @@ const SubscriptionsHistory = () => {
 													</td>
 												</tr>
 											) : (
-												filteredSubscriptions.map((subscription) => (
+												currentSubscriptions.map((subscription) => (
 													<tr key={subscription.id}>
 														<td>
 															<div>
@@ -400,6 +409,14 @@ const SubscriptionsHistory = () => {
 										</tbody>
 									</Table>
 								</div>
+								{filteredSubscriptions.length > 0 && (
+									<Pagination
+										data={filteredSubscriptions}
+										currentPage={currentPage}
+										setCurrentPage={setCurrentPage}
+										perPageData={perPageData}
+									/>
+								)}
 							</CardBody>
 						</Card>
 					</Col>

@@ -5,7 +5,12 @@ import viteTsconfigPaths from "vite-tsconfig-paths";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [react(), viteTsconfigPaths()],
+	plugins: [
+		react({
+			jsxRuntime: "automatic",
+		}),
+		viteTsconfigPaths(),
+	],
 	resolve: {
 		alias: {
 			"@": path.resolve(__dirname, "./src"),
@@ -23,6 +28,10 @@ export default defineConfig({
 					"global-builtin",
 					"color-functions",
 					"mixed-decls",
+				],
+				includePaths: [
+					path.resolve(__dirname, "./node_modules"),
+					path.resolve(__dirname, "./src"),
 				],
 			},
 		},
@@ -44,6 +53,10 @@ export default defineConfig({
 				},
 			},
 		},
+		chunkSizeWarningLimit: 1000,
+	},
+	esbuild: {
+		logOverride: { "this-is-undefined-in-esm": "silent" },
 	},
 	optimizeDeps: {
 		include: ["react", "react-dom"],

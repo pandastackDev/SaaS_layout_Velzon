@@ -3,9 +3,10 @@ enum LAYOUT_TYPES {
 	VERTICAL = "vertical",
 }
 
-// 2. Color Scheme: Light only
+// 2. Color Scheme: Light and Dark
 enum LAYOUT_MODE_TYPES {
 	LIGHTMODE = "light",
+	DARKMODE = "dark",
 }
 
 // 8. Sidebar Color: Light only

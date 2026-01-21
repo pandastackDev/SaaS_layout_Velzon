@@ -153,8 +153,8 @@ const TableContainer = ({
 	};
 
 	const table = useReactTable({
-		columns,
-		data,
+		columns: columns || [],
+		data: data || [],
 		filterFns: {
 			fuzzy: fuzzyFilter,
 		},
@@ -293,9 +293,9 @@ const TableContainer = ({
 					<div className="text-muted">
 						Showing
 						<span className="fw-semibold ms-1">
-							{getState().pagination.pageSize}
-						</span>{" "}
-						of <span className="fw-semibold">{data.length}</span> Results
+						{getState().pagination.pageSize}
+					</span>{" "}
+					of <span className="fw-semibold">{data?.length || 0}</span> Results
 					</div>
 				</div>
 				<div className="col-sm-auto">

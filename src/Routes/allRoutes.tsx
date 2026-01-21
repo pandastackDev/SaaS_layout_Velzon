@@ -236,7 +236,6 @@ const authProtectedRoutes = [
 	{ path: "/contact", component: <ContactPage /> },
 	{ path: "/about-us", component: <AboutUsPage /> },
 
-	{ path: "/dashboard", component: <DashboardPitchInvest /> },
 	{ path: "/index", component: <DashboardPitchInvest /> },
 	{ path: "/dashboard-crypto", component: <DashboardCrypto /> },
 
@@ -468,10 +467,10 @@ const authProtectedRoutes = [
 ];
 
 const publicRoutes = [
-	// Dashboard (Public Access)
-	{ path: "/dashboard", component: <DashboardPitchInvest /> },
+	// Redirect root and dashboard to admin dashboard
+	{ path: "/", component: <Navigate to="/admin/dashboard" replace /> },
+	{ path: "/dashboard", component: <Navigate to="/admin/dashboard" replace /> },
 	{ path: "/index", component: <DashboardPitchInvest /> },
-	{ path: "/", component: <DashboardPitchInvest /> },
 
 	// Authentication Page
 	{ path: "/logout", component: <Logout /> },

@@ -115,7 +115,7 @@ export const addMessage = (message: Record<string, unknown>) =>
 // add Message
 export const deleteMessage = (
 	message: string | number | Record<string, unknown>,
-) => api.delete(url.DELETE_MESSAGE, { headers: { message } });
+) => api.delete(url.DELETE_MESSAGE, { headers: { message: String(message) } });
 
 // get Channels
 export const getChannels = () => api.get(url.GET_CHANNELS);

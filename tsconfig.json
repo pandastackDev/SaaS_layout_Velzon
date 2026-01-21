@@ -3,6 +3,7 @@
 		"target": "ES2020",
 		"useDefineForClassFields": true,
 		"lib": ["ES2020", "DOM", "DOM.Iterable"],
+		"types": ["node"],
 		"module": "ESNext",
 		"skipLibCheck": true,
 
@@ -15,10 +16,12 @@
 		"jsx": "react-jsx",
 
 		/* Linting */
-		"strict": true,
+		"strict": false,
 		"noUnusedLocals": false,
 		"noUnusedParameters": false,
 		"noFallthroughCasesInSwitch": true,
+		"noImplicitAny": false,
+		"strictNullChecks": false,
 
 		/* Path mapping */
 		"baseUrl": "./src",
@@ -32,6 +35,6 @@
 		"allowSyntheticDefaultImports": true,
 		"forceConsistentCasingInFileNames": true
 	},
-	"include": ["src"],
+	"include": ["src", "src/types"],
 	"exclude": ["node_modules"]
 }

@@ -23,6 +23,7 @@ import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import Pagination from "../../../Components/Common/Pagination";
 import { supabase } from "../../../lib/supabase";
 import { useAdmin } from "../../../hooks/useAdmin";
 import { getErrorMessage } from "../../../lib/errorHandler";
@@ -62,6 +63,8 @@ const ManagePricing = () => {
 	const { isAdmin, loading: adminLoading } = useAdmin();
 	const [loading, setLoading] = useState(true);
 	const [plans, setPlans] = useState<PricingPlan[]>([]);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [perPageData] = useState(10);
 	const [editModal, setEditModal] = useState(false);
 	const [selectedPlan, setSelectedPlan] = useState<PricingPlan | null>(null);
 
@@ -147,6 +150,7 @@ const ManagePricing = () => {
 
 			console.log("Pricing plans loaded:", transformedPlans.length);
 			setPlans(transformedPlans);
+			setCurrentPage(1); // Reset to first page when data loads
 		} catch (error: any) {
 			console.error("Error loading pricing plans:", error);
 			const errorMsg = getErrorMessage(error);
@@ -255,6 +259,11 @@ const ManagePricing = () => {
 		return null;
 	}
 
+	// Calculate pagination
+	const indexOfLastData = currentPage * perPageData;
+	const indexOfFirstData = indexOfLastData - perPageData;
+	const currentPlans = plans.slice(indexOfFirstData, indexOfLastData);
+
 	return (
 		<div className="page-content">
 			<Container fluid>
@@ -291,7 +300,7 @@ const ManagePricing = () => {
 													</td>
 												</tr>
 											) : (
-												plans.map((plan) => (
+												currentPlans.map((plan) => (
 													<tr key={plan.id || plan.plan_name}>
 														<td>
 															<h6 className="mb-0">{plan.plan_name}</h6>
@@ -349,6 +358,14 @@ const ManagePricing = () => {
 										</tbody>
 									</Table>
 								</div>
+								{plans.length > 0 && (
+									<Pagination
+										data={plans}
+										currentPage={currentPage}
+										setCurrentPage={setCurrentPage}
+										perPageData={perPageData}
+									/>
+								)}
 							</CardBody>
 						</Card>
 					</Col>

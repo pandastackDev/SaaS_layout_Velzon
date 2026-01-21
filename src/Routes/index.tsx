@@ -9,7 +9,7 @@ import { authProtectedRoutes, publicRoutes } from "./allRoutes";
 import "react-toastify/dist/ReactToastify.css";
 
 // Routes that should use VerticalLayout even without auth
-const layoutRoutes = ["/dashboard", "/index", "/"];
+const layoutRoutes = ["/index"];
 
 const Index = () => {
 	return (
