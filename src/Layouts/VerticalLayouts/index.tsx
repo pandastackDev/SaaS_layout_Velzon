@@ -191,6 +191,8 @@ const VerticalLayout = (props: VerticalLayoutProps) => {
 		<React.Fragment>
 			{/* menu Items */}
 			{(navData || []).map((item, index) => {
+				const itemLink = item.link || "/#";
+				const isActive = itemLink !== "/#" && path.startsWith(itemLink);
 				return (
 					<React.Fragment
 						key={`menu-${index}-${item.id || item.label || index}`}
@@ -356,8 +358,9 @@ const VerticalLayout = (props: VerticalLayoutProps) => {
 						) : (
 							<li className="nav-item">
 								<Link
-									className="nav-link menu-link"
-									to={item.link ? item.link : "/#"}
+									className={`nav-link menu-link ${isActive ? "active" : ""}`}
+									to={itemLink}
+									aria-current={isActive ? "page" : undefined}
 								>
 									<i className={item.icon}></i>{" "}
 									<span>{props.t(item.label)}</span>

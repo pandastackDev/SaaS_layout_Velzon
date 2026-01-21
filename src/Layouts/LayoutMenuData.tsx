@@ -71,6 +71,12 @@ const Navdata = () => {
 			link: "/admin/subscriptions",
 			icon: "ri-vip-diamond-line",
 		},
+		{
+			id: "admin-auctions",
+			label: "Auctions & Bids",
+			link: "/admin/auctions",
+			icon: "ri-auction-line",
+		},
 	];
 	return menuItems;
 };

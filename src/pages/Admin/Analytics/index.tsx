@@ -22,7 +22,7 @@ import { supabase } from "../../../lib/supabase";
 import { useAdmin } from "../../../hooks/useAdmin";
 import { getErrorMessage } from "../../../lib/errorHandler";
 import { AnalyticsPageSkeleton } from "../../../Components/Common/LoadingSkeleton";
-import { toast } from "react-toastify";
+import { showToast } from "../../../lib/toast";
 import ReactApexChart from "react-apexcharts";
 import getChartColorsArray from "../../../Components/Common/ChartsDynamicColor";
 
@@ -368,7 +368,7 @@ const Analytics = () => {
 			});
 		} catch (error: any) {
 			const errorMsg = getErrorMessage(error);
-			toast.error(errorMsg);
+			showToast.error(errorMsg);
 		} finally {
 			setLoading(false);
 		}

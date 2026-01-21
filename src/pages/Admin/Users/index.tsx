@@ -44,6 +44,20 @@ interface User {
 	created_at: string;
 	updated_at: string;
 	is_banned?: boolean;
+	// Subscription data (joined)
+	subscription_status?: string;
+	subscription_plan?: string;
+	subscription_end?: string;
+}
+
+interface Subscription {
+	id: string;
+	user_id: string;
+	status: string;
+	current_period_end?: string;
+	pricing_plan?: {
+		name: string;
+	};
 }
 
 const ManageUsers = () => {
@@ -58,6 +72,8 @@ const ManageUsers = () => {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [typeFilter, setTypeFilter] = useState<string>("all");
 	const [statusFilter, setStatusFilter] = useState<string>("all");
+	const [subscriptionFilter, setSubscriptionFilter] = useState<string>("all");
+	const [bannedFilter, setBannedFilter] = useState<string>("all");
 	const [selectedUser, setSelectedUser] = useState<User | null>(null);
 	const [editModal, setEditModal] = useState(false);
 	const [banModal, setBanModal] = useState(false);
@@ -94,31 +110,69 @@ const ManageUsers = () => {
 	useEffect(() => {
 		filterUsers();
 		setCurrentPage(1); // Reset to first page when filters change
-	}, [users, searchTerm, typeFilter, statusFilter]);
+	}, [users, searchTerm, typeFilter, statusFilter, subscriptionFilter, bannedFilter]);
 
 	const loadUsers = async () => {
 		try {
 			setLoading(true);
 			console.log("Loading users from Supabase...");
 			
-			const { data, error } = await supabase
+			// First, load all users
+			const { data: usersData, error: usersError } = await supabase
 				.from("users")
 				.select("*")
 				.order("created_at", { ascending: false });
 
-			if (error) {
-				console.error("Supabase error:", error);
-				throw error;
+			if (usersError) {
+				console.error("Supabase error:", usersError);
+				throw usersError;
 			}
 
-			console.log("Users loaded:", data?.length || 0);
-			setUsers(data || []);
-			setFilteredUsers(data || []);
+			// Load subscriptions (just need user_id, status, and current_period_end)
+			const { data: subscriptionsData, error: subError } = await supabase
+				.from("subscriptions")
+				.select("user_id, status, current_period_end");
+
+			if (subError) {
+				console.warn("Could not load subscriptions:", subError);
+			}
+
+			console.log("Subscriptions data:", subscriptionsData);
+
+			// Create a map of user_id to subscription info
+			const subscriptionMap = new Map<string, { status: string; current_period_end: string }>();
+			if (subscriptionsData) {
+				subscriptionsData.forEach((sub: any) => {
+					// If user already has a subscription in map, prefer 'active' status
+					const existing = subscriptionMap.get(sub.user_id);
+					if (!existing || sub.status === 'active') {
+						subscriptionMap.set(sub.user_id, {
+							status: sub.status,
+							current_period_end: sub.current_period_end
+						});
+					}
+				});
+			}
+
+			console.log("Users with subscriptions:", subscriptionMap.size);
+
+			// Merge subscription data into users
+			const usersWithSubscription = (usersData || []).map((user: User) => {
+				const subscription = subscriptionMap.get(user.id);
+				return {
+					...user,
+					subscription_status: subscription?.status || null,
+					subscription_end: subscription?.current_period_end || null,
+				};
+			});
+
+			console.log("Users loaded:", usersWithSubscription?.length || 0);
+			setUsers(usersWithSubscription);
+			setFilteredUsers(usersWithSubscription);
 		} catch (error: any) {
 			console.error("Error loading users:", error);
 			const errorMsg = getErrorMessage(error);
 			showToast.error(`Failed to load users: ${errorMsg}`);
-			// Set empty arrays on error to show "No users found" instead of infinite loading
 			setUsers([]);
 			setFilteredUsers([]);
 		} finally {
@@ -143,6 +197,20 @@ const ManageUsers = () => {
 				filtered = filtered.filter((u) => u.is_banned === true);
 			} else {
 				filtered = filtered.filter((u) => u.profile_status === statusFilter);
+			}
+		}
+		if (subscriptionFilter !== "all") {
+			if (subscriptionFilter === "active") {
+				filtered = filtered.filter((u) => u.subscription_status === "active");
+			} else if (subscriptionFilter === "none") {
+				filtered = filtered.filter((u) => !u.subscription_status);
+			}
+		}
+		if (bannedFilter !== "all") {
+			if (bannedFilter === "banned") {
+				filtered = filtered.filter((u) => u.is_banned === true);
+			} else if (bannedFilter === "active") {
+				filtered = filtered.filter((u) => !u.is_banned);
 			}
 		}
 		setFilteredUsers(filtered);
@@ -300,6 +368,56 @@ const ManageUsers = () => {
 		return <Badge className={`bg-${colors[type] || "secondary"}-subtle text-${colors[type] || "secondary"}`}>{type}</Badge>;
 	};
 
+	const getSubscriptionBadge = (status?: string, endDate?: string) => {
+		// If no subscription, show empty
+		if (!status) {
+			return <span className="text-muted">—</span>;
+		}
+
+		// Check if subscription period has ended
+		const isExpired = endDate && new Date(endDate) < new Date();
+
+		switch (status) {
+			case "active":
+				return (
+					<div className="d-flex flex-column align-items-start">
+						<Badge className="bg-success">Subscribed</Badge>
+					
+					</div>
+				);
+			case "trial":
+				return (
+					<div className="d-flex flex-column align-items-start">
+						<Badge className="bg-info">Trial</Badge>
+						{endDate && (
+							<small className="text-muted" style={{ fontSize: "10px" }}>
+								Ends {new Date(endDate).toLocaleDateString()}
+							</small>
+						)}
+					</div>
+				);
+			case "canceled":
+				return (
+					<div className="d-flex flex-column align-items-start">
+						<Badge className="bg-warning text-dark">Canceled</Badge>
+						{endDate && (
+							<small className="text-muted" style={{ fontSize: "10px" }}>
+								Until {new Date(endDate).toLocaleDateString()}
+							</small>
+						)}
+					</div>
+				);
+			case "past_due":
+				return <Badge className="bg-danger">Past Due</Badge>;
+			case "unpaid":
+				return <Badge className="bg-danger">Unpaid</Badge>;
+			case "expired":
+				return <Badge className="bg-secondary">Expired</Badge>;
+			default:
+				return <Badge className="bg-success">{status}</Badge>;
+		}
+	};
+
 	// Show loading skeleton only if we're still checking admin status OR actively loading data
 	if (adminLoading) {
 		return (
@@ -359,19 +477,19 @@ const ManageUsers = () => {
 						<Card>
 							<CardHeader className="d-flex justify-content-between align-items-center">
 								<h4 className="card-title mb-0">Users Management</h4>
-								<div className="d-flex gap-2">
+								<div className="d-flex gap-2 flex-wrap">
 									<Input
 										type="text"
 										placeholder="Search users..."
 										value={searchTerm}
 										onChange={(e) => setSearchTerm(e.target.value)}
-										style={{ maxWidth: "250px" }}
+										style={{ maxWidth: "200px" }}
 									/>
 									<Input
 										type="select"
 										value={typeFilter}
 										onChange={(e) => setTypeFilter(e.target.value)}
-										style={{ maxWidth: "150px" }}
+										style={{ maxWidth: "130px" }}
 									>
 										<option value="all">All Types</option>
 										<option value="Inventor">Inventor</option>
@@ -383,13 +501,32 @@ const ManageUsers = () => {
 										type="select"
 										value={statusFilter}
 										onChange={(e) => setStatusFilter(e.target.value)}
-										style={{ maxWidth: "150px" }}
+										style={{ maxWidth: "130px" }}
 									>
 										<option value="all">All Status</option>
-										<option value="pending">Pending</option>
 										<option value="approved">Approved</option>
-										<option value="rejected">Rejected</option>
+										<option value="pending">Pending</option>
 										<option value="banned">Banned</option>
+									</Input>
+									<Input
+										type="select"
+										value={subscriptionFilter}
+										onChange={(e) => setSubscriptionFilter(e.target.value)}
+										style={{ maxWidth: "150px" }}
+									>
+										<option value="all">All Subscriptions</option>
+										<option value="active">Active Subscription</option>
+										<option value="none">No Subscription</option>
+									</Input>
+									<Input
+										type="select"
+										value={bannedFilter}
+										onChange={(e) => setBannedFilter(e.target.value)}
+										style={{ maxWidth: "130px" }}
+									>
+										<option value="all">All Users</option>
+										<option value="active">Active Only</option>
+										<option value="banned">Banned Only</option>
 									</Input>
 								</div>
 							</CardHeader>
@@ -401,16 +538,17 @@ const ManageUsers = () => {
 												<th>User</th>
 												<th>Email</th>
 												<th>Type</th>
-												<th>Status</th>
+												<th>Subscription</th>
 												<th>Location</th>
 												<th>Created</th>
+												<th>Status</th>
 												<th>Actions</th>
 											</tr>
 										</thead>
 										<tbody>
 											{filteredUsers.length === 0 ? (
 												<tr>
-													<td colSpan={7} className="text-center py-4">
+													<td colSpan={8} className="text-center py-4">
 														<p className="text-muted mb-0">No users found</p>
 													</td>
 												</tr>
@@ -446,20 +584,21 @@ const ManageUsers = () => {
 															<p className="mb-0">{user.personal_email}</p>
 														</td>
 														<td>{getUserTypeBadge(user.user_type)}</td>
-														<td>{getStatusBadge(user.profile_status, user.is_banned)}</td>
+														<td>{getSubscriptionBadge(user.subscription_status, user.subscription_end)}</td>
 														<td>
 															{user.city && user.country
 																? `${user.city}, ${user.country}`
 																: user.country || user.city || "N/A"}
 														</td>
 														<td>{new Date(user.created_at).toLocaleDateString()}</td>
+														<td>{getStatusBadge(user.profile_status, user.is_banned)}</td>
 														<td>
 															<UncontrolledDropdown>
 																<DropdownToggle tag="button" className="btn btn-soft-secondary btn-sm">
 																	<i className="ri-more-fill"></i>
 																</DropdownToggle>
 																<DropdownMenu>
-																	<DropdownItem onClick={() => navigate(`/pages-profile?id=${user.id}`)}>
+																	<DropdownItem onClick={() => navigate(`/admin/users/details?id=${user.id}`)}>
 																		<i className="ri-eye-line me-2"></i>View Profile
 																	</DropdownItem>
 																	<DropdownItem onClick={() => handleEdit(user)}>

@@ -19,7 +19,7 @@ import {
 	Badge,
 	Spinner,
 } from "reactstrap";
-import { toast } from "react-toastify";
+import { showToast } from "../../../lib/toast";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import Pagination from "../../../Components/Common/Pagination";
 import { supabase } from "../../../lib/supabase";
@@ -28,6 +28,7 @@ import { getErrorMessage } from "../../../lib/errorHandler";
 import { TablePageSkeleton } from "../../../Components/Common/LoadingSkeleton";
 import { uploadFile } from "../../../lib/storage";
 import { useAuth } from "../../../hooks/useAuth";
+import { activityHelpers } from "../../../lib/activityTracker";
 
 interface AdBanner {
 	id?: string;
@@ -110,7 +111,7 @@ const Advertising = () => {
 		} catch (error: any) {
 			const errorMsg = getErrorMessage(error);
 			console.error("Error loading banners:", error);
-			toast.error(errorMsg);
+			showToast.error(errorMsg);
 			// Set empty array if table doesn't exist yet
 			setBanners([]);
 		} finally {
@@ -123,12 +124,12 @@ const Advertising = () => {
 		if (!file) return;
 
 		if (file.size > 5 * 1024 * 1024) {
-			toast.error("Image size must be less than 5MB");
+			showToast.error("Image size must be less than 5MB");
 			return;
 		}
 
 		if (!user?.id) {
-			toast.error("User not authenticated");
+			showToast.error("User not authenticated");
 			return;
 		}
 
@@ -137,13 +138,13 @@ const Advertising = () => {
 			const result = await uploadFile("user-files", file, user.id, "advertising");
 			if (result.url) {
 				setImagePreview(result.url);
-				toast.success("Image uploaded successfully!");
+				showToast.success("Image uploaded successfully!");
 			} else {
 				throw new Error("Upload failed");
 			}
 		} catch (error: any) {
 			const errorMsg = getErrorMessage(error);
-			toast.error(errorMsg);
+			showToast.error(errorMsg);
 		} finally {
 			setUploading(false);
 		}
@@ -152,20 +153,20 @@ const Advertising = () => {
 	const handleSave = async () => {
 		try {
 			if (!formData.title.trim()) {
-				toast.error("Banner title is required");
+				showToast.error("Banner title is required");
 				return;
 			}
 
 			// For new banners, image is required. For editing, use existing image if no new one uploaded
 			if (!selectedBanner && !imagePreview) {
-				toast.error("Please upload a banner image");
+				showToast.error("Please upload a banner image");
 				return;
 			}
 
 			// Use existing image if editing and no new image was uploaded
 			const finalImageUrl = imagePreview || selectedBanner?.image_url;
 			if (!finalImageUrl) {
-				toast.error("Banner image is required");
+				showToast.error("Banner image is required");
 				return;
 			}
 
@@ -188,7 +189,11 @@ const Advertising = () => {
 					.eq("id", selectedBanner.id);
 
 				if (error) throw error;
-				toast.success("Banner updated successfully!");
+				
+				// Log activity
+				activityHelpers.bannerUpdated(formData.title);
+				
+				showToast.success("Banner updated successfully!");
 			} else {
 				// Create new banner
 				const { error } = await supabase
@@ -196,7 +201,11 @@ const Advertising = () => {
 					.insert([bannerData]);
 
 				if (error) throw error;
-				toast.success("Banner created successfully!");
+				
+				// Log activity
+				activityHelpers.bannerUploaded(formData.title);
+				
+				showToast.success("Banner created successfully!");
 			}
 
 			setEditModal(false);
@@ -214,7 +223,7 @@ const Advertising = () => {
 		} catch (error: any) {
 			const errorMsg = getErrorMessage(error);
 			console.error("Error saving banner:", error);
-			toast.error(errorMsg);
+			showToast.error(errorMsg);
 		}
 	};
 
@@ -248,7 +257,7 @@ const Advertising = () => {
 
 	const handleToggleClick = (banner: AdBanner) => {
 		if (!banner.id) {
-			toast.error("Banner ID is missing");
+			showToast.error("Banner ID is missing");
 			return;
 		}
 		setBannerToToggle({ banner, newStatus: !banner.is_active });
@@ -257,7 +266,7 @@ const Advertising = () => {
 
 	const toggleBannerStatus = async () => {
 		if (!bannerToToggle?.banner.id) {
-			toast.error("Banner ID is missing");
+			showToast.error("Banner ID is missing");
 			setToggleModal(false);
 			setBannerToToggle(null);
 			return;
@@ -267,7 +276,7 @@ const Advertising = () => {
 		const bannerId = banner.id;
 
 		if (!isAdmin) {
-			toast.error("You don't have permission to modify banners");
+			showToast.error("You don't have permission to modify banners");
 			setToggleModal(false);
 			setBannerToToggle(null);
 			return;
@@ -302,7 +311,7 @@ const Advertising = () => {
 			}
 
 			console.log("Banner updated successfully:", data[0]);
-			toast.success(`Banner ${newStatus ? "activated" : "deactivated"} successfully!`);
+			showToast.success(`Banner ${newStatus ? "activated" : "deactivated"} successfully!`);
 			
 			// Close modal and reset state
 			setToggleModal(false);
@@ -321,7 +330,7 @@ const Advertising = () => {
 				errorDetails: error.details,
 				errorHint: error.hint
 			});
-			toast.error(`Failed to ${newStatus ? "activate" : "deactivate"} banner: ${errorMsg}`);
+			showToast.error(`Failed to ${newStatus ? "activate" : "deactivate"} banner: ${errorMsg}`);
 		} finally {
 			setToggling(null);
 		}
@@ -334,7 +343,7 @@ const Advertising = () => {
 
 	const handleDeleteConfirm = async () => {
 		if (!bannerToDelete?.id) {
-			toast.error("No banner selected for deletion");
+			showToast.error("No banner selected for deletion");
 			return;
 		}
 
@@ -347,14 +356,19 @@ const Advertising = () => {
 
 			if (error) throw error;
 
-			toast.success("Banner deleted successfully!");
+			// Log activity
+			if (bannerToDelete) {
+				activityHelpers.bannerDeleted(bannerToDelete.title);
+			}
+
+			showToast.success("Banner deleted successfully!");
 			setDeleteModal(false);
 			setBannerToDelete(null);
 			await loadBanners();
 		} catch (error: any) {
 			const errorMsg = getErrorMessage(error);
 			console.error("Error deleting banner:", error);
-			toast.error(errorMsg);
+			showToast.error(errorMsg);
 		} finally {
 			setDeleting(false);
 		}

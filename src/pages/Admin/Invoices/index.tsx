@@ -16,7 +16,7 @@ import {
 	DropdownMenu,
 	DropdownItem,
 } from "reactstrap";
-import { toast } from "react-toastify";
+import { showToast } from "../../../lib/toast";
 import CountUp from "react-countup";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import Pagination from "../../../Components/Common/Pagination";
@@ -56,6 +56,8 @@ const ViewInvoices = () => {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [statusFilter, setStatusFilter] = useState<string>("all");
 	const [typeFilter, setTypeFilter] = useState<string>("all");
+	const [currentPage, setCurrentPage] = useState(1);
+	const perPageData = 10;
 
 	useEffect(() => {
 		// Don't do anything while still checking admin status
@@ -114,7 +116,7 @@ const ViewInvoices = () => {
 			setFilteredInvoices(invoicesWithUsers);
 		} catch (error: any) {
 			const errorMsg = getErrorMessage(error);
-			toast.error(errorMsg);
+			showToast.error(errorMsg);
 		} finally {
 			setLoading(false);
 		}

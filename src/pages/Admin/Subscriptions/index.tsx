@@ -16,7 +16,7 @@ import {
 	DropdownMenu,
 	DropdownItem,
 } from "reactstrap";
-import { toast } from "react-toastify";
+import { showToast } from "../../../lib/toast";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 import Pagination from "../../../Components/Common/Pagination";
 import { supabase } from "../../../lib/supabase";
@@ -111,7 +111,7 @@ const SubscriptionsHistory = () => {
 				) {
 					const errorMsg = `RLS Policy Error: ${testError.message}\n\nPlease run the SQL in supabase_rls_policies.sql to grant access.`;
 					console.error("🔒", errorMsg);
-					toast.error("Access denied by RLS policy. Check console for details.");
+					showToast.error("Access denied by RLS policy. Check console for details.");
 					setSubscriptions([]);
 					setFilteredSubscriptions([]);
 					return;
@@ -120,7 +120,7 @@ const SubscriptionsHistory = () => {
 				// Check if table doesn't exist
 				if (testError.code === "42P01" || testError.message?.toLowerCase().includes("does not exist")) {
 					console.error("❌ Table 'subscriptions' does not exist in database");
-					toast.error("Subscriptions table not found. Please create it in Supabase.");
+					showToast.error("Subscriptions table not found. Please create it in Supabase.");
 					setSubscriptions([]);
 					setFilteredSubscriptions([]);
 					return;
@@ -158,7 +158,7 @@ const SubscriptionsHistory = () => {
 				
 				setSubscriptions([]);
 				setFilteredSubscriptions([]);
-				toast.info("No subscriptions found. Check console for debugging info.");
+				showToast.info("No subscriptions found. Check console for debugging info.");
 				return;
 			}
 
@@ -205,13 +205,13 @@ const SubscriptionsHistory = () => {
 			
 			// Provide specific guidance based on error type
 			if (error?.code === "42501") {
-				toast.error(
+				showToast.error(
 					"RLS Policy Error: You don't have permission to view subscriptions. Run the SQL in supabase_rls_policies.sql"
 				);
 			} else if (error?.code === "42P01") {
-				toast.error("Table 'subscriptions' does not exist. Please create it in Supabase.");
+				showToast.error("Table 'subscriptions' does not exist. Please create it in Supabase.");
 			} else {
-				toast.error(`Failed to load subscriptions: ${errorMsg}. Check console for details.`);
+				showToast.error(`Failed to load subscriptions: ${errorMsg}. Check console for details.`);
 			}
 			
 			setSubscriptions([]);

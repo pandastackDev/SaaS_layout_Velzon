@@ -19,7 +19,7 @@ import {
 	FormFeedback,
 	Badge,
 } from "reactstrap";
-import { toast } from "react-toastify";
+import { showToast } from "../../../lib/toast";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
@@ -28,6 +28,7 @@ import { supabase } from "../../../lib/supabase";
 import { useAdmin } from "../../../hooks/useAdmin";
 import { getErrorMessage } from "../../../lib/errorHandler";
 import { TablePageSkeleton } from "../../../Components/Common/LoadingSkeleton";
+import { activityHelpers } from "../../../lib/activityTracker";
 
 /**
  * PricingPlan interface
@@ -48,7 +49,8 @@ interface PricingPlan {
 	id?: string;
 	plan_name: string;
 	plan_type: string;
-	price: number;
+	monthly_price: number;
+	currency: string;
 	billing_cycle: string;
 	features: string[];
 	description?: string;
@@ -66,6 +68,7 @@ const ManagePricing = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [perPageData] = useState(10);
 	const [editModal, setEditModal] = useState(false);
+	const [deleteModal, setDeleteModal] = useState(false);
 	const [selectedPlan, setSelectedPlan] = useState<PricingPlan | null>(null);
 
 	useEffect(() => {
@@ -102,7 +105,7 @@ const ManagePricing = () => {
 				// If table doesn't exist, show helpful message
 				if (error.code === "PGRST116" || error.message?.includes("relation") || error.message?.includes("does not exist")) {
 					console.warn("pricing_plans table does not exist. Please create it in Supabase.");
-					toast.warning("Pricing plans table not found. Please create the 'pricing_plans' table in Supabase.");
+					showToast.warning("Pricing plans table not found. Please create the 'pricing_plans' table in Supabase.");
 					setPlans([]);
 					return;
 				}
@@ -139,7 +142,8 @@ const ManagePricing = () => {
 					id: plan.id,
 					plan_name: plan.plan_name || plan.name || "",
 					plan_type: plan.plan_type || plan.type || "subscription",
-					price: parseFloat(plan.price || plan.plan_price || 0),
+					monthly_price: parseFloat(plan.monthly_price || 0),
+					currency: plan.currency || "USD",
 					billing_cycle: plan.billing_cycle || plan.billing_period || "monthly",
 					features: features,
 					description: plan.description || "",
@@ -154,7 +158,7 @@ const ManagePricing = () => {
 		} catch (error: any) {
 			console.error("Error loading pricing plans:", error);
 			const errorMsg = getErrorMessage(error);
-			toast.error(`Failed to load pricing plans: ${errorMsg}`);
+			showToast.error(`Failed to load pricing plans: ${errorMsg}`);
 			setPlans([]);
 		} finally {
 			setLoading(false);
@@ -166,14 +170,15 @@ const ManagePricing = () => {
 		initialValues: {
 			plan_name: selectedPlan?.plan_name || "",
 			plan_type: selectedPlan?.plan_type || "subscription",
-			price: selectedPlan?.price || 0,
+			monthly_price: selectedPlan?.monthly_price || 0,
+			currency: selectedPlan?.currency || "USD",
 			billing_cycle: selectedPlan?.billing_cycle || "monthly",
 			description: selectedPlan?.description || "",
 			features: selectedPlan?.features?.join(", ") || "",
 		},
 		validationSchema: Yup.object({
 			plan_name: Yup.string().required("Plan name is required"),
-			price: Yup.number().min(0, "Price must be positive").required("Price is required"),
+			monthly_price: Yup.number().min(0, "Price must be positive").required("Price is required"),
 			billing_cycle: Yup.string().required("Billing cycle is required"),
 		}),
 		onSubmit: async (values) => {
@@ -189,12 +194,12 @@ const ManagePricing = () => {
 				const planData = {
 					plan_name: values.plan_name,
 					plan_type: values.plan_type,
-					price: parseFloat(values.price.toString()),
+					monthly_price: parseFloat(values.monthly_price.toString()),
+					currency: values.currency || "USD",
 					billing_cycle: values.billing_cycle,
 					features: JSON.stringify(features), // Store as JSON string
 					description: values.description || null,
 					is_active: true,
-					updated_at: new Date().toISOString(),
 				};
 
 				if (selectedPlan?.id) {
@@ -205,16 +210,23 @@ const ManagePricing = () => {
 						.eq("id", selectedPlan.id);
 
 					if (error) throw error;
-					toast.success("Pricing plan updated successfully!");
+					
+					// Log activity
+					activityHelpers.pricingUpdated(values.plan_name);
+					
+					showToast.success("Pricing plan updated successfully!");
 				} else {
 					// Create new plan
-					planData.created_at = new Date().toISOString();
 					const { error } = await supabase
 						.from("pricing_plans")
 						.insert([planData]);
 
 					if (error) throw error;
-					toast.success("Pricing plan created successfully!");
+					
+					// Log activity
+					activityHelpers.pricingCreated(values.plan_name);
+					
+					showToast.success("Pricing plan created successfully!");
 				}
 
 				setEditModal(false);
@@ -222,7 +234,7 @@ const ManagePricing = () => {
 				await loadPricingPlans();
 			} catch (error: any) {
 				const errorMsg = getErrorMessage(error);
-				toast.error(`Failed to save pricing plan: ${errorMsg}`);
+				showToast.error(`Failed to save pricing plan: ${errorMsg}`);
 			} finally {
 				setLoading(false);
 			}
@@ -238,6 +250,62 @@ const ManagePricing = () => {
 		setSelectedPlan(null);
 		validation.resetForm();
 		setEditModal(true);
+	};
+
+	const handleDelete = (plan: PricingPlan) => {
+		setSelectedPlan(plan);
+		setDeleteModal(true);
+	};
+
+	const confirmDelete = async () => {
+		if (!selectedPlan?.id) return;
+
+		try {
+			setLoading(true);
+			const { error } = await supabase
+				.from("pricing_plans")
+				.delete()
+				.eq("id", selectedPlan.id);
+
+			if (error) throw error;
+
+			activityHelpers.log("pricing_deleted", selectedPlan.id, {
+				plan_name: selectedPlan.plan_name
+			});
+
+			showToast.success("Pricing plan deleted successfully!");
+			setDeleteModal(false);
+			setSelectedPlan(null);
+			await loadPricingPlans();
+		} catch (error: any) {
+			const errorMsg = getErrorMessage(error);
+			showToast.error(`Failed to delete pricing plan: ${errorMsg}`);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	const togglePlanStatus = async (plan: PricingPlan) => {
+		try {
+			const newStatus = !plan.is_active;
+			const { error } = await supabase
+				.from("pricing_plans")
+				.update({ is_active: newStatus })
+				.eq("id", plan.id);
+
+			if (error) throw error;
+
+			activityHelpers.log("pricing_status_toggled", plan.id!, {
+				plan_name: plan.plan_name,
+				new_status: newStatus
+			});
+
+			showToast.success(`Plan ${newStatus ? "activated" : "deactivated"} successfully!`);
+			await loadPricingPlans();
+		} catch (error: any) {
+			const errorMsg = getErrorMessage(error);
+			showToast.error(`Failed to update plan status: ${errorMsg}`);
+		}
 	};
 
 	if (adminLoading || loading) {
@@ -314,7 +382,7 @@ const ManagePricing = () => {
 															</Badge>
 														</td>
 														<td>
-															<strong>${plan.price.toFixed(2)}</strong>
+															<strong>{plan.currency} {plan.monthly_price.toFixed(2)}</strong>
 														</td>
 														<td>
 															<Badge className="bg-info-subtle text-info">
@@ -344,13 +412,32 @@ const ManagePricing = () => {
 															)}
 														</td>
 														<td>
-															<Button
-																color="soft-primary"
-																size="sm"
-																onClick={() => handleEdit(plan)}
-															>
-																<i className="ri-edit-line"></i>
-															</Button>
+															<div className="d-flex gap-2">
+																<Button
+																	color="soft-primary"
+																	size="sm"
+																	onClick={() => handleEdit(plan)}
+																	title="Edit plan"
+																>
+																	<i className="ri-edit-line"></i>
+																</Button>
+																<Button
+																	color={plan.is_active ? "soft-warning" : "soft-success"}
+																	size="sm"
+																	onClick={() => togglePlanStatus(plan)}
+																	title={plan.is_active ? "Deactivate" : "Activate"}
+																>
+																	<i className={plan.is_active ? "ri-eye-off-line" : "ri-eye-line"}></i>
+																</Button>
+																<Button
+																	color="soft-danger"
+																	size="sm"
+																	onClick={() => handleDelete(plan)}
+																	title="Delete plan"
+																>
+																	<i className="ri-delete-bin-line"></i>
+																</Button>
+															</div>
 														</td>
 													</tr>
 												))
@@ -411,20 +498,33 @@ const ManagePricing = () => {
 								</Input>
 							</Col>
 							<Col md={6}>
-								<Label>Price (USD) *</Label>
+								<Label>Monthly Price *</Label>
 								<Input
 									type="number"
-									name="price"
-									value={validation.values.price}
+									name="monthly_price"
+									value={validation.values.monthly_price}
 									onChange={validation.handleChange}
 									onBlur={validation.handleBlur}
-									invalid={!!(validation.touched.price && validation.errors.price)}
+									invalid={!!(validation.touched.monthly_price && validation.errors.monthly_price)}
 									step="0.01"
 									min="0"
 								/>
-								{validation.touched.price && validation.errors.price && (
-									<FormFeedback type="invalid">{validation.errors.price}</FormFeedback>
+								{validation.touched.monthly_price && validation.errors.monthly_price && (
+									<FormFeedback type="invalid">{validation.errors.monthly_price}</FormFeedback>
 								)}
+							</Col>
+							<Col md={6}>
+								<Label>Currency *</Label>
+								<Input
+									type="select"
+									name="currency"
+									value={validation.values.currency}
+									onChange={validation.handleChange}
+								>
+									<option value="USD">USD</option>
+									<option value="EUR">EUR</option>
+									<option value="GBP">GBP</option>
+								</Input>
 							</Col>
 							<Col md={6}>
 								<Label>Billing Cycle *</Label>
@@ -473,6 +573,33 @@ const ManagePricing = () => {
 					<Button color="primary" onClick={() => validation.handleSubmit()}>
 						<i className="ri-save-line me-1"></i>
 						{selectedPlan ? "Update Plan" : "Create Plan"}
+					</Button>
+				</ModalFooter>
+			</Modal>
+
+			{/* Delete Confirmation Modal */}
+			<Modal isOpen={deleteModal} toggle={() => setDeleteModal(false)} centered>
+				<ModalHeader toggle={() => setDeleteModal(false)} className="bg-danger text-white">
+					<i className="ri-delete-bin-line me-2"></i>Delete Pricing Plan
+				</ModalHeader>
+				<ModalBody>
+					<div className="text-center py-3">
+						<i className="ri-error-warning-line text-danger" style={{ fontSize: "64px" }}></i>
+						<h5 className="mt-3">Are you sure?</h5>
+						<p className="text-muted mb-0">
+							Do you really want to delete the pricing plan <strong>"{selectedPlan?.plan_name}"</strong>?
+							<br />
+							This action cannot be undone.
+						</p>
+					</div>
+				</ModalBody>
+				<ModalFooter>
+					<Button color="secondary" onClick={() => setDeleteModal(false)}>
+						Cancel
+					</Button>
+					<Button color="danger" onClick={confirmDelete} disabled={loading}>
+						<i className="ri-delete-bin-line me-1"></i>
+						Yes, Delete
 					</Button>
 				</ModalFooter>
 			</Modal>

@@ -153,6 +153,17 @@ export const activityHelpers = {
 		});
 	},
 
+	pricingCreated: (planName: string) => {
+		logActivity({
+			type: "pricing_created",
+			title: "Pricing Plan Created",
+			description: `Created new pricing plan: ${planName}`,
+			icon: "ri-add-circle-line",
+			iconClass: "success",
+			page: "/admin/pricing",
+		});
+	},
+
 	bannerUploaded: (assetName: string) => {
 		logActivity({
 			type: "banner_uploaded",
@@ -160,6 +171,17 @@ export const activityHelpers = {
 			description: `Uploaded advertising banner: ${assetName}`,
 			icon: "ri-image-line",
 			iconClass: "primary",
+			page: "/admin/advertising",
+		});
+	},
+
+	bannerUpdated: (assetName: string) => {
+		logActivity({
+			type: "banner_updated",
+			title: "Banner Updated",
+			description: `Updated advertising banner: ${assetName}`,
+			icon: "ri-edit-line",
+			iconClass: "info",
 			page: "/admin/advertising",
 		});
 	},

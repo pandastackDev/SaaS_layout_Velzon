@@ -114,13 +114,16 @@ import DashboardPitchInvest from "../pages/DashboardPitchInvest";
 //Admin Pages
 import AdminDashboard from "../pages/Admin/Dashboard";
 import ManageProjects from "../pages/Admin/Projects";
+import ProjectDetails from "../pages/Admin/Projects/ProjectDetails";
 import ProfileApproval from "../pages/Admin/ProfileApproval";
 import ManageUsers from "../pages/Admin/Users";
+import UserDetails from "../pages/Admin/Users/UserDetails";
 import Analytics from "../pages/Admin/Analytics";
 import ViewInvoices from "../pages/Admin/Invoices";
 import ManagePricing from "../pages/Admin/Pricing";
 import Advertising from "../pages/Admin/Advertising";
 import SubscriptionsHistory from "../pages/Admin/Subscriptions";
+import ManageAuctions from "../pages/Admin/Auctions";
 import EcommerceCart from "../pages/Ecommerce/EcommerceCart";
 import EcommerceCheckout from "../pages/Ecommerce/EcommerceCheckout";
 import EcommerceCustomers from "../pages/Ecommerce/EcommerceCustomers/index";
@@ -242,13 +245,16 @@ const authProtectedRoutes = [
 	// Admin Routes
 	{ path: "/admin/dashboard", component: <AdminDashboard /> },
 	{ path: "/admin/projects", component: <ManageProjects /> },
+	{ path: "/admin/projects/details", component: <ProjectDetails /> },
 	{ path: "/admin/profile-approval", component: <ProfileApproval /> },
 	{ path: "/admin/users", component: <ManageUsers /> },
+	{ path: "/admin/users/details", component: <UserDetails /> },
 	{ path: "/admin/analytics", component: <Analytics /> },
 	{ path: "/admin/invoices", component: <ViewInvoices /> },
 	{ path: "/admin/pricing", component: <ManagePricing /> },
 	{ path: "/admin/advertising", component: <Advertising /> },
 	{ path: "/admin/subscriptions", component: <SubscriptionsHistory /> },
+	{ path: "/admin/auctions", component: <ManageAuctions /> },
 
 	{ path: "/apps-calendar", component: <Calendar /> },
 	{ path: "/apps-calendar-month-grid", component: <MonthGrid /> },

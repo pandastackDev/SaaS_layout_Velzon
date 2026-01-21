@@ -341,7 +341,7 @@ const ProfileApproval = () => {
 																	<i className="ri-more-fill"></i>
 																</DropdownToggle>
 																<DropdownMenu>
-																	<DropdownItem onClick={() => navigate(`/pages-profile?id=${user.id}`)}>
+																	<DropdownItem onClick={() => navigate(`/admin/users/details?id=${user.id}`)}>
 																		<i className="ri-eye-line me-2"></i>View Profile
 																	</DropdownItem>
 																	{user.profile_status === "pending" && (

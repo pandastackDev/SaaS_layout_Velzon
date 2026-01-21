@@ -40,6 +40,7 @@ const Register = () => {
 	const [otpCode, setOtpCode] = useState("");
 	const [otpSecondsLeft, setOtpSecondsLeft] = useState(0);
 	const [showOtpModal, setShowOtpModal] = useState(false);
+	const [resendingOtp, setResendingOtp] = useState(false);
 
 	const [formData, setFormData] = useState({
 		userType: "",
@@ -164,13 +165,19 @@ const Register = () => {
 
 	const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
 		const file = e.target.files?.[0];
-		if (!file) return;
+		if (!file) {
+			console.log(`No file selected for ${field}`);
+			return;
+		}
+
+		console.log(`File selected for ${field}:`, file.name, file.type, file.size);
 
 		if (field === "coverImage") {
 			setFileObjects((prev) => ({ ...prev, coverImage: file }));
 			const reader = new FileReader();
 			reader.onloadend = () => {
 				setFormData((prev) => ({ ...prev, coverImagePreview: reader.result as string }));
+				console.log("Cover image preview created");
 			};
 			reader.readAsDataURL(file);
 		} else if (field === "photo") {
@@ -178,10 +185,12 @@ const Register = () => {
 			const reader = new FileReader();
 			reader.onloadend = () => {
 				setFormData((prev) => ({ ...prev, photoPreview: reader.result as string }));
+				console.log("Photo preview created");
 			};
 			reader.readAsDataURL(file);
 		} else if (field === "pitchVideo") {
 			setFileObjects((prev) => ({ ...prev, pitchVideo: file }));
+			console.log("Pitch video file stored");
 		}
 	};
 
@@ -276,9 +285,13 @@ const Register = () => {
 		}
 	};
 
-	const sendOtpCode = async () => {
+	const sendOtpCode = async (isResend = false) => {
 		setError("");
-		setLoading(true);
+		if (isResend) {
+			setResendingOtp(true);
+		} else {
+			setLoading(true);
+		}
 		try {
 			const { error: otpError } = await supabase.auth.signInWithOtp({
 				email: formData.personalEmail.trim(),
@@ -292,11 +305,20 @@ const Register = () => {
 
 			setOtpSent(true);
 			setOtpSecondsLeft(180);
+			setOtpCode("");
+			if (isResend) {
+				toast.success("Verification code resent successfully!");
+			}
 		} catch (e: any) {
-			setError(e.message || "Failed to send verification code");
-			toast.error(e.message || "Failed to send verification code");
+			const errorMsg = e.message || "Failed to send verification code";
+			setError(errorMsg);
+			toast.error(errorMsg);
 		} finally {
-			setLoading(false);
+			if (isResend) {
+				setResendingOtp(false);
+			} else {
+				setLoading(false);
+			}
 		}
 	};
 
@@ -320,6 +342,16 @@ const Register = () => {
 		setLoading(true);
 		setError("");
 
+		console.log("=== Starting Registration ===");
+		console.log("File objects:", {
+			hasCoverImage: !!fileObjects.coverImage,
+			hasPhoto: !!fileObjects.photo,
+			hasPitchVideo: !!fileObjects.pitchVideo,
+			coverImageName: fileObjects.coverImage?.name,
+			photoName: fileObjects.photo?.name,
+			pitchVideoName: fileObjects.pitchVideo?.name,
+		});
+
 		try {
 			// Verify OTP
 			const { data: verifyData, error: verifyError } = await supabase.auth.verifyOtp({
@@ -333,21 +365,10 @@ const Register = () => {
 
 			const userId = verifyData.user.id;
 
-			// Update user metadata
+			// Set password if provided
 			if (formData.password && formData.password.length >= 6) {
 				await supabase.auth.updateUser({
 					password: formData.password,
-					data: {
-						full_name: formData.fullName,
-						user_type: formData.userType,
-					},
-				});
-			} else {
-				await supabase.auth.updateUser({
-					data: {
-						full_name: formData.fullName,
-						user_type: formData.userType,
-					},
 				});
 			}
 
@@ -358,41 +379,69 @@ const Register = () => {
 				pitchVideo?: string;
 			} = {};
 
+			// Upload cover image
 			if (fileObjects.coverImage) {
-				const res = await uploadFile("user-files", fileObjects.coverImage, userId, "cover");
-				if (res.url) fileUrls.coverImage = res.url;
+				console.log("Uploading cover image...", fileObjects.coverImage.name);
+				const res = await uploadFile("user-files", fileObjects.coverImage, userId, "covers");
+				if (res.error) {
+					console.error("Cover image upload error:", res.error);
+					toast.error("Failed to upload cover image");
+				} else if (res.url) {
+					console.log("Cover image uploaded successfully:", res.url);
+					fileUrls.coverImage = res.url;
+				}
 			} else if (formData.coverImagePreview) {
+				console.log("Converting and uploading cover image from preview...");
 				const file = await base64ToFile(formData.coverImagePreview, "cover.jpg");
-				const res = await uploadFile("user-files", file, userId, "cover");
-				if (res.url) fileUrls.coverImage = res.url;
+				const res = await uploadFile("user-files", file, userId, "covers");
+				if (res.error) {
+					console.error("Cover image upload error:", res.error);
+				} else if (res.url) {
+					console.log("Cover image uploaded successfully:", res.url);
+					fileUrls.coverImage = res.url;
+				}
 			}
 
+			// Upload profile photo
 			if (fileObjects.photo) {
+				console.log("Uploading profile photo...", fileObjects.photo.name);
 				const res = await uploadFile("user-files", fileObjects.photo, userId, "photos");
-				if (res.url) fileUrls.photo = res.url;
+				if (res.error) {
+					console.error("Photo upload error:", res.error);
+					toast.error("Failed to upload profile photo");
+				} else if (res.url) {
+					console.log("Photo uploaded successfully:", res.url);
+					fileUrls.photo = res.url;
+				}
 			} else if (formData.photoPreview) {
+				console.log("Converting and uploading photo from preview...");
 				const file = await base64ToFile(formData.photoPreview, "photo.jpg");
 				const res = await uploadFile("user-files", file, userId, "photos");
-				if (res.url) fileUrls.photo = res.url;
+				if (res.error) {
+					console.error("Photo upload error:", res.error);
+				} else if (res.url) {
+					console.log("Photo uploaded successfully:", res.url);
+					fileUrls.photo = res.url;
+				}
 			}
 
+			// Upload pitch video
 			if (fileObjects.pitchVideo) {
+				console.log("Uploading pitch video...", fileObjects.pitchVideo.name);
 				const res = await uploadFile("user-files", fileObjects.pitchVideo, userId, "videos");
-				if (res.url) fileUrls.pitchVideo = res.url;
+				if (res.error) {
+					console.error("Video upload error:", res.error);
+					toast.error("Failed to upload pitch video");
+				} else if (res.url) {
+					console.log("Video uploaded successfully:", res.url);
+					fileUrls.pitchVideo = res.url;
+				}
 			}
 
-			// Create user profile
-			const userData = {
-				id: userId,
-				user_type: formData.userType,
-				full_name: formData.fullName.trim(),
-				personal_email: formData.personalEmail.trim(),
-				telephone: formData.telephone?.trim() || null,
-				country: formData.country?.trim() || null,
-				city: formData.city?.trim() || null,
-				cover_image_url: fileUrls.coverImage || null,
-				photo_url: fileUrls.photo || null,
-				profile_status: "pending",
+			console.log("All file uploads completed. URLs:", fileUrls);
+
+			// Store additional business data in user metadata
+			const additionalMetadata = {
 				company_name: formData.companyName || null,
 				project_name: formData.projectName || null,
 				project_category: formData.projectCategory || null,
@@ -415,8 +464,30 @@ const Register = () => {
 				total_sale_of_project: formData.totalSaleOfProject || null,
 				investment_preferences: formData.investmentPreferences || null,
 				description: formData.description || null,
-				pitch_video_url: fileUrls.pitchVideo || null,
 			};
+
+			// Update user metadata with all business information
+			await supabase.auth.updateUser({
+				data: {
+					full_name: formData.fullName,
+					user_type: formData.userType,
+					...additionalMetadata,
+				},
+			});
+
+			// Create user profile with only existing database columns
+			const userData = {
+				id: userId,
+				user_type: formData.userType,
+				full_name: formData.fullName.trim(),
+				personal_email: formData.personalEmail.trim(),
+				country: formData.country?.trim() || null,
+				city: formData.city?.trim() || null,
+				cover_image_url: fileUrls.coverImage || null,
+				photo_url: fileUrls.photo || null,
+			};
+
+			console.log("Inserting user data to database:", userData);
 
 			const { error: userError } = await supabase.from("users").upsert(userData, {
 				onConflict: "id",
@@ -426,15 +497,45 @@ const Register = () => {
 
 			// Create project if applicable
 			if (formData.userType !== "Investor" && formData.projectName?.trim()) {
+				// Build location string from country and city
+				const locationParts = [formData.city, formData.country].filter(Boolean);
+				const location = locationParts.length > 0 ? locationParts.join(", ") : null;
+
+				// Determine investment amount based on user type
+				let investmentAmount = null;
+				if (formData.capitalTotalValue) {
+					investmentAmount = formData.capitalTotalValue;
+				} else if (formData.totalSaleOfProject) {
+					investmentAmount = formData.totalSaleOfProject;
+				} else if (formData.patentSale) {
+					investmentAmount = formData.patentSale;
+				}
+
 				const projectData = {
 					user_id: userId,
 					title: formData.projectName.trim(),
+					subtitle: formData.companyName || null,
 					description: formData.description || null,
 					status: "pending",
 					category: formData.projectCategory || null,
+					cover_image_url: fileUrls.coverImage || null,
+					video_url: fileUrls.pitchVideo || null,
+					location: location,
+					investment_amount: investmentAmount,
+					available_status: true,
+					featured: false,
+					verified: false,
 				};
 
-				await supabase.from("projects").insert(projectData);
+				console.log("Inserting project data to database:", projectData);
+
+				const { error: projectError } = await supabase.from("projects").insert(projectData);
+				if (projectError) {
+					console.error("Failed to create project:", projectError);
+					// Don't throw - allow registration to complete even if project creation fails
+				} else {
+					console.log("Project created successfully");
+				}
 			}
 
 			toast.success("Registration successful!");
@@ -462,42 +563,52 @@ const Register = () => {
 			const fallbackName =
 				formData.fullName || session.user.email?.split("@")[0] || "User";
 
-			await supabase.auth.updateUser({
-				data: {
-					full_name: fallbackName,
-					user_type: formData.userType,
-				},
-			});
-
 			// Upload files and create profile (same as regular registration)
 			const fileUrls: { coverImage?: string; photo?: string; pitchVideo?: string } = {};
 
+			// Upload cover image
 			if (fileObjects.coverImage) {
-				const res = await uploadFile("user-files", fileObjects.coverImage, userId, "cover");
-				if (res.url) fileUrls.coverImage = res.url;
+				console.log("OAuth: Uploading cover image...", fileObjects.coverImage.name);
+				const res = await uploadFile("user-files", fileObjects.coverImage, userId, "covers");
+				if (res.error) {
+					console.error("OAuth: Cover image upload error:", res.error);
+					toast.error("Failed to upload cover image");
+				} else if (res.url) {
+					console.log("OAuth: Cover image uploaded successfully:", res.url);
+					fileUrls.coverImage = res.url;
+				}
 			}
 
+			// Upload profile photo
 			if (fileObjects.photo) {
+				console.log("OAuth: Uploading profile photo...", fileObjects.photo.name);
 				const res = await uploadFile("user-files", fileObjects.photo, userId, "photos");
-				if (res.url) fileUrls.photo = res.url;
+				if (res.error) {
+					console.error("OAuth: Photo upload error:", res.error);
+					toast.error("Failed to upload profile photo");
+				} else if (res.url) {
+					console.log("OAuth: Photo uploaded successfully:", res.url);
+					fileUrls.photo = res.url;
+				}
 			}
 
+			// Upload pitch video
 			if (fileObjects.pitchVideo) {
+				console.log("OAuth: Uploading pitch video...", fileObjects.pitchVideo.name);
 				const res = await uploadFile("user-files", fileObjects.pitchVideo, userId, "videos");
-				if (res.url) fileUrls.pitchVideo = res.url;
+				if (res.error) {
+					console.error("OAuth: Video upload error:", res.error);
+					toast.error("Failed to upload pitch video");
+				} else if (res.url) {
+					console.log("OAuth: Video uploaded successfully:", res.url);
+					fileUrls.pitchVideo = res.url;
+				}
 			}
 
-			const userData = {
-				id: userId,
-				user_type: formData.userType,
-				full_name: fallbackName,
-				personal_email: session.user.email || "",
-				telephone: null,
-				country: formData.country || null,
-				city: formData.city || null,
-				cover_image_url: fileUrls.coverImage || session.user.user_metadata?.avatar_url || null,
-				photo_url: fileUrls.photo || session.user.user_metadata?.picture || null,
-				profile_status: "pending",
+			console.log("OAuth: All file uploads completed. URLs:", fileUrls);
+
+			// Store additional business data in user metadata
+			const additionalMetadata = {
 				company_name: formData.companyName || null,
 				project_name: formData.projectName || null,
 				project_category: formData.projectCategory || null,
@@ -520,7 +631,26 @@ const Register = () => {
 				total_sale_of_project: formData.totalSaleOfProject || null,
 				investment_preferences: formData.investmentPreferences || null,
 				description: formData.description || null,
-				pitch_video_url: fileUrls.pitchVideo || null,
+			};
+
+			// Update user metadata with all business information
+			await supabase.auth.updateUser({
+				data: {
+					full_name: fallbackName,
+					user_type: formData.userType,
+					...additionalMetadata,
+				},
+			});
+
+			const userData = {
+				id: userId,
+				user_type: formData.userType,
+				full_name: fallbackName,
+				personal_email: session.user.email || "",
+				country: formData.country || null,
+				city: formData.city || null,
+				cover_image_url: fileUrls.coverImage || session.user.user_metadata?.avatar_url || null,
+				photo_url: fileUrls.photo || session.user.user_metadata?.picture || null,
 			};
 
 			const { error: userError } = await supabase.from("users").upsert(userData, {
@@ -530,15 +660,41 @@ const Register = () => {
 			if (userError) throw new Error(`Failed to create user record: ${userError.message}`);
 
 			if (formData.userType !== "Investor" && formData.projectName?.trim()) {
+				// Build location string from country and city
+				const locationParts = [formData.city, formData.country].filter(Boolean);
+				const location = locationParts.length > 0 ? locationParts.join(", ") : null;
+
+				// Determine investment amount based on user type
+				let investmentAmount = null;
+				if (formData.capitalTotalValue) {
+					investmentAmount = formData.capitalTotalValue;
+				} else if (formData.totalSaleOfProject) {
+					investmentAmount = formData.totalSaleOfProject;
+				} else if (formData.patentSale) {
+					investmentAmount = formData.patentSale;
+				}
+
 				const projectData = {
 					user_id: userId,
 					title: formData.projectName.trim(),
+					subtitle: formData.companyName || null,
 					description: formData.description || null,
 					status: "pending",
 					category: formData.projectCategory || null,
+					cover_image_url: fileUrls.coverImage || null,
+					video_url: fileUrls.pitchVideo || null,
+					location: location,
+					investment_amount: investmentAmount,
+					available_status: true,
+					featured: false,
+					verified: false,
 				};
 
-				await supabase.from("projects").insert(projectData);
+				const { error: projectError } = await supabase.from("projects").insert(projectData);
+				if (projectError) {
+					console.error("Failed to create project:", projectError);
+					// Don't throw - allow registration to complete even if project creation fails
+				}
 			}
 
 			toast.success("Registration complete!");
@@ -947,41 +1103,69 @@ const Register = () => {
 			</div>
 
 			{/* OTP Verification Modal */}
-			<Modal isOpen={showOtpModal} toggle={() => setShowOtpModal(false)} centered>
-				<ModalHeader toggle={() => setShowOtpModal(false)}>Verify Email</ModalHeader>
-				<ModalBody>
-					<div className="mb-3">
-						<Label>Enter 6-digit code sent to {formData.personalEmail}</Label>
+			<Modal isOpen={showOtpModal} toggle={() => setShowOtpModal(false)} centered size="md">
+				<ModalHeader toggle={() => setShowOtpModal(false)} className="bg-light">
+					<div className="d-flex align-items-center">
+						<i className="ri-mail-check-line text-primary fs-24 me-2"></i>
+						<span>Verify Your Email</span>
+					</div>
+				</ModalHeader>
+				<ModalBody className="p-4">
+					<div className="text-center mb-4">
+						<p className="text-muted mb-2">
+							We've sent a 6-digit verification code to
+						</p>
+						<p className="fw-semibold text-primary">{formData.personalEmail}</p>
+					</div>
+
+					{error && (
+						<Alert color="danger" className="mb-3">
+							{error}
+						</Alert>
+					)}
+
+					<div className="mb-4">
+						<Label className="form-label text-center w-100 mb-3">Enter Verification Code</Label>
 						<Input
 							type="text"
 							className="form-control text-center fs-20 fw-bold"
 							placeholder="000000"
 							value={otpCode}
-							onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
+							onChange={(e) => {
+								setOtpCode(e.target.value.replace(/\D/g, "").slice(0, 6));
+								setError("");
+							}}
+							onKeyPress={(e) => {
+								if (e.key === "Enter" && otpCode.length === 6) {
+									verifyOtpAndRegister();
+								}
+							}}
 							maxLength={6}
-							style={{ letterSpacing: "0.5rem" }}
+							style={{ letterSpacing: "1rem", fontSize: "1.75rem", padding: "1rem" }}
+							autoFocus
 						/>
-						{otpSent && otpSecondsLeft > 0 && (
-							<small className="text-muted d-block mt-2 text-center">
-								Code expires in {Math.floor(otpSecondsLeft / 60)}:{(otpSecondsLeft % 60).toString().padStart(2, "0")}
-							</small>
-						)}
-						{otpSent && otpSecondsLeft <= 0 && (
-							<button
-								type="button"
-								className="btn btn-link p-0 mt-2 w-100"
-								onClick={sendOtpCode}
-							>
-								Resend code
-							</button>
-						)}
+						
+						<div className="mt-3 text-center">
+							{otpSent && otpSecondsLeft > 0 && (
+								<div className="d-flex align-items-center justify-content-center gap-2">
+									<i className="ri-time-line text-muted"></i>
+									<small className="text-muted">
+										Code expires in <span className="fw-semibold text-danger">
+											{Math.floor(otpSecondsLeft / 60)}:{(otpSecondsLeft % 60).toString().padStart(2, "0")}
+										</span>
+									</small>
+								</div>
+							)}
+						</div>
 					</div>
-					<div className="d-flex gap-2">
+
+					<div className="d-flex flex-column gap-2">
 						<Button
 							color="primary"
-							className="flex-fill"
+							size="lg"
+							block
 							onClick={verifyOtpAndRegister}
-							disabled={otpCode.length !== 6 || loading}
+							disabled={otpCode.length !== 6 || loading || otpSecondsLeft <= 0}
 						>
 							{loading ? (
 								<>
@@ -989,16 +1173,48 @@ const Register = () => {
 									Verifying...
 								</>
 							) : (
-								"Verify"
+								<>
+									<i className="ri-check-line me-2"></i>
+									Verify & Complete Registration
+								</>
 							)}
 						</Button>
+
+						<div className="text-center mt-2">
+							<small className="text-muted">Didn't receive the code?</small>
+							<Button
+								color="link"
+								size="sm"
+								className="text-decoration-none p-0 ms-1"
+								onClick={() => sendOtpCode(true)}
+								disabled={resendingOtp || otpSecondsLeft > 120}
+							>
+								{resendingOtp ? (
+									<>
+										<Spinner size="sm" className="me-1" />
+										Sending...
+									</>
+								) : otpSecondsLeft > 120 ? (
+									`Resend in ${otpSecondsLeft - 120}s`
+								) : (
+									<>
+										<i className="ri-refresh-line me-1"></i>
+										Resend Code
+									</>
+								)}
+							</Button>
+						</div>
+
 						<Button
-							color="secondary"
+							color="light"
+							outline
+							block
 							onClick={() => {
 								setShowOtpModal(false);
 								setOtpCode("");
-								setOtpSent(false);
+								setError("");
 							}}
+							disabled={loading || resendingOtp}
 						>
 							Cancel
 						</Button>
