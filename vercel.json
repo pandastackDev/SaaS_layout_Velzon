@@ -1,4 +1,8 @@
 {
+	"buildCommand": "npm run build",
+	"outputDirectory": "build",
+	"framework": "vite",
+	"installCommand": "npm install --legacy-peer-deps",
 	"build": {
 		"env": {
 			"NODE_OPTIONS": "--max_old_space_size=4096",
@@ -7,5 +11,11 @@
 	},
 	"github": {
 		"silent": true
-	}
+	},
+	"rewrites": [
+		{
+			"source": "/(.*)",
+			"destination": "/index.html"
+		}
+	]
 }
