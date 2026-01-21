@@ -40,7 +40,7 @@ class FirebaseAuthBackend {
 		return new Promise((resolve, reject) => {
 			firebase
 				.auth()
-				.createUserWithEmailAndPassword(email, password)
+				.createUserWithEmailAndPassword(email as string, password as string)
 				.then(
 					(_user) => {
 						resolve(firebase.auth().currentUser);

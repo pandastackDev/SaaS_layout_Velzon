@@ -272,7 +272,12 @@ const ManageUsers = () => {
 		}
 	};
 
-	const getStatusBadge = (status: string) => {
+	const getStatusBadge = (status: string, isBanned?: boolean) => {
+		// If user is banned, show banned badge regardless of status
+		if (isBanned) {
+			return <Badge className="bg-danger">Banned</Badge>;
+		}
+		
 		switch (status) {
 			case "approved":
 				return <Badge className="bg-success">Approved</Badge>;

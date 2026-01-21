@@ -98,7 +98,7 @@ export const updateEvent = (event: any) => api.put(url.UPDATE_EVENT, event);
 
 // delete Event
 export const deleteEvent = (event: any) =>
-	api.delete(url.DELETE_EVENT, { headers: { event } });
+	api.delete(url.DELETE_EVENT, { headers: { event: String(event) } });
 
 // Chat
 // get Contact
@@ -126,23 +126,23 @@ export const getMailDetails = () => api.get(url.GET_MAIL_DETAILS);
 
 // delete Mail
 export const deleteMail = (forId: string | number) =>
-	api.delete(url.DELETE_MAIL, { headers: { forId } });
+	api.delete(url.DELETE_MAIL, { headers: { forId: String(forId) } });
 
 // unread Mail
 export const unreadMail = (forId: string | number) =>
-	api.delete(url.UNREAD_MAIL, { headers: { forId } });
+	api.delete(url.UNREAD_MAIL, { headers: { forId: String(forId) } });
 
 // star Mail
 export const staredMail = (forId: string | number) =>
-	api.delete(url.STARED_MAIL, { headers: { forId } });
+	api.delete(url.STARED_MAIL, { headers: { forId: String(forId) } });
 
 // label Mail
 export const labelMail = (forId: string | number | Record<string, unknown>) =>
-	api.delete(url.LABEL_MAIL, { headers: { forId } });
+	api.delete(url.LABEL_MAIL, { headers: { forId: String(forId) } });
 
 // trash Mail
 export const trashMail = (forId: string | number) =>
-	api.delete(url.TRASH_MAIL, { headers: { forId } });
+	api.delete(url.TRASH_MAIL, { headers: { forId: String(forId) } });
 
 // Ecommerce
 // get Products
@@ -151,7 +151,7 @@ export const getProducts = () => api.get(url.GET_PRODUCTS);
 // delete Product
 export const deleteProducts = (
 	product: string | number | Record<string, unknown>,
-) => api.delete(url.DELETE_PRODUCT, { headers: { product } });
+) => api.delete(url.DELETE_PRODUCT, { headers: { product: String(product) } });
 
 // add Products
 export const addNewProduct = (product: Record<string, unknown>) =>
@@ -173,7 +173,7 @@ export const updateOrder = (order: Record<string, unknown>) =>
 
 // delete Order
 export const deleteOrder = (order: string | number | Record<string, unknown>) =>
-	api.delete(url.DELETE_ORDER, { headers: { order } });
+	api.delete(url.DELETE_ORDER, { headers: { order: String(order) } });
 
 // get Customers
 export const getCustomers = () => api.get(url.GET_CUSTOMERS);
@@ -189,7 +189,7 @@ export const updateCustomer = (customer: Record<string, unknown>) =>
 // delete Customers
 export const deleteCustomer = (
 	customer: string | number | Record<string, unknown>,
-) => api.delete(url.DELETE_CUSTOMER, { headers: { customer } });
+) => api.delete(url.DELETE_CUSTOMER, { headers: { customer: String(customer) } });
 
 // get Sellers
 export const getSellers = () => api.get(url.GET_SELLERS);
@@ -212,7 +212,7 @@ export const updateTask = (task: Record<string, unknown>) =>
 
 // delete Task
 export const deleteTask = (task: string | number | Record<string, unknown>) =>
-	api.delete(url.DELETE_TASK, { headers: { task } });
+	api.delete(url.DELETE_TASK, { headers: { task: String(task) } });
 
 // Kanban Board
 export const getTasks = () => api.get(url.GET_TASKS);
@@ -221,7 +221,7 @@ export const addNewTasks = (card: Record<string, unknown>) =>
 export const updateTasks = (card: Record<string, unknown>) =>
 	api.put(url.UPDATE_TASKS, card);
 export const deleteTasks = (card: string | number | Record<string, unknown>) =>
-	api.delete(url.DELETE_TASKS, { headers: { card } });
+	api.delete(url.DELETE_TASKS, { headers: { card: String(card) } });
 
 // CRM
 // get Contacts
@@ -238,7 +238,7 @@ export const updateContact = (contact: Record<string, unknown>) =>
 // delete Contact
 export const deleteContact = (
 	contact: string | number | Record<string, unknown>,
-) => api.delete(url.DELETE_CONTACT, { headers: { contact } });
+) => api.delete(url.DELETE_CONTACT, { headers: { contact: String(contact) } });
 
 // get Companies
 export const getCompanies = () => api.get(url.GET_COMPANIES);
@@ -254,7 +254,7 @@ export const updateCompanies = (company: Record<string, unknown>) =>
 // delete Companies
 export const deleteCompanies = (
 	company: string | number | Record<string, unknown>,
-) => api.delete(url.DELETE_COMPANIES, { headers: { company } });
+) => api.delete(url.DELETE_COMPANIES, { headers: { company: String(company) } });
 
 // get Deals
 export const getDeals = () => api.get(url.GET_DEALS);
@@ -272,7 +272,7 @@ export const updateLead = (lead: Record<string, unknown>) =>
 
 // delete Lead
 export const deleteLead = (lead: string | number | Record<string, unknown>) =>
-	api.delete(url.DELETE_LEAD, { headers: { lead } });
+	api.delete(url.DELETE_LEAD, { headers: { lead: String(lead) } });
 
 // Crypto
 // Transation
@@ -312,7 +312,7 @@ export const updateTicket = (ticket: Record<string, unknown>) =>
 // delete Tickets
 export const deleteTicket = (
 	ticket: string | number | Record<string, unknown>,
-) => api.delete(url.DELETE_TICKET, { headers: { ticket } });
+) => api.delete(url.DELETE_TICKET, { headers: { ticket: String(ticket) } });
 
 // Dashboard Analytics
 
@@ -427,13 +427,13 @@ export const updateProjectList = (project: Record<string, unknown>) =>
 	api.put(url.UPDATE_PROJECT, project);
 export const deleteProjectList = (
 	project: string | number | Record<string, unknown>,
-) => api.delete(url.DELETE_PROJECT, { headers: { project } });
+) => api.delete(url.DELETE_PROJECT, { headers: { project: String(project) } });
 
 // Pages > Team
 export const getTeamData = () => api.get(url.GET_TEAMDATA);
 export const deleteTeamData = (
 	team: string | number | Record<string, unknown>,
-) => api.delete(url.DELETE_TEAMDATA, { headers: { team } });
+) => api.delete(url.DELETE_TEAMDATA, { headers: { team: String(team) } });
 export const addTeamData = (team: Record<string, unknown>) =>
 	api.create(url.ADD_NEW_TEAMDATA, team);
 export const updateTeamData = (team: Record<string, unknown>) =>
@@ -445,7 +445,7 @@ export const updateTeamData = (team: Record<string, unknown>) =>
 export const getFolders = () => api.get(url.GET_FOLDERS);
 export const deleteFolder = (
 	folder: string | number | Record<string, unknown>,
-) => api.delete(url.DELETE_FOLDER, { headers: { folder } });
+) => api.delete(url.DELETE_FOLDER, { headers: { folder: String(folder) } });
 export const addNewFolder = (folder: Record<string, unknown>) =>
 	api.create(url.ADD_NEW_FOLDER, folder);
 export const updateFolder = (folder: Record<string, unknown>) =>
@@ -454,7 +454,7 @@ export const updateFolder = (folder: Record<string, unknown>) =>
 // File
 export const getFiles = () => api.get(url.GET_FILES);
 export const deleteFile = (file: string | number | Record<string, unknown>) =>
-	api.delete(url.DELETE_FILE, { headers: { file } });
+	api.delete(url.DELETE_FILE, { headers: { file: String(file) } });
 export const addNewFile = (file: Record<string, unknown>) =>
 	api.create(url.ADD_NEW_FILE, file);
 export const updateFile = (file: Record<string, unknown>) =>
@@ -463,7 +463,7 @@ export const updateFile = (file: Record<string, unknown>) =>
 // To Do
 export const getTodos = () => api.get(url.GET_TODOS);
 export const deleteTodo = (todo: string | number | Record<string, unknown>) =>
-	api.delete(url.DELETE_TODO, { headers: { todo } });
+	api.delete(url.DELETE_TODO, { headers: { todo: String(todo) } });
 export const addNewTodo = (todo: Record<string, unknown>) =>
 	api.create(url.ADD_NEW_TODO, todo);
 export const updateTodo = (todo: Record<string, unknown>) =>
@@ -485,17 +485,17 @@ export const updateJobApplicationList = (job: Record<string, unknown>) =>
 	api.put(url.UPDATE_APPLICATION_LIST, job);
 export const deleteJobApplicationList = (
 	job: string | number | Record<string, unknown>,
-) => api.delete(url.DELETE_APPLICATION_LIST, { headers: { job } });
+) => api.delete(url.DELETE_APPLICATION_LIST, { headers: { job: String(job) } });
 
 // candidate list
-export const getJobCandidateList = () => api.get(url.GET_CANDIDATE, "");
+export const getJobCandidateList = () => api.get(url.GET_CANDIDATE);
 export const addJobCandidate = (candidate: Record<string, unknown>) =>
 	api.create(url.ADD_NEW_CANDIDATE, candidate);
 export const updateJobCandidate = (candidate: Record<string, unknown>) =>
 	api.update(url.UPDATE_CANDIDATE, candidate);
 export const deleteJobCandidate = (
 	candidate: string | number | Record<string, unknown>,
-) => api.delete(url.DELETE_CANDIDATE, { headers: { candidate } });
+) => api.delete(url.DELETE_CANDIDATE, { headers: { candidate: String(candidate) } });
 
 // category list
 export const getcategoryList = () => api.get(url.GET_CATEGORY_LIST);

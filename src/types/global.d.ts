@@ -32,6 +32,47 @@ declare module 'lodash' {
 	export default _;
 }
 
+declare module 'reactstrap' {
+	export const Row: any;
+	export const Col: any;
+	export const Container: any;
+	export const Card: any;
+	export const CardBody: any;
+	export const CardHeader: any;
+	export const Button: any;
+	export const Input: any;
+	export const Label: any;
+	export const Form: any;
+	export const FormFeedback: any;
+	export const Table: any;
+	export const Dropdown: any;
+	export const DropdownToggle: any;
+	export const DropdownMenu: any;
+	export const DropdownItem: any;
+	export const Spinner: any;
+	export const Alert: any;
+	export const TabContent: any;
+	export const TabPane: any;
+	export const Nav: any;
+	export const NavItem: any;
+	export const NavLink: any;
+	export const Badge: any;
+	export const Modal: any;
+	export const ModalHeader: any;
+	export const ModalBody: any;
+	export const ModalFooter: any;
+	export const Pagination: any;
+	export const PaginationItem: any;
+	export const PaginationLink: any;
+	export const UncontrolledDropdown: any;
+	export const UncontrolledButtonDropdown: any;
+	export const UncontrolledTooltip: any;
+	export const UncontrolledPopover: any;
+	export const UncontrolledCollapse: any;
+	export const UncontrolledAlert: any;
+	export const UncontrolledCarousel: any;
+}
+
 // Extend Document interface for fullscreen API vendor prefixes
 interface Document {
 	mozFullScreenElement?: Element | null;
