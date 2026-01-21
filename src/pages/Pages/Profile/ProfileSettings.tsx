@@ -27,7 +27,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import { supabase } from "../../../lib/supabase";
 import { uploadFile, base64ToFile } from "../../../lib/storage";
 import { getErrorMessage } from "../../../lib/errorHandler";
-import Breadcrumbs from "../../../Components/Common/Breadcrumb";
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
 
 const ProfileSettings = () => {
 	const navigate = useNavigate();
@@ -268,7 +268,7 @@ const ProfileSettings = () => {
 	return (
 		<div className="page-content">
 			<Container fluid>
-				<Breadcrumbs title="Profile Settings" breadcrumbItem="Settings" />
+				<BreadCrumb title="Profile Settings" pageTitle="Settings" />
 
 				<Row>
 					<Col lg={12}>
